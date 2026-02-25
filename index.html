@@ -7,7 +7,7 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #020617;
+      background: #0f172a;
       color: #e5e7eb;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
@@ -15,34 +15,56 @@
     a { color: #38bdf8; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── HEADER / HERO ── */
+    /* ── STICKY NAV ── */
     header {
-      padding: 3.5rem 1.5rem 2.5rem;
-      background: radial-gradient(circle at top left, #1d283a, #020617);
+      background: #020617;
       border-bottom: 1px solid #1e293b;
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .hero {
-      max-width: 960px;
+    .header-inner {
+      max-width: 900px;
       margin: 0 auto;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .site-title { font-weight: 700; font-size: 1rem; color: #f1f5f9; }
+    nav { display: flex; gap: 1.25rem; }
+    nav a { color: #94a3b8; font-size: 0.88rem; }
+    nav a:hover { color: #f1f5f9; text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: radial-gradient(circle at top left, #1d283a, #020617);
+      border-bottom: 1px solid #1e293b;
+      padding: 3rem 1.5rem 2.5rem;
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
       gap: 2rem;
+      align-items: center;
       flex-wrap: wrap;
     }
     .hero-photo {
       width: 110px;
       height: 110px;
       border-radius: 50%;
-      object-fit: cover;
       border: 3px solid #38bdf8;
-      flex-shrink: 0;
       background: #1e293b;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
-      color: #38bdf8;
+      font-size: 2rem;
       font-weight: 700;
+      color: #38bdf8;
+      overflow: hidden;
     }
     .hero-photo img {
       width: 100%;
@@ -51,99 +73,79 @@
       object-fit: cover;
     }
     .hero-text h1 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
       font-weight: 700;
       color: #f1f5f9;
     }
-    .hero-text .subtitle {
-      color: #94a3b8;
-      margin-top: 0.3rem;
-      font-size: 0.97rem;
+    .hero-text .tagline { color: #94a3b8; margin-top: 0.3rem; font-size: 0.95rem; }
+    .hero-links { display: flex; gap: 0.75rem; margin-top: 0.9rem; flex-wrap: wrap; }
+    .hero-links a {
+      font-size: 0.85rem;
+      background: #1e40af;
+      color: #fff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.2s;
     }
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      margin-top: 1rem;
-      font-size: 0.95rem;
-    }
-    nav a {
-      color: #38bdf8;
-      border-bottom: 1px solid transparent;
-      padding-bottom: 2px;
-      transition: border-color 0.2s;
-    }
-    nav a:hover { border-bottom-color: #38bdf8; text-decoration: none; }
+    .hero-links a:hover { background: #2563eb; text-decoration: none; }
 
-    /* ── MAIN LAYOUT ── */
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-    }
-
-    /* ── SECTION HEADERS ── */
+    /* ── PAGE ── */
+    .page { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+    section { margin-bottom: 3rem; }
     section h2 {
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: #f1f5f9;
-      border-bottom: 2px solid #1e293b;
-      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.4rem;
       margin-bottom: 1.25rem;
     }
-    section p { color: #cbd5e1; margin-bottom: 0.75rem; }
+    section p { color: #94a3b8; margin-bottom: 0.75rem; font-size: 0.93rem; }
 
-    /* ── SKILLS BOXES (Bryan-style) ── */
+    /* ── SKILL BOXES ── */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
     }
-    @media (max-width: 700px) { .skills-grid { grid-template-columns: 1fr; } }
-    @media (min-width: 701px) and (max-width: 900px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
-
+    @media (max-width: 650px) { .skills-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 651px) and (max-width: 860px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
     .skill-box {
       background: #0f172a;
       border: 1px solid #1e293b;
-      border-radius: 8px;
-      padding: 1.25rem 1.25rem 1rem;
+      border-radius: 6px;
+      padding: 1rem 1rem 0.85rem;
     }
     .skill-box h3 {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #38bdf8;
       border-bottom: 1px solid #1e293b;
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.75rem;
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
     }
-    .skill-box ul {
-      list-style: none;
-      padding: 0;
-    }
+    .skill-box ul { list-style: none; padding: 0; }
     .skill-box ul li {
-      font-size: 0.9rem;
+      font-size: 0.87rem;
       color: #cbd5e1;
-      padding: 0.3rem 0;
-      border-bottom: 1px solid #1e293b11;
+      padding: 0.22rem 0;
+      border-bottom: 1px solid #1e293b55;
     }
     .skill-box ul li:last-child { border-bottom: none; }
 
-    /* ── EXPERIENCE (Bryan-style with logos) ── */
+    /* ── EXPERIENCE ── */
     .exp-item {
       display: flex;
-      gap: 1.25rem;
-      margin-bottom: 2rem;
+      gap: 1.1rem;
+      margin-bottom: 2.25rem;
       align-items: flex-start;
     }
     .exp-item:last-child { margin-bottom: 0; }
     .exp-logo {
-      width: 56px;
-      height: 56px;
+      width: 52px;
+      height: 52px;
       border-radius: 8px;
       border: 1px solid #1e293b;
       background: #0f172a;
@@ -151,86 +153,59 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 1.1rem;
+      font-weight: 800;
+      font-size: 0.78rem;
       color: #38bdf8;
       overflow: hidden;
+      text-align: center;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
     }
-    .exp-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 6px;
-    }
+    .exp-logo img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
     .exp-body { flex: 1; }
-    .exp-body h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #f1f5f9;
-      margin-bottom: 0.1rem;
-    }
-    .exp-role {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #38bdf8;
-    }
-    .exp-meta {
-      font-size: 0.82rem;
-      color: #64748b;
-      margin-bottom: 0.6rem;
-    }
-    .exp-body ul {
-      padding-left: 1.1rem;
-      color: #cbd5e1;
-      font-size: 0.9rem;
-    }
-    .exp-body ul li { margin-bottom: 0.3rem; }
+    .exp-body h3 { font-size: 1rem; font-weight: 700; color: #f1f5f9; }
+    .exp-role { font-size: 0.87rem; font-weight: 600; color: #38bdf8; }
+    .exp-meta { font-size: 0.79rem; color: #64748b; margin-bottom: 0.55rem; }
+    .exp-body ul { padding-left: 1.1rem; color: #cbd5e1; font-size: 0.88rem; }
+    .exp-body ul li { margin-bottom: 0.28rem; }
 
-    /* ── PROJECT CARDS ── */
+    /* ── PROJECTS ── */
     .project-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
+      gap: 1.1rem;
     }
-    @media (max-width: 640px) { .project-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .project-grid { grid-template-columns: 1fr; } }
     .project-card {
       background: #0f172a;
       border: 1px solid #1e293b;
-      border-radius: 8px;
-      padding: 1.25rem;
+      border-radius: 6px;
+      padding: 1.1rem;
       transition: border-color 0.2s;
     }
     .project-card:hover { border-color: #38bdf8; }
-    .project-card h3 {
-      font-size: 1rem;
-      color: #f1f5f9;
-      margin-bottom: 0.25rem;
-    }
+    .project-card h3 { font-size: 0.97rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.2rem; }
     .project-card .tag {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: #38bdf8;
-      margin-bottom: 0.6rem;
-      display: block;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      display: block;
     }
-    .project-card ul {
-      padding-left: 1.1rem;
-      color: #94a3b8;
-      font-size: 0.87rem;
-    }
-    .project-card ul li { margin-bottom: 0.25rem; }
+    .project-card ul { padding-left: 1.1rem; color: #94a3b8; font-size: 0.86rem; }
+    .project-card ul li { margin-bottom: 0.22rem; }
 
     /* ── EDUCATION ── */
     .edu-item {
       display: flex;
-      gap: 1.25rem;
+      gap: 1.1rem;
       margin-bottom: 1.5rem;
       align-items: flex-start;
     }
     .edu-logo {
-      width: 56px;
-      height: 56px;
+      width: 52px;
+      height: 52px;
       border-radius: 8px;
       border: 1px solid #1e293b;
       background: #0f172a;
@@ -238,59 +213,70 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #38bdf8;
       overflow: hidden;
+      text-align: center;
+      line-height: 1.2;
     }
-    .edu-logo img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
-    .edu-body h3 { font-size: 1rem; color: #f1f5f9; font-weight: 700; }
-    .edu-body .degree { font-size: 0.9rem; color: #38bdf8; }
-    .edu-body .edu-meta { font-size: 0.82rem; color: #64748b; }
+    .edu-logo img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+    .edu-body h3 { font-size: 1rem; font-weight: 700; color: #f1f5f9; }
+    .edu-body .degree { font-size: 0.88rem; color: #38bdf8; font-weight: 600; }
+    .edu-body .edu-meta { font-size: 0.79rem; color: #64748b; }
 
     /* ── CONTACT ── */
     .contact-list { list-style: none; padding: 0; }
-    .contact-list li { margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.95rem; }
+    .contact-list li { margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.93rem; }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid #1e293b;
       text-align: center;
       padding: 1.5rem;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: #475569;
     }
   </style>
 </head>
 <body>
 
-<!-- ════════════════ HEADER ════════════════ -->
+<!-- ════ STICKY NAV ════ -->
 <header>
-  <div class="hero">
-
-    <!-- PROFILE PHOTO -->
-    <!-- Replace the URL below with your LinkedIn profile photo URL -->
-    <!-- To get it: open LinkedIn → right-click your photo → "Copy image address" -->
-    <div class="hero-photo">GY</div>
-    <!-- Once you have the URL, replace the div above with:
-    <div class="hero-photo"><img src="YOUR_LINKEDIN_PHOTO_URL" alt="Gavin Yam"></div>
-    -->
-
-    <div class="hero-text">
-      <h1>Gavin Yam</h1>
-      <p class="subtitle">Mechatronics &amp; Mechanical Engineer &nbsp;·&nbsp; Robotics &nbsp;·&nbsp; Rockets &nbsp;·&nbsp; HVAC Systems</p>
-      <nav>
-        <a href="#background">Background</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
+  <div class="header-inner">
+    <span class="site-title">Gavin Yam</span>
+    <nav>
+      <a href="#background">Background</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
 </header>
 
-<main>
+<!-- ════ HERO ════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <!-- Replace "GY" div with your photo once you have the URL from orbes.space/team -->
+    <!-- <img class="hero-photo" src="YOUR_PHOTO_URL" alt="Gavin Yam"> -->
+    <div class="hero-photo">GY</div>
+    <div class="hero-text">
+      <h1>Gavin Yam</h1>
+      <p class="tagline">Mechatronics &amp; Mechanical Engineer &nbsp;·&nbsp; Robotics · Rockets · HVAC Systems</p>
+      <div class="hero-links">
+        <a href="mailto:legendgavin00@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/gavin-yam2023" target="_blank">LinkedIn</a>
+        <a href="https://1drv.ms/f/c/A001C2F87ED3831A/EhqD0374wgEggKB27QAAAAABa1MG-cNeBJptjtdL1IuaxQ?e=6SsW0g" target="_blank">Portfolio</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <!-- ════════════════ BACKGROUND ════════════════ -->
+<div class="page">
+
+  <!-- ════ BACKGROUND ════ -->
   <section id="background">
     <h2>Background</h2>
     <p>
@@ -303,11 +289,11 @@
       free-flying robotic platforms, commercial VRF/heat pump designs, and compact evaporative
       coolers. I take systems from first principles through CAD, fabrication, assembly,
       structured testing, and design iteration — with a strong focus on safety, reliability,
-      and clear documentation.
+      and clear documentation. Fluent in English and Chinese (written and spoken).
     </p>
   </section>
 
-  <!-- ════════════════ SKILLS ════════════════ -->
+  <!-- ════ SKILLS ════ -->
   <section id="skills">
     <h2>Skills</h2>
     <div class="skills-grid">
@@ -315,60 +301,108 @@
       <div class="skill-box">
         <h3>Mechanical Design</h3>
         <ul>
-          Multi-component system design</li>
-          Dynamics &amp; stress analysis</li>
-          DFM / DFA</li>
-          Cryogenic &amp; high-pressure systems</li>
-          Electromechanical integration</li>
-          Tolerance stack-up analysis</li>
+          >Multi-component system design</li>
+          >Dynamics &amp; stress analysis</li>
+          >DFM / DFA</li>
+          >Cryogenic &amp; high-pressure systems</li>
+          >Electromechanical integration</li>
+          >Tolerance stack-up</li>
         </ul>
       </div>
 
       <div class="skill-box">
         <h3>CAD &amp; Drafting</h3>
         <ul>
-          Fusion 360</li>
-          SolidWorks</li>
-          NX (Siemens)</li>
-          AutoCAD</li>
-          Revit / BIM</li>
-          BOMs &amp; Assembly Drawings</li>
+          >Fusion 360</li>
+          >SolidWorks</li>
+          >NX (Siemens)</li>
+          >AutoCAD</li>
+          >Revit / BIM</li>
+          >BOMs &amp; Assembly Drawings</li>
         </ul>
       </div>
 
       <div class="skill-box">
         <h3>Software &amp; Controls</h3>
         <ul>
-          Python</li>
-          C / C++</li>
-          MATLAB / Simulink</li>
-          ROS2</li>
-          Git / GitHub</li>
-          Linux (CLI)</li>
+          >Python</li>
+          >C / C++</li>
+          >MATLAB / Simulink</li>
+          >ROS2</li>
+          >Git / GitHub</li>
+          >Linux (CLI)</li>
         </ul>
       </div>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <h2>Experience</h2>
 
-      <div class="skill-box">
-        <h3>Building Systems</h3>
-        <ul>
-          HVAC Load Calculations</li>
-          VRF &amp; Heat Pump Design</li>
-          Duct Routing &amp; Layout</li>
-          Title 24 / CBC / CMC</li>
-          EnergyPro Compliance</li>
-          Multidisciplinary Coordination</li>
-        </ul>
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>Orbital Exploration Systems (ORBES) — Los Angeles, CA</h3>
+        <span class="exp-date">Jun 2025 – Present</span>
       </div>
+      <div class="exp-role">Mechanical Controls Engineer</div>
+      <ul>
+        >Designed and built 6-DOF free-flying robotic platforms using SBCs and BLDC motors.</li>
+        >Developed control laws for compound maneuvers with reaction wheels and fans, achieving ±5° attitude accuracy.</li>
+        >Implemented multiprocessing and VIO pipelines in ROS2, reducing hardware cost by ~$2,000 per unit.</li>
+        >Diagnosed and fixed mechanical and signal-path issues, iterating hardware and control logic for improved robustness.</li>
+      </ul>
+    </div>
 
-      <div class="skill-box">
-        <h3>Test &amp; Fabrication</h3>
-        <ul>
-          High-pressure &amp; flow testing</li>
-          Hotfire campaign operations</li>
-          3D Printing &amp; CNC Routing</li>
-          Laser cutting &amp; machining</li>
-          PCB design basics</li>
-          Instrumentation &amp; DAQ</li>
-        </ul>
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>ACIES Engineering — San Jose, CA</h3>
+        <span class="exp-date">Aug 2024 – May 2025</span>
       </div>
+      <div class="exp-role">Mechanical Design Engineer</div>
+      <ul>
+        >Designed and evaluated heat pump and VRF systems for 50+ commercial interiors: retail, residential, restaurants, and large offices.</li>
+        >Performed load calculations, building-envelope modeling, and Title 24 / CBC / CMC compliance work including EnergyPro reporting.</li>
+        >Used AutoCAD and Revit to route ducts and place equipment in constrained ceiling spaces, coordinating with plumbing and electrical.</li>
+        >Conducted site surveys including a complex industrial-to-retail remodel in San Francisco — climbed ceilings, used roof and balcony access to trace ducts and confirm unit specs for fire and code compliance.</li>
+        >Solved limited-tonnage cases by carefully splitting fan-coil and kitchen ventilation paths to stay within energy-saving constraints.</li>
+      </ul>
+    </div>
 
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>Clocky LLC — Los Angeles, CA</h3>
+        <span class="exp-date">May 2023 – Aug 2023</span>
+      </div>
+      <div class="exp-role">Mechanical Engineering Intern</div>
+      <ul>
+        >Designed an indoor evaporative cooler with optimized fan/stator geometry to reduce drag and focus effective blade length.</li>
+        >Integrated an atomizer and conical nozzle for even air mixing and improved cooling performance.</li>
+        >Positioned reservoir below fan with linear slots to keep center of gravity low, reducing tip-over hazard while cutting part count ~30%.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>UC Berkeley — Honeywell Capstone</h3>
+        <span class="exp-date">Aug 2023 – May 2024</span>
+      </div>
+      <div class="exp-role">Senior Capstone Co-Lead · Jitter Analysis Mitigation for Satellite</div>
+      <ul>
+        Built a multi-body dynamics model to predict satellite jitter and evaluate passive vs. active mitigation strategies.</li>
+        Traded off model fidelity against simulation time to achieve arc-second-level pointing performance.</li>
+        Led documentation and stakeholder communication of design recommendations and test strategies.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>CPP Liquid Rocket Lab — Bronco 1 / E-2 Vehicles</h3>
+        <span class="exp-date">Aug 2021 – May 2023</span>
+      </div>
+      <div class="exp-role">Propellant Feed &amp; Structures</div>
+      <ul>
+        Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN₂ pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li>
+        Contributed to thrust-transfer rails, MVA covers, and fin-slot structural design.</li>
+        Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li>
+        Authored detailed test procedures with timed steps, PPE      </li>
+      </ul>
+    </div>
+      
