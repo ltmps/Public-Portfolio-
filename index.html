@@ -2,16 +2,286 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Gavin Yam | Mechatronics Engineer</title>
+  <title>Gavin Yam | Mechatronics & Mechanical Engineer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { background: #020617; color: #e5e7eb; font-family: sans-serif; padding: 2rem; }
-    h1 { color: #38bdf8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── HEADER ── */
+    header {
+      padding: 3rem 1.5rem 2rem;
+      background: radial-gradient(circle at top left, #1d283a, #020617);
+      border-bottom: 1px solid #1e293b;
+    }
+    .hero { max-width: 960px; margin: 0 auto; }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .hero .subtitle {
+      color: #94a3b8;
+      margin-top: 0.4rem;
+      font-size: 1rem;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+      font-size: 0.95rem;
+    }
+    nav a {
+      color: #38bdf8;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+    }
+    nav a:hover { border-bottom-color: #38bdf8; text-decoration: none; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* ── SECTIONS ── */
+    section h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    section p { margin-bottom: 0.75rem; color: #cbd5e1; }
+
+    /* ── SKILLS GRID ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2rem;
+    }
+    @media (max-width: 640px) { .skills-grid { grid-template-columns: 1fr; } }
+    .skill-block h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #38bdf8;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .skill-block ul {
+      padding-left: 1.1rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+    }
+    .skill-block ul li { margin-bottom: 0.25rem; }
+
+    /* ── EXPERIENCE ── */
+    .exp-item { margin-bottom: 2rem; }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.25rem; }
+    .exp-header h3 { font-size: 1.05rem; color: #f1f5f9; }
+    .exp-date { font-size: 0.85rem; color: #64748b; white-space: nowrap; }
+    .exp-role { font-size: 0.9rem; color: #38bdf8; margin-bottom: 0.5rem; }
+    .exp-item ul { padding-left: 1.1rem; color: #cbd5e1; font-size: 0.93rem; }
+    .exp-item ul li { margin-bottom: 0.3rem; }
+
+    /* ── PROJECTS ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 640px) { .project-grid { grid-template-columns: 1fr; } }
+    .project-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .project-card h3 { font-size: 1rem; color: #f1f5f9; margin-bottom: 0.3rem; }
+    .project-card .tag { font-size: 0.78rem; color: #38bdf8; margin-bottom: 0.6rem; display: block; }
+    .project-card ul { padding-left: 1.1rem; color: #94a3b8; font-size: 0.88rem; }
+    .project-card ul li { margin-bottom: 0.25rem; }
+
+    /* ── CONTACT ── */
+    .contact-list { list-style: none; padding: 0; }
+    .contact-list li { margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.95rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid #1e293b;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.82rem;
+      color: #475569;
+    }
   </style>
 </head>
 <body>
-  <h1>Gavin Yam</h1>
-  <p>Mechatronics &amp; Mechanical Engineer</p>
-  <p>Site is working!</p>
-</body>
-</html>
+
+<header>
+  <div class="hero">
+    <h1>Gavin Yam</h1>
+    <p class="subtitle">Mechatronics &amp; Mechanical Engineer &nbsp;·&nbsp; Robotics &nbsp;·&nbsp; Rockets &nbsp;·&nbsp; HVAC Systems</p>
+    <nav>
+      <a href="#background">Background</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- BACKGROUND -->
+  <section id="background">
+    <h2>Background</h2>
+    <p>
+      Mechanical and mechatronics engineer with about three years of hands-on experience
+      designing, building, and testing hardware systems in robotics, rocketry, HVAC
+      building systems, and consumer products.
+    </p>
+    <p>
+      My work ranges from cryogenic liquid rocket feed systems and high-pressure test rigs
+      to free-flying robotic platforms, commercial VRF/heat pump designs, and compact
+      evaporative coolers. I take systems from first principles through CAD, fabrication,
+      assembly, structured testing, and design iteration — with a strong focus on safety,
+      reliability, and clear documentation.
+    </p>
+    <p>
+      MEng in Mechanical Engineering (Simulation &amp; Control) from UC Berkeley.
+      B.S. in Aerospace Engineering from Cal Poly Pomona.
+    </p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h3>Mechanical &amp; Mechatronics</h3>
+        <ul>
+          >Multi-component system design (rockets, robots, HVAC, consumer devices)</li>
+          >Dynamics, stress analysis, structural design for tanks, rails, fins, and supports</li>
+          >Cryogenic &amp; high-pressure systems: LOX/propane feed, GN₂ to 6,000 psi, pneumatic valves</li>
+          >Electromechanical integration: valves, sensors, avionics, motorized subsystems</li>
+          >DFM/DFA, part-count reduction, maintainability</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>CAD &amp; Documentation</h3>
+        <ul>
+          >Fusion 360, SolidWorks, NX, AutoCAD, Revit</li>
+          >Full-vehicle and rig assemblies, plumbing and routing in tight envelopes</li>
+          >HVAC layouts: duct routing, equipment placement, coordination drawings</li>
+          >Part/assembly drawings, BOMs, and build documentation</li>
+          >Step-by-step test procedures for repeatability and safety</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>Analysis, Controls &amp; Software</h3>
+        <ul>
+          >Multi-body dynamics, thermal/flow modeling, load-path and fastener sizing</li>
+          >E-Reg control logic, thrust-vector-control testing, abort-sequence design</li>
+          >MATLAB, Python, C/C++, ROS2, data-analysis scripting</li>
+          >Instrumentation: thermocouples, RTDs, pressure transducers, load cells, level sensors</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>Field, Test &amp; Operations</h3>
+        <ul>
+          >Pressure, flow, hotfire, structural, and functional testing of liquid rocket systems</li>
+          >Site surveys and field verification for HVAC retrofits and tenant improvements</li>
+          >Safe test operations: PPE planning, role assignments, abort logic and interlocks</li>
+          >Root-cause analysis and design updates driven by test and field data</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>Orbital Exploration Systems (ORBES) — Los Angeles, CA</h3>
+        <span class="exp-date">Jun 2025 – Present</span>
+      </div>
+      <div class="exp-role">Mechanical Controls Engineer</div>
+      <ul>
+        >Designed and built 6-DOF free-flying robotic platforms using SBCs and BLDC motors.</li>
+        >Developed control laws for compound maneuvers with reaction wheels and fans, achieving ±5° attitude accuracy.</li>
+        >Implemented multiprocessing and VIO pipelines in ROS2, reducing hardware cost by ~$2,000 per unit.</li>
+        >Diagnosed and fixed mechanical and signal-path issues, iterating hardware and control logic for improved robustness.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>ACIES Engineering — San Jose, CA</h3>
+        <span class="exp-date">Aug 2024 – May 2025</span>
+      </div>
+      <div class="exp-role">Mechanical Design Engineer</div>
+      <ul>
+        >Designed and evaluated heat pump and VRF systems for 50+ commercial interiors: retail, residential, restaurants, and large offices.</li>
+        >Performed load calculations, building-envelope modeling, and Title 24 / CBC / CMC compliance work including EnergyPro reporting.</li>
+        >Used AutoCAD and Revit to route ducts and place equipment in constrained ceiling spaces, coordinating with plumbing and electrical.</li>
+        >Conducted site surveys including a complex industrial-to-retail remodel in San Francisco — climbed ceilings, used roof and balcony access to trace ducts and confirm unit specs for fire and code compliance.</li>
+        >Solved limited-tonnage cases by carefully splitting fan-coil and kitchen ventilation paths to stay within energy-saving constraints.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>Clocky LLC — Los Angeles, CA</h3>
+        <span class="exp-date">May 2023 – Aug 2023</span>
+      </div>
+      <div class="exp-role">Mechanical Engineering Intern</div>
+      <ul>
+        >Designed an indoor evaporative cooler with optimized fan/stator geometry to reduce drag and focus effective blade length.</li>
+        >Integrated an atomizer and conical nozzle for even air mixing and improved cooling performance.</li>
+        >Positioned reservoir below fan with linear slots to keep center of gravity low, reducing tip-over hazard while cutting part count ~30%.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>UC Berkeley — Honeywell Capstone</h3>
+        <span class="exp-date">Aug 2023 – May 2024</span>
+      </div>
+      <div class="exp-role">Senior Capstone Co-Lead · Jitter Analysis Mitigation for Satellite</div>
+      <ul>
+        >Built a multi-body dynamics model to predict satellite jitter and evaluate passive vs. active mitigation strategies.</li>
+        >Traded off model fidelity against simulation time to achieve arc-second-level pointing performance.</li>
+        >Led documentation and stakeholder communication of design recommendations and test strategies.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <h3>CPP Liquid Rocket Lab — Bronco 1 / E-2 Vehicles</h3>
+        <span class="exp-date">Aug 2021 – May 2023</span>
+      </div>
+      <div class="exp-role">Propellant Feed &amp; Structures</div>
+      <ul>
+        >Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN₂ pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li>
+        >Contributed to thrust-transfer rails, MVA covers, and fin-slot structural design.</li>
+        >Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li>
+        >Authored detailed test procedures with timed steps, PPE
