@@ -15,38 +15,67 @@
     a { color: #38bdf8; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── HEADER ── */
+    /* ── HEADER / HERO ── */
     header {
-      padding: 3rem 1.5rem 2rem;
+      padding: 3.5rem 1.5rem 2.5rem;
       background: radial-gradient(circle at top left, #1d283a, #020617);
       border-bottom: 1px solid #1e293b;
     }
-    .hero { max-width: 960px; margin: 0 auto; }
-    .hero h1 {
-      font-size: clamp(2rem, 4vw, 2.8rem);
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #38bdf8;
+      flex-shrink: 0;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #38bdf8;
+      font-weight: 700;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .hero-text h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
       font-weight: 700;
       color: #f1f5f9;
     }
-    .hero .subtitle {
+    .hero-text .subtitle {
       color: #94a3b8;
-      margin-top: 0.4rem;
-      font-size: 1rem;
+      margin-top: 0.3rem;
+      font-size: 0.97rem;
     }
     nav {
       display: flex;
       flex-wrap: wrap;
       gap: 1.25rem;
-      margin-top: 1.25rem;
+      margin-top: 1rem;
       font-size: 0.95rem;
     }
     nav a {
       color: #38bdf8;
       border-bottom: 1px solid transparent;
       padding-bottom: 2px;
+      transition: border-color 0.2s;
     }
     nav a:hover { border-bottom-color: #38bdf8; text-decoration: none; }
 
-    /* ── MAIN ── */
+    /* ── MAIN LAYOUT ── */
     main {
       max-width: 960px;
       margin: 0 auto;
@@ -56,50 +85,108 @@
       gap: 3rem;
     }
 
-    /* ── SECTIONS ── */
+    /* ── SECTION HEADERS ── */
     section h2 {
-      font-size: 1.35rem;
-      font-weight: 600;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: #f1f5f9;
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 0.4rem;
-      margin-bottom: 1rem;
+      border-bottom: 2px solid #1e293b;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
     }
-    section p { margin-bottom: 0.75rem; color: #cbd5e1; }
+    section p { color: #cbd5e1; margin-bottom: 0.75rem; }
 
-    /* ── SKILLS GRID ── */
+    /* ── SKILLS BOXES (Bryan-style) ── */
     .skills-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
     }
-    @media (max-width: 640px) { .skills-grid { grid-template-columns: 1fr; } }
-    .skill-block h3 {
-      font-size: 0.95rem;
+    @media (max-width: 700px) { .skills-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 701px) and (max-width: 900px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
+
+    .skill-box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 1.25rem 1.25rem 1rem;
+    }
+    .skill-box h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #38bdf8;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .skill-box ul {
+      list-style: none;
+      padding: 0;
+    }
+    .skill-box ul li {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #1e293b11;
+    }
+    .skill-box ul li:last-child { border-bottom: none; }
+
+    /* ── EXPERIENCE (Bryan-style with logos) ── */
+    .exp-item {
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      background: #0f172a;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #38bdf8;
+      overflow: hidden;
+    }
+    .exp-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 6px;
+    }
+    .exp-body { flex: 1; }
+    .exp-body h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 0.1rem;
+    }
+    .exp-role {
+      font-size: 0.9rem;
       font-weight: 600;
       color: #38bdf8;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
-    .skill-block ul {
+    .exp-meta {
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-bottom: 0.6rem;
+    }
+    .exp-body ul {
       padding-left: 1.1rem;
       color: #cbd5e1;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
-    .skill-block ul li { margin-bottom: 0.25rem; }
+    .exp-body ul li { margin-bottom: 0.3rem; }
 
-    /* ── EXPERIENCE ── */
-    .exp-item { margin-bottom: 2rem; }
-    .exp-item:last-child { margin-bottom: 0; }
-    .exp-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.25rem; }
-    .exp-header h3 { font-size: 1.05rem; color: #f1f5f9; }
-    .exp-date { font-size: 0.85rem; color: #64748b; white-space: nowrap; }
-    .exp-role { font-size: 0.9rem; color: #38bdf8; margin-bottom: 0.5rem; }
-    .exp-item ul { padding-left: 1.1rem; color: #cbd5e1; font-size: 0.93rem; }
-    .exp-item ul li { margin-bottom: 0.3rem; }
-
-    /* ── PROJECTS ── */
+    /* ── PROJECT CARDS ── */
     .project-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -111,11 +198,52 @@
       border: 1px solid #1e293b;
       border-radius: 8px;
       padding: 1.25rem;
+      transition: border-color 0.2s;
     }
-    .project-card h3 { font-size: 1rem; color: #f1f5f9; margin-bottom: 0.3rem; }
-    .project-card .tag { font-size: 0.78rem; color: #38bdf8; margin-bottom: 0.6rem; display: block; }
-    .project-card ul { padding-left: 1.1rem; color: #94a3b8; font-size: 0.88rem; }
+    .project-card:hover { border-color: #38bdf8; }
+    .project-card h3 {
+      font-size: 1rem;
+      color: #f1f5f9;
+      margin-bottom: 0.25rem;
+    }
+    .project-card .tag {
+      font-size: 0.75rem;
+      color: #38bdf8;
+      margin-bottom: 0.6rem;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .project-card ul {
+      padding-left: 1.1rem;
+      color: #94a3b8;
+      font-size: 0.87rem;
+    }
     .project-card ul li { margin-bottom: 0.25rem; }
+
+    /* ── EDUCATION ── */
+    .edu-item {
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+    .edu-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      background: #0f172a;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .edu-logo img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+    .edu-body h3 { font-size: 1rem; color: #f1f5f9; font-weight: 700; }
+    .edu-body .degree { font-size: 0.9rem; color: #38bdf8; }
+    .edu-body .edu-meta { font-size: 0.82rem; color: #64748b; }
 
     /* ── CONTACT ── */
     .contact-list { list-style: none; padding: 0; }
@@ -133,155 +261,116 @@
 </head>
 <body>
 
+<!-- ════════════════ HEADER ════════════════ -->
 <header>
   <div class="hero">
-    <h1>Gavin Yam</h1>
-    <p class="subtitle">Mechatronics &amp; Mechanical Engineer &nbsp;·&nbsp; Robotics &nbsp;·&nbsp; Rockets &nbsp;·&nbsp; HVAC Systems</p>
-    <nav>
-      <a href="#background">Background</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+
+    <!-- PROFILE PHOTO -->
+    <!-- Replace the URL below with your LinkedIn profile photo URL -->
+    <!-- To get it: open LinkedIn → right-click your photo → "Copy image address" -->
+    <div class="hero-photo">GY</div>
+    <!-- Once you have the URL, replace the div above with:
+    <div class="hero-photo"><img src="YOUR_LINKEDIN_PHOTO_URL" alt="Gavin Yam"></div>
+    -->
+
+    <div class="hero-text">
+      <h1>Gavin Yam</h1>
+      <p class="subtitle">Mechatronics &amp; Mechanical Engineer &nbsp;·&nbsp; Robotics &nbsp;·&nbsp; Rockets &nbsp;·&nbsp; HVAC Systems</p>
+      <nav>
+        <a href="#background">Background</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </div>
 </header>
 
 <main>
 
-  <!-- BACKGROUND -->
+  <!-- ════════════════ BACKGROUND ════════════════ -->
   <section id="background">
     <h2>Background</h2>
     <p>
       Mechanical and mechatronics engineer with about three years of hands-on experience
-      designing, building, and testing hardware systems in robotics, rocketry, HVAC
-      building systems, and consumer products.
+      designing, building, and testing hardware systems in robotics, rocketry, HVAC building
+      systems, and consumer products.
     </p>
     <p>
-      My work ranges from cryogenic liquid rocket feed systems and high-pressure test rigs
-      to free-flying robotic platforms, commercial VRF/heat pump designs, and compact
-      evaporative coolers. I take systems from first principles through CAD, fabrication,
-      assembly, structured testing, and design iteration — with a strong focus on safety,
-      reliability, and clear documentation.
-    </p>
-    <p>
-      MEng in Mechanical Engineering (Simulation &amp; Control) from UC Berkeley.
-      B.S. in Aerospace Engineering from Cal Poly Pomona.
+      My work spans cryogenic liquid rocket feed systems and high-pressure test rigs,
+      free-flying robotic platforms, commercial VRF/heat pump designs, and compact evaporative
+      coolers. I take systems from first principles through CAD, fabrication, assembly,
+      structured testing, and design iteration — with a strong focus on safety, reliability,
+      and clear documentation.
     </p>
   </section>
 
-  <!-- SKILLS -->
+  <!-- ════════════════ SKILLS ════════════════ -->
   <section id="skills">
     <h2>Skills</h2>
     <div class="skills-grid">
-      <div class="skill-block">
-        <h3>Mechanical &amp; Mechatronics</h3>
+
+      <div class="skill-box">
+        <h3>Mechanical Design</h3>
         <ul>
-          >Multi-component system design (rockets, robots, HVAC, consumer devices)</li>
-          >Dynamics, stress analysis, structural design for tanks, rails, fins, and supports</li>
-          >Cryogenic &amp; high-pressure systems: LOX/propane feed, GN₂ to 6,000 psi, pneumatic valves</li>
-          >Electromechanical integration: valves, sensors, avionics, motorized subsystems</li>
-          >DFM/DFA, part-count reduction, maintainability</li>
+          >Multi-component system design</li>
+          >Dynamics &amp; stress analysis</li>
+          >DFM / DFA</li>
+          >Cryogenic &amp; high-pressure systems</li>
+          >Electromechanical integration</li>
+          >Tolerance stack-up analysis</li>
         </ul>
       </div>
-      <div class="skill-block">
-        <h3>CAD &amp; Documentation</h3>
+
+      <div class="skill-box">
+        <h3>CAD &amp; Drafting</h3>
         <ul>
-          >Fusion 360, SolidWorks, NX, AutoCAD, Revit</li>
-          >Full-vehicle and rig assemblies, plumbing and routing in tight envelopes</li>
-          >HVAC layouts: duct routing, equipment placement, coordination drawings</li>
-          >Part/assembly drawings, BOMs, and build documentation</li>
-          >Step-by-step test procedures for repeatability and safety</li>
+          >Fusion 360</li>
+          >SolidWorks</li>
+          >NX (Siemens)</li>
+          >AutoCAD</li>
+          >Revit / BIM</li>
+          >BOMs &amp; Assembly Drawings</li>
         </ul>
       </div>
-      <div class="skill-block">
-        <h3>Analysis, Controls &amp; Software</h3>
+
+      <div class="skill-box">
+        <h3>Software &amp; Controls</h3>
         <ul>
-          >Multi-body dynamics, thermal/flow modeling, load-path and fastener sizing</li>
-          >E-Reg control logic, thrust-vector-control testing, abort-sequence design</li>
-          >MATLAB, Python, C/C++, ROS2, data-analysis scripting</li>
-          >Instrumentation: thermocouples, RTDs, pressure transducers, load cells, level sensors</li>
+          >Python</li>
+          >C / C++</li>
+          >MATLAB / Simulink</li>
+          >ROS2</li>
+          >Git / GitHub</li>
+          >Linux (CLI)</li>
         </ul>
       </div>
-      <div class="skill-block">
-        <h3>Field, Test &amp; Operations</h3>
+
+      <div class="skill-box">
+        <h3>Building Systems</h3>
         <ul>
-          >Pressure, flow, hotfire, structural, and functional testing of liquid rocket systems</li>
-          >Site surveys and field verification for HVAC retrofits and tenant improvements</li>
-          >Safe test operations: PPE planning, role assignments, abort logic and interlocks</li>
-          >Root-cause analysis and design updates driven by test and field data</li>
+          >HVAC Load Calculations</li>
+          >VRF &amp; Heat Pump Design</li>
+          >Duct Routing &amp; Layout</li>
+          >Title 24 / CBC / CMC</li>
+          >EnergyPro Compliance</li>
+          >Multidisciplinary Coordination</li>
         </ul>
       </div>
-    </div>
-  </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <h2>Experience</h2>
-
-    <div class="exp-item">
-      <div class="exp-header">
-        <h3>Orbital Exploration Systems (ORBES) — Los Angeles, CA</h3>
-        <span class="exp-date">Jun 2025 – Present</span>
+      <div class="skill-box">
+        <h3>Test &amp; Fabrication</h3>
+        <ul>
+          >High-pressure &amp; flow testing</li>
+          >Hotfire campaign operations</li>
+          >3D Printing &amp; CNC Routing</li>
+          >Laser cutting &amp; machining</li>
+          >PCB design basics</li>
+          >Instrumentation &amp; DAQ</li>
+        </ul>
       </div>
-      <div class="exp-role">Mechanical Controls Engineer</div>
-      <ul>
-        >Designed and built 6-DOF free-flying robotic platforms using SBCs and BLDC motors.</li>
-        >Developed control laws for compound maneuvers with reaction wheels and fans, achieving ±5° attitude accuracy.</li>
-        >Implemented multiprocessing and VIO pipelines in ROS2, reducing hardware cost by ~$2,000 per unit.</li>
-        >Diagnosed and fixed mechanical and signal-path issues, iterating hardware and control logic for improved robustness.</li>
-      </ul>
-    </div>
 
-    <div class="exp-item">
-      <div class="exp-header">
-        <h3>ACIES Engineering — San Jose, CA</h3>
-        <span class="exp-date">Aug 2024 – May 2025</span>
-      </div>
-      <div class="exp-role">Mechanical Design Engineer</div>
-      <ul>
-        >Designed and evaluated heat pump and VRF systems for 50+ commercial interiors: retail, residential, restaurants, and large offices.</li>
-        >Performed load calculations, building-envelope modeling, and Title 24 / CBC / CMC compliance work including EnergyPro reporting.</li>
-        >Used AutoCAD and Revit to route ducts and place equipment in constrained ceiling spaces, coordinating with plumbing and electrical.</li>
-        >Conducted site surveys including a complex industrial-to-retail remodel in San Francisco — climbed ceilings, used roof and balcony access to trace ducts and confirm unit specs for fire and code compliance.</li>
-        >Solved limited-tonnage cases by carefully splitting fan-coil and kitchen ventilation paths to stay within energy-saving constraints.</li>
-      </ul>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-header">
-        <h3>Clocky LLC — Los Angeles, CA</h3>
-        <span class="exp-date">May 2023 – Aug 2023</span>
-      </div>
-      <div class="exp-role">Mechanical Engineering Intern</div>
-      <ul>
-        >Designed an indoor evaporative cooler with optimized fan/stator geometry to reduce drag and focus effective blade length.</li>
-        >Integrated an atomizer and conical nozzle for even air mixing and improved cooling performance.</li>
-        >Positioned reservoir below fan with linear slots to keep center of gravity low, reducing tip-over hazard while cutting part count ~30%.</li>
-      </ul>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-header">
-        <h3>UC Berkeley — Honeywell Capstone</h3>
-        <span class="exp-date">Aug 2023 – May 2024</span>
-      </div>
-      <div class="exp-role">Senior Capstone Co-Lead · Jitter Analysis Mitigation for Satellite</div>
-      <ul>
-        >Built a multi-body dynamics model to predict satellite jitter and evaluate passive vs. active mitigation strategies.</li>
-        >Traded off model fidelity against simulation time to achieve arc-second-level pointing performance.</li>
-        >Led documentation and stakeholder communication of design recommendations and test strategies.</li>
-      </ul>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-header">
-        <h3>CPP Liquid Rocket Lab — Bronco 1 / E-2 Vehicles</h3>
-        <span class="exp-date">Aug 2021 – May 2023</span>
-      </div>
-      <div class="exp-role">Propellant Feed &amp; Structures</div>
-      <ul>
-        >Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN₂ pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li>
-        >Contributed to thrust-transfer rails, MVA covers, and fin-slot structural design.</li>
-        >Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li>
-        >Authored detailed test procedures with timed steps, PPE
+      <div class="skill-box">
+        <h3>Process &amp;
