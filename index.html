@@ -95,6 +95,9 @@
     .hero-text .tagline { color: #94a3b8; margin-top: 0.5rem; font-size: 0.95rem; }
     .hero-links { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
     .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       font-size: 0.85rem;
       background: #1e40af;
       color: #fff;
@@ -103,6 +106,12 @@
       transition: background 0.2s;
     }
     .hero-links a:hover { background: #2563eb; text-decoration: none; }
+    .hero-links a img {
+      width: 16px;
+      height: 16px;
+      border-radius: 2px;
+      background: white; /* helps if the logo has transparency */
+    }
 
     /* ── PAGE CONTAINER (Controls the width) ── */
     .page { 
@@ -155,14 +164,51 @@
     }
     .skill-box ul li:last-child { border-bottom: none; }
 
-    /* ── EXPERIENCE & PROJECTS (Fixed Flex Layout) ── */
+    /* ── EXPERIENCE, PROJECTS, EDUCATION (With Logos) ── */
     .exp-item {
+      display: flex;
+      flex-direction: row;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+      align-items: flex-start;
+    }
+    @media (max-width: 600px) {
+      .exp-item {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+    }
+    .exp-item:last-child { margin-bottom: 0; }
+    
+    .exp-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      background: #fff; /* White background to make logos pop cleanly */
+      box-shadow: 0 0 0 1px #1e293b;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #0f172a; /* Fallback text color */
+      overflow: hidden;
+    }
+    .exp-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 4px;
+    }
+
+    .exp-content {
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      margin-bottom: 2.5rem;
+      width: 100%;
     }
-    .exp-item:last-child { margin-bottom: 0; }
     
     .exp-header {
       display: flex;
@@ -189,14 +235,36 @@
       margin-bottom: 0.25rem;
     }
     
-    .exp-item ul { 
+    .exp-content ul { 
       padding-left: 1.25rem; 
       color: #cbd5e1; 
       font-size: 0.93rem; 
     }
-    .exp-item ul li { 
+    .exp-content ul li { 
       margin-bottom: 0.4rem; 
-      list-style-type: disc; /* Re-added bullets */
+      list-style-type: disc; 
+    }
+
+    /* ── BOTTOM LOGOS ── */
+    .bottom-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 3rem 1.5rem;
+      border-top: 1px solid #1e293b;
+      background: #020617;
+    }
+    .bottom-logos img {
+      height: 45px;
+      max-width: 140px;
+      object-fit: contain;
+      filter: grayscale(100%) opacity(60%); /* Makes them look clean and uniform */
+      transition: all 0.3s ease;
+    }
+    .bottom-logos img:hover {
+      filter: grayscale(0%) opacity(100%); /* Reveals full color on hover */
     }
 
     /* ── FOOTER ── */
@@ -220,7 +288,7 @@
       <a href="#background">Background</a>
       <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a> <!-- Fixed link target -->
+      <a href="#projects">Projects</a>
     </nav>
   </div>
 </header>
@@ -228,13 +296,20 @@
 <!-- ════ HERO ════ -->
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-photo">GY</div>
+    <div class="hero-photo">
+      <!-- Paste your copied LinkedIn image address below -->
+      <img src="YOUR_LINKEDIN_IMAGE_URL_HERE.jpg" alt="Gavin Yam" onerror="this.style.display='none'; this.parentNode.innerHTML='GY'">
+    </div>
     <div class="hero-text">
       <h1>Gavin Yam</h1>
       <p class="tagline">Mechatronics &amp; Mechanical Engineer &nbsp;·&nbsp; Robotics · Rockets · HVAC Systems</p>
       <div class="hero-links">
         <a href="mailto:legendgavin00@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/gavin-yam2023" target="_blank">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/gavin-yam2023" target="_blank">
+          <!-- Grab icon from LinkedIn domain -->
+          <img src="https://logo.clearbit.com/linkedin.com" alt="LinkedIn Logo" onerror="this.style.display='none'"> 
+          LinkedIn
+        </a>
         <a href="https://1drv.ms/f/c/A001C2F87ED3831A/EhqD0374wgEggKB27QAAAAABa1MG-cNeBJptjtdL1IuaxQ?e=6SsW0g" target="_blank">Portfolio</a>
       </div>
     </div>
@@ -301,7 +376,7 @@
         </ul>
       </div>
       
-    </div> <!-- Added missing closing div for skills-grid -->
+    </div>
   </section>
 
   <!-- ════ EXPERIENCE ════ -->
@@ -309,84 +384,123 @@
     <h2>Experience</h2>
 
     <div class="exp-item">
-      <div class="exp-header">
-        <h3>Orbital Exploration Systems (ORBES) — Los Angeles, CA</h3>
-        <span class="exp-date">Jun 2025 – Present</span>
+      <!-- Added Company Logo -->
+      <div class="exp-logo">
+        <img src="https://logo.clearbit.com/orbes.space" alt="ORBES Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='OE'">
       </div>
-      <div class="exp-role">Mechanical Controls Engineer</div>
-      <ul>
-        <li>Designed and built 6-DOF free-flying robotic platforms using SBCs and BLDC motors.</li>
-        <li>Developed control laws for compound maneuvers with reaction wheels and fans, achieving ±5° attitude accuracy.</li>
-        <li>Implemented multiprocessing and VIO pipelines in ROS2, reducing hardware cost by ~$2,000 per unit.</li>
-        <li>Diagnosed and fixed mechanical and signal-path issues, iterating hardware and control logic for improved robustness.</li>
-      </ul>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>Orbital Exploration Systems (ORBES) — Los Angeles, CA</h3>
+          <span class="exp-date">Jun 2025 – Present</span>
+        </div>
+        <div class="exp-role">Mechanical Controls Engineer</div>
+        <ul>
+          <li>Designed and built 6-DOF free-flying robotic platforms using SBCs and BLDC motors.</li>
+          <li>Developed control laws for compound maneuvers with reaction wheels and fans, achieving ±5° attitude accuracy.</li>
+          <li>Implemented multiprocessing and VIO pipelines in ROS2, reducing hardware cost by ~$2,000 per unit.</li>
+          <li>Diagnosed and fixed mechanical and signal-path issues, iterating hardware and control logic for improved robustness.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="exp-item">
-      <div class="exp-header">
-        <h3>ACIES Engineering — San Jose, CA</h3>
-        <span class="exp-date">Aug 2024 – May 2025</span>
+      <!-- Added Company Logo -->
+      <div class="exp-logo">
+        <img src="https://logo.clearbit.com/acieseng.com" alt="ACIES Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='AE'">
       </div>
-      <div class="exp-role">Mechanical Design Engineer</div>
-      <ul>
-        <li>Designed and evaluated heat pump and VRF systems for 50+ commercial interiors: retail, residential, restaurants, and large offices.</li>
-        <li>Performed load calculations, building-envelope modeling, and Title 24 / CBC / CMC compliance work including EnergyPro reporting.</li>
-        <li>Used AutoCAD and Revit to route ducts and place equipment in constrained ceiling spaces, coordinating with plumbing and electrical.</li>
-        <li>Conducted site surveys including a complex industrial-to-retail remodel in San Francisco — climbed ceilings, used roof and balcony access to trace ducts and confirm unit specs for fire and code compliance.</li>
-        <li>Solved limited-tonnage cases by carefully splitting fan-coil and kitchen ventilation paths to stay within energy-saving constraints.</li>
-      </ul>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>ACIES Engineering — San Jose, CA</h3>
+          <span class="exp-date">Aug 2024 – May 2025</span>
+        </div>
+        <div class="exp-role">Mechanical Design Engineer</div>
+        <ul>
+          <li>Designed and evaluated heat pump and VRF systems for 50+ commercial interiors: retail, residential, restaurants, and large offices.</li>
+          <li>Performed load calculations, building-envelope modeling, and Title 24 / CBC / CMC compliance work including EnergyPro reporting.</li>
+          <li>Used AutoCAD and Revit to route ducts and place equipment in constrained ceiling spaces, coordinating with plumbing and electrical.</li>
+          <li>Conducted site surveys including a complex industrial-to-retail remodel in San Francisco — climbed ceilings, used roof and balcony access to trace ducts and confirm unit specs for fire and code compliance.</li>
+          <li>Solved limited-tonnage cases by carefully splitting fan-coil and kitchen ventilation paths to stay within energy-saving constraints.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="exp-item">
-      <div class="exp-header">
-        <h3>Clocky LLC — Los Angeles, CA</h3>
-        <span class="exp-date">May 2023 – Aug 2023</span>
+      <!-- Added Company Logo -->
+      <div class="exp-logo">
+        <img src="https://logo.clearbit.com/clocky.com" alt="Clocky Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='CL'">
       </div>
-      <div class="exp-role">Mechanical Engineering Intern</div>
-      <ul>
-        <li>Designed an indoor evaporative cooler with optimized fan/stator geometry to reduce drag and focus effective blade length.</li>
-        <li>Integrated an atomizer and conical nozzle for even air mixing and improved cooling performance.</li>
-        <li>Positioned reservoir below fan with linear slots to keep center of gravity low, reducing tip-over hazard while cutting part count ~30%.</li>
-      </ul>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>Clocky LLC — Los Angeles, CA</h3>
+          <span class="exp-date">May 2023 – Aug 2023</span>
+        </div>
+        <div class="exp-role">Mechanical Engineering Intern</div>
+        <ul>
+          <li>Designed an indoor evaporative cooler with optimized fan/stator geometry to reduce drag and focus effective blade length.</li>
+          <li>Integrated an atomizer and conical nozzle for even air mixing and improved cooling performance.</li>
+          <li>Positioned reservoir below fan with linear slots to keep center of gravity low, reducing tip-over hazard while cutting part count ~30%.</li>
+        </ul>
+      </div>
     </div>
   </section>
   
   <!-- ════ PROJECTS ════ -->
-  <section id="projects"> <!-- Changed id from 'project' to 'projects' so nav link works -->
-    <h2>Projects</h2> <!-- Changed title to plural to match nav -->
+  <section id="projects"> 
+    <h2>Projects</h2>
     
     <div class="exp-item">
-      <div class="exp-header">
-        <h3>UC Berkeley — Honeywell Capstone</h3>
-        <span class="exp-date">Aug 2023 – May 2024</span>
+      <!-- Added University Logo for Project -->
+      <div class="exp-logo">
+        <img src="https://logo.clearbit.com/berkeley.edu" alt="UC Berkeley Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='UCB'">
       </div>
-      <div class="exp-role">Senior Capstone Co-Lead · Jitter Analysis Mitigation for Satellite</div>
-      <ul>
-        <li>Built a multi-body dynamics model to predict satellite jitter and evaluate passive vs. active mitigation strategies.</li>
-        <li>Traded off model fidelity against simulation time to achieve arc-second-level pointing performance.</li>
-        <li>Led documentation and stakeholder communication of design recommendations and test strategies.</li>
-      </ul>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>UC Berkeley — Honeywell Capstone</h3>
+          <span class="exp-date">Aug 2023 – May 2024</span>
+        </div>
+        <div class="exp-role">Senior Capstone Co-Lead · Jitter Analysis Mitigation for Satellite</div>
+        <ul>
+          <li>Built a multi-body dynamics model to predict satellite jitter and evaluate passive vs. active mitigation strategies.</li>
+          <li>Traded off model fidelity against simulation time to achieve arc-second-level pointing performance.</li>
+          <li>Led documentation and stakeholder communication of design recommendations and test strategies.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="exp-item">
-      <div class="exp-header">
-        <h3>CPP Liquid Rocket Lab — Bronco 1 / Space Enterprise E-2 Vehicles</h3>
-        <span class="exp-date">Aug 2021 – May 2023</span>
+      <!-- Added University Logo for Project -->
+      <div class="exp-logo">
+        <img src="https://logo.clearbit.com/cpp.edu" alt="CPP Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='CPP'">
       </div>
-      <div class="exp-role">Propellant Feed &amp; Structures</div>
-      <ul>
-        <li>Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN₂ pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li>
-        <li>Contributed to thrust-transfer rails, MVA covers, and fin-slot structural design.</li>
-        <li>Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li>
-        <li>Authored detailed test procedures with timed steps and appropriate PPE usage.</li> <!-- Cleaned up trailing text -->
-      </ul>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>CPP Liquid Rocket Lab — Bronco 1 / Space Enterprise E-2 Vehicles</h3>
+          <span class="exp-date">Aug 2021 – May 2023</span>
+        </div>
+        <div class="exp-role">Propellant Feed &amp; Structures</div>
+        <ul>
+          <li>Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN₂ pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li>
+          <li>Contributed to thrust-transfer rails, MVA covers, and fin-slot structural design.</li>
+          <li>Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li>
+          <li>Authored detailed test procedures with timed steps and appropriate PPE usage.</li>
+        </ul>
+      </div>
     </div>
   </section>
-  
+
 </div> <!-- End of .page wrapper -->
 
+<!-- ════ AFFILIATION LOGOS ════ -->
+<div class="bottom-logos">
+  <img src="https://logo.clearbit.com/orbes.space" alt="ORBES" title="ORBES">
+  <img src="https://logo.clearbit.com/acieseng.com" alt="ACIES Engineering" title="ACIES Engineering">
+  <img src="https://logo.clearbit.com/clocky.com" alt="Clocky" title="Clocky LLC">
+  <img src="https://logo.clearbit.com/berkeley.edu" alt="UC Berkeley" title="UC Berkeley">
+  <img src="https://logo.clearbit.com/cpp.edu" alt="Cal Poly Pomona" title="Cal Poly Pomona">
+</div>
+
 <footer>
-  <p>© 2025 Gavin Yam. All rights reserved.</p>
+  <p>© 2026 Gavin Yam. All rights reserved.</p>
 </footer>
 
 </body>
