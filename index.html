@@ -48,7 +48,7 @@
     nav a:hover { color: #f1f5f9; text-decoration: none; }
     
     @media (max-width: 600px) {
-      nav { display: none; /* Optional: hide nav on very small screens or make a hamburger menu */ }
+      nav { display: none; }
     }
 
     /* ── HERO ── */
@@ -66,10 +66,11 @@
       flex-wrap: wrap;
     }
     .hero-photo {
-      width: 110px;
-      height: 110px;
+      width: 152px; /* Matched to LinkedIn profile picture size */
+      height: 152px;
       border-radius: 50%;
-      border: 3px solid #38bdf8;
+      border: 3px solid #0f172a;
+      box-shadow: 0 0 0 3px #38bdf8;
       background: #1e293b;
       flex-shrink: 0;
       display: flex;
@@ -84,7 +85,7 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      object-fit: cover;
+      object-fit: cover; /* Ensures your photo fills the circle perfectly */
     }
     .hero-text h1 {
       font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -110,10 +111,10 @@
       width: 16px;
       height: 16px;
       border-radius: 2px;
-      background: white; /* helps if the logo has transparency */
+      background: white; 
     }
 
-    /* ── PAGE CONTAINER (Controls the width) ── */
+    /* ── PAGE CONTAINER ── */
     .page { 
       max-width: 900px; 
       margin: 0 auto; 
@@ -164,7 +165,7 @@
     }
     .skill-box ul li:last-child { border-bottom: none; }
 
-    /* ── EXPERIENCE, PROJECTS, EDUCATION (With Logos) ── */
+    /* ── EXPERIENCE, PROJECTS (LinkedIn Logo Style) ── */
     .exp-item {
       display: flex;
       flex-direction: row;
@@ -181,25 +182,23 @@
     .exp-item:last-child { margin-bottom: 0; }
     
     .exp-logo {
-      width: 52px;
-      height: 52px;
-      border-radius: 8px;
-      background: #fff; /* White background to make logos pop cleanly */
-      box-shadow: 0 0 0 1px #1e293b;
+      width: 56px; /* Matched to LinkedIn standard size */
+      height: 56px;
+      border-radius: 4px; /* LinkedIn uses slightly rounded squares */
+      background: #fff; 
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1.2rem;
-      color: #0f172a; /* Fallback text color */
+      font-size: 1.25rem;
+      color: #000; /* Black text for fallbacks like UCB/CPP */
       overflow: hidden;
     }
     .exp-logo img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      padding: 4px;
+      object-fit: cover;
     }
 
     .exp-content {
@@ -214,7 +213,7 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      flex-wrap: wrap; /* Stacks nicely on mobile */
+      flex-wrap: wrap; 
       gap: 0.5rem;
     }
     .exp-header h3 { 
@@ -226,7 +225,7 @@
     .exp-date {
       font-size: 0.85rem;
       color: #94a3b8;
-      white-space: nowrap; /* Prevents date from splitting on two lines */
+      white-space: nowrap; 
     }
     .exp-role { 
       font-size: 0.95rem; 
@@ -260,11 +259,11 @@
       height: 45px;
       max-width: 140px;
       object-fit: contain;
-      filter: grayscale(100%) opacity(60%); /* Makes them look clean and uniform */
+      filter: grayscale(100%) opacity(60%); 
       transition: all 0.3s ease;
     }
     .bottom-logos img:hover {
-      filter: grayscale(0%) opacity(100%); /* Reveals full color on hover */
+      filter: grayscale(0%) opacity(100%); 
     }
 
     /* ── FOOTER ── */
@@ -297,8 +296,8 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-photo">
-      <!-- Paste your copied LinkedIn image address below -->
-      <img src="YOUR_LINKEDIN_IMAGE_URL_HERE.jpg" alt="Gavin Yam" onerror="this.style.display='none'; this.parentNode.innerHTML='GY'">
+      <!-- Upload 'profile.jpg' to your GitHub -->
+      <img src="profile.jpeg" alt="Gavin Yam" onerror="this.style.display='none'; this.parentNode.innerHTML='GY'">
     </div>
     <div class="hero-text">
       <h1>Gavin Yam</h1>
@@ -306,7 +305,7 @@
       <div class="hero-links">
         <a href="mailto:legendgavin00@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/gavin-yam2023" target="_blank">
-          <!-- Grab icon from LinkedIn domain -->
+          <!-- Default LinkedIn Icon from Clearbit usually works, kept as is -->
           <img src="https://logo.clearbit.com/linkedin.com" alt="LinkedIn Logo" onerror="this.style.display='none'"> 
           LinkedIn
         </a>
@@ -384,9 +383,9 @@
     <h2>Experience</h2>
 
     <div class="exp-item">
-      <!-- Added Company Logo -->
+      <!-- Upload 'orbes.png' to your GitHub -->
       <div class="exp-logo">
-        <img src="https://logo.clearbit.com/orbes.space" alt="ORBES Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='OE'">
+        <img src="orbes.jpeg" alt="ORBES Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='OE'">
       </div>
       <div class="exp-content">
         <div class="exp-header">
@@ -404,9 +403,9 @@
     </div>
 
     <div class="exp-item">
-      <!-- Added Company Logo -->
+      <!-- Upload 'acies.png' to your GitHub -->
       <div class="exp-logo">
-        <img src="https://logo.clearbit.com/acieseng.com" alt="ACIES Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='AE'">
+        <img src="acies.jpeg" alt="ACIES Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='AE'">
       </div>
       <div class="exp-content">
         <div class="exp-header">
@@ -423,9 +422,27 @@
         </ul>
       </div>
     </div>
+    
+    <!-- ADDED CPP LIQUID ROCKET LAB EXPERIENCE BASED ON YOUR SCREENSHOT -->
+    <div class="exp-item">
+      <!-- Upload 'cpp-rocket.png' to your GitHub -->
+      <div class="exp-logo">
+        <img src="cpp-rocket.jpeg" alt="CPP Rocket Lab Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='CPP'">
+      </div>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>Cal Poly Pomona Liquid Rocket Lab</h3>
+          <span class="exp-date">Jun 2022 – Jul 2022</span>
+        </div>
+        <div class="exp-role">Propellant Feed System Engineer</div>
+        <ul>
+          <li>Worked on Piping and Instrumentation Drawing (P&amp;ID), Cryogenics, and related systems.</li>
+        </ul>
+      </div>
+    </div>
 
     <div class="exp-item">
-      <!-- Added Company Logo -->
+      <!-- Clocky Logo (Kept as clearbit as it usually works, or you can host it locally) -->
       <div class="exp-logo">
         <img src="https://logo.clearbit.com/clocky.com" alt="Clocky Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='CL'">
       </div>
@@ -449,9 +466,10 @@
     <h2>Projects</h2>
     
     <div class="exp-item">
-      <!-- Added University Logo for Project -->
+      <!-- UCB Box styled exactly like your screenshot -->
       <div class="exp-logo">
-        <img src="https://logo.clearbit.com/berkeley.edu" alt="UC Berkeley Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='UCB'">
+        <!-- Kept intentionally empty to trigger fallback UCB text matching LinkedIn style -->
+        <img src="" onerror="this.style.display='none'; this.parentNode.innerHTML='UCB'">
       </div>
       <div class="exp-content">
         <div class="exp-header">
@@ -468,9 +486,10 @@
     </div>
 
     <div class="exp-item">
-      <!-- Added University Logo for Project -->
+      <!-- CPP Box styled exactly like your screenshot -->
       <div class="exp-logo">
-        <img src="https://logo.clearbit.com/cpp.edu" alt="CPP Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='CPP'">
+        <!-- Kept intentionally empty to trigger fallback CPP text matching LinkedIn style -->
+        <img src="" onerror="this.style.display='none'; this.parentNode.innerHTML='CPP'">
       </div>
       <div class="exp-content">
         <div class="exp-header">
@@ -492,11 +511,11 @@
 
 <!-- ════ AFFILIATION LOGOS ════ -->
 <div class="bottom-logos">
-  <img src="https://logo.clearbit.com/orbes.space" alt="ORBES" title="ORBES">
-  <img src="https://logo.clearbit.com/acieseng.com" alt="ACIES Engineering" title="ACIES Engineering">
-  <img src="https://logo.clearbit.com/clocky.com" alt="Clocky" title="Clocky LLC">
-  <img src="https://logo.clearbit.com/berkeley.edu" alt="UC Berkeley" title="UC Berkeley">
-  <img src="https://logo.clearbit.com/cpp.edu" alt="Cal Poly Pomona" title="Cal Poly Pomona">
+  <img src="https://logo.clearbit.com/orbes.space" alt="ORBES" title="ORBES" onerror="this.style.display='none'">
+  <img src="https://logo.clearbit.com/acieseng.com" alt="ACIES Engineering" title="ACIES Engineering" onerror="this.style.display='none'">
+  <img src="https://logo.clearbit.com/clocky.com" alt="Clocky" title="Clocky LLC" onerror="this.style.display='none'">
+  <img src="https://logo.clearbit.com/berkeley.edu" alt="UC Berkeley" title="UC Berkeley" onerror="this.style.display='none'">
+  <img src="https://logo.clearbit.com/cpp.edu" alt="Cal Poly Pomona" title="Cal Poly Pomona" onerror="this.style.display='none'">
 </div>
 
 <footer>
