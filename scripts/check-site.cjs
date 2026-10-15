@@ -18,6 +18,11 @@ for (const file of pages) {
   assert(/<title>[^<]+<\/title>/.test(html), `${file}: page title`);
   assert(/<meta\b[^>]*name="description"[^>]*content="[^"]+"/.test(html), `${file}: description`);
   assert(/<meta\b[^>]*name="viewport"/.test(html), `${file}: responsive viewport`);
+  const skipLink = [...html.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)].find(match =>
+    attr(match[0], 'href') === '#main' &&
+    (attr(match[0], 'class') || '').split(/\s+/).some(name => name === 'skip' || name === 'skip-link')
+  );
+  assert(skipLink, `${file}: skip link targeting main content must exist`);
   const main = html.match(/<main\b[^>]*>/)?.[0];
   assert.equal(attr(main || '', 'tabindex'), '-1', `${file}: skip destination must accept keyboard focus`);
   assert.equal(attr(main || '', 'id'), 'main', `${file}: skip destination exists`);
