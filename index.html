@@ -1,324 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Gavin Yam | Mechatronics & Mechanical Engineer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    /* ── RESET & BASE ── */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: #0f172a;
-      color: #e5e7eb;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-      /* Ensure text wraps nicely and doesn't stretch past screen width */
-      overflow-x: hidden; 
-    }
-    a { color: #38bdf8; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    
-    /* Global text wrapping for long words/links */
-    p, h1, h2, h3, li {
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-    }
-
-    /* ── STICKY NAV ── */
-    header {
-      background: rgba(2, 6, 23, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #1e293b;
-      padding: 0 1.5rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .header-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 52px;
-    }
-    .site-title { font-weight: 700; font-size: 1rem; color: #f1f5f9; }
-    nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-    nav a { color: #94a3b8; font-size: 0.88rem; transition: color 0.2s; }
-    nav a:hover { color: #f1f5f9; text-decoration: none; }
-    
-    @media (max-width: 600px) {
-      nav { display: none; }
-    }
-
-    /* ── HERO ── */
-    .hero {
-      background: radial-gradient(circle at top left, #1d283a, #020617);
-      border-bottom: 1px solid #1e293b;
-      padding: 3rem 1.5rem 2.5rem;
-    }
-    .hero-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .hero-photo {
-      width: 152px; /* Matched to LinkedIn profile picture size */
-      height: 152px;
-      border-radius: 50%;
-      border: 3px solid #0f172a;
-      box-shadow: 0 0 0 3px #38bdf8;
-      background: #1e293b;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #38bdf8;
-      overflow: hidden;
-    }
-    .hero-photo img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover; /* Ensures your photo fills the circle perfectly */
-    }
-    .hero-text h1 {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 700;
-      color: #f1f5f9;
-      line-height: 1.2;
-    }
-    .hero-text .tagline { color: #94a3b8; margin-top: 0.5rem; font-size: 0.95rem; }
-    .hero-links { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
-    .hero-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      background: #1e40af;
-      color: #fff;
-      padding: 0.4rem 0.9rem;
-      border-radius: 4px;
-      transition: background 0.2s;
-    }
-    .hero-links a:hover { background: #2563eb; text-decoration: none; }
-    .hero-links a img {
-      width: 16px;
-      height: 16px;
-      border-radius: 2px;
-      background: white; 
-    }
-
-    /* ── PAGE CONTAINER ── */
-    .page { 
-      max-width: 900px; 
-      margin: 0 auto; 
-      padding: 2.5rem 1.5rem 4rem; 
-    }
-    
-    section { margin-bottom: 3.5rem; }
-    section h2 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #f1f5f9;
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 0.4rem;
-      margin-bottom: 1.5rem;
-    }
-    section p { color: #94a3b8; margin-bottom: 1rem; font-size: 0.95rem; }
-
-    /* ── SKILL BOXES ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-    }
-    @media (max-width: 650px) { .skills-grid { grid-template-columns: 1fr; } }
-    @media (min-width: 651px) and (max-width: 860px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
-    .skill-box {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 6px;
-      padding: 1.25rem;
-    }
-    .skill-box h3 {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #38bdf8;
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.75rem;
-    }
-    .skill-box ul { list-style: none; padding: 0; }
-    .skill-box ul li {
-      font-size: 0.87rem;
-      color: #cbd5e1;
-      padding: 0.25rem 0;
-      border-bottom: 1px solid #1e293b55;
-    }
-    .skill-box ul li:last-child { border-bottom: none; }
-
-    /* ── EXPERIENCE, PROJECTS (LinkedIn Logo Style) ── */
-    .exp-item {
-      display: flex;
-      flex-direction: row;
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
-      align-items: flex-start;
-    }
-    @media (max-width: 600px) {
-      .exp-item {
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-    }
-    .exp-item:last-child { margin-bottom: 0; }
-    
-    .exp-logo {
-      width: 56px; /* Matched to LinkedIn standard size */
-      height: 56px;
-      border-radius: 4px; /* LinkedIn uses slightly rounded squares */
-      background: #fff; 
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.25rem;
-      color: #000; /* Black text for fallbacks like UCB/CPP */
-      overflow: hidden;
-    }
-    .exp-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .exp-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      width: 100%;
-    }
-    
-    .exp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap; 
-      gap: 0.5rem;
-    }
-    .exp-header h3 { 
-      font-size: 1.1rem; 
-      font-weight: 700; 
-      color: #f1f5f9; 
-      margin: 0;
-    }
-    .exp-date {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      white-space: nowrap; 
-    }
-    .exp-role { 
-      font-size: 0.95rem; 
-      font-weight: 600; 
-      color: #38bdf8; 
-      margin-bottom: 0.25rem;
-    }
-    
-    .exp-content ul { 
-      padding-left: 1.25rem; 
-      color: #cbd5e1; 
-      font-size: 0.93rem; 
-    }
-    .exp-content ul li { 
-      margin-bottom: 0.4rem; 
-      list-style-type: disc; 
-    }
-
-    /* ── BOTTOM LOGOS ── */
-    .bottom-logos {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-      padding: 3rem 1.5rem;
-      border-top: 1px solid #1e293b;
-      background: #020617;
-    }
-    .bottom-logos img {
-      height: 45px;
-      max-width: 140px;
-      object-fit: contain;
-      filter: grayscale(100%) opacity(60%); 
-      transition: all 0.3s ease;
-    }
-    .bottom-logos img:hover {
-      filter: grayscale(0%) opacity(100%); 
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid #1e293b;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      font-size: 0.85rem;
-      color: #475569;
-      background: #020617;
-    }
-  </style>
+  <meta name="description" content="Gavin Yam — mechanical and mechatronics engineering. Selected work in robotics, satellite dynamics and rocket feed systems.">
+  <title>Gavin Yam | Mechatronics &amp; Mechanical Engineer</title>
+  <link rel="stylesheet" href="assets/css/home.css">
 </head>
-<body>
-
-<!-- ════ STICKY NAV ════ -->
-<header>
-  <div class="header-inner">
-    <span class="site-title">Gavin Yam</span>
-    <nav>
-      <a href="#background">Background</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-    </nav>
-  </div>
-</header>
-
-<!-- ════ HERO ════ -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-photo">
-      <!-- Upload 'profile.jpg' to your GitHub -->
-      <img src="profile.jpeg" alt="Gavin Yam" onerror="this.style.display='none'; this.parentNode.innerHTML='GY'">
+<body class="portfolio-home">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+  <a class="identity" href="#main">Gavin <span>/ Engineering</span></a>
+  <nav aria-label="Main navigation"><a href="#projects">Selected work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav>
+</div></header>
+<main id="main" class="shell">
+  <section class="intro" aria-labelledby="intro-title">
+    <div><p class="discipline">Mechatronics &amp; Mechanical Engineer</p><h1 id="intro-title">Gavin Yam</h1><p class="intro-line">Robotics. Rockets. HVAC systems.</p><p class="intro-copy">From first principles through CAD, fabrication, assembly, structured testing, and design iteration.</p><a class="text-link" href="#background">Engineering background</a></div>
+    <img class="portrait" src="profile.jpeg" width="184" height="184" alt="Gavin Yam" decoding="async">
+  </section>
+  <section id="projects" class="selected-work" aria-labelledby="selected-title">
+    <div class="section-top"><h2 id="selected-title">Selected work</h2><p>Hardware, controls and the decisions between.</p></div>
+    <div class="project-grid">
+      <article class="project-card featured"><div class="project-media"><span class="media-name">ORBES</span><span class="media-status">Hardware photograph pending approval</span></div><div class="project-card-copy"><p class="project-category">Robotics &amp; controls</p><h3>From a control command <br>to a physical response.</h3><p>A draft case study connecting the system, design decisions and evidence.</p><a class="project-link" href="projects/orbes/">Explore ORBES <span class="link-note">Draft case study</span></a></div></article>
+      <article class="project-card"><div class="project-media secondary-media"><span class="media-name">Satellite <br>dynamics</span><span class="media-status">Project media pending approval</span></div><div class="project-card-copy"><p class="project-category">UC Berkeley / Honeywell</p><h3>Jitter analysis <br>&amp; mitigation.</h3><p>Multi-body dynamics and passive versus active mitigation strategies.</p><a class="project-link" href="#satellite-details">Read project details</a><p class="availability">Case study not yet available</p></div></article>
+      <article class="project-card"><div class="project-media secondary-media"><span class="media-name">Rocket <br>feed systems</span><span class="media-status">Project media pending approval</span></div><div class="project-card-copy"><p class="project-category">CPP Liquid Rocket Lab</p><h3>Propellant feed <br>&amp; structures.</h3><p>Feed systems, structural integration and test procedures.</p><a class="project-link" href="#rocket-details">Read project details</a><p class="availability">Case study not yet available</p></div></article>
     </div>
-    <div class="hero-text">
-      <h1>Gavin Yam</h1>
-      <p class="tagline">Mechatronics &amp; Mechanical Engineer &nbsp;·&nbsp; Robotics · Rockets · HVAC Systems</p>
-      <div class="hero-links">
-        <a href="mailto:legendgavin00@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/gavin-yam2023" target="_blank">
-          <!-- Default LinkedIn Icon from Clearbit usually works, kept as is -->
-          <img src="https://logo.clearbit.com/linkedin.com" alt="LinkedIn Logo" onerror="this.style.display='none'"> 
-          LinkedIn
-        </a>
-        <a href="https://1drv.ms/f/c/A001C2F87ED3831A/EhqD0374wgEggKB27QAAAAABa1MG-cNeBJptjtdL1IuaxQ?e=6SsW0g" target="_blank">Portfolio</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="page">
-
-  <!-- ════ BACKGROUND ════ -->
-  <section id="background">
+  </section>
+  <div class="career-content">
+    <section id="background">
     <h2>Background</h2>
     <p>
       Mechanical and mechatronics engineer with about three years of hands-on experience
@@ -333,9 +42,133 @@
       and clear documentation.
     </p>
   </section>
+    <section id="experience">
+    <h2>Experience</h2>
 
-  <!-- ════ SKILLS ════ -->
-  <section id="skills">
+    <div class="exp-item">
+
+      <div class="exp-logo">
+        <img loading="lazy" decoding="async" src="orbes.jpeg" alt="ORBES Logo">
+      </div>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>Orbital Exploration Systems (ORBES) — Los Angeles, CA</h3>
+          <span class="exp-date">Jun 2025 – Present</span>
+        </div>
+        <div class="exp-role">Mechanical Controls Engineer</div>
+        <ul>
+          <li>Designed and built 6-DOF free-flying robotic platforms using SBCs and BLDC motors.</li>
+          <li>Developed control laws for compound maneuvers with reaction wheels and fans, achieving ±5° attitude accuracy.</li>
+          <li>Implemented multiprocessing and VIO pipelines in ROS2, reducing hardware cost by ~$2,000 per unit.</li>
+          <li>Diagnosed and fixed mechanical and signal-path issues, iterating hardware and control logic for improved robustness.</li>
+        </ul>
+        <p><a href="projects/orbes/">Explore the ORBES case study (draft)</a></p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+
+      <div class="exp-logo">
+        <img loading="lazy" decoding="async" src="acies.jpeg" alt="ACIES Logo">
+      </div>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>ACIES Engineering — San Jose, CA</h3>
+          <span class="exp-date">Aug 2024 – May 2025</span>
+        </div>
+        <div class="exp-role">Mechanical Design Engineer</div>
+        <ul>
+          <li>Designed and evaluated heat pump and VRF systems for 50+ commercial interiors: retail, residential, restaurants, and large offices.</li>
+          <li>Performed load calculations, building-envelope modeling, and Title 24 / CBC / CMC compliance work including EnergyPro reporting.</li>
+          <li>Used AutoCAD and Revit to route ducts and place equipment in constrained ceiling spaces, coordinating with plumbing and electrical.</li>
+          <li>Conducted site surveys including a complex industrial-to-retail remodel in San Francisco — climbed ceilings, used roof and balcony access to trace ducts and confirm unit specs for fire and code compliance.</li>
+          <li>Solved limited-tonnage cases by carefully splitting fan-coil and kitchen ventilation paths to stay within energy-saving constraints.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="exp-item">
+
+      <div class="exp-logo">
+        <img loading="lazy" decoding="async" src="cpp-rocket.jpeg" alt="CPP Rocket Lab Logo">
+      </div>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>Cal Poly Pomona Liquid Rocket Lab</h3>
+          <span class="exp-date">Jun 2022 – Jul 2022</span>
+        </div>
+        <div class="exp-role">Propellant Feed System Engineer</div>
+        <ul>
+          <li>Worked on Piping and Instrumentation Drawing (P&amp;ID), Cryogenics, and related systems.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+
+      <div class="exp-logo">
+        <img loading="lazy" decoding="async" src="logo_clocky.png" alt="Clocky Logo">
+      </div>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>Clocky LLC — Los Angeles, CA</h3>
+          <span class="exp-date">May 2023 – Aug 2023</span>
+        </div>
+        <div class="exp-role">Mechanical Engineering Intern</div>
+        <ul>
+          <li>Designed an indoor evaporative cooler with optimized fan/stator geometry to reduce drag and focus effective blade length.</li>
+          <li>Integrated an atomizer and conical nozzle for even air mixing and improved cooling performance.</li>
+          <li>Positioned reservoir below fan with linear slots to keep center of gravity low, reducing tip-over hazard while cutting part count ~30%.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+    <section id="project-details">
+    <h2>Project details</h2>
+
+    <div class="exp-item" id="satellite-details" tabindex="-1">
+
+      <div class="exp-logo">
+
+        <span aria-label="UC Berkeley">UCB</span>
+      </div>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>UC Berkeley — Honeywell Capstone</h3>
+          <span class="exp-date">Aug 2023 – May 2024</span>
+        </div>
+        <div class="exp-role">Senior Capstone Co-Lead · Jitter Analysis Mitigation for Satellite</div>
+        <ul>
+          <li>Built a multi-body dynamics model to predict satellite jitter and evaluate passive vs. active mitigation strategies.</li>
+          <li>Traded off model fidelity against simulation time to achieve arc-second-level pointing performance.</li>
+          <li>Led documentation and stakeholder communication of design recommendations and test strategies.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item" id="rocket-details" tabindex="-1">
+
+      <div class="exp-logo">
+
+        <span aria-label="Cal Poly Pomona">CPP</span>
+      </div>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>CPP Liquid Rocket Lab — Bronco 1 / Space Enterprise E-2 Vehicles</h3>
+          <span class="exp-date">Aug 2021 – May 2023</span>
+        </div>
+        <div class="exp-role">Propellant Feed &amp; Structures</div>
+        <ul>
+          <li>Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN₂ pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li>
+          <li>Contributed to thrust-transfer rails, MVA covers, and fin-slot structural design.</li>
+          <li>Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li>
+          <li>Authored detailed test procedures with timed steps and appropriate PPE usage.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+    <section id="skills">
     <h2>Skills</h2>
     <div class="skills-grid">
 
@@ -374,154 +207,11 @@
           <li>Linux (CLI)</li>
         </ul>
       </div>
-      
+
     </div>
   </section>
-
-  <!-- ════ EXPERIENCE ════ -->
-  <section id="experience">
-    <h2>Experience</h2>
-
-    <div class="exp-item">
-      <!-- Upload 'orbes.png' to your GitHub -->
-      <div class="exp-logo">
-        <img src="orbes.jpeg" alt="ORBES Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='OE'">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>Orbital Exploration Systems (ORBES) — Los Angeles, CA</h3>
-          <span class="exp-date">Jun 2025 – Present</span>
-        </div>
-        <div class="exp-role">Mechanical Controls Engineer</div>
-        <ul>
-          <li>Designed and built 6-DOF free-flying robotic platforms using SBCs and BLDC motors.</li>
-          <li>Developed control laws for compound maneuvers with reaction wheels and fans, achieving ±5° attitude accuracy.</li>
-          <li>Implemented multiprocessing and VIO pipelines in ROS2, reducing hardware cost by ~$2,000 per unit.</li>
-          <li>Diagnosed and fixed mechanical and signal-path issues, iterating hardware and control logic for improved robustness.</li>
-        </ul>
-        <p><a href="projects/orbes/">Explore the ORBES case study (draft)</a></p>
-      </div>
-    </div>
-
-    <div class="exp-item">
-      <!-- Upload 'acies.png' to your GitHub -->
-      <div class="exp-logo">
-        <img src="acies.jpeg" alt="ACIES Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='AE'">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>ACIES Engineering — San Jose, CA</h3>
-          <span class="exp-date">Aug 2024 – May 2025</span>
-        </div>
-        <div class="exp-role">Mechanical Design Engineer</div>
-        <ul>
-          <li>Designed and evaluated heat pump and VRF systems for 50+ commercial interiors: retail, residential, restaurants, and large offices.</li>
-          <li>Performed load calculations, building-envelope modeling, and Title 24 / CBC / CMC compliance work including EnergyPro reporting.</li>
-          <li>Used AutoCAD and Revit to route ducts and place equipment in constrained ceiling spaces, coordinating with plumbing and electrical.</li>
-          <li>Conducted site surveys including a complex industrial-to-retail remodel in San Francisco — climbed ceilings, used roof and balcony access to trace ducts and confirm unit specs for fire and code compliance.</li>
-          <li>Solved limited-tonnage cases by carefully splitting fan-coil and kitchen ventilation paths to stay within energy-saving constraints.</li>
-        </ul>
-      </div>
-    </div>
-    
-    <!-- ADDED CPP LIQUID ROCKET LAB EXPERIENCE BASED ON YOUR SCREENSHOT -->
-    <div class="exp-item">
-      <!-- Upload 'cpp-rocket.png' to your GitHub -->
-      <div class="exp-logo">
-        <img src="cpp-rocket.jpeg" alt="CPP Rocket Lab Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='CPP'">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>Cal Poly Pomona Liquid Rocket Lab</h3>
-          <span class="exp-date">Jun 2022 – Jul 2022</span>
-        </div>
-        <div class="exp-role">Propellant Feed System Engineer</div>
-        <ul>
-          <li>Worked on Piping and Instrumentation Drawing (P&amp;ID), Cryogenics, and related systems.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item">
-      <!-- Clocky Logo (Kept as clearbit as it usually works, or you can host it locally) -->
-      <div class="exp-logo">
-        <img src="https://logo.clearbit.com/clocky.com" alt="Clocky Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='CL'">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>Clocky LLC — Los Angeles, CA</h3>
-          <span class="exp-date">May 2023 – Aug 2023</span>
-        </div>
-        <div class="exp-role">Mechanical Engineering Intern</div>
-        <ul>
-          <li>Designed an indoor evaporative cooler with optimized fan/stator geometry to reduce drag and focus effective blade length.</li>
-          <li>Integrated an atomizer and conical nozzle for even air mixing and improved cooling performance.</li>
-          <li>Positioned reservoir below fan with linear slots to keep center of gravity low, reducing tip-over hazard while cutting part count ~30%.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  
-  <!-- ════ PROJECTS ════ -->
-  <section id="projects"> 
-    <h2>Projects</h2>
-    
-    <div class="exp-item">
-      <!-- UCB Box styled exactly like your screenshot -->
-      <div class="exp-logo">
-        <!-- Kept intentionally empty to trigger fallback UCB text matching LinkedIn style -->
-        <img src="" onerror="this.style.display='none'; this.parentNode.innerHTML='UCB'">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>UC Berkeley — Honeywell Capstone</h3>
-          <span class="exp-date">Aug 2023 – May 2024</span>
-        </div>
-        <div class="exp-role">Senior Capstone Co-Lead · Jitter Analysis Mitigation for Satellite</div>
-        <ul>
-          <li>Built a multi-body dynamics model to predict satellite jitter and evaluate passive vs. active mitigation strategies.</li>
-          <li>Traded off model fidelity against simulation time to achieve arc-second-level pointing performance.</li>
-          <li>Led documentation and stakeholder communication of design recommendations and test strategies.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item">
-      <!-- CPP Box styled exactly like your screenshot -->
-      <div class="exp-logo">
-        <!-- Kept intentionally empty to trigger fallback CPP text matching LinkedIn style -->
-        <img src="" onerror="this.style.display='none'; this.parentNode.innerHTML='CPP'">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>CPP Liquid Rocket Lab — Bronco 1 / Space Enterprise E-2 Vehicles</h3>
-          <span class="exp-date">Aug 2021 – May 2023</span>
-        </div>
-        <div class="exp-role">Propellant Feed &amp; Structures</div>
-        <ul>
-          <li>Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN₂ pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li>
-          <li>Contributed to thrust-transfer rails, MVA covers, and fin-slot structural design.</li>
-          <li>Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li>
-          <li>Authored detailed test procedures with timed steps and appropriate PPE usage.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-</div> <!-- End of .page wrapper -->
-
-<!-- ════ AFFILIATION LOGOS ════ -->
-<div class="bottom-logos">
-  <img src="https://logo.clearbit.com/orbes.space" alt="ORBES" title="ORBES" onerror="this.style.display='none'">
-  <img src="https://logo.clearbit.com/acieseng.com" alt="ACIES Engineering" title="ACIES Engineering" onerror="this.style.display='none'">
-  <img src="https://logo.clearbit.com/clocky.com" alt="Clocky" title="Clocky LLC" onerror="this.style.display='none'">
-  <img src="https://logo.clearbit.com/berkeley.edu" alt="UC Berkeley" title="UC Berkeley" onerror="this.style.display='none'">
-  <img src="https://logo.clearbit.com/cpp.edu" alt="Cal Poly Pomona" title="Cal Poly Pomona" onerror="this.style.display='none'">
-</div>
-
-<footer>
-  <p>© 2026 Gavin Yam. All rights reserved.</p>
-</footer>
-
+  </div>
+</main>
+<footer id="contact"><div class="shell"><div class="contact-row"><div><p class="footer-identity">Gavin / Engineering</p><h2>Continue the conversation.</h2></div><nav aria-label="Contact links"><a href="mailto:legendgavin00@gmail.com">Email Gavin</a><a href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer">LinkedIn <span class="sr-only">(opens in a new tab)</span></a><a href="https://1drv.ms/f/c/A001C2F87ED3831A/EhqD0374wgEggKB27QAAAAABa1MG-cNeBJptjtdL1IuaxQ?e=6SsW0g" target="_blank" rel="noopener noreferrer">Portfolio archive (OneDrive) <span class="sr-only">(opens in a new tab)</span></a></nav></div><div class="footer-bottom"><p>© 2026 Gavin Yam. All rights reserved.</p><a href="#main">Back to top</a></div></div></footer>
 </body>
 </html>
