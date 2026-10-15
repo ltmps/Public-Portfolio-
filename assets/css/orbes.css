@@ -49,3 +49,6 @@ main[tabindex="-1"]:focus-visible{outline:3px solid #b16929;outline-offset:6px}
   .heading-highlight,.heading-highlight.is-revealed{background-size:100% .24em;transition:none}
   .stage,.stage span{transition:none}
 }
+.contribution-list{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
+.contribution-list li{padding-left:3px;margin-bottom:10px}
+.contribution-list strong{color:var(--ink);font-weight:500}
