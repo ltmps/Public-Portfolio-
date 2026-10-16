@@ -52,3 +52,10 @@ main[tabindex="-1"]:focus-visible{outline:3px solid #b16929;outline-offset:6px}
 .contribution-list{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
 .contribution-list li{padding-left:3px;margin-bottom:10px}
 .contribution-list strong{color:var(--ink);font-weight:500}
+
+.architecture-figure{margin:0 0 20px;border:1px solid var(--line);background:#fff}
+.architecture-figure img{display:block;width:100%;max-width:661px;height:auto;margin:24px auto}
+.architecture-figure figcaption{position:static;display:block;padding:18px 22px;font-size:14px;border-top:1px solid var(--line)}
+.architecture-figure figcaption p{max-width:80ch;color:var(--muted);margin:8px 0 12px}
+.architecture-figure figcaption a{display:inline-block;color:var(--teal)}
+.architecture-description{margin-bottom:28px}
