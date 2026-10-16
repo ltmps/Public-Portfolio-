@@ -1,9 +1,9 @@
 "use strict";
 const descriptions = {
-  estimator: ["Estimator", "Turns available sensor observations into an estimate of the system’s current state. The actual ORBES sensors and estimation method are still to be confirmed."],
-  controller: ["Controller", "Compares an estimated state with a desired command and chooses a corrective response. The control strategy, inputs and tuning used in ORBES are not yet verified."],
-  allocation: ["Allocation", "Maps a requested response to individual actuator commands while accounting for available authority. This stage is illustrative; ORBES actuator mapping and limits need confirmation."],
-  motors: ["Motors", "Convert actuator commands into a physical response. Sensing can close the loop by reporting what happened. The actual motor arrangement and feedback path in ORBES remain unverified."]
+  estimator: ["Estimator", "Turns available sensor observations into an estimate of the system's current state. This is a conceptual explanation; the approved diagram above shows the fan-platform architecture."],
+  controller: ["Controller", "Compares an estimated state with a desired command and chooses a corrective response. This walkthrough explains the role of a controller; the design rationale below describes the PID-to-LQR decision."],
+  allocation: ["Allocation", "Maps a requested response to individual actuator commands while accounting for available authority. This stage is illustrative and does not specify the ORBES actuator mapping or limits."],
+  motors: ["Motors", "Convert actuator commands into a physical response. Sensing can close the loop by reporting what happened. This conceptual stage does not demonstrate hardware operation or measured performance."]
 };
 const stageButtons = document.querySelectorAll("[data-stage]");
 const description = document.getElementById("stage-description");
