@@ -58,4 +58,19 @@ assert(home.indexOf('href="projects/orbes/"') < home.indexOf('href="projects/b1l
 assert(home.includes('href="projects/b1lv/"'), 'Homepage must link to B1LV');
 assert(read('projects/orbes/index.html').includes('href="../../index.html#contact"'), 'ORBES must offer the existing contact route');
 assert(read('projects/b1lv/index.html').includes('href="../../index.html#contact"'), 'B1LV must offer the existing contact route');
-console.log(`PASS: ${pages.length} pages; ${checked} local references; metadata, image alt, keyboard skip destinations and project/contact navigation.`);
+// Source-level regression guard for the two evidence cards (not browser CSS QA).
+const caseCss = read('assets/css/orbes.css');
+function cardColor(selector) {
+  let color;
+  for (const rule of caseCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    if (!rule[1].split(',').map(s => s.trim()).includes(selector)) continue;
+    for (const declaration of rule[2].split(';')) {
+      const [property, value] = declaration.split(':').map(s => s.trim());
+      if (property === 'color') color = value;
+    }
+  }
+  return color;
+}
+assert.equal(cardColor('.results-placeholder'), 'var(--ink)', 'Pale results card must use readable ink text');
+assert.equal(cardColor('.demo-placeholder'), 'var(--paper)', 'Dark demo card must retain light text');
+console.log(`PASS: ${pages.length} pages; ${checked} local references; metadata, image alt, keyboard skip destinations, project/contact navigation and evidence-card text colors.`);
