@@ -21,6 +21,23 @@
 .b1lv-case .source-list{max-width:85ch;padding-left:20px}
 .b1lv-case .source-list li{margin:12px 0}
 .b1lv-case p,.b1lv-case a,.b1lv-case li{overflow-wrap:anywhere}
+.b1lv-case .media-credit{display:block;margin-top:6px;font-size:11px}
+.b1lv-case .contribution-points{max-width:75ch;margin:0 0 20px calc(25% + 11px);padding-left:20px}
+.b1lv-case .contribution-points li{margin-bottom:10px}
+.b1lv-case .boundary-note{font-size:14px;color:var(--muted);max-width:78ch;margin:22px 0}
+.b1lv-case .story-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;margin:32px 0}
+.b1lv-case .setup-pair{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+.b1lv-case .story-copy{max-width:54ch}
+.b1lv-case .story-copy h3,.b1lv-case .short-lessons h3{font-size:25px;font-weight:500;letter-spacing:-.025em;line-height:1.25;margin:0 0 16px}
+.b1lv-case .story-copy p,.b1lv-case .short-lessons p{color:var(--muted)}
+.b1lv-case .piping-render{padding:24px 24px 0}
+.b1lv-case .piping-render figcaption{margin:24px -24px 0}
+.b1lv-case .problem-pair img{max-height:580px}
+.b1lv-case .model-pair img{max-height:570px}
+.b1lv-case .short-lessons article+article{margin-top:24px}
+.b1lv-case .short-lessons p{margin:0}
+@media(max-width:850px){.b1lv-case .contribution-points{margin-left:0}.b1lv-case .story-pair{gap:24px}}
+@media(max-width:600px){.b1lv-case .story-pair{grid-template-columns:minmax(0,1fr);gap:24px}.b1lv-case .piping-render{padding:12px 12px 0}.b1lv-case .piping-render figcaption{margin:12px -12px 0}.b1lv-case .story-copy h3,.b1lv-case .short-lessons h3{font-size:23px}}
 @media(max-width:850px){.b1lv-case .lesson-list{margin-left:0}.b1lv-case .evidence-notes{gap:28px}.b1lv-case .hero-title{align-items:flex-start}}
 @media(max-width:600px){
  .b1lv-case h1{font-size:clamp(64px,18vw,100px)}
