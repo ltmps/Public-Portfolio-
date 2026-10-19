@@ -1,9 +1,9 @@
-// Dependency-free checks for the portfolio's two public entry points.
+// Dependency-free checks for the homepage and case studies.
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'projects/orbes/index.html'];
+const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html'];
 const base = 'https://example.test/Public-Portfolio-/';
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const ids = html => [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
@@ -51,7 +51,11 @@ for (const file of pages) {
   }
 }
 const home = read('index.html');
-const detailLinks = [...home.matchAll(/<a\b[^>]*href="#(?:satellite|rocket)-details"[^>]*>([^<]+)<\/a>/g)].map(m => m[1]);
-assert.equal(new Set(detailLinks).size, 2, 'Project detail links need distinct accessible names');
+const detailLinks = [...home.matchAll(/<a\b[^>]*class="project-link"[^>]*>([\s\S]*?)<\/a>/g)].map(m => m[1].replace(/<[^>]*>/g, '').trim());
+assert.equal(detailLinks.length, 3, 'Three selected-work links must remain');
+assert.equal(new Set(detailLinks).size, 3, 'Project links need distinct accessible names');
+assert(home.indexOf('href="projects/orbes/"') < home.indexOf('href="projects/b1lv/"'), 'ORBES must remain before B1LV');
+assert(home.includes('href="projects/b1lv/"'), 'Homepage must link to B1LV');
 assert(read('projects/orbes/index.html').includes('href="../../index.html#contact"'), 'ORBES must offer the existing contact route');
+assert(read('projects/b1lv/index.html').includes('href="../../index.html#contact"'), 'B1LV must offer the existing contact route');
 console.log(`PASS: ${pages.length} pages; ${checked} local references; metadata, image alt, keyboard skip destinations and project/contact navigation.`);

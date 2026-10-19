@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gavin Yam's Bronco 1 case study: propellant feed-system documentation, hardware traceability and shared failure analysis at Cal Poly Pomona Liquid Rocket Lab.">
+  <title>Bronco 1: Propellant Feed Systems and Test Readiness | Gavin Yam</title>
+  <link rel="stylesheet" href="../../assets/css/orbes.css">
+  <link rel="stylesheet" href="../../assets/css/b1lv.css">
+</head>
+<body class="b1lv-case">
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead"><div class="nav-inner"><a class="brand" href="../../index.html">Gavin <span>/ Engineering</span></a><span class="breadcrumb"><a href="../../index.html#projects">Selected work</a> <span>/ B1LV</span></span></div></header>
+<main id="main" tabindex="-1">
+  <section class="hero wrap" aria-labelledby="project-title">
+    <p class="project-context">CPP Liquid Rocket Lab / Propellant Feed Systems team / 2022–2023</p>
+    <div class="hero-title"><h1 id="project-title">Bronco 1</h1><p>Propellant Feed Systems<br>and Test Readiness</p></div>
+    <figure class="b1lv-media hero-photo">
+      <img src="../../assets/images/b1lv/water-flow-test.jpg" srcset="../../assets/images/b1lv/water-flow-test-600.jpg 600w, ../../assets/images/b1lv/water-flow-test.jpg 1824w" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 850px) calc(100vw - 48px), (max-width: 1312px) calc(100vw - 112px), 1200px" width="1824" height="1368" alt="Instrumented piping, valves and sensor wiring on the B1LV team's mobile water-flow test stand." decoding="async" fetchpriority="high">
+      <figcaption>Water-flow test hardware, 17 March 2023. Photo: B1LV team, Cal Poly Pomona Liquid Rocket Lab, 2022–2023.</figcaption>
+    </figure>
+    <div class="project-summary">
+      <div><h2>My role</h2><p>Propellant Feed Systems team</p><small>Student engineering project.</small></div>
+      <div><h2>My contribution</h2><p>Documentation and traceability</p><small>Shared technical reporting and failure analysis.</small></div>
+      <div><h2>Project evidence</h2><p>Water-flow tests and analysis</p><small>Team results, interpreted with their limitations.</small></div>
+    </div>
+    <p class="case-intro">Preparing a liquid rocket for testing requires a clear understanding of its components, potential failures and expected behavior. On the Bronco 1 Propellant Feed Systems team, I helped connect hardware records, modeling assumptions and test evidence.</p>
+    <nav class="section-nav" aria-label="Case study sections"><a href="#contribution">My contribution</a><a href="#evidence">Test evidence</a><a href="#lessons">Lessons</a><a href="#sources">Sources</a></nav>
+  </section>
+  <section id="contribution" class="section wrap" aria-labelledby="contribution-title">
+    <div class="section-heading"><p class="section-label">My contribution</p><div><h2 id="contribution-title">Keep the hardware story traceable.</h2><p class="intro">My work centered on shared technical reporting, project records and inventory. These supported the team's understanding of what was assembled, what changed and what still needed investigation.</p></div></div>
+    <div class="decision-list">
+      <article><h3>Hardware records</h3><div><p>I maintained meeting notes, documented important design changes and helped manage inventory through the Hardware Utilization List.</p><p>Keeping these records current helped connect project decisions to the hardware configuration being discussed.</p></div></article>
+      <article><h3>Technical reporting</h3><div><p>I contributed to shared report sections covering piping assembly and cleaning, tank fatigue analysis, water-flow testing, and failure modes and effects analysis (FMEA).</p><p>These were team deliverables. My reporting contributions do not imply that I personally performed every test or model described in them.</p></div></article>
+      <article><h3>Failure analysis</h3><div><p>I was a shared author of the piping FMEA. The work connected potential component failures with their effects on the wider system, helping frame the team's test-readiness discussions.</p></div></article>
+    </div>
+  </section>
+  <section id="evidence" class="section wrap" aria-labelledby="evidence-title">
+    <div class="section-heading"><p class="section-label">Team evidence</p><div><h2 id="evidence-title">Read the data alongside the hardware.</h2><p class="intro">The team characterized pressure, temperature and mass flow using instrumented replica piping on a mobile test stand, without the engine. This water-flow test provided evidence about the feed system, rather than a flight result.</p></div></div>
+    <figure class="b1lv-media analysis-figure">
+      <img src="../../assets/images/b1lv/pressure-flow-analysis.png" width="947" height="602" alt="Team plot of tank pressure in psig versus mass flow in pounds mass per second. Experimental points have error bars and are compared with predicted points and fitted trends." loading="lazy" decoding="async" aria-describedby="analysis-caption">
+      <figcaption id="analysis-caption"><strong>Tank pressure versus mass flow, Block 1.</strong> Experimental and predicted data from the team's water-flow analysis. Axes, units, error bars and legend are preserved from the original figure. Figure: B1LV team, Cal Poly Pomona Liquid Rocket Lab, 2022–2023. <a href="../../assets/images/b1lv/pressure-flow-analysis.png">Open the full-size analysis figure</a></figcaption>
+    </figure>
+    <div class="evidence-notes">
+      <article><h3>Measurements need context.</h3><p>The team's presentation records leakage and inconsistencies in the data. A run was scrubbed and repeated after the leaks were addressed. The resulting lesson is to interpret a trend alongside the condition of the hardware and the uncertainty in the measurements.</p></article>
+      <article><h3>A model is a different kind of evidence.</h3><p>A complementary tank study compared SolidWorks fatigue analysis with hand calculations under pressure and thermal loading. Those results were model predictions, not measurements of service life. I contributed to the shared reporting, rather than claiming sole ownership of the analysis.</p></article>
+    </div>
+    <details class="draft-notes"><summary>How to read this evidence</summary><p>The graph is a team analysis figure, not a new analysis performed for this portfolio. It does not establish flight performance, a reliability improvement or measured tank service life. The documented test issues are part of the evidence and are retained in the narrative.</p></details>
+  </section>
+  <section id="lessons" class="section wrap" aria-labelledby="lessons-title">
+    <div class="section-heading"><p class="section-label">What I learned</p><div><h2 id="lessons-title">Make assumptions visible.</h2><p class="intro">My personal reflection in the final report emphasized looking beyond nominal predictions, understanding the system behind a sensor reading, and recording changes as they happened.</p></div></div>
+    <div class="lesson-list">
+      <article><h3>Examine uncertainty.</h3><p>With limited experiments, a nominal result is only part of the picture. I learned to examine the assumptions and uncertainty behind an analysis before treating it as a decision-making input.</p></article>
+      <article><h3>Understand the measurement path.</h3><p>Piping and instrumentation diagrams, component behavior and the test environment provide context for sensor readings. Understanding that context matters when interpreting unexpected data.</p></article>
+      <article><h3>Record changes while they are fresh.</h3><p>Meeting notes, design-change records and inventory tracking preserve the reasoning behind a configuration. I learned to treat documentation as part of the engineering work throughout the project.</p></article>
+    </div>
+  </section>
+  <section id="sources" class="section wrap source-section" aria-labelledby="sources-title">
+    <div class="section-heading"><p class="section-label">Credits &amp; sources</p><div><h2 id="sources-title">A team project, with a defined contribution.</h2><p class="intro">Project work, test photography and analysis figures are credited to the B1LV team at Cal Poly Pomona Liquid Rocket Lab, 2022–2023. First-person statements describe my documented contribution.</p></div></div>
+    <details class="draft-notes"><summary>Source notes and contribution boundaries</summary><ul class="source-list"><li><cite>Bronco 1 Launch Vehicle Final Report 2022–2023</cite>: contributor table (p. 275); personal reflection (pp. 137–138); hardware records (p. 15); tank analysis (pp. 18–20); water-flow testing (p. 129); shared FMEA authorship and method (pp. 145–146).</li><li><cite>B1LV Senior Project Symposium Presentation</cite>, April 2023: analysis figure (slide 13), test inconsistencies (slide 15), test-day photograph (slide 17).</li><li>Selected media are reproduced with permission. The case study summarizes the engineering work; it does not reproduce test procedures or the complete project reports.</li></ul></details>
+  </section>
+</main>
+<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="../../index.html#projects">Back to selected work</a></div><div class="wrap footer-bottom"><span>Bronco 1 / Engineering case study</span><a href="#main">Back to top</a></div></footer>
+</body>
+</html>
