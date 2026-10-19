@@ -32,16 +32,25 @@
     button.hidden = false;
     button.addEventListener('focus', () => select(button.dataset.projectSelect));
     button.addEventListener('click', () => select(button.dataset.projectSelect));
-    button.addEventListener('pointerenter', event => {
-      if (event.pointerType !== 'touch') select(button.dataset.projectSelect);
-    });
   });
   lines.forEach(line => {
-    line.addEventListener('pointerenter', event => {
-      if (event.pointerType !== 'touch') select(line.dataset.projectLine);
-    });
     line.addEventListener('focusin', () => select(line.dataset.projectLine));
     line.addEventListener('click', () => select(line.dataset.projectLine));
+  });
+  // Scroll can move rows beneath a stationary pointer. Only viewport movement
+  // restores hover selection after keyboard focus; boundary entry alone cannot.
+  let pointerPosition = null;
+  document.addEventListener('pointermove', event => {
+    if (event.pointerType === 'touch') return;
+    const moved = pointerPosition
+      ? event.clientX !== pointerPosition.x || event.clientY !== pointerPosition.y
+      : Boolean(event.movementX || event.movementY);
+    pointerPosition = { x: event.clientX, y: event.clientY };
+    if (!moved) return;
+    const target = event.target.closest('[data-project-select], [data-project-line]');
+    if (target && root.contains(target)) {
+      select(target.dataset.projectSelect || target.dataset.projectLine);
+    }
   });
   root.classList.add('is-enhanced');
   picker.hidden = false;
