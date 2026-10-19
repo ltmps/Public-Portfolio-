@@ -59,3 +59,8 @@ main[tabindex="-1"]:focus-visible{outline:3px solid #b16929;outline-offset:6px}
 .architecture-figure figcaption p{max-width:80ch;color:var(--muted);margin:8px 0 12px}
 .architecture-figure figcaption a{display:inline-block;color:var(--teal)}
 .architecture-description{margin-bottom:28px}
+
+/* Approved photograph: show the full original frame at every viewport size. */
+.hardware-photo{margin:0;background:#000;border:1px solid var(--line)}
+.hardware-photo img{display:block;width:100%;height:auto;max-height:630px;object-fit:contain}
+.hardware-photo figcaption{position:static;background:var(--white);color:var(--muted)}
