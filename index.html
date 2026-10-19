@@ -6,6 +6,8 @@
   <meta name="description" content="Gavin Yam — mechanical and mechatronics engineering. Selected work in robotics, satellite dynamics and rocket feed systems.">
   <title>Gavin Yam | Mechatronics &amp; Mechanical Engineer</title>
   <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/project-selector.css">
+  <script src="assets/js/project-selector.js" defer></script>
 </head>
 <body class="portfolio-home">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -147,25 +149,28 @@
       </div>
     </div>
 
-    <div class="exp-item" id="rocket-details" tabindex="-1">
-
-      <div class="exp-logo">
-
-        <span aria-label="Cal Poly Pomona">CPP</span>
+    <div class="project-associations" data-project-associations id="rocket-details" tabindex="-1">
+      <p class="association-context">Rocket projects: Bronco 1, Enterprise E-2 and the FAR 51025 competition.</p>
+      <div class="association-picker" data-project-picker hidden>
+        <div><p class="association-help" id="association-help">Hover, focus or tap a sector or project heading to highlight its project and view the full logo.</p>
+        <div class="association-pie" role="group" aria-label="Rocket project associations" aria-describedby="association-help">
+          <button type="button" class="association-sector sector-bronco" data-project-select="bronco" aria-label="Highlight Bronco 1 project" aria-controls="project-logo-display bronco-details" aria-pressed="false"><span class="sector-content"><img src="assets/images/projects/bronco.png" width="600" height="600" alt=""><span>Bronco 1</span></span></button>
+          <button type="button" class="association-sector sector-enterprise" data-project-select="enterprise" aria-label="Highlight Enterprise E-2 project" aria-controls="project-logo-display enterprise-details" aria-pressed="false"><span class="sector-content"><img src="assets/images/projects/space-enterprise.png" width="233" height="600" alt=""><span>Enterprise E-2</span></span></button>
+          <button type="button" class="association-sector sector-far" data-project-select="far" aria-label="Highlight FAR 51025 / Singularity project" aria-controls="project-logo-display far-details" aria-pressed="false"><span class="sector-content"><img src="assets/images/projects/far.png" width="320" height="312" alt=""><span>FAR</span></span></button>
+        </div></div>
+        <div class="association-display" id="project-logo-display" aria-live="polite" aria-atomic="true"><div class="association-logo-frame"><img data-project-logo src="assets/images/projects/bronco.png" width="600" height="600" alt="Bronco Launch Vehicle emblem"></div><p data-project-label>Bronco 1 / CPP Liquid Rocket Lab</p><p class="association-display-note" data-project-note>Vehicle project emblem</p></div>
       </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>CPP Liquid Rocket Lab — Bronco 1 / Space Enterprise E-2 Vehicles</h3>
-          <span class="exp-date">Aug 2021 – May 2023</span>
-        </div>
-        <div class="exp-role">Propellant Feed &amp; Structures</div>
-        <ul>
-          <li>Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN₂ pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li>
-          <li>Contributed to thrust-transfer rails, MVA covers, and fin-slot structural design.</li>
-          <li>Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li>
-          <li>Authored detailed test procedures with timed steps and appropriate PPE usage.</li>
-        </ul>
-        <p><a href="projects/b1lv/">Read my Bronco 1 documentation and test-readiness case study</a></p>
+      <div class="exp-item association-line" data-project-line="bronco" id="bronco-details" tabindex="-1">
+        <div class="exp-logo"><img src="assets/images/projects/bronco.png" alt="Bronco Launch Vehicle emblem" width="600" height="600" decoding="async" loading="lazy"></div>
+        <div class="exp-content"><div class="exp-header"><h3><span class="association-static-title">Bronco 1</span><button class="association-line-button" type="button" data-project-select="bronco" aria-controls="project-logo-display" aria-pressed="false" hidden>Bronco 1</button></h3><span class="exp-date">CPP Liquid Rocket Lab · 2022–2023</span></div><div class="exp-role">Propellant Feed Systems team</div><ul><li>Contributed to shared technical reporting on feed-system hardware, testing and failure analysis.</li><li>Maintained meeting notes, documented design changes and supported hardware inventory tracking.</li></ul><p><a href="projects/b1lv/">Read my Bronco 1 documentation and test-readiness case study</a></p></div>
+      </div>
+      <div class="exp-item association-line" data-project-line="enterprise" id="enterprise-details" tabindex="-1">
+        <div class="exp-logo"><img src="assets/images/projects/space-enterprise.png" alt="Space Enterprise at Berkeley team logo" width="233" height="600" decoding="async" loading="lazy"></div>
+        <div class="exp-content"><div class="exp-header"><h3><span class="association-static-title">Enterprise E-2</span><button class="association-line-button" type="button" data-project-select="enterprise" aria-controls="project-logo-display" aria-pressed="false" hidden>Enterprise E-2</button></h3><span class="exp-date">Vehicle project work</span></div><div class="exp-role">Propellant Feed &amp; Structures</div><p class="association-scope">Feed-system and structural work documented across Bronco 1 and Space Enterprise E-2 vehicle projects.</p><ul><li>Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN2 pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li><li>Contributed to thrust-transfer rails and MVA covers.</li><li>Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li><li>Authored detailed test procedures with timed steps and appropriate PPE usage.</li></ul></div>
+      </div>
+      <div class="exp-item association-line" data-project-line="far" id="far-details" tabindex="-1">
+        <div class="exp-logo"><img src="assets/images/projects/far.png" alt="Friends of Amateur Rocketry logo" width="320" height="312" decoding="async" loading="lazy"></div>
+        <div class="exp-content"><div class="exp-header"><h3><span class="association-static-title">FAR 51025 / Singularity</span><button class="association-line-button" type="button" data-project-select="far" aria-controls="project-logo-display" aria-pressed="false" hidden>FAR 51025 / Singularity</button></h3><span class="exp-date">UMBRA, Cal Poly Pomona · Aug 2021 – May 2023</span></div><div class="exp-role">Avionics &amp; Recovery Engineer, Systems Liaison</div><p class="association-scope">Singularity student rocket project for the Friends of Amateur Rocketry competition.</p><ul><li>Integrated embedded tracking and data-logging systems.</li><li>Manufactured custom hand tools for fin installation and milled jig slots for alignment.</li></ul></div>
       </div>
     </div>
   </section>
