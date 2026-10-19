@@ -10,13 +10,14 @@ Sources are named on the page, including the final report's contribution table (
 
 ## Approved media
 
-Selected from the April 2023 B1LV Senior Project Symposium Presentation, with credit to the B1LV team, Cal Poly Pomona Liquid Rocket Lab, 2022–2023:
+The page uses seven approved visual panels: the wider test stand, piping replica CAD, hardware detail, annotated piping photograph, pressure-flow evidence, combined-stress model and team work area.
 
-- Slide 17, `image30.jpeg`: water-flow test hardware from 17 March 2023. Exported as `water-flow-test.jpg` (1824 × 1368) and `water-flow-test-600.jpg` (600 × 450), preserving the full frame and aspect ratio.
-- Slide 13, `image22.png`: tank pressure versus mass flow, Block 1. Exported as `pressure-flow-analysis.png` (947 × 602), with unchanged pixels, including axes, units, legend and error bars.
-
-Exports omit source metadata. Each displayed image includes team credit; the analysis figure has a full-size link. The page states the reported leakage and test inconsistencies alongside the plot.
+See the [complete asset provenance](../../assets/images/b1lv/README.md) for source documents, figure/page locations, approval scope, crop bounds and image processing. One visible credit covers all team visuals; concise captions distinguish team evidence, personal reporting and model predictions. Detailed qualifications remain in the source disclosure. Technical figures have full-size links.
 
 ## Validation
+
+Copy tightening comparison against `8bedb6b`: default-visible body text decreased from **757 to 458 words**; excluding captions, **527 to 342**. Main-content-only counts are **733 to 434**, or **503 to 318** excluding captions. Method: parse HTML text nodes, join with spaces, then count whitespace-delimited tokens containing a Unicode letter or digit. Include headings, navigation, captions, credits, link labels and footer; exclude head metadata, attributes/alt text, scripts/styles, hidden elements, the offscreen skip link, and closed `details` content except its `summary`. These are consistent source-based counts, not browser-rendered measurements.
+
+Column image `sizes` follow the CSS grid: hardware detail uses 60% of the available row after its gap; the team photo uses 50%. The 600px breakpoint stacks both at full content width. At an 800px viewport and 1× pixel density, declared slots are 436.8px and 364px respectively, allowing the 600px candidates; higher pixel density may correctly request larger files.
 
 Run `node scripts/check-site.cjs` from the repository root. The checker covers the homepage and both case studies, project-base paths, local links, image alt text, metadata and focusable skip destinations. Native `details` elements provide source/evidence notes with no JavaScript dependency. Browser layout and keyboard checks should cover desktop, phone and zoomed views before merge.
