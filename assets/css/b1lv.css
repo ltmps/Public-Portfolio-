@@ -1,0 +1,33 @@
+/* B1LV uses the established case-study typography and palette. */
+.b1lv-case .project-context{font-size:13px;color:var(--teal);margin:0}
+.b1lv-case h1{font-size:clamp(64px,10vw,136px);letter-spacing:-.065em;margin-left:-5px}
+.b1lv-case .hero-title>p{max-width:390px}
+.b1lv-case .b1lv-media{margin:0;border:1px solid var(--line);background:#fff}
+.b1lv-case .b1lv-media img{display:block;width:100%;height:auto;object-fit:contain}
+.b1lv-case .hero-photo{background:var(--wash)}
+.b1lv-case .hero-photo img{max-height:620px}
+.b1lv-case .b1lv-media figcaption{position:static;display:block;font-size:13px;line-height:1.6;padding:17px 22px;color:var(--muted);background:var(--white)}
+.b1lv-case .b1lv-media figcaption a{display:block;width:fit-content;margin-top:10px;color:var(--teal)}
+.b1lv-case .case-intro{font-size:20px;line-height:1.65;max-width:76ch;color:var(--muted);margin:20px 0 0}
+.b1lv-case .section-nav{flex-wrap:wrap;gap:12px 36px;margin-top:35px}
+.b1lv-case .section-nav a{padding:5px 0}
+.b1lv-case .analysis-figure img{max-width:947px;margin-inline:auto}
+.b1lv-case .evidence-notes{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin:30px 0}
+.b1lv-case .evidence-notes h3,.b1lv-case .lesson-list h3{font-size:23px;font-weight:500;letter-spacing:-.025em;margin:0 0 12px}
+.b1lv-case .evidence-notes p,.b1lv-case .lesson-list p{font-size:16px;color:var(--muted);margin:0;max-width:75ch}
+.b1lv-case .lesson-list{margin-left:calc(25% + 11px)}
+.b1lv-case .lesson-list article{border-top:1px solid var(--line);padding:24px 0}
+.b1lv-case .source-section{padding-bottom:70px}
+.b1lv-case .source-list{max-width:85ch;padding-left:20px}
+.b1lv-case .source-list li{margin:12px 0}
+.b1lv-case p,.b1lv-case a,.b1lv-case li{overflow-wrap:anywhere}
+@media(max-width:850px){.b1lv-case .lesson-list{margin-left:0}.b1lv-case .evidence-notes{gap:28px}.b1lv-case .hero-title{align-items:flex-start}}
+@media(max-width:600px){
+ .b1lv-case h1{font-size:clamp(64px,18vw,100px)}
+ .b1lv-case .project-context{font-size:12px}
+ .b1lv-case .case-intro{font-size:17px}
+ .b1lv-case .b1lv-media figcaption{padding:14px 16px;font-size:12px}
+ .b1lv-case .section-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+ .b1lv-case .evidence-notes{grid-template-columns:1fr;gap:28px}
+ .b1lv-case .source-section{padding-bottom:45px}
+}

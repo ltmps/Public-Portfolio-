@@ -115,3 +115,8 @@ body.portfolio-home{margin:0;background:var(--paper);color:var(--ink);font:16px/
  .portfolio-home .footer-bottom{flex-direction:column;gap:12px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Approved B1LV test photo; preserve the full frame and visible team credit. */
+.portfolio-home .b1lv-card-media{padding:0;display:block;position:relative;overflow:hidden}
+.portfolio-home .b1lv-card-media img{display:block;width:100%;height:calc(100% - 32px);object-fit:contain}
+.portfolio-home .b1lv-media-credit{display:block;height:32px;line-height:32px;padding-inline:10px;font-size:10px;color:var(--muted);border-top:1px solid var(--line)}
