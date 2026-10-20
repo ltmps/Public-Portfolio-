@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A draft of Gavin's ORBES mechanical-controls case study. Hardware photograph and architecture included; demonstrations and measured results remain pending.">
+  <meta name="description" content="Gavin's ORBES mechanical-controls work: fan-platform architecture, reaction-wheel PID control, integration and a reported result from compound maneuvers on the robot.">
   <title>ORBES — Gavin / Engineering</title>
   <link rel="stylesheet" href="../../assets/css/orbes.css">
   <script src="../../assets/js/orbes.js" defer></script>
@@ -15,11 +15,11 @@
 </header>
 <nav class="page-index" aria-label="On this page">
   <p class="index-title"><span class="index-desktop">On this page</span><span class="index-mobile">Jump to</span></p>
-  <div class="index-links"><a href="#system">System</a><a href="#contribution">My contribution</a><a href="#evidence">Test evidence</a><a href="#lessons">Lessons</a></div>
+  <div class="index-links"><a href="#system">System</a><a href="#contribution">My contribution</a><a href="#evidence">On the robot</a><a href="#lessons">Lessons</a></div>
 </nav>
 <main id="main" tabindex="-1">
   <section class="hero wrap" aria-labelledby="project-title">
-    <div class="draft-line"><span class="status-dot" aria-hidden="true"></span> Case study preview <span class="draft-state">Draft · verification pending</span></div>
+    <div class="draft-line"><span class="status-dot" aria-hidden="true"></span> Mechanical controls <span class="draft-state">ORBES</span></div>
     <div class="hero-title"><h1 id="project-title">ORBES</h1><p>From a control command<br>to a physical response.</p></div>
     <figure class="hardware-photo">
       <img src="../../assets/images/orbes/hardware.png" width="875" height="630" alt="ORBES cube hardware with a front-mounted camera, white fan grilles and a purple frame." decoding="async" fetchpriority="high">
@@ -27,57 +27,57 @@
     </figure>
     <div class="project-summary">
       <div><h2>Focus</h2><p>Mechanical controls</p><small>Controls, simulation and integration.</small></div>
-      <div><h2>Contribution</h2><p>PID control and motor commissioning</p><small>Contribution scope outlined below.</small></div>
-      <div><h2>Evidence</h2><p>Hardware, demonstration, results</p><small>Hardware shown; demonstration and validated data pending.</small></div>
+      <div><h2>Contribution</h2><p>PID control and motor commissioning</p><small>Reaction wheels, motor PCBs and sensor integration.</small></div>
+      <div><h2>On the robot</h2><p>±5° attitude hold</p><small>Reported by Gavin for compound maneuvers.</small></div>
     </div>
-    <details class="draft-notes"><summary>About this draft</summary><p>This draft outlines my mechanical-controls work and the fan-platform architecture I developed. The hardware photograph, architecture diagram and design rationale are included; demonstrations and measured results remain pending. The interactive walkthrough below is a general explanation of a control loop.</p></details>
+    <details class="draft-notes"><summary>What’s included</summary><p>The photograph shows the robot; the diagram shows the fan-platform architecture I developed. I describe my controls and integration work below, along with the hardware result I reported. Video and supporting test records are not included yet.</p></details>
   </section>
   <div class="case-layout wrap">
   <div class="case-sections">
   <section id="system" class="section wrap" aria-labelledby="system-title">
-    <div class="section-heading"><p class="section-label">The system</p><div><h2 id="system-title">Make the loop legible.</h2><p class="intro">I developed the overall guidance, navigation and control architecture for the ORBES fan platform, connecting guidance commands and sensor estimates to attitude and translation control.</p></div></div>
+    <div class="section-heading"><p class="section-label">The system</p><div><h2 id="system-title">From sensor readings to motor commands.</h2><p class="intro">I developed the overall guidance, navigation and control architecture for the ORBES fan platform, connecting guidance commands and sensor estimates to attitude and translation control.</p></div></div>
     <figure class="architecture-figure">
       <img src="../../assets/images/orbes/fan-platform-architecture.png" width="661" height="591" loading="lazy" decoding="async" alt="ORBES fan-platform architecture: guidance setpoints and navigation estimates feed an attitude and translation controller, which commands fourteen motors." aria-describedby="architecture-caption">
-      <figcaption id="architecture-caption"><strong>ORBES fan-platform GNC architecture</strong><p>Architecture developed by Gavin. Original diagram reproduced unchanged. This design snapshot shows the fan platform, separate from my reaction-wheel control work. It does not show measured hardware performance or specify the later LQR implementation.</p><a href="../../assets/images/orbes/fan-platform-architecture.png">Open full-size architecture diagram</a></figcaption>
+      <figcaption id="architecture-caption"><strong>ORBES fan-platform GNC architecture</strong><p>I developed this fan-platform architecture, separate from my reaction-wheel control work. The diagram shows signal paths, not measured performance or the later LQR implementation.</p><a href="../../assets/images/orbes/fan-platform-architecture.png">Open full-size architecture diagram</a></figcaption>
     </figure>
-    <details class="draft-notes architecture-description"><summary>Read the diagram as text</summary><div><p>Guidance supplies setpoints from a predefined trajectory or tracking input. Navigation uses accelerometer, gyroscope, magnetometer and computer-vision inputs to provide attitude and translation estimates. These feed the attitude and translation controller, which sends thruster commands to the fourteen-motor vehicle.</p><p>The controller's design evolution is described below. The diagram is an architecture view, not a test result.</p></div></details>
+    <details class="draft-notes architecture-description"><summary>Read the diagram as text</summary><div><p>Guidance supplies setpoints from a predefined trajectory or tracking input. Navigation uses accelerometer, gyroscope, magnetometer and computer-vision inputs to provide attitude and translation estimates. These feed the attitude and translation controller, which sends thruster commands to the fourteen-motor vehicle.</p><p>The PID-to-LQR change is described below. This diagram shows how the components connect.</p></div></details>
     <div class="diagram">
-      <div class="diagram-header"><span>Conceptual control loop</span><span class="badge">General illustration</span></div>
-      <p class="diagram-help">Select a stage to explore its purpose.</p>
-      <div class="stages" role="group" aria-label="Conceptual control loop stages">
+      <div class="diagram-header"><span>How a control loop works</span><span class="badge">Simplified walkthrough</span></div>
+      <p class="diagram-help">Select a stage to see what it does. This simplified sequence does not specify the robot’s actuator mapping or limits.</p>
+      <div class="stages" role="group" aria-label="How a control loop works stages">
         <button class="stage active" type="button" data-stage="estimator" aria-pressed="true" aria-controls="stage-description"><span>Estimate state</span><strong>Estimator</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
         <button class="stage" type="button" data-stage="controller" aria-pressed="false" aria-controls="stage-description"><span>Choose a response</span><strong>Controller</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
         <button class="stage" type="button" data-stage="allocation" aria-pressed="false" aria-controls="stage-description"><span>Distribute effort</span><strong>Allocation</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
         <button class="stage" type="button" data-stage="motors" aria-pressed="false" aria-controls="stage-description"><span>Act on the system</span><strong>Motors</strong></button>
       </div>
-      <div class="feedback" aria-label="Conceptual feedback from physical response to estimator"><span>←</span><p>Physical response · sensing · feedback</p></div>
-      <div id="stage-description" class="stage-description" aria-live="polite" aria-atomic="true"><h3>Estimator</h3><p>Turns available sensor observations into an estimate of the system's current state. This is a conceptual explanation; the approved diagram above shows the fan-platform architecture.</p></div>
-      <noscript><p>JavaScript is off. Conceptually, a controller chooses a response, allocation distributes actuator effort, and motors produce a physical response. This walkthrough is a general illustration; the approved architecture is shown above.</p></noscript>
+      <div class="feedback" aria-label="Sensor feedback from the robot to the estimator"><span>←</span><p>Physical response · sensing · feedback</p></div>
+      <div id="stage-description" class="stage-description" aria-live="polite" aria-atomic="true"><h3>Estimator</h3><p>Combines sensor readings to estimate orientation and motion. The controller uses that estimate to decide how to respond.</p></div>
+      <noscript><p>JavaScript is off. A controller compares the estimated motion with the command. Allocation divides the requested response among motors, and sensor readings feed the resulting motion back to the estimator.</p></noscript>
     </div>
   </section>
   <section id="contribution" class="section wrap" aria-labelledby="contribution-title">
-    <div class="section-heading"><p class="section-label">My contribution</p><div><h2 id="contribution-title">The decisions behind it.</h2><p class="intro">My focus was mechanical controls.</p></div></div>
+    <div class="section-heading"><p class="section-label">My contribution</p><div><h2 id="contribution-title">What I built and integrated.</h2><p class="intro">My focus was mechanical controls.</p></div></div>
     <div class="decision-list">
-      <article><h3>My work in the system</h3><div><ul class="contribution-list"><li><strong>Architecture:</strong> I developed the overall fan-platform guidance, navigation and control architecture.</li><li><strong>Controls:</strong> I developed PID control for reaction wheels.</li><li><strong>Simulation:</strong> I worked on ROS2 simulation.</li><li><strong>Commissioning:</strong> I commissioned motor PCBs.</li><li><strong>Integration:</strong> I integrated EKF, avionics and VIO components.</li></ul><details><summary>Supporting detail</summary><p>The controls rationale is outlined below. Detailed implementation constraints and measured hardware evidence remain to be added.</p></details></div></article>
-      <article><h3>From PID to LQR</h3><div><p>I started with PID for initial hardware-in-the-loop work, then moved the fan-platform control design to a linear quadratic regulator (LQR) to coordinate coupled states. Separately, observability considerations informed the sensor-fusion work: what could be inferred from the available measurements shaped the state-estimation approach.</p><details><summary>Scope of this decision</summary><p>This explains the design rationale. It does not claim a formal controllability or observability proof, a measured performance gain, or hardware validation of the LQR implementation.</p></details></div></article>
-      <article><h3>What shaped the design?</h3><div><p class="slot-label">Constraints · draft slot</p><p>Identify the physical or implementation constraint that materially changed the design.</p><details><summary>Content notes</summary><p>Confirm the relevant limits before naming them: sensing, actuation, power, timing or packaging. Do not imply these were observed issues without evidence.</p></details></div></article>
+      <article><h3>My work in the system</h3><div><ul class="contribution-list"><li><strong>Architecture:</strong> I developed the overall fan-platform guidance, navigation and control architecture.</li><li><strong>Controls:</strong> I developed PID control for reaction wheels.</li><li><strong>Simulation:</strong> I worked on ROS2 simulation.</li><li><strong>Commissioning:</strong> I commissioned motor PCBs.</li><li><strong>Integration:</strong> I integrated EKF, avionics and VIO components.</li></ul><details><summary>Implementation details</summary><p>The PID-to-LQR change is described below. Detailed implementation limits and supporting test records are not included yet.</p></details></div></article>
+      <article><h3>From PID to LQR</h3><div><p>I started with PID for initial hardware-in-the-loop work, then moved the fan-platform control design to a linear quadratic regulator (LQR) to coordinate coupled states. For sensor fusion, I used what the available sensors could measure to guide the state-estimation approach.</p><details><summary>What this change tells us</summary><p>This describes why I changed the control design. It does not establish a formal controllability or observability proof, a measured gain, or hardware validation of LQR.</p></details></div></article>
+      <article><h3>Implementation limits</h3><div><p class="slot-label">Details not included yet</p><p>Specific sensing, actuation, power, timing and packaging limits are not documented on this page yet.</p></div></article>
     </div>
   </section>
   <section id="evidence" class="section wrap" aria-labelledby="evidence-title">
-    <div class="section-heading"><p class="section-label">The evidence</p><div><h2 id="evidence-title">Show what happened.</h2><p class="intro">Pair an observable physical response with a documented test. Keep the conditions visible, and let the evidence support the conclusion.</p></div></div>
+    <div class="section-heading"><p class="section-label">On the robot</p><div><h2 id="evidence-title">Attitude hold during compound maneuvers.</h2><p class="intro">I measured attitude hold on the robot during compound maneuvers. The reported result is below; footage and detailed test records are not included yet.</p></div></div>
     <div class="evidence-grid">
-      <article><div class="demo-placeholder"><span class="sync-mark" aria-hidden="true">Ⅱ</span><h3>Synchronized demonstration</h3><p>Command and physical response,<br>shown on the same timeline.</p><span class="badge">Media pending approval</span></div><p class="caption">Reserved for approved footage with synchronized annotations. No video is loaded.</p></article>
+      <article><div class="demo-placeholder"><span class="sync-mark" aria-hidden="true">Ⅱ</span><h3>Robot in motion</h3><p>Video not available yet.</p><span class="badge">No video loaded</span></div><p class="caption">Footage showing the command alongside the robot’s response is not included yet.</p></article>
       <article><div class="results-placeholder"><span class="empty-mark" aria-hidden="true">—</span><h3>Measured hardware result</h3><p>Attitude held within ±5° in compound maneuvers, measured on the robot.</p><span class="badge">Reported by Gavin</span></div><p class="caption">This result applies to the reported compound maneuvers. Test conditions, metric definition and supporting records remain to be added.</p></article>
     </div>
-    <details class="draft-notes"><summary>Evidence needed to finish this section</summary><p>An approved demonstration clip, the matching test record, the success criterion and a defensible interpretation. Only add a plot when the underlying measurements can be traced to that test.</p></details>
+    <details class="draft-notes"><summary>Test details</summary><p>The demonstration clip, matching test record and success criterion are not included yet. The reported hardware result does not establish a measured improvement from PID to LQR.</p></details>
   </section>
   <section id="lessons" class="section wrap" aria-labelledby="lessons-title">
-    <div class="section-heading"><p class="section-label">Lessons & next steps</p><div><h2 id="lessons-title">Let the test change the design.</h2><p class="intro">The useful story is the connection between an observation and the decision that followed.</p></div></div>
-    <div class="lessons-grid"><article><span class="slot-label">Design reflection</span><h3>Separate control from estimation.</h3><p>The design work raised two distinct questions: how to coordinate coupled states, and what the sensor measurements could reveal about those states. The PID-to-LQR decision addressed the first; observability considerations informed sensor fusion for the second. A test-backed account of the outcome is still pending.</p></article><article><span class="slot-label">Next test · draft slot</span><h3>What would I test next?</h3><p>Name the remaining uncertainty, a test that would resolve it and the evidence needed to judge the outcome.</p></article></div>
+    <div class="section-heading"><p class="section-label">Lessons & next steps</p><div><h2 id="lessons-title">Control and estimation solve different problems.</h2><p class="intro">The controller coordinates motion; the estimator works out that motion from sensor readings.</p></div></div>
+    <div class="lessons-grid"><article><span class="slot-label">What I learned</span><h3>Separate control from estimation.</h3><p>I learned to separate two questions: how to coordinate motion, and what motion the sensors could detect. Switching from PID to LQR addressed the first; the sensor-fusion work addressed the second. The effect of that design change has not been documented here with test data.</p></article><article><span class="slot-label">Next steps</span><h3>Next test not specified yet.</h3><p>A specific follow-up test and its success criteria are not included here yet.</p></article></div>
   </section>
   </div>
   </div>
 </main>
-<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="#main">Back to top ↑</a></div><div class="wrap footer-bottom"><span>ORBES · Portfolio case study draft</span><span>Draft content for review</span></div></footer>
+<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="#main">Back to top ↑</a></div><div class="wrap footer-bottom"><span>ORBES · Mechanical controls</span><span>Gavin / Engineering</span></div></footer>
 </body>
 </html>
