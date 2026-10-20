@@ -1,9 +1,9 @@
 "use strict";
 const descriptions = {
-  estimator: ["Estimator", "Turns available sensor observations into an estimate of the system's current state. This is a conceptual explanation; the approved diagram above shows the fan-platform architecture."],
-  controller: ["Controller", "Compares an estimated state with a desired command and chooses a corrective response. This walkthrough explains the role of a controller; the design rationale below describes the PID-to-LQR decision."],
-  allocation: ["Allocation", "Maps a requested response to individual actuator commands while accounting for available authority. This stage is illustrative and does not specify the ORBES actuator mapping or limits."],
-  motors: ["Motors", "Convert actuator commands into a physical response. Sensing can close the loop by reporting what happened. This conceptual stage does not demonstrate hardware operation or measured performance."]
+  estimator: ["Estimator", "Combines sensor readings to estimate orientation and motion. The controller uses that estimate to decide how to respond."],
+  controller: ["Controller", "Compares the estimated orientation and motion with the command, then calculates a corrective response."],
+  allocation: ["Allocation", "Divides the requested response among the motors, within what the actuators can deliver."],
+  motors: ["Motors", "Turn motor commands into physical motion. Sensors measure the response and feed it back to the estimator. Clicking these stages does not run the robot."]
 };
 const stageButtons = document.querySelectorAll("[data-stage]");
 const description = document.getElementById("stage-description");
