@@ -11,3 +11,7 @@ Only these selected logo exports are included. Source decks, other figures, resu
 ## Content mapping
 
 Bronco 1 copy follows the documented contribution in its existing case study. Enterprise E-2 retains the existing feed/structures narrative with its shared Bronco 1 / E-2 scope stated explicitly, rather than assigning every activity solely to E-2. The fin-installation tooling is placed under Singularity/FAR based on Gavin's resume; his role is Avionics & Recovery Engineer, Systems Liaison. Honeywell's standalone project entry is unchanged. No new sponsorship, ranking, altitude or reliability claims are added.
+
+## Honeywell capstone wordmark
+
+`honeywell.png` is a byte-identical copy of the user-uploaded repository asset `b67c282f-c029-4a5c-ad9d-34654d206b74.png`, fetched from main at 5278eb97721198a72edb72e1451fcf9e9b811157. Dimensions: 576 × 324. SHA-256: bb1887e1d6c30f0b349417cfe26f67b60dcc1e63d8c6ae360f1e68ef5b9a8cc1. Used to identify the UC Berkeley / Honeywell capstone context; original artwork, canvas and aspect ratio are retained. Original root upload remains unchanged.
