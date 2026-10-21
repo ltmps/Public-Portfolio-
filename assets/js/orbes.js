@@ -3,7 +3,7 @@ const descriptions = {
   estimator: ["Estimator", "Combines sensor readings to estimate orientation and motion. The controller uses that estimate to decide how to respond."],
   controller: ["Controller", "Compares the estimated orientation and motion with the command, then calculates a corrective response."],
   allocation: ["Allocation", "Divides the requested response among the motors, within what the actuators can deliver."],
-  motors: ["Motors", "Turn motor commands into physical motion. Sensors measure the response and feed it back to the estimator. Clicking these stages does not run the robot."]
+  motors: ["Motors", "Turn motor commands into physical motion. Sensors measure the response and feed it back to the estimator."]
 };
 const stageButtons = document.querySelectorAll("[data-stage]");
 const description = document.getElementById("stage-description");
