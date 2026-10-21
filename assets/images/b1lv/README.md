@@ -29,4 +29,15 @@ Source files remain private and are not shipped with the site. Full-size links e
 - **Preliminary Cleanroom Plans**, original deck filename dated November 18, 2022, reviewed through `Cleanroom slides.pdf`: slide 1 credits Gavin, Destry Lister and Alex Landeros; slides 4–7 compare three alternatives and recommend designated lab sessions. Displayed October 21, 2026 dates are export dates, not project dates. This supports a shared planning decision, not cleanliness certification.
 - **Development of the Data Acquisition and Control System**, `B1LV-RP-2023-004A.01`: contributor list on rendered page 2 / printed page 1 includes Gavin. Section 2.4, rendered page 8 / printed page 7, covers mechanical relays and operating limitations including vibration concerns. The portfolio credits shared documentation, not implementation of the entire DAQ system.
 
-These additions use narrative findings only. No new figures, source documents, private review comments or contact details are included.
+These narrative additions include no source documents, private review comments or contact details.
+
+## Additional test-day photos
+
+The user's 21 October 2026 request to include photos from the additional sources covers these two selected team photographs. Both come from slide 17, "B1LV Water Flow Test / Test Day - 3/17/2023", in the local `b1LV Symposium Slide.pdf` export of the April 28, 2023 symposium deck. The source PDF SHA256 is `d12908948b78dbd63a0228489f8463886e4a2da120723c04121e37f2f866f0ac`.
+
+| Asset | Extraction and verification |
+| --- | --- |
+| `b1lv-test-area-overview-symposium-slide-17.png` | Native JPEG strips at xrefs 160-164 decoded to RGB and joined vertically without resizing; 1855 x 2473. PNG SHA256 `2d0f6fd5ef3e7239ef03758d76b6fdee905a9cccf63357e10949c67e0bb6dba7`; RGB pixel SHA256 `cb05d9c82e5d96aa9b0a9a1cf1088f96b94450223852fd6b464917b88a65d6e4`. |
+| `b1lv-test-day-team-symposium-slide-17.png` | Native JPEG strips at xrefs 169-170 decoded to RGB and joined vertically without resizing; 1766 x 1838. PNG SHA256 `15ecba51e55f5e4183c5cecbd3ed73057f028752ee1a92836c7e97537357a74c`; RGB pixel SHA256 `36093dda6748d6a68efb9ee8590546a357f546407d4f1af2e91a2ef7510a5298`. |
+
+Both complete images were visually inspected locally and their file and pixel hashes matched the reviewed selections. Credit: B1LV project team, Cal Poly Pomona Liquid Rocket Lab. Captions identify the test-day setting, not individuals or specific operations. Existing photographs remain unchanged; the source PDF is not published.
