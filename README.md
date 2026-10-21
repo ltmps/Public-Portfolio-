@@ -11,6 +11,7 @@ node scripts/check-site.cjs
 node --check assets/js/orbes.js
 node --check assets/js/project-selector.js
 node scripts/check-project-selector.cjs
+node scripts/check-modeling-media.cjs
 ```
 
 The dependency-free checker covers all seven entry points: local resources and fragments, project-base paths, page metadata, image alt attributes, focusable skip-link targets and project/contact navigation. It does not render pages or verify external services.
