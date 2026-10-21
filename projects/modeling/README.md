@@ -74,3 +74,19 @@ The R2024a createActivity command returns no model object, and the newer activit
 ## Trajectory presentation wording
 
 Public headings use neutral trajectory-study and playback labels. The recordings remain the same plot-derived paths with estimated timing and zero assumed spacecraft Z; the method, reference-track origins and source mass-label qualifications above still apply. No trajectory was recomputed or newly validated for this presentation change. The separate Lambert study retains its solar two-body model description. Media pixels, captions embedded in videos and all recorded data are unchanged.
+
+
+## SHERPA presentation media
+
+User-uploaded original media from main commit `667eef8` remains at its original repository paths. The overview uses six inspected PNGs and `VID_20251220_200405.mp4`; source bytes are unchanged. Artwork and presentation belong to the Cal Poly Pomona SHERPA team. Embedded capabilities, timelines and costs describe a mission concept.
+
+- `6cef784d-f6e6-4ffb-ae6e-0b2495440058.png`: deployed spacecraft CAD.
+- `539bf43b-6241-4011-b080-32d3fa018781.png`: launch-fairing packaging CAD.
+- `ed53db83-58f1-477b-8959-66ef3227676c.png`: servicing deck CAD.
+- `a5a1ff89-22f1-48f2-b422-f697dd5d80f5.png`: concept trajectory plot.
+- `c92aeacc-b140-4346-8b61-f70ab5af3ed5.png`: concept summary slide.
+- `79a8cc65-9590-4903-b6f3-e5a069ac212b.png`: team photograph; no individual identities inferred.
+
+The B1LV poster (`2909f74a-9fd8-402b-bf50-c75e32117b7e.png`) and SHERPA layout containing placeholder body text (`7cfad0f4-6cb3-422d-a268-af98e451e197.png`) remain unchanged as uploaded and are omitted from this gallery.
+
+The 117.77-second video fully decoded with FFmpeg; representative frames throughout its duration and the six images were visually inspected. Audio has not been independently reviewed or transcribed; synchronized captions remain outstanding. Native controls, an accompanying visual summary and a direct video link are provided. No autoplay or gallery script is used.
