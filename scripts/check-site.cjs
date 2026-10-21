@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html', 'projects/modeling/index.html'];
+const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html', 'projects/modeling/index.html', 'projects/modeling/playback/index.html'];
 const base = 'https://example.test/Public-Portfolio-/';
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const ids = html => [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
@@ -30,7 +30,7 @@ for (const file of pages) {
     assert.notEqual(attr(image[0], 'alt'), undefined, `${file}: image needs alt text`);
     assert(attr(image[0], 'src'), `${file}: image needs nonempty source`);
   }
-  for (const tag of html.matchAll(/<(?:a|img|link|script)\b[^>]*>/g)) {
+  for (const tag of html.matchAll(/<(?:a|img|link|script|source|video)\b[^>]*>/g)) {
     const ref = attr(tag[0], 'href') ?? attr(tag[0], 'src');
     if (ref === undefined) continue;
     assert(ref, `${file}: empty reference`);
