@@ -19,3 +19,7 @@ Embedded diagram-editor metadata is omitted from the public PNG; image data and 
 ## Hardware photograph
 
 Gavin supplied and approved the hardware photograph used in the homepage card and case-study hero. assets/images/orbes/hardware.png preserves the supplied PNG unchanged at 875 × 630 pixels. Both placements show the full frame without cropping. The photograph documents the physical hardware; it is not presented as a demonstration or performance measurement.
+
+## Hardware-result and investigation scope
+
+The user reports ±5° hardware attitude hold during compound maneuvers. This does not establish a measured PID-to-LQR improvement; the metric definition, detailed conditions and underlying records were not independently reviewed. The LQR paragraph describes a design change, while the estimator and allocator stories describe specific diagnostic experiments. The archive reports a transient spike absent in the October 29 follow-up, full-axis tests on October 30, and allocator diagnostics in November. These do not demonstrate universal estimator accuracy or complete autonomous-loop stability. Ed advised some EKF tuning weights. The page keeps the hardware result and design/diagnostic stories distinct without repeating these editorial caveats.
