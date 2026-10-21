@@ -4,7 +4,7 @@ Static page at `projects/b1lv/`. It uses the existing case-study palette and typ
 
 ## Content scope
 
-Gavin's documented contribution covers meeting notes, design-change records, inventory support and shared technical reporting. The final report contributor table credits shared sections VII, VIII, XV and Appendix I. The FMEA appendix also explicitly credits Gavin among its authors. Team tests and model results are distinguished from individual work, and model predictions are not presented as measured service life or flight achievements.
+Gavin's documented contribution includes PFS team piping organization, cleaning and assembly preparation, pressurant concept comparisons, individual meeting/design-change records and inventory management, and shared technical reporting. The PFS fall draft supports collective team work and a named personal reflection; the pressurant CDR supports concepts and tradeoffs, without establishing a built or tested redesign. Personal water-flow rig assembly and authorship of its P&ID remain unconfirmed. The final report contributor table credits shared sections VII, VIII, XV and Appendix I. The FMEA appendix also explicitly credits Gavin among its authors. Team tests and model results are distinguished from individual work, and model predictions are not presented as measured service life or flight achievements.
 
 Sources are named on the page, including the final report's contribution table (p. 275), personal reflection (pp. 137–138), and FMEA appendix (pp. 145–146). Page references follow the source report. The complete report and test procedures are not included in this repository.
 
