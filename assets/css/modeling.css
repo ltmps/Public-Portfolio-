@@ -35,3 +35,12 @@ body.modeling{font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",san
 .recording-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:20px}
 .recording-grid img{width:100%;height:auto}.recording-grid a{display:inline-block;margin-right:16px;padding:8px 0}
 @media(max-width:600px){.trajectory-controls:not([hidden]){display:grid;grid-template-columns:1fr;width:100%}.recording-grid{grid-template-columns:1fr}}
+
+.sherpa-media{padding-top:32px}
+.sherpa-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+.sherpa-gallery figure{margin:0}
+.sherpa-gallery a{display:block}
+.sherpa-gallery img{max-height:620px;object-fit:contain}
+.sherpa-gallery a:focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+.sherpa-media .sherpa-credit{font-size:13px;margin-top:24px}
+@media(max-width:600px){.sherpa-gallery{grid-template-columns:1fr}.sherpa-gallery img{max-height:none}}

@@ -22,7 +22,7 @@
     video.onloadedmetadata = () => {
       if (Number.isFinite(video.duration)) video.currentTime = Math.min(time, video.duration);
     };
-    caption.textContent = labels[view] + ' view · silent 10-second path replay. Source annotations are retained in the recordings; timing and encounter markers follow the reconstruction assumptions.';
+    caption.textContent = labels[view] + ' view · silent 10-second trajectory playback.';
     // Keep each new view paused, including when reduced motion is requested.
     video.load();
   });
