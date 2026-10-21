@@ -17,3 +17,7 @@ body.modeling{font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",san
 .modeling .method span{color:var(--muted)}
 .modeling .method p{font-size:13px;margin:24px 0 0}
 @media(max-width:600px){.modeling .method{padding:20px}.modeling .section{padding-top:32px}.modeling .section-nav{display:flex;flex-direction:column;align-items:flex-start;gap:8px}.modeling .section h2{font-size:32px}}
+
+.modeling-media figure{margin:24px 0;border:1px solid var(--line);background:var(--white)}
+.modeling-media img,.modeling-media video{display:block;width:100%;height:auto}
+.modeling-media figcaption{position:static;display:block;padding:18px 22px;font-size:13px;color:var(--muted)}
