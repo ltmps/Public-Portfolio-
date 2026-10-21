@@ -1,0 +1,146 @@
+[
+  {
+    "file": "direct-a-heliocentric.mp4",
+    "source": "presentation_v6/Final_Low_thrust_heliocentric_10s.mp4",
+    "bytes": 1116917,
+    "sha256": "d3defb65bb181bd185a30d4c31672d3a162fa9c1115f7401ad8e8deaeddfd49c"
+  },
+  {
+    "file": "direct-a-heliocentric.png",
+    "source": "presentation_v6/Final_Low_thrust_heliocentric_animation_preview.png",
+    "bytes": 88846,
+    "sha256": "4688726b1f03c4a7909e48c46de7e12460d9109f5c026eeb04f62111acd014c0"
+  },
+  {
+    "file": "direct-a-angled.mp4",
+    "source": "presentation_v6/Final_Low_thrust_10s.mp4",
+    "bytes": 1284146,
+    "sha256": "765a9410dc7ae61ff105c2a279d0fb743e115b8e803e6d788b77c67bd237d5ec"
+  },
+  {
+    "file": "direct-a-angled.png",
+    "source": "presentation_v6/Final_Low_thrust_animation_preview.png",
+    "bytes": 122415,
+    "sha256": "73c1dee336206db07733d4722dd9566b760de91191eaff87193d6b3feb3f2f6b"
+  },
+  {
+    "file": "direct-b-heliocentric.mp4",
+    "source": "presentation_v6/Low_Thurst_heliocentric_10s.mp4",
+    "bytes": 1080771,
+    "sha256": "a7acf582ace36840b5e3c9bba001dc8623ae83d22ef0513f9ea6d9b806853e4e"
+  },
+  {
+    "file": "direct-b-heliocentric.png",
+    "source": "presentation_v6/Low_Thurst_heliocentric_animation_preview.png",
+    "bytes": 89026,
+    "sha256": "dd5f4670272abb166dcf08b757c21f626c9f1d086297d26e6df9919bcf6414ff"
+  },
+  {
+    "file": "direct-b-angled.mp4",
+    "source": "presentation_v6/Low_Thurst_10s.mp4",
+    "bytes": 1192223,
+    "sha256": "88165f68e8baf6b299e09bad36421393984caeb3d3d906a5e193c451c4debecd"
+  },
+  {
+    "file": "direct-b-angled.png",
+    "source": "presentation_v6/Low_Thurst_animation_preview.png",
+    "bytes": 115733,
+    "sha256": "0f9d05f585956fb1aa7edf69cea8089cf7b5a535d4ff8ec3c8d370347bfe6581"
+  },
+  {
+    "file": "mars-assisted-heliocentric.mp4",
+    "source": "presentation_v6/Fly_by_heliocentric_10s.mp4",
+    "bytes": 1299115,
+    "sha256": "927eb2bd55eb28b6a7c2ae086b4e48043e61711fa81db6e37713f2839280808e"
+  },
+  {
+    "file": "mars-assisted-heliocentric.png",
+    "source": "presentation_v6/Fly_by_heliocentric_animation_preview.png",
+    "bytes": 105458,
+    "sha256": "25f20ae79c93fe3fd23feb0b95f49f4038293b2abc9c2667674cc1c6a752c52d"
+  },
+  {
+    "file": "mars-assisted-angled.mp4",
+    "source": "presentation_v6/Fly_by_10s.mp4",
+    "bytes": 1347268,
+    "sha256": "0b643a0df095f802af44f568324579f888777e821a6cfcd875e7823b3017baab"
+  },
+  {
+    "file": "mars-assisted-angled.png",
+    "source": "presentation_v6/Fly_by_animation_preview.png",
+    "bytes": 133166,
+    "sha256": "b2912575cd99624bdb222fc197eaec6e263895f2c0a6e36741157912bc83ed30"
+  },
+  {
+    "file": "window-1-2d.mp4",
+    "source": "porkchop/media_contours/case_1_2d.mp4",
+    "bytes": 1549054,
+    "sha256": "b785e57a2a16dc9dc346616595e71355494bdcb92216107b645f13d37300ce6b"
+  },
+  {
+    "file": "window-1-2d.png",
+    "source": "porkchop/media_contours/case_1_2d_preview.png",
+    "bytes": 207250,
+    "sha256": "c610f68085db318f2473db4d6d8dee89e0d0f3ae6cc2dc336e56902071e90c37"
+  },
+  {
+    "file": "window-1-3d.mp4",
+    "source": "porkchop/media_contours/case_1_3d.mp4",
+    "bytes": 1781321,
+    "sha256": "a154056553f5a377a27f9cfd733187983d1d0d914b7a43d8a6341b47859e1417"
+  },
+  {
+    "file": "window-1-3d.png",
+    "source": "porkchop/media_contours/case_1_3d_preview.png",
+    "bytes": 237056,
+    "sha256": "c086e216fa2eb176f6939f71e56bd650a367dce509c1f10b97e26fbd578124e9"
+  },
+  {
+    "file": "window-2-2d.mp4",
+    "source": "porkchop/media_contours/case_2_2d.mp4",
+    "bytes": 1580859,
+    "sha256": "3e14e773bf49409bccb8fac4e66a56b49aa7161c18fd90dbfc758243a9be4512"
+  },
+  {
+    "file": "window-2-2d.png",
+    "source": "porkchop/media_contours/case_2_2d_preview.png",
+    "bytes": 210117,
+    "sha256": "d3fee3ce53ef5ab6f12e6b570160230fa2d040a543f9905499aa49b9d27d525c"
+  },
+  {
+    "file": "window-2-3d.mp4",
+    "source": "porkchop/media_contours/case_2_3d.mp4",
+    "bytes": 1804012,
+    "sha256": "cf2c64c6783dee44a3a9d6c94fe41139a143b52a88acbaaa7df31f870c78c3b7"
+  },
+  {
+    "file": "window-2-3d.png",
+    "source": "porkchop/media_contours/case_2_3d_preview.png",
+    "bytes": 237945,
+    "sha256": "2b8c2084d7d2538801c509f2935f308e922518374888db038bd5d66b91581548"
+  },
+  {
+    "file": "window-3-2d.mp4",
+    "source": "porkchop/media_contours/case_3_2d.mp4",
+    "bytes": 1590919,
+    "sha256": "984d6037c84ebe3f7647a67bca01e6c59e5775476427db91d39c9c9c64c5c222"
+  },
+  {
+    "file": "window-3-2d.png",
+    "source": "porkchop/media_contours/case_3_2d_preview.png",
+    "bytes": 211935,
+    "sha256": "bdfac0c180920e0da6b5011ccf7a60b7bc00178a709012f3c20a9dbd75debe6c"
+  },
+  {
+    "file": "window-3-3d.mp4",
+    "source": "porkchop/media_contours/case_3_3d.mp4",
+    "bytes": 1814309,
+    "sha256": "c1e8fc1af22998e759c1645247aaf6520af795ae69af45514cef455fec12ff23"
+  },
+  {
+    "file": "window-3-3d.png",
+    "source": "porkchop/media_contours/case_3_3d_preview.png",
+    "bytes": 240585,
+    "sha256": "dcee9308eeeddf805ed481e320f5c79263441f40bb3a309068c5f4b054e8443b"
+  }
+]

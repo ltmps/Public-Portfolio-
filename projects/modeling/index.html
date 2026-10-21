@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Engineering studies connecting system requirements, reaction-wheel dynamics, mission concepts, trajectory reconstruction and ROS2 integration.">
+  <title>Modeling &amp; Simulation | Gavin Yam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/orbes.css">
+  <link rel="stylesheet" href="../../assets/css/project-notes.css">
+  <link rel="stylesheet" href="../../assets/css/modeling.css">
+</head>
+<body class="project-notes modeling">
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead"><div class="nav-inner"><a class="brand" href="../../index.html">Gavin <span>/ Engineering</span></a><span class="breadcrumb"><a href="../../index.html#project-details">Projects</a> <span>/ Modeling</span></span></div></header>
+<main id="main" tabindex="-1">
+  <section class="hero wrap" aria-labelledby="project-title">
+    <div class="hero-title"><h1 id="project-title">Modeling &amp; simulation</h1><p>Connect a system question<br>to a model that can answer it.</p></div>
+    <p class="project-intro">From requirements and interfaces to dynamics and mission studies, these projects explore how engineering assumptions shape a model's behavior. The work spans historical coursework, reaction-wheel control development and continued model exploration.</p>
+    <nav class="section-nav" aria-label="Modeling studies"><a href="#architecture">Systems architecture</a><a href="#dynamics">Reaction-wheel dynamics</a><a href="#missions">Mission studies</a><a href="#sherpa">SHERPA</a><a href="#integration">ROS2 integration</a></nav>
+  </section>
+  <section id="architecture" class="section wrap" aria-labelledby="architecture-title">
+    <div class="section-heading"><p class="section-label">SCExample / System Composer</p><div><h2 id="architecture-title">Connect requirements to the parts that fulfill them.</h2><p>The educational Mars-helicopter example separates operations, functions and physical subsystems. Architecture and allocation views make it possible to follow a requirement through the system and inspect the interfaces between components.</p><p>Gavin's 2023 work in the inherited SCExample project included System Composer models, stereotypes and allocation diagrams. Continued enrichment in 2026 adds typed interfaces, requirement traceability and executable mission-state behavior using synthetic events and educational assumptions.</p></div></div>
+  </section>
+  <div class="wrap modeling-media"><figure><img src="../../assets/media/modeling/traceability-example.svg" width="1500" height="670" loading="lazy" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component."><figcaption>SCExample educational model: selected altitude-sensing relationships. Solid lines show native relationships; the dashed line marks a proposed metric.</figcaption></figure><p><a href="playback/">Open the recorded SCExample operational playback</a></p><p>Explore five simulated scenarios, operational timelines and resource use. Faults are represented by signal proxies; playback starts only when requested.</p></div>
+  <section id="dynamics" class="section wrap" aria-labelledby="dynamics-title">
+    <div class="section-heading"><p class="section-label">Reaction wheels / Simscape &amp; PID</p><div><h2 id="dynamics-title">Follow wheel torque into body motion.</h2><p>The reaction-wheel study connects a multibody model with attitude-control scripts. Quaternion-based PID work, wheel sizing and log analysis explore how rotor inertia, torque and speed limits affect the commanded response.</p><p>Reviewing the model exposed unit conversions, inconsistent inertia assumptions and a mismatch between the tuning objective and the final controller. Those issues make parameter consistency and stress-case behavior central to the next model iteration. The scope here is simulated reaction-wheel dynamics.</p></div></div>
+  </section>
+  <div class="wrap modeling-media"><figure><video controls playsinline preload="none" width="1600" height="902" poster="../../assets/media/modeling/case01_preview.png" aria-label="Reaction-wheel simulation: roll slew, angle acquisition and hold" aria-describedby="case01-caption"><source src="../../assets/media/modeling/case01_cad.mp4" type="video/mp4"><a href="../../assets/media/modeling/case01_cad.mp4">Open the roll simulation video</a></video><figcaption id="case01-caption">Case 01: roll slew, angle acquisition and hold. Imported CAD geometry follows saved simulated states; colored wheels identify body axes. Silent recording from the 2026 Simscape study.</figcaption></figure><figure><video controls playsinline preload="none" width="1600" height="902" poster="../../assets/media/modeling/case10_preview.png" aria-label="Reaction-wheel simulation: prescribed target tracking" aria-describedby="case10-caption"><source src="../../assets/media/modeling/case10_cad.mp4" type="video/mp4"><a href="../../assets/media/modeling/case10_cad.mp4">Open the target-tracking simulation video</a></video><figcaption id="case10-caption">Case 10: compound slew and tracking of a prescribed planar target path. The panels show the simulated assembly, target direction and geometric bearing in a fixed camera view. Silent recording from the 2026 Simscape study.</figcaption></figure><p>These selected recordings illustrate simulated behavior under their stated assumptions. The broader study also includes stress cases that exceeded their tracking or wheel-speed limits.</p></div>
+  <section id="missions" class="section wrap" aria-labelledby="missions-title">
+    <div class="section-heading"><p class="section-label">MALTO / Earth–Encke</p><div><h2 id="missions-title">Keep a mission configuration distinct from its trajectory picture.</h2><p>Saved MALTO mission configurations cover comet, Encke and Psyche studies. They record work with an existing mission-design tool and provide a starting point for examining mission assumptions.</p><p>A separate Earth–Encke reconstruction study compares direct and Mars-assisted paths. Spacecraft coordinates are reconstructed from plots, with estimated timing and an assumed out-of-plane coordinate. Earth and Mars SPICE tracks and an Encke Horizons track provide separate reference context.</p>
+      <div class="method" aria-label="Trajectory reconstruction method"><h3>Reconstruction method</h3><ol><li><strong>Read the plotted path</strong><span>Recover spacecraft coordinates from the source plots.</span></li><li><strong>Apply stated assumptions</strong><span>Estimate timing and specify the out-of-plane coordinate.</span></li><li><strong>Compare in context</strong><span>Display the reconstructed path alongside planetary and comet reference tracks.</span></li></ol><p>This sequence describes a visualization method for reconstructed paths.</p></div>
+    </div></div>
+  </section>
+  <div class="wrap modeling-media encke-preview" aria-labelledby="encke-title">
+    <p><a href="trajectories/">Compare all four route replays and three launch-window choices</a></p>
+    <h3 id="encke-title">Earth–Mars–Encke: replay the reconstructed path.</h3>
+    <p>This ARO 3090 study reconstructs spacecraft coordinates from plotted paths. Timing is estimated from path length, and the unknown spacecraft Z coordinate is displayed as zero. Earth and Mars use DE405/SPICE reference tracks; Encke uses a separate JPL Horizons reference track.</p>
+    <div id="encke-views" class="encke-views" role="group" aria-label="Trajectory view" hidden>
+      <button type="button" data-view="heliocentric" aria-pressed="true" aria-controls="encke-video">Heliocentric</button>
+      <button type="button" data-view="angled" aria-pressed="false" aria-controls="encke-video">Angled</button>
+      <button type="button" data-view="original" aria-pressed="false" aria-controls="encke-video">Original</button>
+    </div>
+    <figure><video id="encke-video" controls playsinline preload="none" width="1500" height="900" poster="../../assets/media/modeling/encke/heliocentric.png" aria-label="Earth–Mars–Encke plotted-path reconstruction" aria-describedby="encke-caption"><source src="../../assets/media/modeling/encke/heliocentric.mp4" type="video/mp4"><a href="../../assets/media/modeling/encke/heliocentric.mp4">Open the heliocentric recording</a></video><figcaption id="encke-caption">Heliocentric view · silent 10-second path replay. Source annotations are retained in the recordings; timing and encounter markers follow the reconstruction assumptions.</figcaption></figure>
+    <p class="encke-downloads">Open a recording directly: <a href="../../assets/media/modeling/encke/heliocentric.mp4">Heliocentric</a> · <a href="../../assets/media/modeling/encke/angled.mp4">Angled</a> · <a href="../../assets/media/modeling/encke/original.mp4">Original</a>.</p>
+    <noscript><p>The heliocentric recording plays with native controls. The links above open the other views.</p></noscript>
+  </div>
+  <section id="sherpa" class="section wrap" aria-labelledby="sherpa-title">
+    <div class="section-heading"><p class="section-label">SHERPA / NASA RASC-AL concept</p><div><h2 id="sherpa-title">Turn a servicing mission into a system concept.</h2><p>The student team's SHERPA proposal explored a multi-use platform near Earth–Moon L1 for spacecraft servicing, refueling and communications relay. Its concept of operations connects arrival, docking and servicing with architecture choices, technology assumptions, mass estimates and budget planning.</p><p>Gavin is a named member of the proposal team. This entry presents the shared mission-concept study and its system-level tradeoffs.</p></div></div>
+  </section>
+  <section id="integration" class="section wrap" aria-labelledby="integration-title">
+    <div class="section-heading"><p class="section-label">ROS2 / ORBES integration</p><div><h2 id="integration-title">Exercise the data path before connecting every sensor.</h2><p>ROS2 simulation work used CSV and IMU replay alongside synthetic camera data to exercise integration. Replayed and generated inputs provide a controlled setting for following data through the pipeline and separating interface behavior from physical sensor behavior.</p><p>The related ORBES case study follows the fan platform's hanging tests, frame-alignment investigation and motor-allocation work.</p><p><a href="../orbes/">Read the ORBES control and integration story</a></p></div></div>
+  </section>
+</main>
+<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="../../index.html#projects">Back to selected work</a></div><div class="wrap footer-bottom"><span>Modeling &amp; Simulation</span><a href="#main">Back to top</a></div></footer>
+<script src="../../assets/js/encke-viewer.js" defer></script>
+</body>
+</html>
