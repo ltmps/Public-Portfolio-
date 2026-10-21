@@ -31,7 +31,7 @@ const enckeScript = fs.readFileSync(path.join(root, 'assets/js/encke-viewer.js')
 new vm.Script(enckeScript);
 assert(!/\bplay\(/.test(enckeScript), 'View changes must leave playback paused');
 assert(page.includes('id="encke-views"') && page.includes('aria-label="Trajectory view" hidden'), 'Hide script-only selectors by default');
-assert(page.includes('unknown spacecraft Z coordinate is displayed as zero'), 'Visible reconstruction assumptions');
+assert(page.includes('Earth and Mars reference tracks use DE405/SPICE; Encke uses JPL Horizons.'), 'Visible reference-track credits');
 const hashes = {
   'original.mp4': '40bcc0010decf91b0979f1b3fa49cb905f4e9b5dfdfb5962a86e0591d45cc4ad',
   'original.png': '81373113415db12fd90b08fe3fb56de89ef96d4f208769dc35b3773238eb69e3',
