@@ -34,6 +34,18 @@
       <div class="method" aria-label="Trajectory reconstruction method"><h3>Reconstruction method</h3><ol><li><strong>Read the plotted path</strong><span>Recover spacecraft coordinates from the source plots.</span></li><li><strong>Apply stated assumptions</strong><span>Estimate timing and specify the out-of-plane coordinate.</span></li><li><strong>Compare in context</strong><span>Display the reconstructed path alongside planetary and comet reference tracks.</span></li></ol><p>This sequence describes a visualization method for reconstructed paths.</p></div>
     </div></div>
   </section>
+  <div class="wrap modeling-media encke-preview" aria-labelledby="encke-title">
+    <h3 id="encke-title">Earth–Mars–Encke: replay the reconstructed path.</h3>
+    <p>This ARO 3090 study reconstructs spacecraft coordinates from plotted paths. Timing is estimated from path length, and the unknown spacecraft Z coordinate is displayed as zero. Earth and Mars use DE405/SPICE reference tracks; Encke uses a separate JPL Horizons reference track.</p>
+    <div id="encke-views" class="encke-views" role="group" aria-label="Trajectory view" hidden>
+      <button type="button" data-view="heliocentric" aria-pressed="true" aria-controls="encke-video">Heliocentric</button>
+      <button type="button" data-view="angled" aria-pressed="false" aria-controls="encke-video">Angled</button>
+      <button type="button" data-view="original" aria-pressed="false" aria-controls="encke-video">Original</button>
+    </div>
+    <figure><video id="encke-video" controls playsinline preload="none" width="1500" height="900" poster="../../assets/media/modeling/encke/heliocentric.png" aria-label="Earth–Mars–Encke plotted-path reconstruction" aria-describedby="encke-caption"><source src="../../assets/media/modeling/encke/heliocentric.mp4" type="video/mp4"><a href="../../assets/media/modeling/encke/heliocentric.mp4">Open the heliocentric recording</a></video><figcaption id="encke-caption">Heliocentric view · silent 10-second path replay. Source annotations are retained in the recordings; timing and encounter markers follow the reconstruction assumptions.</figcaption></figure>
+    <p class="encke-downloads">Open a recording directly: <a href="../../assets/media/modeling/encke/heliocentric.mp4">Heliocentric</a> · <a href="../../assets/media/modeling/encke/angled.mp4">Angled</a> · <a href="../../assets/media/modeling/encke/original.mp4">Original</a>.</p>
+    <noscript><p>The heliocentric recording plays with native controls. The links above open the other views.</p></noscript>
+  </div>
   <section id="sherpa" class="section wrap" aria-labelledby="sherpa-title">
     <div class="section-heading"><p class="section-label">SHERPA / NASA RASC-AL concept</p><div><h2 id="sherpa-title">Turn a servicing mission into a system concept.</h2><p>The student team's SHERPA proposal explored a multi-use platform near Earth–Moon L1 for spacecraft servicing, refueling and communications relay. Its concept of operations connects arrival, docking and servicing with architecture choices, technology assumptions, mass estimates and budget planning.</p><p>Gavin is a named member of the proposal team. This entry presents the shared mission-concept study and its system-level tradeoffs.</p></div></div>
   </section>
@@ -42,5 +54,6 @@
   </section>
 </main>
 <footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="../../index.html#projects">Back to selected work</a></div><div class="wrap footer-bottom"><span>Modeling &amp; Simulation</span><a href="#main">Back to top</a></div></footer>
+<script src="../../assets/js/encke-viewer.js" defer></script>
 </body>
 </html>
