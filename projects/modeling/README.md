@@ -70,3 +70,7 @@ The public player summarizes model assumptions affirmatively. Original detailed 
 - PASS refers to selected response/resource procedures; full requirement verification and operational validation are not asserted.
 
 The R2024a createActivity command returns no model object, and the newer activity node-programming API was unavailable. Playback executes SCexample_OperationalExecution linked Simulink behavior. Recorded time series and check results are unchanged by the copy pass.
+
+## Trajectory presentation wording
+
+Public headings use neutral trajectory-study and playback labels. The recordings remain the same plot-derived paths with estimated timing and zero assumed spacecraft Z; the method, reference-track origins and source mass-label qualifications above still apply. No trajectory was recomputed or newly validated for this presentation change. The separate Lambert study retains its solar two-body model description. Media pixels, captions embedded in videos and all recorded data are unchanged.
