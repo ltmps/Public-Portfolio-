@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ORBES controls investigations: hanging tests, camera/IMU alignment, Kalman filtering and commands beyond a fourteen-thruster platform's feasible range.">
+  <title>ORBES — Gavin / Engineering</title>
+  <link rel="stylesheet" href="../../assets/css/orbes.css">
+  <script src="../../assets/js/orbes.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="nav-inner"><a class="brand" href="../../index.html">Gavin <span>/ Engineering</span></a><span class="breadcrumb">Selected work <span>/ ORBES</span></span></div>
+</header>
+<nav class="page-index" aria-label="On this page">
+  <p class="index-title"><span class="index-desktop">On this page</span><span class="index-mobile">Jump to</span></p>
+  <div class="index-links"><a href="#system">System</a><a href="#contribution">Test stories</a><a href="#evidence">On the robot</a><a href="#lessons">Lessons</a></div>
+</nav>
+<main id="main" tabindex="-1">
+  <section class="hero wrap" aria-labelledby="project-title">
+    <div class="draft-line"><span class="status-dot" aria-hidden="true"></span> Mechanical controls <span class="draft-state">ORBES</span></div>
+    <div class="hero-title"><h1 id="project-title">ORBES</h1><p>From a control command<br>to a physical response.</p></div>
+    <figure class="hardware-photo">
+      <img src="../../assets/images/orbes/hardware.png" width="875" height="630" alt="ORBES cube hardware with a front-mounted camera, white fan grilles and a purple frame." decoding="async" fetchpriority="high">
+      <figcaption><span>ORBES hardware</span><span>Photograph supplied by Gavin</span></figcaption>
+    </figure>
+    <div class="project-summary">
+      <div><h2>Focus</h2><p>Mechanical controls</p><small>Controls, simulation and integration.</small></div>
+      <div><h2>Investigations</h2><p>State estimation and thruster allocation</p><small>Hanging tests, sensor frames and feasible motor commands.</small></div>
+      <div><h2>On the robot</h2><p>±5° attitude hold</p><small>Reported by Gavin for compound maneuvers.</small></div>
+    </div>
+    <details class="draft-notes"><summary>Role and collaboration</summary><p>My work covered fan-platform GNC architecture, reaction-wheel PID control, ROS2 simulation, motor PCB commissioning and EKF, avionics and VIO integration, including the experiments and analysis below. Ed advised on some EKF tuning weights.</p></details>
+  </section>
+  <div class="case-layout wrap">
+  <div class="case-sections">
+  <section id="system" class="section wrap" aria-labelledby="system-title">
+    <div class="section-heading"><p class="section-label">The system</p><div><h2 id="system-title">From sensor readings to motor commands.</h2><p class="intro">The fan platform connects guidance commands and sensor estimates to attitude and translation control. A requested motion must pass two practical checks: do the sensor frames agree, and can the fourteen thrusters produce the requested force and torque?</p></div></div>
+    <figure class="architecture-figure">
+      <img src="../../assets/images/orbes/fan-platform-architecture.png" width="661" height="591" loading="lazy" decoding="async" alt="ORBES fan-platform architecture: guidance setpoints and navigation estimates feed an attitude and translation controller, which commands fourteen motors." aria-describedby="architecture-caption">
+      <figcaption id="architecture-caption"><strong>ORBES fan-platform GNC architecture</strong><p>The fan-platform architecture is separate from the reaction-wheel control work. This diagram shows the signal paths; it does not show the later LQR implementation or measured performance.</p><a href="../../assets/images/orbes/fan-platform-architecture.png">Open full-size architecture diagram</a></figcaption>
+    </figure>
+    <details class="draft-notes architecture-description"><summary>Read the diagram as text</summary><div><p>Guidance supplies setpoints from a predefined trajectory or tracking input. Navigation uses accelerometer, gyroscope, magnetometer and computer-vision inputs to provide attitude and translation estimates. These feed the attitude and translation controller, which sends thruster commands to the fourteen-motor vehicle.</p><p>The PID-to-LQR change is described below. This diagram shows how the components connect.</p></div></details>
+    <div class="diagram">
+      <div class="diagram-header"><span>How a control loop works</span><span class="badge">Simplified walkthrough</span></div>
+      <p class="diagram-help">Select a stage to see what it does. This simplified sequence does not specify the robot’s actuator mapping or limits.</p>
+      <div class="stages" role="group" aria-label="How a control loop works stages">
+        <button class="stage active" type="button" data-stage="estimator" aria-pressed="true" aria-controls="stage-description"><span>Estimate state</span><strong>Estimator</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
+        <button class="stage" type="button" data-stage="controller" aria-pressed="false" aria-controls="stage-description"><span>Choose a response</span><strong>Controller</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
+        <button class="stage" type="button" data-stage="allocation" aria-pressed="false" aria-controls="stage-description"><span>Distribute effort</span><strong>Allocation</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
+        <button class="stage" type="button" data-stage="motors" aria-pressed="false" aria-controls="stage-description"><span>Act on the system</span><strong>Motors</strong></button>
+      </div>
+      <div class="feedback" aria-label="Sensor feedback from the robot to the estimator"><span>←</span><p>Physical response · sensing · feedback</p></div>
+      <div id="stage-description" class="stage-description" aria-live="polite" aria-atomic="true"><h3>Estimator</h3><p>Combines sensor readings to estimate orientation and motion. The controller uses that estimate to decide how to respond.</p></div>
+      <noscript><p>JavaScript is off. A controller compares the estimated motion with the command. Allocation divides the requested response among motors, and sensor readings feed the resulting motion back to the estimator.</p></noscript>
+    </div>
+  </section>
+  <section id="contribution" class="section wrap" aria-labelledby="contribution-title">
+    <div class="section-heading"><p class="section-label">Test stories</p><div><h2 id="contribution-title">Follow the mismatch to a smaller test.</h2><p class="intro">Hanging tests exposed disagreement in the state estimate. Later, allocator diagnostics traced missing motor output to requests the thrusters could not deliver.</p></div></div>
+    <div class="decision-list">
+      <article><h3>Yaw aligned. Roll still disagreed.</h3><div><p>October hanging tests exposed a camera/IMU frame mismatch and divergence in the translation estimate. Correcting yaw left a roll mismatch, so the investigation narrowed to a two-state Kalman test for yaw and body-rate bias.</p><p>An October 29 run reported that the transient spike was gone. Full-axis tests followed on October 30. The smaller test helped isolate the behavior; it did not establish estimator accuracy across every axis or maneuver.</p></div></article>
+      <article><h3>A command can ask for too much.</h3><div><p>November diagnostics found requested forces and torques outside the fourteen-thruster platform's feasible wrench envelope—the combinations of force and torque its thrusters could produce. Fallback commands could be negative; flooring those values to zero could leave no motor output.</p><p>Recovered command logs and boundary plots informed scaling the requested force and torque toward feasible commands. This traced a failure path and guided iteration; stable autonomous control was not demonstrated by those diagnostics.</p></div></article>
+      <article><h3>From PID to LQR</h3><div><p>Initial hardware-in-the-loop work used PID. The fan-platform control design then moved to a linear quadratic regulator (LQR) to coordinate coupled states. Sensor-fusion work addressed a separate question: what motion could be inferred from the available measurements?</p><details><summary>What the tests establish</summary><p>The design change has no documented measured gain or hardware validation of LQR here. The estimator and allocator investigations identify specific behaviors, rather than proving the complete control loop.</p></details></div></article>
+    </div>
+  </section>
+  <section id="evidence" class="section wrap" aria-labelledby="evidence-title">
+    <div class="section-heading"><p class="section-label">On the robot</p><div><h2 id="evidence-title">Attitude hold during compound maneuvers.</h2><p class="intro">During compound maneuvers, attitude held within ±5° on the robot, as reported by Gavin. This hardware result is separate from the estimator and allocator diagnostics above.</p></div></div>
+    <div>
+      <article><div class="results-placeholder"><span class="empty-mark" aria-hidden="true">—</span><h3>Measured hardware result</h3><p>Attitude held within ±5° in compound maneuvers, measured on the robot.</p><span class="badge">Reported by Gavin</span></div><p class="caption">This result applies to the reported compound maneuvers. Test conditions, metric definition and supporting records remain to be added.</p></article>
+    </div>
+    <details class="draft-notes"><summary>Test details</summary><p>The ±5° result does not establish a measured improvement from PID to LQR. Test conditions, the metric definition and supporting records are not included here; the estimator and allocator plots do not independently validate this result.</p></details>
+  </section>
+  <section id="lessons" class="section wrap" aria-labelledby="lessons-title">
+    <div class="section-heading"><p class="section-label">Lessons from testing</p><div><h2 id="lessons-title">Check the estimate, then the command.</h2><p class="intro">The two investigations exposed different ways a control loop can fail before the intended motion reaches the robot.</p></div></div>
+    <div class="lessons-grid"><article><span class="slot-label">State estimation</span><h3>One corrected axis is not the whole estimate.</h3><p>The remaining roll mismatch after the yaw correction kept the investigation open. Narrowing the test to yaw and body-rate bias made a transient easier to isolate before returning to full-axis tests.</p></article><article><span class="slot-label">Actuation</span><h3>Check what the motors can produce.</h3><p>A requested force and torque can lie outside the thruster envelope. Command logs and boundary plots helped explain why flooring fallback values could produce zero output, and informed scaling toward feasible requests.</p></article></div>
+  </section>
+  </div>
+  </div>
+</main>
+<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="#main">Back to top ↑</a></div><div class="wrap footer-bottom"><span>ORBES · Mechanical controls</span><span>Gavin / Engineering</span></div></footer>
+</body>
+</html>
