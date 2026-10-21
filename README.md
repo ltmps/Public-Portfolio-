@@ -14,7 +14,7 @@ node scripts/check-project-selector.cjs
 node scripts/check-modeling-media.cjs
 ```
 
-The dependency-free checker covers all seven entry points: local resources and fragments, project-base paths, page metadata, image alt attributes, focusable skip-link targets and project/contact navigation. It does not render pages or verify external services.
+The dependency-free checker covers all eight entry points: local resources and fragments, project-base paths, page metadata, image alt attributes, focusable skip-link targets and project/contact navigation. It does not render pages or verify external services.
 
 Before merging visual changes, check desktop and phone layouts, keyboard navigation and horizontal overflow in a browser. Confirm the fixed outer-gutter ORBES index at 1640px or wider and its compact fallback below that width. Preserve the existing reduced-motion behavior.
 

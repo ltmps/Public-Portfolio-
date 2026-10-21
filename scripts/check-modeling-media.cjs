@@ -46,4 +46,25 @@ for (const [file, hash] of Object.entries(hashes)) {
   assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), hash, `Approved Encke bytes: ${file}`);
   if (file.endsWith('.mp4')) assert(page.includes(`href="../../assets/media/modeling/encke/${file}"`), 'No-JS direct recording link');
 }
-console.log('PASS: selected videos/posters, controls, embedded scenarios, script syntax, privacy scan and static/reduced-motion fallbacks.');
+const trajectoryPage = fs.readFileSync(path.join(root, 'projects/modeling/trajectories/index.html'), 'utf8');
+const trajectoryScript = fs.readFileSync(path.join(root, 'assets/js/trajectory-viewer.js'), 'utf8');
+new vm.Script(trajectoryScript);
+assert(!/\bplay\(|\bfetch\(|XMLHttpRequest/.test(trajectoryScript), 'Local paused selection only');
+assert(!/(?<![A-Za-z])[A-Za-z]:[\\/](?!\/)|file:\/\/|\.gif|\.pdf/.test(trajectoryPage), 'No machine paths or excluded downloads');
+assert.equal([...trajectoryPage.matchAll(/data-case=/g)].length, 14, 'Eight route views and six launch-window views');
+assert.equal([...trajectoryPage.matchAll(/class="trajectory-controls" hidden/g)].length, 2, 'Script-only controls hidden by default');
+assert(trajectoryPage.includes('<noscript>'), 'Native player and recording-link fallback');
+for (const tag of trajectoryPage.matchAll(/<(?:video|source|a)\b[^>]*>/g)) {
+  for (const ref of tag[0].matchAll(/(?:src|poster|data-poster)="([^"]+)"/g)) {
+    assert(fs.existsSync(path.resolve(root, 'projects/modeling/trajectories', ref[1])), `Missing trajectory dependency ${ref[1]}`);
+  }
+  if (tag[0].startsWith('<video')) assert(/controls/.test(tag[0]) && /aria-label/.test(tag[0]) && !/autoplay|loop/.test(tag[0]));
+}
+const selection = JSON.parse(fs.readFileSync(path.join(root, 'assets/media/modeling/trajectories/manifest.json'), 'utf8'));
+assert.equal(selection.length, 24);
+for (const item of selection) {
+  const bytes = fs.readFileSync(path.join(root, 'assets/media/modeling/trajectories', item.file));
+  assert.equal(bytes.length, item.bytes);
+  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), item.sha256);
+}
+console.log('PASS: selected media hashes/dependencies, controls, scenarios, script syntax, privacy and fallback guards.');
