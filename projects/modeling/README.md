@@ -1,6 +1,6 @@
 # Modeling & Simulation overview
 
-This is a curated narrative overview. No source projects, reports, kernels, third-party code, simulation outputs or private source URLs are distributed with it. The reconstruction sequence is original HTML text, not a recovered trajectory or a simulation result.
+This curated overview includes the cleared SCExample recorded playback and traceability diagram, plus two selected Simscape videos and their posters. Private source documents, raw model bundles, kernels, third-party source code, private source URLs and unapproved artifacts are excluded. The reconstruction sequence is original HTML text, not a recovered trajectory or a simulation result.
 
 ## Source basis
 
