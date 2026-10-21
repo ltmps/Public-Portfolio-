@@ -18,7 +18,15 @@ The optional predicted-life figure was omitted to keep the story focused. No int
 
 - PDF p. 229, Appendix V internal p. 21, section 6.4.2: collection-container mass accounting error. This is a calculation correction, separate from leakage.
 - PDF p. 230, Appendix V internal p. 22, section 6.4.3: visible leak, reset/retest of run 3, uncertainty comparing earlier measurements. No quantified improvement or before/after repair claim.
-- Appendix V is credited as team evidence; Gavin's authorship is unconfirmed.
+- The standalone water-flow post-test report establishes Gavin’s coauthorship of the team investigation. The full final-report PDF has not been freshly compared with that standalone report; an identical Appendix V copy is not asserted.
 - Existing personal contribution sources: contributor table (printed p. 275), reflection (printed pp. 137–138), hardware records (printed p. 15), and shared FMEA (printed pp. 145–146). The page retains documentation and shared-reporting scope.
 
 Source files remain private and are not shipped with the site. Full-size links expose only the selected figures above.
+
+## Additional narrative sources
+
+- **B1LV Water Flow Post-Test Evaluation Report**, cover dated March 24, 2023: cover names Gavin Yam with Kristen Jingco, Reyes Cabral, Michelle Ramirez and Seth Seelos. Sections 6.3, 6.4.2 and 6.4.3 on rendered pages 20–22 support the leak investigation, retest and mass-accounting correction. The filename uses `LV-ANA-2023-001B.NC`, while the printed identifier says `LV-ANA-2022-001B.NC`; citations use the title, cover date and pages without resolving that discrepancy. Coauthorship does not identify who performed each operation or calculation.
+- **Preliminary Cleanroom Plans**, original deck filename dated November 18, 2022, reviewed through `Cleanroom slides.pdf`: slide 1 credits Gavin, Destry Lister and Alex Landeros; slides 4–7 compare three alternatives and recommend designated lab sessions. Displayed October 21, 2026 dates are export dates, not project dates. This supports a shared planning decision, not cleanliness certification.
+- **Development of the Data Acquisition and Control System**, `B1LV-RP-2023-004A.01`: contributor list on rendered page 2 / printed page 1 includes Gavin. Section 2.4, rendered page 8 / printed page 7, covers mechanical relays and operating limitations including vibration concerns. The portfolio credits shared documentation, not implementation of the entire DAQ system.
+
+These additions use narrative findings only. No new figures, source documents, private review comments or contact details are included.
