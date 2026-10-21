@@ -51,3 +51,22 @@ The user separately cleared the latest three additional route replays and six po
 - All twelve selected silent MP4s fully decode: 10 seconds at 15 fps; route videos are 1500 × 900 and Lambert videos 1600 × 900. All posters and one-second samples spanning every recording were visually inspected. No models or optimizations were rerun.
 
 Browser validation in installed Chrome covered 390px and 1440px without horizontal overflow; all 14 route/case/view combinations played, paused and sought to five seconds. Ten rapid view/study switches left the final selection paused under reduced motion. Native keyboard selectors and return navigation worked; no-JavaScript player and recording disclosure were visually inspected. Cross-browser and screen-reader testing remain outside this check.
+
+## Playback implementation and qualification notes
+
+The public player summarizes model assumptions affirmatively. Original detailed qualifications remain here for maintenance:
+
+- Timing, capacity and landing delays are explicit educational assumptions.
+- Physical failure modes are proxied by boundary-signal injection; there is no component physics failure model.
+- Airborne landing authority is assumed for sensor, link and degraded-bus cases; touchdown is scripted after the landing delay.
+- A return to preflight readiness does not complete the interrupted mission. Automatic reflight is inhibited.
+- Function activity lanes are inferred from operation allocations plus continuous monitoring; they are not CPU utilization or a contention-aware task schedule.
+- Startup configuration confirmation remains pending before commissioning and in latched-safe mode; it is asserted after the commissioning delay and maintained in active modes.
+- Powered rotor speed is prescribed; unpowered shafts follow an assumed viscous coast law. This model is not coupled to the electrical/thermal energy budget or validated hardware. Latched safe mode does not by itself assert both rotors stopped.
+- Readiness diagnostics describe entry-mode gates; accepted-plan and invalid-time logging uses zero sentinels paired with validity flags. Histories survive reset. These are integrated software boundary records, not independent sensor hardware simulations.
+- Explicit educational 64-byte metadata frames use stop-and-wait acknowledgment without automatic retry. Unused interval capacity is discarded. Native Frame output is uint8[64]; frame-complete metadata distinguishes zero placeholders. RF coding, propagation, camera imagery and radio electrical power are not modeled.
+- Spin-up is grounded until ascent authorization. spinup_complete means the illustrative qualification delay elapsed, separately from ready feedback. Signed dimensionless motor commands are bounded; powered shaft speed is prescribed and electrical load is not command-dependent.
+- Potential operational hazards are traced qualitatively; their flight-dynamic consequences are not simulated.
+- PASS refers to selected response/resource procedures; full requirement verification and operational validation are not asserted.
+
+The R2024a createActivity command returns no model object, and the newer activity node-programming API was unavailable. Playback executes SCexample_OperationalExecution linked Simulink behavior. Recorded time series and check results are unchanged by the copy pass.
