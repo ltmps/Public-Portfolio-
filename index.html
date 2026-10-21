@@ -200,6 +200,19 @@
       height: 100%;
       object-fit: cover;
     }
+    /* Text fallback shown when a logo image is missing; inherits the .exp-logo box */
+    .exp-monogram {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: inherit;
+      background: #fff;
+      color: #000;
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
 
     .exp-content {
       flex: 1;
@@ -321,16 +334,10 @@
   <section id="background">
     <h2>Background</h2>
     <p>
-      Mechanical and mechatronics engineer with about three years of hands-on experience
-      designing, building, and testing hardware systems in robotics, rocketry, HVAC building
-      systems, and consumer products.
-    </p>
-    <p>
-      My work spans cryogenic liquid rocket feed systems and high-pressure test rigs,
-      free-flying robotic platforms, commercial VRF/heat pump designs, and compact evaporative
-      coolers. I take systems from first principles through CAD, fabrication, assembly,
-      structured testing, and design iteration — with a strong focus on safety, reliability,
-      and clear documentation.
+      Mechanical and simulation engineer with about two years of industry experience, plus
+      internships and four years of student rocket and capstone projects. I've validated CFD and
+      FEA pipelines, tuned reaction-wheel control on a free-flying robot, designed commercial HVAC
+      systems, and contributed to a liquid rocket's feed-system test readiness.
     </p>
   </section>
 
@@ -381,6 +388,25 @@
   <!-- ════ EXPERIENCE ════ -->
   <section id="experience">
     <h2>Experience</h2>
+
+    <div class="exp-item">
+      <div class="exp-logo">
+        <img loading="lazy" decoding="async" src="khorium.png" alt="Khorium Logo" onerror="this.parentNode.innerHTML='&lt;span class=&quot;exp-monogram&quot; aria-hidden=&quot;true&quot;&gt;K&lt;/span&gt;'">
+      </div>
+      <div class="exp-content">
+        <div class="exp-header">
+          <h3>Khorium — Los Angeles, CA</h3>
+          <span class="exp-date">Feb 2026 – Present</span>
+        </div>
+        <div class="exp-role">Simulation Engineer</div>
+        <ul>
+          <li>Built Python orchestration for OpenFOAM and CalculiX across seven solver templates, from external flow and conjugate heat transfer to structural statics.</li>
+          <li>Ran 100+ validation studies against public benchmarks and ANSYS Fluent, finding 12 platform defects from the data alone.</li>
+          <li>Integrated Gmsh and snappyHexMesh boundary-layer meshing, raising coverage from 1.45% to 100%.</li>
+          <li>Presented the simulation pipeline to customer engineering teams and scoped their requirements.</li>
+        </ul>
+      </div>
+    </div>
 
     <div class="exp-item">
       <!-- Upload 'orbes.png' to your GitHub -->
