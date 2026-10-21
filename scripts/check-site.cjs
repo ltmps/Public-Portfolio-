@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html'];
+const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html'];
 const base = 'https://example.test/Public-Portfolio-/';
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const ids = html => [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
@@ -58,6 +58,12 @@ assert(home.indexOf('href="projects/orbes/"') < home.indexOf('href="projects/b1l
 assert(home.includes('href="projects/b1lv/"'), 'Homepage must link to B1LV');
 assert(read('projects/orbes/index.html').includes('href="../../index.html#contact"'), 'ORBES must offer the existing contact route');
 assert(read('projects/b1lv/index.html').includes('href="../../index.html#contact"'), 'B1LV must offer the existing contact route');
+for (const slug of ['satellite', 'singularity']) {
+  assert(home.includes(`href="projects/${slug}/"`), `Homepage must link to ${slug}`);
+  const project = read(`projects/${slug}/index.html`);
+  assert(project.includes('href="../../index.html#contact"'), `${slug}: contact route`);
+  assert(project.includes('href="../../index.html#projects"'), `${slug}: selected-work return route`);
+}
 // Source-level regression guard for the two evidence cards (not browser CSS QA).
 const caseCss = read('assets/css/orbes.css');
 function cardColor(selector) {
