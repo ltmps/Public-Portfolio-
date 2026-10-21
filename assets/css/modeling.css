@@ -1,0 +1,19 @@
+/* Scoped overview styles; shared case-study navigation and fallbacks remain intact. */
+body.modeling{font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+.modeling h1{font-size:clamp(44px,7vw,72px);max-width:12ch;letter-spacing:-.045em}
+.modeling .section h2{font-size:32px;max-width:25ch}
+.modeling h3{font-size:22px;font-weight:500}
+.modeling p{font-size:17px;max-width:65ch}
+.modeling .section-label,.modeling .footer-brand{font-size:13px}
+.modeling .section{padding-top:52px;padding-bottom:12px}
+.modeling .section-heading{border-top:1px solid var(--line);padding-top:28px;align-items:start}
+.modeling .section-heading p{margin-top:0}
+.modeling .method{margin-top:30px;padding:24px;background:var(--wash)}
+.modeling .method h3{margin:0 0 20px}
+.modeling .method ol{padding-left:22px;margin:0}
+.modeling .method li{padding-left:8px;margin-bottom:18px}
+.modeling .method strong,.modeling .method span{display:block}
+.modeling .method strong{font-weight:500}
+.modeling .method span{color:var(--muted)}
+.modeling .method p{font-size:13px;margin:24px 0 0}
+@media(max-width:600px){.modeling .method{padding:20px}.modeling .section{padding-top:32px}.modeling .section-nav{display:flex;flex-direction:column;align-items:flex-start;gap:8px}.modeling .section h2{font-size:32px}}
