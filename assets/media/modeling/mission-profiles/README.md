@@ -1,0 +1,9 @@
+# CAPCOM mission-profile media
+
+Four original 120-second MP4s and their supplied frame-0900 PNG posters, from the user-provided mission_profiles_120s package. Original bytes are retained; manifest.json records SHA256 and sizes. Direct routes A/B map to missions 01/02; Mars-assisted A/B map to 03/04. No source scripts, state files, reports, guide PDF, GIF duplicates or regeneration dependencies are published.
+
+The package assumptions_and_sources.md cites report pages 4/10 for launch concept, page 9 for the proposed polar orbit, and page 6 for the historical assumed comet gravity model. The parking ellipse, orientation, ascent and capture transition are visualization assumptions. Solar paths are digitized XY with assumed zero Z and estimated between-event timing; local conics are not state-matched to those curves. Final orbit uses spherical two-body gravity. This is assembled concept visualization, not a mission feasibility or launch-performance validation. Source annotations inside videos remain unchanged and are not new portfolio performance claims.
+
+Earth texture credit: NASA/Goddard SVS Blue Marble (https://svs.gsfc.nasa.gov/2915). Launch reference: ULA Atlas V User's Guide (2010). Body and vehicle geometry are schematic. CAPCOM is a team mission concept; sole authorship of the mission design is not asserted.
+
+All four videos fully decoded with FFmpeg and were sampled across their duration for visual review. They contain H.264 video only, 1280 x 720, 15 fps, 120 seconds, without audio. The page uses manual native playback, paused chapter jumps and previous/next selection. All four figures and direct recording links remain available without JavaScript. Existing page-level guards pause offscreen videos and prevent simultaneous playback. Switching has no animation and respects reduced-motion preferences by construction.
