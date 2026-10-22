@@ -1,44 +1,82 @@
 {
   "files": [
     {
-      "file": "mission_01_120s.mp4",
-      "bytes": 15514186,
-      "sha256": "302fd172c0563c2180365897ed93ccfdd50d2321c61f8b5564558caed762bc34"
+      "file": "mission_01_120s_capture_v3.mp4",
+      "bytes": 19140093,
+      "sha256": "bbf52bf1281231f155202a0cc680926280c8536c4ecfc4ca8ad805e8973ee6c6",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/mission_01_120s_capture_v3.mp4"
     },
     {
-      "file": "mission_01_frame_0900.png",
-      "bytes": 94752,
-      "sha256": "d6470cabe68d2518bdb8e924d7ebf95a342898341d7ffa7ab1a520e9844cb007"
+      "file": "mission_01_capture_v3_poster.png",
+      "bytes": 166534,
+      "sha256": "e95eb79ae563ca9b62464f408106fe95e3b24c261a73ddcc09f14092aa25eb44",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/mission_01_capture_v3_poster.png"
     },
     {
-      "file": "mission_02_120s.mp4",
-      "bytes": 16100347,
-      "sha256": "2b41d4e68851bfef1f1bb3124aa84887a196b77e9176a32a9f1aaa54db0d53d9"
+      "file": "mission_02_120s_capture_v3.mp4",
+      "bytes": 18998470,
+      "sha256": "19b057b2827da49defa6c4172a47f21ffc3bb2f79f31a17aaa374571adc348f3",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/mission_02_120s_capture_v3.mp4"
     },
     {
-      "file": "mission_02_frame_0900.png",
-      "bytes": 104120,
-      "sha256": "0e713676461cc93907723b498897dd9ad3fbba89562ac7db9f18b0b47792794c"
+      "file": "mission_02_capture_v3_poster.png",
+      "bytes": 170845,
+      "sha256": "9611b4ff8fa8336343fe5b159a454bd9b7ffe32f54f82659a9fd4f5e63474cc3",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/mission_02_capture_v3_poster.png"
     },
     {
-      "file": "mission_03_120s.mp4",
-      "bytes": 17981877,
-      "sha256": "039f56e746ad64bd8c23a68dcf807c8225f56d34a905969e2221dc84857060e3"
+      "file": "mission_03_120s_capture_v3.mp4",
+      "bytes": 20650272,
+      "sha256": "7398d56ac290fce4254361bf1168667420bc1fc837168fba5e3177df3698713c",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/mission_03_120s_capture_v3.mp4"
     },
     {
-      "file": "mission_03_frame_0900.png",
-      "bytes": 103830,
-      "sha256": "9485db3faa58b49cb8cea0ed33777a88a81138745d85ca6299a2c50047bb9dc2"
+      "file": "mission_03_capture_v3_poster.png",
+      "bytes": 242477,
+      "sha256": "c4d3ac3a95401d49e7eb129ea5fcff63da0d7cb1698d81221d6bb7db13606a27",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/mission_03_capture_v3_poster.png"
     },
     {
-      "file": "mission_04_120s.mp4",
-      "bytes": 17742959,
-      "sha256": "81bd4d30ec837882b17e2e938d709de9751a3d630683aa4369134740f41fb40d"
+      "file": "mission_04_120s_capture_v3.mp4",
+      "bytes": 20786166,
+      "sha256": "1b859045cff894d76d8261b59908618572bba8a1e2f51a575af04fdbf6bc66e6",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/mission_04_120s_capture_v3.mp4"
     },
     {
-      "file": "mission_04_frame_0900.png",
-      "bytes": 104850,
-      "sha256": "e37d4665b8be6d7eba54091c0c57e83cf89b54d5d9a33f223f2649ffc9c631d5"
+      "file": "mission_04_capture_v3_poster.png",
+      "bytes": 235924,
+      "sha256": "56aadd50ba3acd177cd9fd024aaa154a372229961d1211937dc31d8a163f063d",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/mission_04_capture_v3_poster.png"
+    },
+    {
+      "file": "arrival_01_15s_capture_v3.mp4",
+      "bytes": 1119234,
+      "sha256": "f039eafd6592eff27f928e284a54ed689188d6152682bdc44c28d3cbd065e792",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/arrival_01_15s_capture_v3.mp4"
+    },
+    {
+      "file": "arrival_01_capture_v3_poster.png",
+      "bytes": 139427,
+      "sha256": "5338bb1e077dcae2e59a854f1712db2c2491d3dd835779b0c48da04d5f5d4faf",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/media/arrival_01_capture_v3_poster.png"
+    },
+    {
+      "file": "neighbor_window_comparison.png",
+      "bytes": 63842,
+      "sha256": "95dade16063f93f01c8c4e26e797ab6ea525bbf1285b82d306614dac44c116ad",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/design/media/neighbor_window_comparison.png"
+    },
+    {
+      "file": "c3_launch_to_arrival.mp4",
+      "bytes": 1020520,
+      "sha256": "3c7ff532a1e714b2c3f90ba5372f402d6f79492a3c9baed8257c74867e10ee88",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/design/media/c3_launch_to_arrival.mp4"
+    },
+    {
+      "file": "c3_launch_to_arrival_poster.png",
+      "bytes": 154422,
+      "sha256": "3ebcc79ef7cbdd2c1655df964039197892e3de659134fe68106265b986f40e7a",
+      "archive_entry": "CAPCOM_Mission_Explorer/mission_profiles_120s/design/media/c3_launch_to_arrival_poster.png"
     }
   ]
 }
