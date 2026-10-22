@@ -97,3 +97,15 @@ The 117.77-second video fully decoded with FFmpeg; representative frames through
 The overview and trajectory page share `modeling-reels.js`. Previous/next controls cycle existing cases; the view control switches only between supplied recordings. The short flip is a UI transition, not a generated camera view. Case/view changes stay paused; offscreen players and background tabs pause. Starting one video pauses the others. Reduced-motion switches are instantaneous. Without JavaScript, original figures, native controls, posters and direct recording links remain available.
 
 This interface pass uses only previously published media and public copy. It adds no report-derived claims or new upload embeds. Route and Lambert sections are intentionally kept in sync across the two entry points.
+
+
+## CAPCOM mission context
+
+Source: *Close Approach Primary Cometary Outburst Mapper (CAPCOM)*, team project report, August 12, 2021. Public summary authorized by the user; original PDF and report figures are not included. Page references below are physical PDF pages (matching printed labels for these cited pages):
+
+- Page 1: full mission name; authors Hayley Davies, Cheyenne Marcelin Stone, Alejandro Rodriguez and Kwan Hang Gavin Yam.
+- Pages 2–4: section attribution and mission purpose. Mission Overview and Introduction credit Kwan Hang Gavin Yam; the concept targets close-range observation of 2P/Encke and cometary outbursts.
+- Pages 7–9: Transfer Analysis credits Cheyenne Marcelin Stone and Hayley Davies; compares direct low-thrust and Mars-assisted approaches, including flight time and propellant tradeoffs.
+- Page 10: Launch Vehicle Selection credits Kwan Hang Gavin Yam and Alejandro Rodriguez; discusses escape capability and propellant requirements.
+
+Context was verified against Library page text. Local PDF materialization failed, and returned page-image references were not viewable pixels in this executor. No figure interpretation or quantitative result was added. Existing trajectory recordings and the separate Lambert comparison remain unchanged; their provenance and assumptions above still apply. The report context does not independently validate those recordings or the later Lambert outputs.
