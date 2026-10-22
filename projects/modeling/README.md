@@ -109,3 +109,8 @@ Source: *Close Approach Primary Cometary Outburst Mapper (CAPCOM)*, team project
 - Page 10: Launch Vehicle Selection credits Kwan Hang Gavin Yam and Alejandro Rodriguez; discusses escape capability and propellant requirements.
 
 Context was verified against Library page text. Local PDF materialization failed, and returned page-image references were not viewable pixels in this executor. No figure interpretation or quantitative result was added. Existing trajectory recordings and the separate Lambert comparison remain unchanged; their provenance and assumptions above still apply. The report context does not independently validate those recordings or the later Lambert outputs.
+
+
+## CAPCOM mission profiles
+
+The four user-supplied two-minute mission animations appear inline at `#mission-profiles`, with a link from the trajectory page. See [media provenance](../../assets/media/modeling/mission-profiles/README.md) for assumptions, original-file hashes, credits and presentation scope. Source documents and regeneration code remain outside the repository.
