@@ -15,7 +15,7 @@
 </header>
 <nav class="page-index" aria-label="On this page">
   <p class="index-title"><span class="index-desktop">On this page</span><span class="index-mobile">Jump to</span></p>
-  <div class="index-links"><a href="#system">System</a><a href="#contribution">Test stories</a><a href="#evidence">On the robot</a><a href="#lessons">Lessons</a></div>
+  <div class="index-links"><a href="#system">System</a><a href="#contribution">Test stories</a><a href="#workshop">Workshop footage</a><a href="#evidence">On the robot</a><a href="#lessons">Lessons</a></div>
 </nav>
 <main id="main" tabindex="-1">
   <section class="hero wrap" aria-labelledby="project-title">
@@ -61,6 +61,13 @@
       <article><h3>Yaw aligned. Roll still disagreed.</h3><div><p>Hanging tests exposed a camera/IMU frame mismatch and divergence in the translation estimate. Correcting yaw left a roll mismatch, so the investigation narrowed to a two-state Kalman test for yaw and body-rate bias.</p><p>A follow-up run showed the transient spike was gone. The smaller test isolated that behavior before testing returned to all three axes.</p></div></article>
       <article><h3>A command can ask for too much.</h3><div><p>Allocator diagnostics found requested forces and torques outside the fourteen-thruster platform's feasible wrench envelope—the combinations of force and torque its thrusters could produce. Fallback commands could be negative; flooring those values to zero could leave no motor output.</p><p>Command logs and boundary plots traced the failure path and informed scaling the requested force and torque toward feasible commands.</p></div></article>
       <article><h3>From PID to LQR</h3><div><p>Initial hardware-in-the-loop work used PID. The fan-platform control design then moved to a linear quadratic regulator (LQR) to coordinate coupled states. Sensor-fusion work addressed a separate question: what motion could be inferred from the available measurements?</p></div></article>
+    </div>
+  </section>
+  <section id="workshop" class="section wrap" aria-labelledby="workshop-title">
+    <div class="section-heading"><p class="section-label">Workshop footage</p><div><h2 id="workshop-title">ORBES hardware in the lab.</h2><p class="intro">Two views of the prototype: suspended in the workshop and being handled at a work area.</p></div></div>
+    <div class="orbes-recordings">
+      <figure><video id="orbes-suspended" controls playsinline preload="none" width="1080" height="1920" poster="../../assets/media/orbes/suspended-hardware.jpg" aria-label="ORBES suspended hardware recording" aria-describedby="suspended-caption"><source src="../../20230603_131600.mp4" type="video/mp4"><a href="../../20230603_131600.mp4">Open the suspended hardware video</a></video><figcaption id="suspended-caption">ORBES prototype suspended in the workshop. <a href="../../20230603_131600.mp4">Open recording</a> · <a href="../../assets/media/orbes/suspended-hardware.jpg">View still</a>.</figcaption></figure>
+      <figure><video id="orbes-workbench" controls playsinline preload="none" width="400" height="712" poster="../../assets/media/orbes/workbench.jpg" aria-label="ORBES hardware handling recording, silent" aria-describedby="workbench-caption"><source src="../../assets/media/orbes/workbench.mp4" type="video/mp4"><a href="../../assets/media/orbes/workbench.mp4">Open the hardware handling video</a></video><figcaption id="workbench-caption">Handling the ORBES hardware at a work area. Silent recording converted from the supplied GIF. <a href="../../assets/media/orbes/workbench.mp4">Open recording</a> · <a href="../../assets/media/orbes/workbench.jpg">View still</a>.</figcaption></figure>
     </div>
   </section>
   <section id="evidence" class="section wrap" aria-labelledby="evidence-title">
