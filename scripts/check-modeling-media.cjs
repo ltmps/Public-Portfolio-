@@ -74,3 +74,20 @@ for (const item of selection) {
   assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), item.sha256);
 }
 console.log('PASS: selected media hashes/dependencies, controls, scenarios, script syntax, privacy and fallback guards.');
+
+// CAPCOM full mission recordings: immutable media and local progressive enhancement.
+const profilesRoot = path.join(root, 'assets/media/modeling/mission-profiles');
+const profileManifest = JSON.parse(fs.readFileSync(path.join(profilesRoot, 'manifest.json'), 'utf8'));
+assert.equal(profileManifest.files.length, 8);
+for (const item of profileManifest.files) {
+  const bytes = fs.readFileSync(path.join(profilesRoot, item.file));
+  assert.equal(bytes.length, item.bytes);
+  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), item.sha256);
+  assert(page.includes(`href="../../assets/media/modeling/mission-profiles/${item.file}"`), 'Direct recording/poster fallback');
+}
+const profileScript = fs.readFileSync(path.join(root, 'assets/js/mission-profiles.js'), 'utf8');
+new vm.Script(profileScript);
+assert(!/\bplay\(|\bfetch\(|XMLHttpRequest/.test(profileScript), 'Profile selection stays paused and local');
+assert(profileScript.includes('cancelSeek') && profileScript.includes('removeEventListener'), 'Cancel stale chapter seeks');
+assert(page.includes('id="mission-profiles"') && page.includes('illustrative launch and capture phases'));
+console.log('PASS: CAPCOM mission-profile hashes, source scope, paused selection and static links.');
