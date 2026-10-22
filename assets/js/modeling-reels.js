@@ -83,7 +83,7 @@
       ui.status.textContent = `${index + 1} / ${buttons.length} · ${buttons[index].textContent}`;
       animate(video, true);
     };
-    buttons.forEach(b => b.addEventListener('click', () => queueMicrotask(sync)));
+    encke.addEventListener('enckeviewchange', sync);
     sync();
   }
   const dynamics = document.querySelector('.dynamics-reel');
