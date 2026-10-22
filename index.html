@@ -1,224 +1,507 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Gavin Yam, Mechanical &amp; Simulation Engineer. I model hardware, build it, and test whether the model was right. Robotics, rockets, and building systems.">
-  <title>Gavin Yam | Mechanical &amp; Simulation Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/home.css">
-  <link rel="stylesheet" href="assets/css/project-selector.css">
-  <script src="assets/js/project-selector.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Gavin Yam, Mechanical &amp; Simulation Engineer. I model hardware, build it, and test whether the model was right. Robotics, rockets, and building systems.">
+<title>Gavin Yam | Mechanical &amp; Simulation Engineer</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/gy.css">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.5);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.35);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{opacity:var(--lo,1);left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-hero{cursor:crosshair}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-part:focus-visible,.gy-card:focus-visible,.gy-btn:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-btn{transition:background-color .2s,color .2s,border-color .2s}
+.gy-btn:hover{background:var(--foreground) !important;color:var(--background) !important;border-color:var(--foreground) !important}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim,.gy-part:focus-visible .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line,.gy-part:focus-visible .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line,.gy-part:focus-visible .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-img{filter:grayscale(1) contrast(1.05);transition:filter .5s,transform .7s cubic-bezier(0,0,.2,1)}
+:root[data-theme="dark"] .gy-img{filter:none}
+.gy-part:hover .gy-img,.gy-card:hover .gy-img{filter:none;transform:scale(1.03)}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
+.gy-balloon{transition:background-color .2s,color .2s}
+.gy-part:hover .gy-balloon{background:var(--foreground);color:var(--background)}
+.gy-cta{transition:color .2s,border-color .2s}
+.gy-cta svg{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-cta{border-color:rgb(var(--acc)) !important}
+.gy-part:hover .gy-cta svg{transform:translate(3px,-3px)}
+.gy-row{transition:background-color .2s}
+.gy-row:hover{background:var(--muted)}
+.gy-tri{transition:fill .2s,stroke .2s}
+.gy-row:hover .gy-tri{fill:rgb(var(--acc));stroke:rgb(var(--acc))}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:var(--muted)}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-ring{transition:border-color .3s}
+.gy-detail:hover .gy-ring{border-color:rgb(var(--acc));animation:gy-spin 14s linear infinite}
+.gy-detail img{filter:grayscale(1) contrast(1.05);transition:filter .5s,transform .7s cubic-bezier(0,0,.2,1)}
+:root[data-theme="dark"] .gy-detail img{filter:none}
+.gy-detail:hover img{filter:none;transform:scale(1.05)}
+@keyframes gy-spin{to{transform:rotate(360deg)}}
+.gy-card{transition:border-color .25s}
+.gy-card:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow,.gy-ix:hover .gy-arrow{transform:translate(3px,-3px)}
+.gy-ix{transition:background-color .2s}
+.gy-ix:hover{background:var(--muted)}
+.gy-play{transition:opacity .25s}
+.gy-card:hover .gy-play{opacity:0}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+</style>
+<script src="assets/js/gy.js" defer></script>
+<script src="assets/js/gy-mesh.js" defer></script>
 </head>
-<body class="portfolio-home">
+<body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><div class="shell header-inner">
-  <a class="identity" href="#main">Gavin <span>/ Engineering</span></a>
-  <nav aria-label="Main navigation"><a href="#projects">Selected work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a><a href="mailto:legendgavin00@gmail.com">Email</a><a href="assets/Gavin_Yam_Resume.pdf">Resume (PDF)</a></nav>
-</div></header>
-<main id="main" class="shell" tabindex="-1">
-  <section class="intro" aria-labelledby="intro-title">
-    <div><h1 id="intro-title">Gavin Yam</h1><p class="intro-line">Mechanical &amp; Simulation Engineer</p><p class="intro-copy">Robotics, rockets, and building systems, from first principles through simulation, fabrication, and test.</p><a class="text-link" href="#background">Engineering background</a></div>
-    <img class="portrait" src="assets/images/profile-600.jpg" srcset="assets/images/profile-300.jpg 300w, assets/images/profile-600.jpg 600w" sizes="(max-width: 480px) 72px, (max-width: 750px) 112px, 184px" width="184" height="184" alt="Gavin Yam" decoding="async">
-  </section>
-  <section id="projects" class="selected-work" aria-labelledby="selected-title">
-    <div class="section-top"><h2 id="selected-title">Selected work</h2><p>Hardware, controls and the decisions between.</p></div>
-    <div class="project-grid">
-      <article class="project-card featured"><div class="project-media orbes-photo-media"><img src="assets/images/orbes/hardware.png" width="875" height="630" alt="ORBES cube hardware with a camera, white fan grilles and a purple frame." decoding="async"></div><div class="project-card-copy"><p class="project-category">Robotics &amp; controls</p><h3>ORBES robot: ±5° attitude hold on hardware</h3><p>Hanging tests, sensor alignment and motor-command diagnostics.</p><p class="project-outcome">±5° attitude hold on hardware</p><a class="project-link" href="projects/orbes/">Explore ORBES</a></div></article>
-      <article class="project-card"><div class="project-media secondary-media"><span class="media-name">Satellite <br>dynamics</span><span class="media-status">Dynamics and image quality</span></div><div class="project-card-copy"><p class="project-category">UC Berkeley / Honeywell</p><h3>Satellite jitter: arc-second-scale hold in a simplified disturbance model</h3><p>Multi-body dynamics and passive versus active mitigation strategies.</p><p class="project-outcome">Arc-second-scale hold in a simplified disturbance model</p><a class="project-link" href="projects/satellite/">Explore satellite jitter analysis</a></div></article>
-      <article class="project-card"><div class="project-media b1lv-card-media"><img src="assets/images/b1lv/water-flow-test-600.jpg" width="600" height="450" alt="B1LV team's instrumented water-flow test piping." loading="lazy" decoding="async"><span class="b1lv-media-credit">Photo: CPP B1LV team</span></div><div class="project-card-copy"><p class="project-category">CPP Liquid Rocket Lab / B1LV</p><h3>Liquid rocket feed system: documentation and test readiness</h3><p>Contributed to piping organization, LOX-cleaning preparation and pressurant concept comparisons, with hardware traceability and shared failure analysis.</p><a class="project-link" href="projects/b1lv/">Explore the Bronco 1 case study</a></div></article>
-    </div>
-  </section>
-  <div class="career-content">
-    <section id="background">
-    <h2>Background</h2>
-    <p>
-      Mechanical and simulation engineer with about two years of industry experience, plus
-      internships and four years of student rocket and capstone projects. I've validated CFD and
-      FEA pipelines, tuned reaction-wheel control on a free-flying robot, designed commercial HVAC
-      systems, and contributed to a liquid rocket's feed-system test readiness.
-    </p>
-  </section>
-    <section id="experience">
-    <h2>Experience</h2>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; cursor: crosshair; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-    <div class="exp-item">
-      <div class="exp-logo">
-        <img loading="lazy" decoding="async" src="khorium.png" alt="Khorium Logo">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>Khorium — Los Angeles, CA</h3>
-          <span class="exp-date">Feb 2026 – Present</span>
-        </div>
-        <div class="exp-role">Simulation Engineer</div>
-        <ul>
-          <li>Built Python orchestration for OpenFOAM and CalculiX across seven solver templates, from external flow and conjugate heat transfer to structural statics.</li>
-          <li>Ran 100+ validation studies against public benchmarks and ANSYS Fluent, finding 12 platform defects from the data alone.</li>
-          <li>Integrated Gmsh and snappyHexMesh boundary-layer meshing, raising coverage from 1.45% to 100%.</li>
-          <li>Presented the simulation pipeline to customer engineering teams and scoped their requirements.</li>
-        </ul>
-      </div>
-    </div>
+<main id="main" tabindex="-1">
+<section id="top" class="gy-hero" aria-label="Introduction" data-gy-hero style="position: relative; z-index: 1; padding: 24px;">
+<canvas data-gy-mesh="home" data-refinement="110" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block;"></canvas>
+<div style="position: relative; z-index: 1; max-width: 1360px; margin: 0 auto; border: 1.5px solid var(--foreground); background: var(--paper);">
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); height: 22px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px;">
+<span style="display: flex; align-items: center; justify-content: center;">8</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">7</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">6</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">5</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">4</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">3</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">2</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">1</span>
+</div>
+<div style="display: flex;">
+<div aria-hidden="true" style="flex: 0 0 22px; display: flex; flex-direction: column; border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px;">
+<span style="flex: 1; display: flex; align-items: center; justify-content: center;">D</span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--foreground);">C</span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--foreground);">B</span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--foreground);">A</span>
+</div>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding: 14px 24px 14px 32px; border-bottom: 1px solid var(--border); background: var(--background);">
+<a href="#top" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="#work">Work</a>
+<a class="gy-link" href="projects/modeling/">Simulations</a>
+<a class="gy-link" href="#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</header>
+<div style="padding: 56px 48px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 48px; align-items: center;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">Mechanical &amp; Simulation Engineer</p>
+<h1 style="margin: 0; font-size: clamp(64px, 10vw, 148px); line-height: 0.86; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Gavin<br>Yam</h1>
+<div style="max-width: 440px; border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">General notes</p>
+<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 14px; line-height: 1.8; text-transform: uppercase;">
+<li>Model the hardware.</li>
+<li>Build it.</li>
+<li>Test whether the model was right.</li>
+</ol>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-btn" href="#work" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1.5px solid var(--foreground); background: var(--background); text-decoration: none;">Selected work <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg></a>
+<a class="gy-btn" href="projects/modeling/" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1.5px solid var(--foreground); background: var(--background); text-decoration: none;">Simulations <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+<a class="gy-btn" href="mailto:legendgavin00@gmail.com" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1.5px solid var(--foreground); background: var(--background); text-decoration: none;">Email</a>
+<a class="gy-btn" href="assets/Gavin_Yam_Resume.pdf" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1.5px solid var(--foreground); background: var(--background); text-decoration: none;">Resume (PDF)</a>
+</div>
+</div>
+<figure class="gy-detail" style="margin: 0; justify-self: center; display: flex; flex-direction: column; align-items: center; gap: 22px;">
+<div style="position: relative; width: 320px; height: 320px; max-width: 72vw; max-height: 72vw;">
+<div class="gy-ring" aria-hidden="true" style="position: absolute; inset: -16px; border-radius: 50%; border: 1px dashed var(--foreground);"></div>
+<div style="position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--foreground); background: var(--muted);">
+<img src="assets/images/profile-600.jpg" alt="Gavin Yam" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+</div>
+<span aria-hidden="true" style="position: absolute; top: 4px; right: 4px; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--foreground); background: var(--background); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 15px; font-weight: 600;">A</span>
+</div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;">Detail A · Scale 2 : 1</figcaption>
+</figure>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-top: auto;">
+<div aria-hidden="true" style="flex: 0 0 auto; width: 384px; max-width: calc(100% - 32px); box-sizing: border-box; margin: 0 0 14px 32px; padding: 10px 12px; border: 1px solid var(--foreground); background: var(--background); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; line-height: 1.75; text-transform: uppercase;">
+<div style="display: flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap; overflow: hidden;"><span style="flex: 0 0 8px; height: 8px; background: rgb(var(--acc));"></span>Local mesh refinement follows your cursor</div>
+<div style="color: var(--muted-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Hold + drag to trace · Hold still to cycle size</div>
+<div data-gy-hud style="font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Cells 0 · Levels 0 to 3</div>
+</div>
+<dl style="margin: 0 0 0 auto; flex: 0 1 560px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--foreground); border-left: 1px solid var(--foreground); font-family: var(--font-mono); text-transform: uppercase; min-width: min(480px, 100%); white-space: nowrap; background: var(--background);">
+<div style="padding: 8px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Drawn</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">G. Yam</dd></div>
+<div style="padding: 8px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Title</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Portfolio</dd></div>
+<div style="padding: 8px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Scale</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">1 : 1</dd></div>
+<div style="padding: 8px 14px;"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Sheet</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">1 of 9</dd></div>
+</dl>
+</div>
+</div>
+<div aria-hidden="true" style="flex: 0 0 22px; display: flex; flex-direction: column; border-left: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px;">
+<span style="flex: 1; display: flex; align-items: center; justify-content: center;">D</span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--foreground);">C</span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--foreground);">B</span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--foreground);">A</span>
+</div>
+</div>
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); height: 22px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px;">
+<span style="display: flex; align-items: center; justify-content: center;">8</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">7</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">6</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">5</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">4</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">3</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">2</span>
+<span style="display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--foreground);">1</span>
+</div>
+</div>
+</section>
 
-    <div class="exp-item">
+<section aria-labelledby="dims-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 96px 32px 0;">
+<div style="border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 9px 16px; border-bottom: 1.5px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">
+<h2 id="dims-title" style="margin: 0; font-size: 11px; font-weight: 600;">Key dimensions</h2>
+<span>Hover to dimension</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 240px; padding: 28px 24px 26px; display: flex; flex-direction: column; gap: 22px;">
+<span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Validation</span>
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 64px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em; font-variant-numeric: tabular-nums;">100+</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">studies against public benchmarks and ANSYS Fluent</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 28px 24px 26px; display: flex; flex-direction: column; gap: 22px;">
+<span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Defects found</span>
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 64px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em; font-variant-numeric: tabular-nums;">12</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">platform defects found from the data alone</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 28px 24px 26px; display: flex; flex-direction: column; gap: 22px;">
+<span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Attitude hold</span>
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 64px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em; font-variant-numeric: tabular-nums;">±5°</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">in compound maneuvers, measured on the robot</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 28px 24px 26px; display: flex; flex-direction: column; gap: 22px;">
+<span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">HVAC design</span>
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 64px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em; font-variant-numeric: tabular-nums;">50+</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">commercial interiors with heat pump and VRF systems</span>
+</div>
+</div>
+</div>
+</section>
 
-      <div class="exp-logo">
-        <img loading="lazy" decoding="async" src="orbes.jpeg" alt="ORBES Logo">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>Orbital Exploration Systems (ORBES) — Los Angeles, CA</h3>
-          <span class="exp-date">Jun 2025 – Jan 2026</span>
-        </div>
-        <div class="exp-role">Mechanical Controls Engineer</div>
-        <ul>
-          <li>Designed and built 6-DOF free-flying robotic platforms using SBCs and BLDC motors.</li>
-          <li>Developed control laws for compound maneuvers with reaction wheels and fans.</li>
-          <li>Attitude held within ±5° in compound maneuvers, measured on the robot.</li>
-          <li>Implemented multiprocessing and VIO pipelines in ROS2.</li>
-          <li>Diagnosed and fixed mechanical and signal-path issues, iterating hardware and control logic for improved robustness.</li>
-        </ul>
-        <p><a href="projects/orbes/">Explore the ORBES case study</a></p>
-      </div>
-    </div>
+<section id="work" aria-labelledby="work-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 96px 32px 72px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 80px;">
+<h2 id="work-title" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Selected work</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Sheet 02 · Hover to dimension, click to open</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 96px 80px;">
 
-    <div class="exp-item">
+<a class="gy-part" href="projects/orbes/" data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span class="gy-balloon" aria-hidden="true" style="position: absolute; left: -19px; top: -19px; z-index: 3; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--foreground); background: var(--background); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 600;">1</span>
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">±5° ATTITUDE HOLD</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">MEASURED ON HARDWARE</span>
+</span>
+<div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1.5px solid var(--foreground); background: #000;">
+<img class="gy-img" src="assets/images/orbes/hardware.png" alt="ORBES cube robot with a camera, white fan grilles and a purple frame." style="width: 100%; height: 100%; object-fit: cover;">
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<div style="display: flex;">
+<div style="flex: 1 1 auto; min-width: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Part</span>
+<h3 style="margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase;">ORBES free-flyer</h3>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Reaction-wheel and fan attitude control, tested on the robot</span>
+</div>
+<span class="gy-cta" style="flex: 0 0 120px; padding: 16px 18px; border-left: 1.5px solid var(--foreground); display: flex; flex-direction: column; justify-content: space-between; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;"><span style="font-size: 22px; font-weight: 600; letter-spacing: 0;">01</span><span style="display: inline-flex; align-items: center; gap: 6px;">Open <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></span>
+</div>
+</a>
 
-      <div class="exp-logo">
-        <img loading="lazy" decoding="async" src="acies.jpeg" alt="ACIES Logo">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>ACIES Engineering — San Jose, CA</h3>
-          <span class="exp-date">Aug 2024 – May 2025</span>
-        </div>
-        <div class="exp-role">Mechanical Design Engineer</div>
-        <ul>
-          <li>Designed and evaluated heat pump and VRF systems for 50+ commercial interiors: retail, residential, restaurants, and large offices.</li>
-          <li>Performed load calculations, building-envelope modeling, and Title 24 / CBC / CMC compliance work including outdoor-air ventilation calculations for Title 24 (EnergyPro) compliance.</li>
-          <li>Used AutoCAD and Revit to route ducts and place equipment in constrained ceiling spaces, coordinating with plumbing and electrical.</li>
-          <li>Conducted site surveys including a complex industrial-to-retail remodel in San Francisco — climbed ceilings, used roof and balcony access to trace ducts and confirm unit specs for fire and code compliance.</li>
-          <li>Solved limited-tonnage cases by carefully splitting fan-coil and kitchen ventilation paths to stay within energy-saving constraints.</li>
-        </ul>
-      </div>
-    </div>
+<a class="gy-part" href="projects/satellite/" data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span class="gy-balloon" aria-hidden="true" style="position: absolute; left: -19px; top: -19px; z-index: 3; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--foreground); background: var(--background); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 600;">2</span>
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">84.5% LOWER ATTITUDE-HOLD ERROR</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">SIMPLIFIED DISTURBANCE MODEL</span>
+</span>
+<div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1.5px solid var(--foreground); background: #fff;">
+<img class="gy-img" src="2026, 09_07_53 PM.png" alt="Satellite jitter model: disturbance model, flexible spacecraft dynamics and attitude control loop feeding detector motion." style="width: 100%; height: 100%; object-fit: cover;">
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<div style="display: flex;">
+<div style="flex: 1 1 auto; min-width: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Part</span>
+<h3 style="margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase;">Satellite jitter</h3>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Multi-body dynamics, passive versus active mitigation</span>
+</div>
+<span class="gy-cta" style="flex: 0 0 120px; padding: 16px 18px; border-left: 1.5px solid var(--foreground); display: flex; flex-direction: column; justify-content: space-between; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;"><span style="font-size: 22px; font-weight: 600; letter-spacing: 0;">02</span><span style="display: inline-flex; align-items: center; gap: 6px;">Open <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></span>
+</div>
+</a>
 
+<a class="gy-part" href="projects/b1lv/" data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span class="gy-balloon" aria-hidden="true" style="position: absolute; left: -19px; top: -19px; z-index: 3; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--foreground); background: var(--background); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 600;">3</span>
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">TEST READINESS</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">P&amp;ID + LOX CLEANING PREP</span>
+</span>
+<div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1.5px solid var(--foreground); background: #000;">
+<img class="gy-img" src="assets/images/b1lv/test-stand-wide-600.jpg" alt="Cal Poly Pomona Liquid Rocket Lab team at the instrumented test stand." style="width: 100%; height: 100%; object-fit: cover;">
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<div style="display: flex;">
+<div style="flex: 1 1 auto; min-width: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Part</span>
+<h3 style="margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase;">Bronco 1 feed system</h3>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Piping organization, cleaning readiness and water-flow testing</span>
+</div>
+<span class="gy-cta" style="flex: 0 0 120px; padding: 16px 18px; border-left: 1.5px solid var(--foreground); display: flex; flex-direction: column; justify-content: space-between; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;"><span style="font-size: 22px; font-weight: 600; letter-spacing: 0;">03</span><span style="display: inline-flex; align-items: center; gap: 6px;">Open <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></span>
+</div>
+</a>
 
-    <div class="exp-item">
+<a class="gy-part" href="projects/singularity/" data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span class="gy-balloon" aria-hidden="true" style="position: absolute; left: -19px; top: -19px; z-index: 3; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--foreground); background: var(--background); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 600;">4</span>
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">~6 MI GPS RANGE TEST</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">AVIONICS + RECOVERY</span>
+</span>
+<div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1.5px solid var(--foreground); background: #fff;">
+<img class="gy-img" src="assets/images/singularity/manufacturing-slide-19.png" alt="Singularity team manufacturing slide with fin-alignment tools, machining and a fabricated component." style="width: 100%; height: 100%; object-fit: cover; object-position: center 60%;">
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<div style="display: flex;">
+<div style="flex: 1 1 auto; min-width: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Part</span>
+<h3 style="margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase;">Singularity rocket</h3>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Integration, parachute packing and GPS range tests</span>
+</div>
+<span class="gy-cta" style="flex: 0 0 120px; padding: 16px 18px; border-left: 1.5px solid var(--foreground); display: flex; flex-direction: column; justify-content: space-between; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;"><span style="font-size: 22px; font-weight: 600; letter-spacing: 0;">04</span><span style="display: inline-flex; align-items: center; gap: 6px;">Open <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></span>
+</div>
+</a>
 
-      <div class="exp-logo">
-        <img loading="lazy" decoding="async" src="assets/images/clocky-optimized.png" alt="Clocky Logo">
-      </div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>Clocky LLC — Los Angeles, CA</h3>
-          <span class="exp-date">May 2023 – Aug 2023</span>
-        </div>
-        <div class="exp-role">Mechanical Engineering Intern</div>
-        <ul>
-          <li>Designed an indoor evaporative cooler with optimized fan/stator geometry to reduce drag and focus effective blade length.</li>
-          <li>Integrated an atomizer and conical nozzle for even air mixing and improved cooling performance.</li>
-          <li>Positioned reservoir below fan with linear slots to keep center of gravity low, reducing tip-over hazard while cutting part count ~30%.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-    <section id="project-details">
-    <h2>Projects</h2>
+</div>
+</section>
 
-    <article class="exp-item" id="modeling-details"><div class="exp-content"><div class="exp-header"><h3>Modeling &amp; Simulation</h3></div><p>Systems architecture, reaction-wheel dynamics and mission studies, with a path into ROS2 integration.</p><p><a href="projects/modeling/">Explore the modeling and simulation studies</a></p></div></article>
+<section id="simulations" aria-labelledby="sims-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="sims-title" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>Simulations</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Sheet 03 · Hover to run, click to open</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px;">
+<a class="gy-card" href="projects/modeling/" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #000; border-bottom: 1.5px solid var(--foreground);">
+<video src="assets/media/modeling/case10_cad.mp4" poster="assets/media/modeling/case10_preview.png" muted loop preload="metadata" aria-label="Simscape recording of a compound slew with camera tracking" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<div style="padding: 16px 20px 18px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;">
+<span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Simscape &amp; PID</span><span style="font-size: 19px; font-weight: 700; text-transform: uppercase;">Compound slew + tracking</span></span>
+<svg class="gy-arrow" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+</div>
+</a>
+<a class="gy-card" href="projects/modeling/trajectories/" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #000; border-bottom: 1.5px solid var(--foreground);">
+<video src="assets/media/modeling/encke/heliocentric.mp4" poster="assets/media/modeling/encke/heliocentric.png" muted loop preload="metadata" aria-label="Heliocentric playback of the Mars-assisted transfer to comet Encke" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<div style="padding: 16px 20px 18px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;">
+<span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Mission study · CAPCOM</span><span style="font-size: 19px; font-weight: 700; text-transform: uppercase;">Earth to comet Encke</span></span>
+<svg class="gy-arrow" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+</div>
+</a>
+<div style="position: relative; display: flex; flex-direction: column; background: var(--background); border: 1.5px solid var(--foreground);">
+<p style="margin: 0; padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Index · open a study</p>
+<a class="gy-ix" href="projects/modeling/" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;">CFD + FEA, reaction wheels <svg class="gy-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+<a class="gy-ix" href="projects/modeling/trajectories/" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;">Mission studies <svg class="gy-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+<a class="gy-ix" href="projects/modeling/architecture/" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;">Systems architecture <svg class="gy-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+<a class="gy-ix" href="projects/modeling/sherpa/" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;">SHERPA concept <svg class="gy-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+<a class="gy-ix" href="projects/orbes/" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;">ROS2 integration · ORBES <svg class="gy-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+</div>
+</div>
+</section>
 
-    <article class="exp-item" id="reaction-wheel-details" tabindex="-1"><div class="exp-content"><div class="exp-header"><h3>Reaction-wheel robot: ±5° attitude hold on hardware</h3></div><p class="project-outcome">Attitude control tested on a separate reaction-wheel platform.</p></div></article>
+<section id="experience" aria-labelledby="exp-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="exp-title" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>Experience</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Revision history · linked rows open their sheet</span>
+</div>
+<div style="overflow-x: auto; border: 1.5px solid var(--foreground); background: var(--background);">
+<table style="width: 100%; min-width: 760px; border-collapse: collapse;">
+<thead>
+<tr style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left;">
+<th scope="col" style="width: 76px; padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-right: 1px solid var(--foreground); font-weight: 600;">Rev</th>
+<th scope="col" style="width: 160px; padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-right: 1px solid var(--foreground); font-weight: 600;">Date</th>
+<th scope="col" style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-right: 1px solid var(--foreground); font-weight: 600;">Description</th>
+<th scope="col" style="width: 260px; padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); font-weight: 600;">Role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="gy-row">
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><svg aria-hidden="true" width="34" height="30" viewBox="0 0 34 30"><path class="gy-tri" d="M17 2 L32 28 L2 28 Z" fill="none" stroke="currentColor" stroke-width="1.5"></path><text x="17" y="24" text-anchor="middle" font-size="12" font-weight="600" font-family="ui-monospace, Menlo, monospace" fill="currentColor">F</text></svg><span class="sr-only">Revision F</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 13px;">2026 to present</td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><a class="gy-link" href="projects/modeling/" style="display: inline-block; font-size: 17px; font-weight: 700;">Khorium ↗</a><span style="display: block; font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">OpenFOAM and CalculiX orchestration, 100+ validation studies</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 15px;">Simulation Engineer</td>
+</tr>
+<tr class="gy-row">
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><svg aria-hidden="true" width="34" height="30" viewBox="0 0 34 30"><path class="gy-tri" d="M17 2 L32 28 L2 28 Z" fill="none" stroke="currentColor" stroke-width="1.5"></path><text x="17" y="24" text-anchor="middle" font-size="12" font-weight="600" font-family="ui-monospace, Menlo, monospace" fill="currentColor">E</text></svg><span class="sr-only">Revision E</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 13px;">2025 to 2026</td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><a class="gy-link" href="projects/orbes/" style="display: inline-block; font-size: 17px; font-weight: 700;">ORBES ↗</a><span style="display: block; font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">6-DOF free-flying robots, ±5° attitude hold on hardware</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 15px;">Mechanical Controls Engineer</td>
+</tr>
+<tr class="gy-row">
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><svg aria-hidden="true" width="34" height="30" viewBox="0 0 34 30"><path class="gy-tri" d="M17 2 L32 28 L2 28 Z" fill="none" stroke="currentColor" stroke-width="1.5"></path><text x="17" y="24" text-anchor="middle" font-size="12" font-weight="600" font-family="ui-monospace, Menlo, monospace" fill="currentColor">D</text></svg><span class="sr-only">Revision D</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 13px;">2024 to 2025</td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><strong style="display: block; font-size: 17px; font-weight: 700;">ACIES Engineering</strong><span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Heat pump and VRF systems for 50+ commercial interiors</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 15px;">Mechanical Design Engineer</td>
+</tr>
+<tr class="gy-row">
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><svg aria-hidden="true" width="34" height="30" viewBox="0 0 34 30"><path class="gy-tri" d="M17 2 L32 28 L2 28 Z" fill="none" stroke="currentColor" stroke-width="1.5"></path><text x="17" y="24" text-anchor="middle" font-size="12" font-weight="600" font-family="ui-monospace, Menlo, monospace" fill="currentColor">C</text></svg><span class="sr-only">Revision C</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 13px;">2023 to 2024</td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><a class="gy-link" href="projects/satellite/" style="display: inline-block; font-size: 17px; font-weight: 700;">UC Berkeley / Honeywell ↗</a><span style="display: block; font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Satellite jitter model and mitigation trade study</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 15px;">Senior Capstone Co-Lead</td>
+</tr>
+<tr class="gy-row">
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><svg aria-hidden="true" width="34" height="30" viewBox="0 0 34 30"><path class="gy-tri" d="M17 2 L32 28 L2 28 Z" fill="none" stroke="currentColor" stroke-width="1.5"></path><text x="17" y="24" text-anchor="middle" font-size="12" font-weight="600" font-family="ui-monospace, Menlo, monospace" fill="currentColor">B</text></svg><span class="sr-only">Revision B</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 13px;">2023</td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground);"><strong style="display: block; font-size: 17px; font-weight: 700;">Clocky</strong><span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Evaporative cooler with about 30% fewer parts</span></td>
+<td style="padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 15px;">Mechanical Engineering Intern</td>
+</tr>
+<tr class="gy-row">
+<td style="padding: 14px 16px; border-right: 1px solid var(--foreground);"><svg aria-hidden="true" width="34" height="30" viewBox="0 0 34 30"><path class="gy-tri" d="M17 2 L32 28 L2 28 Z" fill="none" stroke="currentColor" stroke-width="1.5"></path><text x="17" y="24" text-anchor="middle" font-size="12" font-weight="600" font-family="ui-monospace, Menlo, monospace" fill="currentColor">A</text></svg><span class="sr-only">Revision A</span></td>
+<td style="padding: 14px 16px; border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 13px;">2021 to 2023</td>
+<td style="padding: 14px 16px; border-right: 1px solid var(--foreground);"><strong style="display: block; font-size: 17px; font-weight: 700;">Student rocketry</strong><span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Feed systems, 6,000 psi pressurization, avionics and recovery</span></td>
+<td style="padding: 14px 16px; font-size: 15px;"><a class="gy-link" href="projects/b1lv/">Bronco 1 ↗</a>, Enterprise E-2, <a class="gy-link" href="projects/singularity/">Singularity ↗</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 
-    <div class="exp-item" id="satellite-details" tabindex="-1">
+<section id="tools" aria-labelledby="tools-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px 112px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="tools-title" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Toolkit</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Bill of materials</span>
+</div>
+<div style="overflow-x: auto; border: 1.5px solid var(--foreground); background: var(--background);">
+<table style="width: 100%; min-width: 640px; border-collapse: collapse;">
+<thead>
+<tr style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left;">
+<th scope="col" style="width: 76px; padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-right: 1px solid var(--foreground); font-weight: 600;">Item</th>
+<th scope="col" style="width: 220px; padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-right: 1px solid var(--foreground); font-weight: 600;">Group</th>
+<th scope="col" style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); font-weight: 600;">Parts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="gy-row">
+<td style="padding: 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 15px; font-weight: 600;">1</td>
+<td style="padding: 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-size: 16px; font-weight: 700; text-transform: uppercase;">Simulation</td>
+<td style="padding: 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 14px; line-height: 1.6;">OpenFOAM, snappyHexMesh, Gmsh, CalculiX, ANSYS Fluent</td>
+</tr>
+<tr class="gy-row">
+<td style="padding: 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 15px; font-weight: 600;">2</td>
+<td style="padding: 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--foreground); font-size: 16px; font-weight: 700; text-transform: uppercase;">Design</td>
+<td style="padding: 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 14px; line-height: 1.6;">SolidWorks, Siemens NX, Fusion 360, AutoCAD, Revit</td>
+</tr>
+<tr class="gy-row">
+<td style="padding: 16px; border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 15px; font-weight: 600;">3</td>
+<td style="padding: 16px; border-right: 1px solid var(--foreground); font-size: 16px; font-weight: 700; text-transform: uppercase;">Code &amp; controls</td>
+<td style="padding: 16px; font-family: var(--font-mono); font-size: 14px; line-height: 1.6;">Python, C / C++, MATLAB / Simulink, ROS2, Linux</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 
-      <div class="exp-logo honeywell-logo"><img loading="lazy" decoding="async" src="assets/images/projects/honeywell.png" width="576" height="324" alt="Honeywell"></div>
-      <div class="exp-content">
-        <div class="exp-header">
-          <h3>UC Berkeley — Honeywell Capstone</h3>
-          <span class="exp-date">Aug 2023 – May 2024</span>
-        </div>
-        <div class="exp-role">Senior Capstone Co-Lead · Jitter Analysis Mitigation for Satellite</div>
-        <ul>
-          <li>Built a multi-body dynamics model to predict satellite jitter and evaluate passive vs. active mitigation strategies.</li>
-          <li>Balanced model fidelity and simulation time when evaluating attitude-control strategies.</li>
-          <li>Led documentation and stakeholder communication of design recommendations and test strategies.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="project-associations" data-project-associations id="rocket-details" tabindex="-1">
-      <p class="association-context">Rocket projects: Bronco 1, Enterprise E-2 and the FAR 51025 competition.</p>
-      <div class="association-picker" data-project-picker hidden>
-        <div><p class="association-help" id="association-help">Hover, focus or tap a sector or project heading to highlight its project and view the full logo.</p>
-        <div class="association-pie" role="group" aria-label="Rocket project associations" aria-describedby="association-help">
-          <button type="button" class="association-sector sector-bronco" data-project-select="bronco" aria-label="Highlight Bronco 1 project" aria-controls="project-logo-display bronco-details" aria-pressed="false"><span class="sector-content"><img src="assets/images/projects/bronco.png" width="600" height="600" alt=""><span>Bronco 1</span></span></button>
-          <button type="button" class="association-sector sector-enterprise" data-project-select="enterprise" aria-label="Highlight Enterprise E-2 project" aria-controls="project-logo-display enterprise-details" aria-pressed="false"><span class="sector-content"><img src="assets/images/projects/space-enterprise.png" width="233" height="600" alt=""><span>Enterprise E-2</span></span></button>
-          <button type="button" class="association-sector sector-far" data-project-select="far" aria-label="Highlight FAR 51025 / Singularity project" aria-controls="project-logo-display far-details" aria-pressed="false"><span class="sector-content"><img src="assets/images/projects/far.png" width="320" height="312" alt=""><span>FAR</span></span></button>
-        </div></div>
-        <div class="association-display" id="project-logo-display" aria-live="polite" aria-atomic="true"><div class="association-logo-frame"><img data-project-logo src="assets/images/projects/bronco.png" width="600" height="600" alt="Bronco Launch Vehicle emblem"></div><p data-project-label>Bronco 1 / CPP Liquid Rocket Lab</p><p class="association-display-note" data-project-note>Vehicle project emblem</p></div>
-      </div>
-      <div class="exp-item association-line" data-project-line="bronco" id="bronco-details" tabindex="-1">
-        <div class="exp-logo"><img src="assets/images/projects/bronco.png" alt="Bronco Launch Vehicle emblem" width="600" height="600" decoding="async" loading="lazy"></div>
-        <div class="exp-content"><div class="exp-header"><h3><span class="association-static-title">Bronco 1</span><button class="association-line-button" type="button" data-project-select="bronco" aria-controls="project-logo-display" aria-pressed="false" hidden>Bronco 1</button></h3><span class="exp-date">CPP Liquid Rocket Lab · 2022–2023</span></div><div class="exp-role">Propellant Feed Systems team</div><ul><li>Worked on piping and instrumentation drawings (P&amp;IDs), cryogenic systems and shared technical reporting on feed-system hardware, testing and failure analysis.</li><li>Maintained meeting notes, documented design changes and supported hardware inventory tracking.</li></ul><p><a href="projects/b1lv/">Explore Bronco 1 hardware preparation and testing</a></p></div>
-      </div>
-      <div class="exp-item association-line" data-project-line="enterprise" id="enterprise-details" tabindex="-1">
-        <div class="exp-logo"><img src="assets/images/projects/space-enterprise.png" alt="Space Enterprise at Berkeley team logo" width="233" height="600" decoding="async" loading="lazy"></div>
-        <div class="exp-content"><div class="exp-header"><h3><span class="association-static-title">Enterprise E-2</span><button class="association-line-button" type="button" data-project-select="enterprise" aria-controls="project-logo-display" aria-pressed="false" hidden>Enterprise E-2</button></h3><span class="exp-date">Vehicle project work</span></div><div class="exp-role">Propellant Feed &amp; Structures</div><p class="association-scope">Rocket engineering projects</p><ul><li>Designed and integrated lengthened LOX and propane tanks in a 7-inch composite airframe with GN2 pressurization to 6,000 psi via custom E-Regs and pneumatic main valves.</li><li>Contributed to thrust-transfer rails and MVA covers.</li><li>Ran and refined pressure, flow, structural, and functional tests across Hotfire 9–12 campaigns.</li><li>Authored detailed test procedures with timed steps and appropriate PPE usage.</li></ul></div>
-      </div>
-      <div class="exp-item association-line" data-project-line="far" id="far-details" tabindex="-1">
-        <div class="exp-logo"><img src="assets/images/projects/far.png" alt="Friends of Amateur Rocketry logo" width="320" height="312" decoding="async" loading="lazy"></div>
-        <div class="exp-content"><div class="exp-header"><h3><span class="association-static-title">FAR 51025 / Singularity</span><button class="association-line-button" type="button" data-project-select="far" aria-controls="project-logo-display" aria-pressed="false" hidden>FAR 51025 / Singularity</button></h3><span class="exp-date">UMBRA, Cal Poly Pomona · Aug 2021 – May 2023</span></div><div class="exp-role">Avionics &amp; Recovery Engineer, Systems Liaison</div><p class="association-scope">Singularity student rocket project for the Friends of Amateur Rocketry competition.</p><ul><li>Integrated embedded tracking and data-logging systems.</li><li>Manufactured custom hand tools for fin installation and milled jig slots for alignment.</li></ul><p><a href="projects/singularity/">Explore Singularity tracking and tooling</a></p></div>
-      </div>
-    </div>
-  </section>
-    <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-
-      <div class="skill-box">
-        <h3>Mechanical Design</h3>
-        <ul>
-          <li>Multi-component system design</li>
-          <li>Dynamics &amp; stress analysis</li>
-          <li>DFM / DFA</li>
-          <li>Cryogenic &amp; high-pressure systems</li>
-          <li>Electromechanical integration</li>
-          <li>Tolerance stack-up</li>
-        </ul>
-      </div>
-
-      <div class="skill-box">
-        <h3>CAD &amp; Drafting</h3>
-        <ul>
-          <li>Fusion 360</li>
-          <li>SolidWorks</li>
-          <li>NX (Siemens)</li>
-          <li>AutoCAD</li>
-          <li>Revit / BIM</li>
-          <li>BOMs &amp; Assembly Drawings</li>
-        </ul>
-      </div>
-
-      <div class="skill-box">
-        <h3>Software &amp; Controls</h3>
-        <ul>
-          <li>Python</li>
-          <li>C / C++</li>
-          <li>MATLAB / Simulink</li>
-          <li>ROS2</li>
-          <li>Git / GitHub</li>
-          <li>Linux (CLI)</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-  </div>
 </main>
-<footer id="contact"><div class="shell"><div class="contact-row"><div><p class="footer-identity">Gavin / Engineering</p><h2>Continue the conversation.</h2></div><nav aria-label="Contact links"><a href="mailto:legendgavin00@gmail.com">Email Gavin</a><a href="assets/Gavin_Yam_Resume.pdf">Resume (PDF)</a><a href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer">LinkedIn <span class="sr-only">(opens in a new tab)</span></a><a href="https://1drv.ms/f/c/A001C2F87ED3831A/EhqD0374wgEggKB27QAAAAABa1MG-cNeBJptjtdL1IuaxQ?e=6SsW0g" target="_blank" rel="noopener noreferrer">Portfolio archive (OneDrive) <span class="sr-only">(opens in a new tab)</span></a></nav></div><div class="footer-bottom"><p>© 2026 Gavin Yam. All rights reserved.</p><a href="#main">Back to top</a></div></div></footer>
+
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px 40px; display: flex; flex-direction: column; gap: 56px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<h2 style="margin: 0; font-size: clamp(44px, 6vw, 88px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-btn" href="mailto:legendgavin00@gmail.com" style="padding: 12px 16px; border: 1.5px solid var(--foreground); text-decoration: none;">legendgavin00@gmail.com</a>
+<a class="gy-btn" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 12px 16px; border: 1.5px solid var(--foreground); text-decoration: none;">LinkedIn ↗</a>
+<a class="gy-btn" href="assets/Gavin_Yam_Resume.pdf" style="padding: 12px 16px; border: 1.5px solid var(--foreground); text-decoration: none;">Resume (PDF)</a>
+</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1.5px solid var(--foreground); font-family: var(--font-mono); text-transform: uppercase; min-width: min(420px, 100%);">
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Drawn</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">G. Yam</dd></div>
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Checked</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Your team</dd></div>
+<div style="padding: 10px 14px;"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Date</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">2026</dd></div>
+</dl>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="#top">Back to top</a>
+</div>
+</div>
+</footer>
+
+<div class="gy-xh" aria-hidden="true" style="position: absolute; inset: 0; z-index: 50; pointer-events: none;">
+<div style="position: absolute; top: 0; bottom: 0; left: var(--cx, -10px); width: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: 0; right: 0; top: var(--cy, -10px); height: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: calc(var(--cx, -999px) + var(--rdx, 14px)); top: calc(var(--cy, -999px) + 14px); padding: 4px 8px; background: var(--background); border: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; font-variant-numeric: tabular-nums;">X <span data-gy-x>0.0</span>  Y <span data-gy-y>0.0</span> mm</div>
+</div>
+</div>
 </body>
 </html>

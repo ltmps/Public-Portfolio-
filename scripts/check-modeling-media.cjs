@@ -1,40 +1,94 @@
+// Dependency-free checks for the modeling pages: media dependencies, playback rules,
+// CAPCOM phase timing, Architecture data and the recorded playback viewer.
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
-const page = fs.readFileSync(path.join(root, 'projects/modeling/index.html'), 'utf8');
-const overview = page;
-const detail = fs.readFileSync(path.join(root, 'projects/modeling/trajectories/index.html'), 'utf8');
-const viewer = fs.readFileSync(path.join(root, 'projects/modeling/playback/index.html'), 'utf8');
-for (const tag of page.matchAll(/<(?:video|source)\b[^>]*>/g)) {
-  assert(!/\bautoplay\b/.test(tag[0]), 'Media must not autoplay');
-  for (const ref of tag[0].matchAll(/(?:src|poster)="([^"]+)"/g)) {
-    assert(fs.statSync(path.resolve(root, 'projects/modeling', ref[1])).size > 0, `Missing media ${ref[1]}`);
+const read = file => fs.readFileSync(path.join(root, file), 'utf8');
+const sha = file => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
+
+const pages = ['index.html', 'projects/modeling/index.html', 'projects/modeling/trajectories/index.html',
+  'projects/modeling/architecture/index.html', 'projects/modeling/sherpa/index.html', 'projects/orbes/index.html'];
+for (const file of pages) {
+  const html = read(file);
+  const dir = path.dirname(file);
+  for (const tag of html.matchAll(/<(?:video|source)\b[^>]*>/g)) {
+    assert(!/\bautoplay\b/.test(tag[0]), `${file}: media must not autoplay`);
+    for (const ref of tag[0].matchAll(/(?:src|poster)="([^"]+)"/g)) {
+      assert(fs.statSync(path.resolve(root, dir, ref[1])).size > 0, `${file}: missing media ${ref[1]}`);
+    }
+    if (tag[0].startsWith('<video')) assert(/aria-label="[^"]+"/.test(tag[0]), `${file}: video needs a name`);
   }
-  if (tag[0].startsWith('<video')) assert(/\bcontrols\b/.test(tag[0]) && /aria-label=/.test(tag[0]), 'Video needs controls and a name');
+  // Hover-to-play videos stay muted, and their label sits in a caption strip, never over the media.
+  for (const block of html.matchAll(/<(a|figure)\b[^>]*data-gy-vid[^>]*>[\s\S]*?<\/\1>/g)) {
+    const video = block[0].match(/<video\b[^>]*>/);
+    if (video) assert(/\bmuted\b/.test(video[0]), `${file}: hover-to-play video must be muted`);
+  }
+  for (const label of html.matchAll(/<span class="gy-play"[^>]*>/g)) {
+    assert(!/position: absolute/.test(label[0]), `${file}: hover-to-play label must not overlay media`);
+  }
 }
+
+// CAPCOM mission studies: merged v5 media and phase jumps
+const missions = read('projects/modeling/trajectories/index.html');
+const ms = read('assets/js/mission-studies.js');
+new vm.Script(ms);
+assert.deepEqual(JSON.parse(ms.match(/var CH = (\[[^\]]+\])/)[1]), [0, 22, 32, 40, 58, 85, 91, 100, 103], 'CAPCOM phase-jump times');
+assert.deepEqual([...ms.matchAll(/n: '0(\d)', mars: (true|false)/g)].map(m => m[2] === 'true'), [false, false, true, true], 'Mars flyby only on Mars routes');
+assert.equal((missions.match(/data-ms-jump="\d"/g) || []).length, 9, 'Nine phase chips');
+const mp = 'assets/media/modeling/mission-profiles/';
+for (const n of ['01', '02', '03', '04']) {
+  for (const f of [`mission_${n}_120s_capture_v3.mp4`, `mission_${n}_capture_v3_poster.png`]) assert(fs.existsSync(path.join(root, mp, f)), `Missing ${f}`);
+}
+for (const f of ['arrival_01_15s_capture_v3.mp4', 'neighbor_window_comparison.png', 'c3_launch_to_arrival.mp4']) {
+  assert(missions.includes(mp + f), `Mission studies must show ${f}`);
+}
+for (const m of ms.matchAll(/'((?:trajectories|encke)\/[a-z0-9-]*[a-z0-9])'/g)) {
+  for (const ext of ['.mp4', '.png']) assert(fs.existsSync(path.join(root, 'assets/media/modeling', m[1] + ext)), `Missing ${m[1]}${ext}`);
+}
+for (const n of [1, 2, 3]) for (const v of ['2d', '3d']) for (const ext of ['.mp4', '.png']) {
+  assert(fs.existsSync(path.join(root, `assets/media/modeling/trajectories/window-${n}-${v}${ext}`)), `Missing window ${n} ${v}`);
+}
+assert(missions.includes('DE405/SPICE') && missions.includes('JPL Horizons'), 'Visible reference-track credits');
+assert(/\bplay\(/.test(ms) && /reduced\(\)/.test(ms), 'Case picks play only when reduced motion is off');
+
+// Systems architecture study
+const arch = read('projects/modeling/architecture/index.html');
+const as = read('assets/js/architecture-study.js');
+new vm.Script(as);
+const scen = JSON.parse(arch.match(/<script id="ar-scenarios" type="application\/json">([\s\S]*?)<\/script>/)[1]);
+const viewer = read('projects/modeling/playback/index.html');
+const recorded = JSON.parse(viewer.match(/<script id="analysis-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
+assert.deepEqual(scen.map(s => s.name), recorded.runs.map(r => r.scenario.name), 'Scenario playback uses the recorded runs');
+for (const s of scen) assert(s.t.length === s.a.length && s.t.length === s.d.length, `${s.name}: aligned series`);
+assert.equal((arch.match(/<button type="button" class="gy-cell /g) || []).length, 24, 'Recovery envelope is a 6 by 4 grid of native buttons');
+assert(!/planar-flight\.(mp4|jpg)/.test(arch), 'Planar flight recording is a labelled placeholder until it is added');
+for (const f of ['mission-cycle.mp4', 'mission-cycle.jpg', 'coupled-domains.mp4', 'coupled-domains.jpg', 'catalog-couplings.png']) {
+  assert(arch.includes('assets/media/modeling/architecture/' + f), `Architecture must use ${f}`);
+}
+
+// Recorded playback viewer (unchanged page)
 assert(!/(?<![A-Za-z])[A-Za-z]:[\\/](?!\/)/.test(viewer), 'No private machine paths');
 assert(!/raw_csv|frame_binary|frame_index|source_hashes/.test(viewer), 'No private download or source-inventory fields');
 assert(!/\bfetch\(|XMLHttpRequest/.test(viewer), 'Viewer must use embedded data');
 assert(viewer.includes('<noscript>') && viewer.includes('prefers-reduced-motion'), 'Static and reduced-motion fallbacks');
-const data = JSON.parse(viewer.match(/<script id="analysis-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
-assert.equal(data.runs.length, 5);
-for (const run of data.runs) {
+assert.equal(recorded.runs.length, 5);
+for (const run of recorded.runs) {
   assert(run.plot_series.time_s.length > 0);
   assert.equal(run.plot_series.mode.length, run.plot_series.time_s.length);
 }
 for (const script of viewer.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
   if (!script[1].includes('application/json')) new vm.Script(script[2]);
 }
-const svg = fs.readFileSync(path.join(root, 'assets/media/modeling/traceability-example.svg'), 'utf8');
+for (const file of ['assets/js/gy.js', 'assets/js/gy-mesh.js']) new vm.Script(read(file));
+
+const svg = read('assets/media/modeling/traceability-example.svg');
 assert(!/<script\b|(?:href|src)=/.test(svg), 'Selected SVG must be self-contained');
-const enckeScript = fs.readFileSync(path.join(root, 'assets/js/encke-viewer.js'), 'utf8');
-new vm.Script(enckeScript);
-assert(!/\bplay\(/.test(enckeScript), 'View changes must leave playback paused');
-assert(detail.includes('id="encke-views"') && detail.includes('aria-label="Trajectory view" hidden'), 'Hide script-only selectors by default');
-assert(detail.includes('Earth and Mars reference tracks use DE405/SPICE; Encke uses JPL Horizons.'), 'Visible reference-track credits');
-const hashes = {
+
+// Approved media bytes stay unchanged
+const encke = {
   'original.mp4': '40bcc0010decf91b0979f1b3fa49cb905f4e9b5dfdfb5962a86e0591d45cc4ad',
   'original.png': '81373113415db12fd90b08fe3fb56de89ef96d4f208769dc35b3773238eb69e3',
   'angled.mp4': '51051689cfc5857731c2b83d776aa530ef405ea6ce02ca9e6084adcd85b524e9',
@@ -42,75 +96,12 @@ const hashes = {
   'heliocentric.mp4': '66dcdce0b589969d5483b507a8af2e3cbc5f3b533cfc0979069a509953ef522c',
   'heliocentric.png': 'eb4bc09880f65a5ec1b52ef0b00bec270604f707d1741bba551961a13c0df334'
 };
-const crypto = require('node:crypto');
-for (const [file, hash] of Object.entries(hashes)) {
-  const bytes = fs.readFileSync(path.join(root, 'assets/media/modeling/encke', file));
-  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), hash, `Approved Encke bytes: ${file}`);
-  if (file.endsWith('.mp4')) assert(detail.includes(`href="../../../assets/media/modeling/encke/${file}"`), 'No-JS direct recording link');
-}
-const trajectoryPage = fs.readFileSync(path.join(root, 'projects/modeling/trajectories/index.html'), 'utf8');
-const trajectoryScript = fs.readFileSync(path.join(root, 'assets/js/trajectory-viewer.js'), 'utf8');
-const reels = fs.readFileSync(path.join(root, 'assets/js/modeling-reels.js'), 'utf8');
-new vm.Script(reels);
-assert(!/\bplay\(/.test(reels), 'Reel changes must never start playback');
-assert(reels.includes('prefers-reduced-motion') && reels.includes('IntersectionObserver'), 'Reel motion and offscreen playback guards');
-assert(!page.includes('id="routes"') && detail.includes('id="routes"') && detail.includes('id="windows"'), 'Detailed route viewers stay on CAPCOM detail page');
-assert.equal((page.match(/assets\/media\/modeling\/mission-profiles\/[^"]+\.mp4" type=/g)||[]).length,1,'One CAPCOM animation on overview');
-assert(page.includes('modeling-reels.js') && trajectoryPage.includes('modeling-reels.js'), 'Both pages use reel enhancement');
-new vm.Script(trajectoryScript);
-assert(!/\bplay\(|\bfetch\(|XMLHttpRequest/.test(trajectoryScript), 'Local paused selection only');
-assert(!/(?<![A-Za-z])[A-Za-z]:[\\/](?!\/)|file:\/\/|\.gif/.test(trajectoryPage), 'No machine paths or excluded downloads');
-assert.equal([...trajectoryPage.matchAll(/data-case=/g)].length, 14, 'Eight route views and six launch-window views');
-assert.equal([...trajectoryPage.matchAll(/class="trajectory-controls" hidden/g)].length, 2, 'Script-only controls hidden by default');
-assert(trajectoryPage.includes('<noscript>'), 'Native player and recording-link fallback');
-for (const tag of trajectoryPage.matchAll(/<(?:video|source|a)\b[^>]*>/g)) {
-  for (const ref of tag[0].matchAll(/(?:src|poster|data-poster)="([^"]+)"/g)) {
-    assert(fs.existsSync(path.resolve(root, 'projects/modeling/trajectories', ref[1])), `Missing trajectory dependency ${ref[1]}`);
-  }
-  if (tag[0].startsWith('<video')) assert(/controls/.test(tag[0]) && /aria-label/.test(tag[0]) && !/autoplay|loop/.test(tag[0]));
-}
-const selection = JSON.parse(fs.readFileSync(path.join(root, 'assets/media/modeling/trajectories/manifest.json'), 'utf8'));
+for (const [file, hash] of Object.entries(encke)) assert.equal(sha('assets/media/modeling/encke/' + file), hash, `Approved Encke bytes: ${file}`);
+const selection = JSON.parse(read('assets/media/modeling/trajectories/manifest.json'));
 assert.equal(selection.length, 24);
 for (const item of selection) {
-  const bytes = fs.readFileSync(path.join(root, 'assets/media/modeling/trajectories', item.file));
-  assert.equal(bytes.length, item.bytes);
-  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), item.sha256);
+  const file = 'assets/media/modeling/trajectories/' + item.file;
+  assert.equal(fs.statSync(path.join(root, file)).size, item.bytes);
+  assert.equal(sha(file), item.sha256);
 }
-console.log('PASS: selected media hashes/dependencies, controls, scenarios, script syntax, privacy and fallback guards.');
-
-// CAPCOM full mission recordings: immutable media and local progressive enhancement.
-const profilesRoot = path.join(root, 'assets/media/modeling/mission-profiles');
-const profileManifest = JSON.parse(fs.readFileSync(path.join(profilesRoot, 'manifest.json'), 'utf8'));
-assert.equal(profileManifest.files.length, 13);
-for (const item of profileManifest.files) {
-  const bytes = fs.readFileSync(path.join(profilesRoot, item.file));
-  assert.equal(bytes.length, item.bytes);
-  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), item.sha256);
-  assert(detail.includes(`href="../../../assets/media/modeling/mission-profiles/${item.file}"`), 'Direct recording/poster fallback');
-}
-const profileScript = fs.readFileSync(path.join(root, 'assets/js/mission-profiles.js'), 'utf8');
-new vm.Script(profileScript);
-assert(!/\bplay\(|\bfetch\(|XMLHttpRequest/.test(profileScript), 'Profile selection stays paused and local');
-assert(profileScript.includes('cancelSeek') && profileScript.includes('removeEventListener'), 'Cancel stale chapter seeks');
-assert(detail.includes('id="mission-profiles"') && detail.includes('illustrative launch phases and a local two-body capture example'));
-console.log('PASS: CAPCOM mission-profile hashes, source scope, paused selection and static links.');
-
-assert(profileScript.includes("['Polar orbit', 103]") && profileScript.includes("['Capture braking', 91]"), 'V5 chapter timing');
-assert(detail.includes('550 Earth days') && detail.includes('Among these three candidates'), 'Bounded annual comparison');
-assert(detail.includes('separately from the interplanetary path'), 'Separate local capture scope');
-
-const sherpa = fs.readFileSync(path.join(root, 'projects/modeling/sherpa/index.html'), 'utf8');
-new vm.Script(fs.readFileSync(path.join(root, 'assets/js/concept-reels.js'), 'utf8'));
-const sherpaManifest=JSON.parse(fs.readFileSync(path.join(root,'assets/media/modeling/sherpa/manifest.json'),'utf8'));
-assert.equal(sherpaManifest.length,14);
-for(const item of sherpaManifest){
- const bytes=fs.readFileSync(path.join(root,'assets/media/modeling/sherpa',item.file));
- assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),item.sha256);
- assert(sherpa.includes(`href="../../../assets/media/modeling/sherpa/${item.file}"`));
-}
-for(const tag of sherpa.matchAll(/<video\b[^>]*>/g)) assert(/controls/.test(tag[0])&&/aria-label/.test(tag[0])&&!/autoplay/.test(tag[0]));
-assert.equal((sherpa.match(/data-concept-reel/g)||[]).length,2);
-assert(sherpa.includes('assumed lumped tank-state model')&&sherpa.includes('Earth-centered two-body conics'));
-console.log('PASS: one CAPCOM overview video, full detail media and SHERPA selection hashes/scopes.');
-
-assert(enckeScript.includes("video.querySelector('source').src"), 'Encke media base follows the page source after relocation');
+console.log('PASS: media dependencies and playback rules, CAPCOM phase jumps and v5 media, architecture data and envelope, playback viewer privacy and approved media hashes.');

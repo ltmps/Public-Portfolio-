@@ -1,30 +1,242 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="SPACEJAM satellite jitter analysis: a coupled spacecraft model connecting disturbances, structural dynamics and attitude control to detector motion and image blur.">
-  <title>Jitter analysis and mitigation | Gavin Yam</title>
-  <link rel="stylesheet" href="../../assets/css/orbes.css">
-  <link rel="stylesheet" href="../../assets/css/project-notes.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SPACEJAM satellite jitter analysis: a coupled spacecraft model connecting disturbances, structural dynamics and attitude control to detector motion and image blur.">
+<title>Jitter analysis and mitigation | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/gy.css">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-frame{transition:border-color .25s}
+.gy-fig:hover .gy-frame{border-color:rgb(var(--acc)) !important}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:var(--muted)}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-step{transition:border-color .2s,background-color .2s}
+.gy-step:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.06) !important}
+.gy-stepn{transition:color .2s}
+.gy-step:hover .gy-stepn{color:rgb(var(--acc))}
+.gy-barrow{transition:background-color .2s}
+.gy-barrow:hover{background:var(--muted)}
+.gy-card{transition:border-color .25s}
+.gy-card:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+</style>
+<script src="../../assets/js/gy.js" defer></script>
 </head>
-<body class="project-notes">
-<a class="skip" href="#main">Skip to content</a>
-<header class="masthead"><div class="nav-inner"><a class="brand" href="../../index.html">Gavin <span>/ Engineering</span></a><span class="breadcrumb"><a href="../../index.html#projects">Selected work</a> <span>/ Satellite jitter</span></span></div></header>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; cursor: crosshair; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
+
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../index.html#work">Work</a>
+<a class="gy-link" href="../modeling/">Simulations</a>
+<a class="gy-link" href="../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
 <main id="main" tabindex="-1">
-  <section class="hero wrap" aria-labelledby="project-title">
-    <p class="project-context">UC Berkeley / Honeywell capstone · August 2023–May 2024</p>
-    <div class="hero-title"><h1 id="project-title">Satellite jitter</h1><p>Follow the disturbance.<br>See its effect on the image.</p></div>
-    <p class="project-intro">Small spacecraft motions can blur an image. SPACEJAM connected disturbances, flexible structural dynamics and attitude control to motion in the detector frame, so mitigation could be assessed through its image consequences.</p>
-    <div class="project-facts"><div><h2>Role</h2><p>Senior Capstone Co-Lead</p></div><div><h2>Work covered</h2><p>Modeling, mitigation comparison and technical communication.</p></div></div>
-    <nav class="section-nav" aria-label="Project sections"><a href="#model">Coupled model</a><a href="#image">Image blur</a><a href="#iteration">Model iteration</a><a href="#tradeoff">Simulation result</a><a href="#communication">Team</a></nav>
-  </section>
-  <section id="model" class="section wrap" aria-labelledby="model-title"><div class="section-heading"><p class="section-label">Coupled model</p><div><h2 id="model-title">Connect the disturbance to the spacecraft response.</h2><p class="intro">The team built a three-axis model of a generic spacecraft in Simulink. The analysis linked attitude control, flexible structural motion and disturbance inputs to examine satellite jitter and compare passive and active mitigation strategies.</p></div></div><figure class="project-figure "><img src="../../assets/images/satellite/model-to-image-quality.png" width="960" height="720" loading="lazy" decoding="async" alt="Block diagram linking spacecraft disturbances and flexible dynamics to attitude control, detector motion and a blurred point spread function."><figcaption>SPACEJAM team poster: illustration of the analysis framework linking disturbance and flexible-spacecraft models with attitude control, detector motion and point spread function. <a href="../../assets/images/satellite/model-to-image-quality.png">Open full-size figure</a></figcaption></figure></section>
-  <section id="image" class="section wrap" aria-labelledby="image-title"><div class="section-heading"><p class="section-label">Image blur</p><div><h2 id="image-title">Carry motion into the detector frame.</h2><p class="intro">Simulink and Python analysis connected the spacecraft response to detector-frame motion and the point spread function: how a point in the scene spreads across an image. This linked the mechanical and control model to image blur.</p></div></div></section>
-  <section id="iteration" class="section wrap" aria-labelledby="iteration-title"><div class="section-heading"><p class="section-label">Model iteration</p><div><h2 id="iteration-title">Refine the model, then reassess the image.</h2><p class="intro">The process cycled through updates to the spacecraft plant, refinement of the sensor and plant models, and updates to the jitter models. Each assessment fed back into further revisions, connecting changes in the modeled system to their imaging consequences.</p></div></div><figure class="project-figure process-figure"><img src="../../assets/images/satellite/model-improvement-process.png" width="1257" height="595" loading="lazy" decoding="async" alt="Four-stage cycle: update the plant, refine sensors and plant, update jitter models, assess impact and revise."><figcaption>SPACEJAM team poster: model-improvement cycle—refine plant and sensors, update jitter models, assess impact. <a href="../../assets/images/satellite/model-improvement-process.png">Open full-size figure</a></figcaption></figure></section>
-  <section id="tradeoff" class="section wrap" aria-labelledby="tradeoff-title"><div class="section-heading"><p class="section-label">Simulation comparison</p><div><h2 id="tradeoff-title">Compare attitude hold against the same disturbances.</h2><p class="intro">In the simplified simulation, combined-disturbance attitude-hold error fell from 6.48 to 1.00 arcseconds vector RMS, an 84.5% reduction against the matched open-loop case.</p><p>The comparison used the final 60 seconds of a 120-second simulation with prescribed wheel and cryocooler disturbance torque, sensor noise disabled, and a simplified flexible model. The comparison measures spacecraft attitude error in the simplified simulation.</p></div></div></section>
-  <section id="communication" class="section wrap" aria-labelledby="communication-title"><div class="section-heading"><p class="section-label">Team</p><div><h2 id="communication-title">Turn the analysis into recommendations.</h2><p class="intro">As capstone co-lead, I worked on dynamics modeling and led documentation and stakeholder communication of design recommendations and test strategies. The simulation comparison uses the team model, whose initializer credits W. Soh.</p><p>The SPACEJAM team comprised Gavin Yam, Palvi, Nicholas Capedevila and Ke Hu, advised by Warren Soh, Jameson Lee and Professor Tarek Zohdi.</p></div></div></section>
+<section id="top" aria-labelledby="page-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px 0;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / <a class="gy-link" href="../../index.html#work">Selected work</a> / Part 02</p>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">UC Berkeley / Honeywell capstone · Aug 2023 to May 2024</p>
+<h1 id="page-title" style="margin: 0; font-size: clamp(48px, 6vw, 88px); line-height: 0.88; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Satellite<br>jitter</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 24ch; text-wrap: pretty;">Follow the disturbance. See its effect on the image.</p>
+</div>
+<figure class="gy-part" data-gy-glow style="position: relative; margin: 0 50px 0 0; border: 1.5px solid var(--foreground); background: #fff;">
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">6.48″ TO 1.00″ RMS</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">MODEL TO IMAGE</span>
+</span>
+<div style="position: relative; aspect-ratio: 960 / 720; overflow: hidden;">
+<img src="../../2026, 09_07_53 PM.png" alt="Block diagram linking spacecraft disturbances and flexible dynamics to attitude control, detector motion and a blurred point spread function." style="width: 100%; height: 100%; object-fit: contain;">
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+</figure>
+</div>
+<dl style="margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Role</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Senior Capstone Co-Lead</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Team</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">SPACEJAM</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Tools</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Simulink, Python</dd></div>
+<div style="padding: 12px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Work</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Modeling, mitigation, communication</dd></div>
+</dl>
+</section>
+
+<section aria-label="Key dimensions" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 32px 0;">
+<div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">84.5%</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">lower attitude-hold error than the matched open-loop case</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">1.00″</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">vector RMS error with attitude hold, down from 6.48″</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">3-axis</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Simulink model of a generic spacecraft</span>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="model-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="model-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Coupled model</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Disturbance to image</span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 56ch;">Attitude control, flexible structural motion and disturbance inputs in one model, carried into the detector frame so mitigation could be judged by image blur.</p>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 10px;">
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">01 · Disturbance</span><span style="font-size: 15px; line-height: 1.45;">Wheel and cryocooler torque inputs.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">02 · Structure</span><span style="font-size: 15px; line-height: 1.45;">Flexible spacecraft dynamics.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">03 · Control</span><span style="font-size: 15px; line-height: 1.45;">Attitude control loop and sensors.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">04 · Detector</span><span style="font-size: 15px; line-height: 1.45;">Motion in the detector frame.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">05 · Image</span><span style="font-size: 15px; line-height: 1.45;">Point spread function, the blur.</span></li>
+</ol>
+</section>
+
+<section aria-labelledby="iter-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="iter-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>Model iteration</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · Refine, then reassess</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px; align-items: center;">
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 16px;"><img src="../../2026, 09_08_05 PM.png" alt="Four-stage cycle: update the plant, refine sensors and plant, update jitter models, assess impact and revise." style="width: 100%; height: auto; display: block;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · SPACEJAM model-improvement cycle</figcaption>
+</figure>
+<div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Each loop</p>
+<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 14px; line-height: 1.9; text-transform: uppercase;">
+<li>Update the plant.</li>
+<li>Refine sensors and plant.</li>
+<li>Update the jitter models.</li>
+<li>Assess impact on the image, then revise.</li>
+</ol>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="result-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="result-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Simulation result</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · Same disturbances, two cases</span>
+</div>
+<figure style="margin: 0; border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="padding: 12px 20px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Combined-disturbance attitude-hold error · vector RMS, arcseconds</div>
+<div class="gy-barrow" style="display: grid; grid-template-columns: 170px minmax(0, 1fr) 80px; gap: 16px; align-items: center; padding: 20px;">
+<span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;">Open loop</span>
+<span style="position: relative; height: 32px; background: var(--muted);"><span style="position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: var(--foreground);"></span></span>
+<span style="font-family: var(--font-mono); font-size: 18px; font-weight: 600; text-align: right;">6.48″</span>
+</div>
+<div class="gy-barrow" style="display: grid; grid-template-columns: 170px minmax(0, 1fr) 80px; gap: 16px; align-items: center; padding: 20px; border-top: 1px solid var(--border);">
+<span style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;">Attitude hold</span>
+<span style="position: relative; height: 32px; background: var(--muted);"><span style="position: absolute; left: 0; top: 0; bottom: 0; width: 15.43%; background: rgb(var(--acc));"></span></span>
+<span style="font-family: var(--font-mono); font-size: 18px; font-weight: 600; text-align: right;">1.00″</span>
+</div>
+<figcaption style="padding: 12px 20px; border-top: 1px solid var(--foreground); font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">Final 60 s of a 120 s simulation with prescribed wheel and cryocooler disturbance torque, sensor noise disabled and a simplified flexible model. It measures spacecraft attitude error in that simplified simulation.</figcaption>
+</figure>
+</section>
+
+<section aria-labelledby="team-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="team-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg>Team</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Turn the analysis into recommendations</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 32px; align-items: start;">
+<dl style="margin: 0; border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="padding: 14px 16px; border-bottom: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">SPACEJAM</dt><dd style="margin: 4px 0 0; font-size: 16px;">Gavin Yam, Palvi, Nicholas Capedevila, Ke Hu</dd></div>
+<div style="padding: 14px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Advisors</dt><dd style="margin: 4px 0 0; font-size: 16px;">Warren Soh, Jameson Lee, Professor Tarek Zohdi</dd></div>
+</dl>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">As co-lead I worked on dynamics modeling and led documentation and stakeholder communication of design recommendations and test strategies. The comparison uses the team model, whose initializer credits W. Soh.</p>
+</div>
+</section>
+
+<section aria-label="Next project" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<a class="gy-card" href="../b1lv/" data-gy-glow style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 32px; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Next part · 03</span><span style="font-size: clamp(32px, 4vw, 56px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Bronco 1 feed system</span></span>
+<svg class="gy-arrow" aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</a>
+</section>
+
 </main>
-<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="../../index.html#projects">Back to selected work</a></div><div class="wrap footer-bottom"><span>Satellite jitter / Engineering</span><a href="#main">Back to top</a></div></footer>
+
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px 40px; display: flex; flex-direction: column; gap: 56px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<h2 style="margin: 0; font-size: clamp(44px, 6vw, 88px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../../assets/Gavin_Yam_Resume.pdf" style="padding: 6px 0;">Resume (PDF)</a>
+</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1.5px solid var(--foreground); font-family: var(--font-mono); text-transform: uppercase; min-width: min(420px, 100%);">
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Drawn</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">G. Yam</dd></div>
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Checked</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Your team</dd></div>
+<div style="padding: 10px 14px;"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Part</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">02 Satellite</dd></div>
+</dl>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+<div class="gy-xh" aria-hidden="true" style="position: absolute; inset: 0; z-index: 50; pointer-events: none;">
+<div style="position: absolute; top: 0; bottom: 0; left: var(--cx, -10px); width: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: 0; right: 0; top: var(--cy, -10px); height: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: calc(var(--cx, -999px) + var(--rdx, 14px)); top: calc(var(--cy, -999px) + 14px); padding: 4px 8px; background: var(--background); border: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; font-variant-numeric: tabular-nums;">X <span data-gy-x>0.0</span>  Y <span data-gy-y>0.0</span> mm</div>
+</div>
+</div>
 </body>
 </html>

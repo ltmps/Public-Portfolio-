@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html', 'projects/modeling/index.html', 'projects/modeling/playback/index.html', 'projects/modeling/trajectories/index.html', 'projects/modeling/sherpa/index.html'];
+const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html', 'projects/modeling/index.html', 'projects/modeling/playback/index.html', 'projects/modeling/trajectories/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/architecture/index.html'];
 const base = 'https://example.test/Public-Portfolio-/';
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const ids = html => [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
@@ -51,32 +51,25 @@ for (const file of pages) {
   }
 }
 const home = read('index.html');
-const detailLinks = [...home.matchAll(/<a\b[^>]*class="project-link"[^>]*>([\s\S]*?)<\/a>/g)].map(m => m[1].replace(/<[^>]*>/g, '').trim());
-assert.equal(detailLinks.length, 3, 'Three selected-work links must remain');
-assert.equal(new Set(detailLinks).size, 3, 'Project links need distinct accessible names');
-assert(home.indexOf('href="projects/orbes/"') < home.indexOf('href="projects/b1lv/"'), 'ORBES must remain before B1LV');
-assert(home.includes('href="projects/b1lv/"'), 'Homepage must link to B1LV');
-assert(read('projects/orbes/index.html').includes('href="../../index.html#contact"'), 'ORBES must offer the existing contact route');
-assert(read('projects/b1lv/index.html').includes('href="../../index.html#contact"'), 'B1LV must offer the existing contact route');
-for (const slug of ['satellite', 'singularity', 'modeling']) {
-  assert(home.includes(`href="projects/${slug}/"`), `Homepage must link to ${slug}`);
-  const project = read(`projects/${slug}/index.html`);
-  assert(project.includes('href="../../index.html#contact"'), `${slug}: contact route`);
-  assert(project.includes('href="../../index.html#projects"'), `${slug}: selected-work return route`);
+const parts = [...home.matchAll(/<a\b[^>]*class="gy-part"[^>]*href="([^"]+)"[^>]*>[\s\S]*?<h3\b[^>]*>([\s\S]*?)<\/h3>/g)].map(m => [m[1], m[2].trim()]);
+assert.deepEqual(parts.map(p => p[0]), ['projects/orbes/', 'projects/satellite/', 'projects/b1lv/', 'projects/singularity/'], 'Selected work keeps ORBES, satellite, Bronco 1 and Singularity in order');
+assert.equal(new Set(parts.map(p => p[1])).size, 4, 'Selected-work cards need distinct accessible names');
+assert(home.includes('href="projects/modeling/"'), 'Homepage must link to the simulations overview');
+for (const study of ['trajectories', 'architecture', 'sherpa']) {
+  assert(read('projects/modeling/index.html').includes(`href="${study}/"`), `Simulations overview must link to ${study}`);
 }
-// Source-level regression guard for the two evidence cards (not browser CSS QA).
-const caseCss = read('assets/css/orbes.css');
-function cardColor(selector) {
-  let color;
-  for (const rule of caseCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
-    if (!rule[1].split(',').map(s => s.trim()).includes(selector)) continue;
-    for (const declaration of rule[2].split(';')) {
-      const [property, value] = declaration.split(':').map(s => s.trim());
-      if (property === 'color') color = value;
-    }
-  }
-  return color;
+// Every redesigned page shares the drafting-table theme and returns home.
+for (const file of pages.filter(f => !f.includes('/playback/'))) {
+  const html = read(file);
+  const rel = '../'.repeat(file.split('/').length - 1);
+  assert(html.includes(`href="${rel}assets/css/gy.css"`) && html.includes(`src="${rel}assets/js/gy.js"`), `${file}: shared theme assets`);
+  assert(/localStorage\.getItem\('gy-theme'\)/.test(html), `${file}: theme restored before first paint`);
+  assert(/<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false">/.test(html), `${file}: native dark-mode toggle`);
+  assert(html.includes('<footer id="contact"'), `${file}: contact footer`);
+  if (file !== 'index.html') assert(html.includes(`href="${rel}index.html"`), `${file}: route back home`);
 }
-assert.equal(cardColor('.results-placeholder'), 'var(--ink)', 'Pale results card must use readable ink text');
-assert.equal(cardColor('.demo-placeholder'), 'var(--paper)', 'Dark demo card must retain light text');
-console.log(`PASS: ${pages.length} pages; ${checked} local references; metadata, image alt, keyboard skip destinations, project/contact navigation and evidence-card text colors.`);
+// Copy rule: no em dashes in pages or the shared theme.
+for (const file of [...pages, 'assets/css/gy.css', 'assets/js/gy.js', 'assets/js/gy-mesh.js', 'assets/js/mission-studies.js', 'assets/js/architecture-study.js']) {
+  assert(!read(file).includes('—'), `${file}: no em dashes`);
+}
+console.log(`PASS: ${pages.length} pages; ${checked} local references; metadata, image alt, keyboard skip destinations, project/contact navigation, shared theme and copy rules.`);

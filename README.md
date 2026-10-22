@@ -1,6 +1,6 @@
 # Engineering portfolio
 
-Static HTML and CSS with a small interaction script for the ORBES case study. B1LV uses native disclosure controls and needs no JavaScript. Satellite and Singularity are compact text-first project pages with no JavaScript dependency. Modeling & Simulation is a curated overview of architecture, dynamics, mission studies and integration, also usable without JavaScript. Its optional SCExample recorded-playback viewer uses JavaScript with a static synopsis and diagram fallback. No build step or package installation is needed. Serve the repository root with an existing static server to preview the homepage and all five project pages with their relative links.
+Static HTML and CSS following the "Portfolio Directions" drafting-table design. Light is the default theme; the dark mesh-field theme is a toggle at the top right of every page, stored in `localStorage` under `gy-theme` and synced across open pages. Shared styles and behavior live in `assets/css/gy.css`, `assets/js/gy.js` (theme, crosshair and loupe, card glow, hover-to-play media, hover-zoom figures) and `assets/js/gy-mesh.js` (hero mesh refinement). Mission studies and the systems architecture study add `mission-studies.js` and `architecture-study.js`. Every page reads fully without JavaScript and respects `prefers-reduced-motion`. No build step, package installation or external dependency is needed. Serve the repository root with any static server to preview the homepage, the simulations overview, three study pages, the playback viewer and four project pages.
 
 ## Checks
 
@@ -8,14 +8,13 @@ With Node.js available, run:
 
 ```sh
 node scripts/check-site.cjs
-node --check assets/js/orbes.js
-node --check assets/js/project-selector.js
-node scripts/check-project-selector.cjs
 node scripts/check-modeling-media.cjs
+node --check assets/js/gy.js
+node --check assets/js/gy-mesh.js
+node --check assets/js/mission-studies.js
+node --check assets/js/architecture-study.js
 ```
 
-The dependency-free checker covers all eight entry points: local resources and fragments, project-base paths, page metadata, image alt attributes, focusable skip-link targets and project/contact navigation. It does not render pages or verify external services.
+`check-site.cjs` covers all ten entry points: local resources and fragments, project-base paths, page metadata, image alt attributes, focusable skip-link targets, project and contact navigation, the shared theme assets and toggle, and the no-em-dash copy rule. `check-modeling-media.cjs` covers media dependencies, no autoplay, muted hover-to-play media, caption-strip labels, CAPCOM phase-jump timing and v5 media, the architecture scenario data and envelope grid, playback-viewer privacy guards and approved media hashes. Neither renders pages or verifies external services.
 
-Before merging visual changes, check desktop and phone layouts, keyboard navigation and horizontal overflow in a browser. Confirm the fixed outer-gutter ORBES index at 1640px or wider and its compact fallback below that width. Preserve the existing reduced-motion behavior.
-
-The homepage rocket-project selector synchronizes sector/row hover, focus and tap with a full-logo display and highlighted project row. It keeps all descriptions visible and falls back to static headings and logos without JavaScript. `check-project-selector.cjs` verifies event handling, pressed states, logo mappings, ARIA targets and fallback source markup without a browser. It does not verify rendered layout, focus visibility or real touch behavior. Logo provenance is recorded in `assets/images/projects/README.md`.
+Before merging visual changes, check desktop and phone layouts in both themes, keyboard navigation and horizontal overflow in a browser, and preserve the reduced-motion behavior. Headless Chromium builds without H.264 cannot play the MP4s; use a full Chrome or substitute a WebM when testing playback.
