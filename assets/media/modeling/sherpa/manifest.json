@@ -1,0 +1,72 @@
+[
+  {
+    "file": "cad_deployment_original.mp4",
+    "bytes": 496519,
+    "sha256": "3da2c888489a6c701c7f9ba0ebd9317391a3118fe138eaa8aba21dd7533b8858"
+  },
+  {
+    "file": "cad_deployment_original.png",
+    "bytes": 158659,
+    "sha256": "30372576bc1d89b59cefde278c62c0e87adea1e84b79b5eb8bb9d47c1ba277b9"
+  },
+  {
+    "file": "docking_concept.mp4",
+    "bytes": 1728749,
+    "sha256": "ffa5e552c418bf12432e2c86dd101ca970034f8cae7fe19a978fae2931abcc11"
+  },
+  {
+    "file": "docking_concept.png",
+    "bytes": 37198,
+    "sha256": "1e9336cf4811dc646a3c789603038b6b44fe48d63eac7fac81d12960fa91d661"
+  },
+  {
+    "file": "repair_concept.mp4",
+    "bytes": 1667522,
+    "sha256": "306cc16462f403944f8064e0f0dc27454ceafb4d8d67cc80e905aa2d0a8b4736"
+  },
+  {
+    "file": "repair_concept.png",
+    "bytes": 37126,
+    "sha256": "3d8b7f4fc13248289d45faccfbc0bf59f3e169319b1ced0f3f499d5685606ee5"
+  },
+  {
+    "file": "xray_body_frame.mp4",
+    "bytes": 1864235,
+    "sha256": "02f1ee0f6837c786c545804c8334334e4eb94737d6c30ba9fe26f8d8b2cf6e09"
+  },
+  {
+    "file": "xray_body_frame.png",
+    "bytes": 45987,
+    "sha256": "fb857931a1212adc98e1fbbc5509ff14634a3852133f8b4f9f9766be40ea34fd"
+  },
+  {
+    "file": "trajectory_manifold_overview.mp4",
+    "bytes": 272544,
+    "sha256": "b768feecb1d6dcf0e48467c97fd29f1193d9183f898f5803ce5ca1aade41c233"
+  },
+  {
+    "file": "trajectory_manifold_overview.png",
+    "bytes": 111408,
+    "sha256": "2a856067d463567da28d11859d91ec5aac68f6a645e0faa0e40db80014cde063"
+  },
+  {
+    "file": "fast_direct_overview.mp4",
+    "bytes": 398056,
+    "sha256": "859e3045da7f65374a1f3144caa53d163ed41c9bf6de16cb4307ff749456ab93"
+  },
+  {
+    "file": "fast_direct_overview.png",
+    "bytes": 35252,
+    "sha256": "0087db77caf0f272e155f5aaf2a61775a3d7dcb0e653398003a1d2221ba4ec47"
+  },
+  {
+    "file": "resupply_return_overview.mp4",
+    "bytes": 421610,
+    "sha256": "e1bc4ea8a4c323122eb7ee1edfc2437746fcf80dd3898b17976e848b6d49bc6b"
+  },
+  {
+    "file": "resupply_return_overview.png",
+    "bytes": 34314,
+    "sha256": "35bd5c4e1bb71bda65521912c3306684b66ff2006e480bb883e3fce5a5366c57"
+  }
+]
