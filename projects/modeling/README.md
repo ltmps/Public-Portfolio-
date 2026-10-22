@@ -114,3 +114,8 @@ Context was verified against Library page text. Local PDF materialization failed
 ## CAPCOM mission profiles
 
 The four user-supplied two-minute mission animations appear inline at `#mission-profiles`, with a link from the trajectory page. See [media provenance](../../assets/media/modeling/mission-profiles/README.md) for assumptions, original-file hashes, credits and presentation scope. Source documents and regeneration code remain outside the repository.
+
+
+### Linked mission study v5
+
+Replaces the four full mission recordings with the user-cleared v5 capture exports. Adds one local arrival-detail clip and the fixed-550-day annual-window comparison, with concise launch-vehicle context. The source archive's MATLAB generator files and original mission report are absent, so supplied validation records are distinguished from independently rerun results. See the mission-profile provenance for exact source sections, selected archive entries and assumptions.

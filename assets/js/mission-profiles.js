@@ -42,7 +42,7 @@
   chapters.className = 'reel-controls profile-chapters';
   chapters.setAttribute('role', 'group'); chapters.setAttribute('aria-label', 'Jump to mission phase; playback stays paused');
   let mars;
-  for (const [label, seconds] of [['Launch', 0], ['Earth parking', 22], ['Departure', 32], ['Solar transfer', 40], ['Mars flyby', 58], ['Encke arrival', 85], ['Polar orbit', 95]]) {
+  for (const [label, seconds] of [['Launch', 0], ['Earth parking', 22], ['Departure', 32], ['Solar transfer', 40], ['Mars flyby', 58], ['Encke arrival', 85], ['Capture braking', 91], ['Circularization / plane change', 100], ['Polar orbit', 103]]) {
     const node = button(label, () => {
       cancelSeek();
       const video = figures[index].querySelector('video'); video.pause();

@@ -78,7 +78,7 @@ console.log('PASS: selected media hashes/dependencies, controls, scenarios, scri
 // CAPCOM full mission recordings: immutable media and local progressive enhancement.
 const profilesRoot = path.join(root, 'assets/media/modeling/mission-profiles');
 const profileManifest = JSON.parse(fs.readFileSync(path.join(profilesRoot, 'manifest.json'), 'utf8'));
-assert.equal(profileManifest.files.length, 8);
+assert.equal(profileManifest.files.length, 13);
 for (const item of profileManifest.files) {
   const bytes = fs.readFileSync(path.join(profilesRoot, item.file));
   assert.equal(bytes.length, item.bytes);
@@ -89,5 +89,9 @@ const profileScript = fs.readFileSync(path.join(root, 'assets/js/mission-profile
 new vm.Script(profileScript);
 assert(!/\bplay\(|\bfetch\(|XMLHttpRequest/.test(profileScript), 'Profile selection stays paused and local');
 assert(profileScript.includes('cancelSeek') && profileScript.includes('removeEventListener'), 'Cancel stale chapter seeks');
-assert(page.includes('id="mission-profiles"') && page.includes('illustrative launch and capture phases'));
+assert(page.includes('id="mission-profiles"') && page.includes('illustrative launch phases and a local two-body capture example'));
 console.log('PASS: CAPCOM mission-profile hashes, source scope, paused selection and static links.');
+
+assert(profileScript.includes("['Polar orbit', 103]") && profileScript.includes("['Capture braking', 91]"), 'V5 chapter timing');
+assert(page.includes('550 Earth days') && page.includes('Among these three candidates'), 'Bounded annual comparison');
+assert(page.includes('separately from the interplanetary path'), 'Separate local capture scope');
