@@ -44,3 +44,21 @@ body.modeling{font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",san
 .sherpa-gallery a:focus-visible{outline:3px solid var(--teal);outline-offset:4px}
 .sherpa-media .sherpa-credit{font-size:13px;margin-top:24px}
 @media(max-width:600px){.sherpa-gallery{grid-template-columns:1fr}.sherpa-gallery img{max-height:none}}
+
+/* Compact, manually operated recording reels. */
+.modeling .hero-title{margin-bottom:20px}
+.modeling .section{padding-top:32px}
+.modeling .section-heading{margin-bottom:20px}
+.modeling-media figure{margin-block:16px}
+.modeling-media video{max-height:68vh;object-fit:contain;background:#0b1014}
+.trajectory-player>p{margin-block:10px}
+.trajectory-controls:not([hidden]){margin-block:16px;gap:12px}
+.trajectory-controls label[hidden]{display:none}
+.reel-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:16px 0 8px}
+.reel-controls button{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:4px;background:var(--white);color:var(--ink);cursor:pointer}
+.reel-controls button:hover{background:var(--wash)}
+.reel-controls button:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.reel-status{flex:1;min-width:140px;font-size:13px;text-align:center}
+.dynamics-reel figure[hidden]{display:none}
+@media(max-width:600px){.reel-controls{gap:8px}.reel-controls button{padding-inline:10px}.reel-status{order:-1;flex-basis:100%;text-align:left}.modeling-media figcaption{padding:14px}.modeling .section{padding-top:24px}}
+@media(prefers-reduced-motion:reduce){.modeling{scroll-behavior:auto}.modeling video{animation:none!important;transition:none!important}}
