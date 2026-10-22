@@ -82,3 +82,18 @@ if ("IntersectionObserver" in window) {
 } else {
   headings.forEach(heading => heading.classList.add("is-revealed"));
 }
+
+// Recordings always start manually; only one may play at a time.
+const recordings = [...document.querySelectorAll('.orbes-recordings video')];
+recordings.forEach(video => video.addEventListener('play', () => {
+  recordings.forEach(other => { if (other !== video) other.pause(); });
+}));
+if ('IntersectionObserver' in window) {
+  const recordingObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) entry.target.pause();
+  }));
+  recordings.forEach(video => recordingObserver.observe(video));
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) recordings.forEach(video => video.pause());
+});
