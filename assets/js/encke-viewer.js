@@ -4,7 +4,7 @@
   const views = document.getElementById('encke-views');
   const caption = document.getElementById('encke-caption');
   if (!video || !views || !caption) return;
-  const base = '../../assets/media/modeling/encke/';
+  const base = new URL('.', video.querySelector('source').src).href;
   const labels = { heliocentric: 'Heliocentric', angled: 'Angled', original: 'Original' };
   views.hidden = false;
   views.addEventListener('click', event => {
