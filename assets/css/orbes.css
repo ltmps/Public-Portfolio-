@@ -64,3 +64,10 @@ main[tabindex="-1"]:focus-visible{outline:3px solid #b16929;outline-offset:6px}
 .hardware-photo{margin:0;background:#000;border:1px solid var(--line)}
 .hardware-photo img{display:block;width:100%;height:auto;max-height:630px;object-fit:contain}
 .hardware-photo figcaption{position:static;background:var(--white);color:var(--muted)}
+
+/* Approved workshop recordings: reserved portrait frames, manual playback. */
+.orbes-recordings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.orbes-recordings figure{margin:0;border:1px solid var(--line);background:var(--white)}
+.orbes-recordings video{display:block;width:100%;height:auto;max-height:620px;object-fit:contain;background:#0b1014;aspect-ratio:9/16}
+.orbes-recordings figcaption{position:static;display:block;padding:18px;font-size:13px}
+@media(max-width:600px){.orbes-recordings{grid-template-columns:1fr}.orbes-recordings video{max-height:70vh}}
