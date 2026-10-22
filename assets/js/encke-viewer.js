@@ -25,5 +25,6 @@
     caption.textContent = labels[view] + ' view · silent 10-second trajectory playback.';
     // Keep each new view paused, including when reduced motion is requested.
     video.load();
+    views.dispatchEvent(new CustomEvent('enckeviewchange', { bubbles: true }));
   });
 })();
