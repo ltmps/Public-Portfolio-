@@ -1,0 +1,44 @@
+{
+  "files": [
+    {
+      "file": "mission_01_120s.mp4",
+      "bytes": 15514186,
+      "sha256": "302fd172c0563c2180365897ed93ccfdd50d2321c61f8b5564558caed762bc34"
+    },
+    {
+      "file": "mission_01_frame_0900.png",
+      "bytes": 94752,
+      "sha256": "d6470cabe68d2518bdb8e924d7ebf95a342898341d7ffa7ab1a520e9844cb007"
+    },
+    {
+      "file": "mission_02_120s.mp4",
+      "bytes": 16100347,
+      "sha256": "2b41d4e68851bfef1f1bb3124aa84887a196b77e9176a32a9f1aaa54db0d53d9"
+    },
+    {
+      "file": "mission_02_frame_0900.png",
+      "bytes": 104120,
+      "sha256": "0e713676461cc93907723b498897dd9ad3fbba89562ac7db9f18b0b47792794c"
+    },
+    {
+      "file": "mission_03_120s.mp4",
+      "bytes": 17981877,
+      "sha256": "039f56e746ad64bd8c23a68dcf807c8225f56d34a905969e2221dc84857060e3"
+    },
+    {
+      "file": "mission_03_frame_0900.png",
+      "bytes": 103830,
+      "sha256": "9485db3faa58b49cb8cea0ed33777a88a81138745d85ca6299a2c50047bb9dc2"
+    },
+    {
+      "file": "mission_04_120s.mp4",
+      "bytes": 17742959,
+      "sha256": "81bd4d30ec837882b17e2e938d709de9751a3d630683aa4369134740f41fb40d"
+    },
+    {
+      "file": "mission_04_frame_0900.png",
+      "bytes": 104850,
+      "sha256": "e37d4665b8be6d7eba54091c0c57e83cf89b54d5d9a33f223f2649ffc9c631d5"
+    }
+  ]
+}

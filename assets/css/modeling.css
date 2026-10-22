@@ -62,3 +62,7 @@ body.modeling{font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",san
 .dynamics-reel figure[hidden]{display:none}
 @media(max-width:600px){.reel-controls{gap:8px}.reel-controls button{padding-inline:10px}.reel-status{order:-1;flex-basis:100%;text-align:left}.modeling-media figcaption{padding:14px}.modeling .section{padding-top:24px}}
 @media(prefers-reduced-motion:reduce){.modeling{scroll-behavior:auto}.modeling video{animation:none!important;transition:none!important}}
+
+.mission-profiles figure[hidden]{display:none}
+.profile-chapters{margin-bottom:16px}
+.profile-credit{font-size:13px}
