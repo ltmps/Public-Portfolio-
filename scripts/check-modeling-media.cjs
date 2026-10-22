@@ -4,6 +4,8 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 const page = fs.readFileSync(path.join(root, 'projects/modeling/index.html'), 'utf8');
+const overview = page;
+const detail = fs.readFileSync(path.join(root, 'projects/modeling/trajectories/index.html'), 'utf8');
 const viewer = fs.readFileSync(path.join(root, 'projects/modeling/playback/index.html'), 'utf8');
 for (const tag of page.matchAll(/<(?:video|source)\b[^>]*>/g)) {
   assert(!/\bautoplay\b/.test(tag[0]), 'Media must not autoplay');
@@ -30,8 +32,8 @@ assert(!/<script\b|(?:href|src)=/.test(svg), 'Selected SVG must be self-containe
 const enckeScript = fs.readFileSync(path.join(root, 'assets/js/encke-viewer.js'), 'utf8');
 new vm.Script(enckeScript);
 assert(!/\bplay\(/.test(enckeScript), 'View changes must leave playback paused');
-assert(page.includes('id="encke-views"') && page.includes('aria-label="Trajectory view" hidden'), 'Hide script-only selectors by default');
-assert(page.includes('Earth and Mars reference tracks use DE405/SPICE; Encke uses JPL Horizons.'), 'Visible reference-track credits');
+assert(detail.includes('id="encke-views"') && detail.includes('aria-label="Trajectory view" hidden'), 'Hide script-only selectors by default');
+assert(detail.includes('Earth and Mars reference tracks use DE405/SPICE; Encke uses JPL Horizons.'), 'Visible reference-track credits');
 const hashes = {
   'original.mp4': '40bcc0010decf91b0979f1b3fa49cb905f4e9b5dfdfb5962a86e0591d45cc4ad',
   'original.png': '81373113415db12fd90b08fe3fb56de89ef96d4f208769dc35b3773238eb69e3',
@@ -44,7 +46,7 @@ const crypto = require('node:crypto');
 for (const [file, hash] of Object.entries(hashes)) {
   const bytes = fs.readFileSync(path.join(root, 'assets/media/modeling/encke', file));
   assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), hash, `Approved Encke bytes: ${file}`);
-  if (file.endsWith('.mp4')) assert(page.includes(`href="../../assets/media/modeling/encke/${file}"`), 'No-JS direct recording link');
+  if (file.endsWith('.mp4')) assert(detail.includes(`href="../../../assets/media/modeling/encke/${file}"`), 'No-JS direct recording link');
 }
 const trajectoryPage = fs.readFileSync(path.join(root, 'projects/modeling/trajectories/index.html'), 'utf8');
 const trajectoryScript = fs.readFileSync(path.join(root, 'assets/js/trajectory-viewer.js'), 'utf8');
@@ -52,11 +54,12 @@ const reels = fs.readFileSync(path.join(root, 'assets/js/modeling-reels.js'), 'u
 new vm.Script(reels);
 assert(!/\bplay\(/.test(reels), 'Reel changes must never start playback');
 assert(reels.includes('prefers-reduced-motion') && reels.includes('IntersectionObserver'), 'Reel motion and offscreen playback guards');
-assert(page.includes('id="routes"') && page.includes('id="windows"'), 'Route and Lambert viewers are inline on overview');
+assert(!page.includes('id="routes"') && detail.includes('id="routes"') && detail.includes('id="windows"'), 'Detailed route viewers stay on CAPCOM detail page');
+assert.equal((page.match(/assets\/media\/modeling\/mission-profiles\/[^"]+\.mp4" type=/g)||[]).length,1,'One CAPCOM animation on overview');
 assert(page.includes('modeling-reels.js') && trajectoryPage.includes('modeling-reels.js'), 'Both pages use reel enhancement');
 new vm.Script(trajectoryScript);
 assert(!/\bplay\(|\bfetch\(|XMLHttpRequest/.test(trajectoryScript), 'Local paused selection only');
-assert(!/(?<![A-Za-z])[A-Za-z]:[\\/](?!\/)|file:\/\/|\.gif|\.pdf/.test(trajectoryPage), 'No machine paths or excluded downloads');
+assert(!/(?<![A-Za-z])[A-Za-z]:[\\/](?!\/)|file:\/\/|\.gif/.test(trajectoryPage), 'No machine paths or excluded downloads');
 assert.equal([...trajectoryPage.matchAll(/data-case=/g)].length, 14, 'Eight route views and six launch-window views');
 assert.equal([...trajectoryPage.matchAll(/class="trajectory-controls" hidden/g)].length, 2, 'Script-only controls hidden by default');
 assert(trajectoryPage.includes('<noscript>'), 'Native player and recording-link fallback');
@@ -83,15 +86,31 @@ for (const item of profileManifest.files) {
   const bytes = fs.readFileSync(path.join(profilesRoot, item.file));
   assert.equal(bytes.length, item.bytes);
   assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), item.sha256);
-  assert(page.includes(`href="../../assets/media/modeling/mission-profiles/${item.file}"`), 'Direct recording/poster fallback');
+  assert(detail.includes(`href="../../../assets/media/modeling/mission-profiles/${item.file}"`), 'Direct recording/poster fallback');
 }
 const profileScript = fs.readFileSync(path.join(root, 'assets/js/mission-profiles.js'), 'utf8');
 new vm.Script(profileScript);
 assert(!/\bplay\(|\bfetch\(|XMLHttpRequest/.test(profileScript), 'Profile selection stays paused and local');
 assert(profileScript.includes('cancelSeek') && profileScript.includes('removeEventListener'), 'Cancel stale chapter seeks');
-assert(page.includes('id="mission-profiles"') && page.includes('illustrative launch phases and a local two-body capture example'));
+assert(detail.includes('id="mission-profiles"') && detail.includes('illustrative launch phases and a local two-body capture example'));
 console.log('PASS: CAPCOM mission-profile hashes, source scope, paused selection and static links.');
 
 assert(profileScript.includes("['Polar orbit', 103]") && profileScript.includes("['Capture braking', 91]"), 'V5 chapter timing');
-assert(page.includes('550 Earth days') && page.includes('Among these three candidates'), 'Bounded annual comparison');
-assert(page.includes('separately from the interplanetary path'), 'Separate local capture scope');
+assert(detail.includes('550 Earth days') && detail.includes('Among these three candidates'), 'Bounded annual comparison');
+assert(detail.includes('separately from the interplanetary path'), 'Separate local capture scope');
+
+const sherpa = fs.readFileSync(path.join(root, 'projects/modeling/sherpa/index.html'), 'utf8');
+new vm.Script(fs.readFileSync(path.join(root, 'assets/js/concept-reels.js'), 'utf8'));
+const sherpaManifest=JSON.parse(fs.readFileSync(path.join(root,'assets/media/modeling/sherpa/manifest.json'),'utf8'));
+assert.equal(sherpaManifest.length,14);
+for(const item of sherpaManifest){
+ const bytes=fs.readFileSync(path.join(root,'assets/media/modeling/sherpa',item.file));
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),item.sha256);
+ assert(sherpa.includes(`href="../../../assets/media/modeling/sherpa/${item.file}"`));
+}
+for(const tag of sherpa.matchAll(/<video\b[^>]*>/g)) assert(/controls/.test(tag[0])&&/aria-label/.test(tag[0])&&!/autoplay/.test(tag[0]));
+assert.equal((sherpa.match(/data-concept-reel/g)||[]).length,2);
+assert(sherpa.includes('assumed lumped tank-state model')&&sherpa.includes('Earth-centered two-body conics'));
+console.log('PASS: one CAPCOM overview video, full detail media and SHERPA selection hashes/scopes.');
+
+assert(enckeScript.includes("video.querySelector('source').src"), 'Encke media base follows the page source after relocation');

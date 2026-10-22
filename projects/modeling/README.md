@@ -119,3 +119,8 @@ The four user-supplied two-minute mission animations appear inline at `#mission-
 ### Linked mission study v5
 
 Replaces the four full mission recordings with the user-cleared v5 capture exports. Adds one local arrival-detail clip and the fixed-550-day annual-window comparison, with concise launch-vehicle context. The source archive's MATLAB generator files and original mission report are absent, so supplied validation records are distinguished from independently rerun results. See the mission-profile provenance for exact source sections, selected archive entries and assumptions.
+
+
+## Overview and detail organization
+
+The overview retains one CAPCOM Mars-assisted mission animation and one SHERPA original CAD deployment clip. Full CAPCOM profiles, arrival, energy comparison, three Encke views and route/window reels are on trajectories/index.html. The SHERPA detail page groups original CAD, servicing concepts and trajectory screening, followed by existing team presentation/media. All media paths are retained or reused without duplicate copies. See the SHERPA media README for the v2 source distinctions.
