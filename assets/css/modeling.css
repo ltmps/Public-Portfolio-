@@ -66,3 +66,5 @@ body.modeling{font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",san
 .mission-profiles figure[hidden]{display:none}
 .profile-chapters{margin-bottom:16px}
 .profile-credit{font-size:13px}
+
+[data-concept-reel] figure[hidden]{display:none}
