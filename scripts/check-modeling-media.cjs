@@ -48,6 +48,12 @@ for (const [file, hash] of Object.entries(hashes)) {
 }
 const trajectoryPage = fs.readFileSync(path.join(root, 'projects/modeling/trajectories/index.html'), 'utf8');
 const trajectoryScript = fs.readFileSync(path.join(root, 'assets/js/trajectory-viewer.js'), 'utf8');
+const reels = fs.readFileSync(path.join(root, 'assets/js/modeling-reels.js'), 'utf8');
+new vm.Script(reels);
+assert(!/\bplay\(/.test(reels), 'Reel changes must never start playback');
+assert(reels.includes('prefers-reduced-motion') && reels.includes('IntersectionObserver'), 'Reel motion and offscreen playback guards');
+assert(page.includes('id="routes"') && page.includes('id="windows"'), 'Route and Lambert viewers are inline on overview');
+assert(page.includes('modeling-reels.js') && trajectoryPage.includes('modeling-reels.js'), 'Both pages use reel enhancement');
 new vm.Script(trajectoryScript);
 assert(!/\bplay\(|\bfetch\(|XMLHttpRequest/.test(trajectoryScript), 'Local paused selection only');
 assert(!/(?<![A-Za-z])[A-Za-z]:[\\/](?!\/)|file:\/\/|\.gif|\.pdf/.test(trajectoryPage), 'No machine paths or excluded downloads');
