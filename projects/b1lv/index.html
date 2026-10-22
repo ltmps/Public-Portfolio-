@@ -1,66 +1,272 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Gavin Yam's Bronco 1 case study: propellant feed-system preparation, hardware traceability, pressurant concepts and shared failure analysis at Cal Poly Pomona Liquid Rocket Lab.">
-  <title>Bronco 1: Propellant Feed Systems and Test Readiness | Gavin Yam</title>
-  <link rel="stylesheet" href="../../assets/css/orbes.css">
-  <link rel="stylesheet" href="../../assets/css/b1lv.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Gavin Yam's Bronco 1 case study: propellant feed-system preparation, hardware traceability, pressurant concepts and shared failure analysis at Cal Poly Pomona Liquid Rocket Lab.">
+<title>Bronco 1: Propellant Feed Systems and Test Readiness | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/gy.css">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-img{filter:grayscale(1) contrast(1.05);transition:filter .5s,transform .7s cubic-bezier(0,0,.2,1)}
+:root[data-theme="dark"] .gy-img{filter:none}
+.gy-part:hover .gy-img,.gy-fig:hover .gy-img{filter:none;transform:scale(1.03)}
+.gy-frame{transition:border-color .25s}
+.gy-fig:hover .gy-frame{border-color:rgb(var(--acc)) !important}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:var(--muted)}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-step{transition:border-color .2s,background-color .2s}
+.gy-step:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.06) !important}
+.gy-stepn{transition:color .2s}
+.gy-step:hover .gy-stepn{color:rgb(var(--acc))}
+.gy-card{transition:border-color .25s}
+.gy-card:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+</style>
+<script src="../../assets/js/gy.js" defer></script>
 </head>
-<body class="b1lv-case">
-<a class="skip" href="#main">Skip to content</a>
-<header class="masthead"><div class="nav-inner"><a class="brand" href="../../index.html">Gavin <span>/ Engineering</span></a><span class="breadcrumb"><a href="../../index.html#projects">Selected work</a> <span>/ B1LV</span></span></div></header>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; cursor: crosshair; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
+
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../index.html#work">Work</a>
+<a class="gy-link" href="../modeling/">Simulations</a>
+<a class="gy-link" href="../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
 <main id="main" tabindex="-1">
-  <section class="hero wrap" aria-labelledby="project-title">
-    <p class="project-context">CPP Liquid Rocket Lab / Propellant Feed Systems team / 2022–2023</p>
-    <div class="hero-title"><h1 id="project-title">Bronco 1</h1><p>Connecting the hardware<br>to the test results.</p></div>
-<figure class="b1lv-media hero-photo"><img src="../../assets/images/b1lv/test-stand-wide.jpg" srcset="../../assets/images/b1lv/test-stand-wide-600.jpg 600w, ../../assets/images/b1lv/test-stand-wide.jpg 1600w" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 850px) calc(100vw - 48px), (max-width: 1312px) calc(100vw - 112px), 1200px" width="1600" height="1200" alt="Instrumented piping, hoses and wiring on a mobile test stand, with team members nearby." fetchpriority="high" decoding="async"><figcaption>The team’s mobile water-flow stand used replica piping to test the feed system on the ground.</figcaption></figure>
-    <div class="project-summary">
-      <div><h2>Team</h2><p>Propellant Feed Systems team</p><small>Student engineering project.</small></div>
-      <div><h2>Work covered</h2><p>Hardware preparation and concept comparisons</p><small>Piping organization, cleaning readiness and traceability.</small></div>
-      <div><h2>Project record</h2><p>Hardware, test data and models</p><small>Team testing and shared technical reporting.</small></div>
-    </div>
-    <nav class="section-nav" aria-label="Case study sections"><a href="#contribution">Hardware preparation</a><a href="#system">Piping &amp; setup</a><a href="#evidence">Water-flow testing</a><a href="#model">Tank model</a><a href="#lessons">Lessons</a><a href="#sources">Team credits</a></nav>
-  </section>
-  <section id="contribution" class="section wrap">
-<div class="section-heading"><p class="section-label">Hardware preparation</p><div><h2>Connect the drawings to the parts on hand.</h2></div></div>
-    <div class="lesson-list">
-      <article><h3>Organize the piping before assembly.</h3><p>As a Propellant Feed Systems engineer, I helped organize piping and prepare hardware for cleaning and assembly. The team reviewed 20 launch-vehicle assembly P&amp;ID drawings, cross-checked the Hardware Utilization List, identified missing parts and organized hardware into 15 P&amp;ID segments.</p></article>
-      <article><h3>Prepare a workable cleaning area.</h3><p>When access to MOCAT was unavailable, the team prepared a controlled cleaning area in the Liquid Rocket Lab. A shared planning study compared an isolated room within the lab, designated whole-lab cleaning sessions and an outsourced cleanroom. The team favored designated lab sessions for cost, cleanliness control and practicality.</p><p>I supported distilled-water cleaning and water-break testing across five component sets. The checks identified that all five needed another cleaning cycle.</p></article>
-      <article><h3>Compare pressurant layouts before committing to one.</h3><p>The pressurant redesign study compared two conceptual layouts for safety, potential leakage reduction, compactness, ergonomics and simplicity. The study recorded qualitative tradeoffs to guide a later design choice.</p></article>
-      <article><h3>Keep changes traceable.</h3><p>I maintained meeting notes and design-change records and managed inventory through the Hardware Utilization List. Shared reporting covered piping, tank fatigue and water-flow testing, alongside co-authorship of the piping failure modes and effects analysis (FMEA). The team recommended visual valve-position indicators so operators could confirm actuation during testing. Contributions to the shared data-acquisition and control-system report covered mechanical relay operation and operating limitations.</p></article>
-    </div>
+<section id="top" aria-labelledby="page-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px 0;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / <a class="gy-link" href="../../index.html#work">Selected work</a> / Part 03</p>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">CPP Liquid Rocket Lab · Propellant Feed Systems · 2022 to 2023</p>
+<h1 id="page-title" style="margin: 0; font-size: clamp(56px, 7vw, 104px); line-height: 0.86; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Bronco 1</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 22ch; text-wrap: pretty;">Connecting the hardware to the test results.</p>
+</div>
+<figure class="gy-part" data-gy-glow style="position: relative; margin: 0 50px 0 0; border: 1.5px solid var(--foreground); background: #000;">
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">WATER-FLOW TEST STAND</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">REPLICA FEED PIPING</span>
+</span>
+<div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden;">
+<img class="gy-img" src="../../assets/images/b1lv/test-stand-wide.jpg" alt="Instrumented piping, hoses and wiring on a mobile test stand, with team members nearby." style="width: 100%; height: 100%; object-fit: cover;">
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+</figure>
+</div>
+<dl style="margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Team</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Propellant Feed Systems</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Work</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Hardware prep, concept trades</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Record</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Test data, models, FMEA</dd></div>
+<div style="padding: 12px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Type</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Student engineering project</dd></div>
+</dl>
+</section>
 
-  </section>
-  <section id="system" class="section wrap">
-<div class="section-heading"><p class="section-label">System &amp; setup</p><div><h2>See the path before reading the data.</h2><p class="intro">The replica isolates the oxidizer piping from the rest of the vehicle. Comparing the layout with the stand helps connect each measurement to its physical path through the system.</p></div></div><figure class="b1lv-media piping-render"><img src="../../assets/images/b1lv/oxidizer-piping-replica.jpg" width="2249" height="506" alt="Team CAD rendering of a long oxidizer-piping replica, with fittings and upright branches at either end." loading="lazy" decoding="async"><figcaption>Oxidizer-piping replica. Team CAD from the project poster. <a href="../../assets/images/b1lv/oxidizer-piping-replica.jpg">Open full-size figure</a></figcaption></figure>
-    <div class="story-pair setup-pair">
-<figure class="b1lv-media "><img src="../../assets/images/b1lv/water-flow-test.jpg" srcset="../../assets/images/b1lv/water-flow-test-600.jpg 600w, ../../assets/images/b1lv/water-flow-test.jpg 1824w" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 850px) calc(60vw - 43.2px), (max-width: 1312px) calc(60vw - 91.2px), 696px" width="1824" height="1368" alt="Close view of valves, pressure instrumentation and wiring on the water-flow test stand." loading="lazy" decoding="async"><figcaption>A closer view of the instrumented assembly.</figcaption></figure><div class="story-copy"><h3>Connections behind the measurements.</h3><p>Valves, fittings and instrumentation connect the isolated piping layout to the working assembly.</p><p>Ground tests characterized flow through the replica feed-system piping.</p></div></div>
-  </section>
-  <section id="test-day" class="section wrap" aria-labelledby="test-day-title">
-    <div class="section-heading"><p class="section-label">Water-flow test day</p><div><h2 id="test-day-title">Around the water-flow test stand.</h2></div></div>
-    <div class="story-pair">
-      <figure class="b1lv-media"><img src="../../assets/images/b1lv/b1lv-test-area-overview-symposium-slide-17.png" width="1855" height="2473" alt="Team members near the mobile water-flow test stand behind caution tape outside the lab." loading="lazy" decoding="async"><figcaption>Water-flow test area. B1LV project team, Cal Poly Pomona Liquid Rocket Lab.</figcaption></figure>
-      <figure class="b1lv-media"><img src="../../assets/images/b1lv/b1lv-test-day-team-symposium-slide-17.png" width="1766" height="1838" alt="Three team members gathered beside equipment at the outdoor water-flow test area." loading="lazy" decoding="async"><figcaption>Team members beside the test setup. B1LV project team, Cal Poly Pomona Liquid Rocket Lab.</figcaption></figure>
-    </div>
-  </section>
-  <section id="evidence" class="section wrap">
-<div class="section-heading"><p class="section-label">Water-flow testing</p><div><h2>Trace discrepancies back to the setup.</h2></div></div><div class="story-pair problem-pair"><figure class="b1lv-media "><img src="../../assets/images/b1lv/annotated-piping.jpg" width="558" height="745" alt="Original red annotation brackets the extended piping between PT-02W and AV-01W." loading="lazy" decoding="async"><figcaption>Extended piping examined for leakage and added flow losses. Original team annotation. <a href="../../assets/images/b1lv/annotated-piping.jpg">Open full-size figure</a></figcaption></figure><div class="story-copy"><h3>Separate the issues.</h3><p>A visible leak prompted a reset and repeat of run 3; comparisons with earlier measurements remained uncertain.</p><p>Separately, a collection-container mass accounting error required a calculation correction.</p><p class="boundary-note">Coauthored the water-flow post-test report, documenting the team’s leak investigation, retest and mass-accounting correction.</p></div></div>
-<figure class="b1lv-media analysis-figure"><img src="../../assets/images/b1lv/pressure-flow-analysis.png" width="947" height="602" alt="Team plot of tank pressure in psig versus mass flow in pounds mass per second, with experimental error bars, predicted points and fitted trends." loading="lazy" decoding="async"><figcaption><strong>Tank pressure versus mass flow, Block 1.</strong> Team measurements with error bars, compared with predicted flow. <a href="../../assets/images/b1lv/pressure-flow-analysis.png">Open full-size figure</a></figcaption></figure>
+<section aria-label="Key dimensions" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 32px 0;">
+<div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">20</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">assembly P&amp;ID drawings reviewed against the parts on hand</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">15</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">P&amp;ID segments organizing the hardware</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">5</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">component sets cleaned and water-break tested</span>
+</div>
+</div>
+</section>
 
-  </section>
-  <section id="model" class="section wrap">
-<div class="section-heading"><p class="section-label">Team model</p><div><h2>Compare the tank’s pressure and thermal loads.</h2></div></div><div class="story-pair model-pair"><figure class="b1lv-media "><img src="../../assets/images/b1lv/lox-combined-stress.png" width="645" height="712" alt="Modeled LOX tank stress field with a von Mises stress legend in psi and an indicated maximum." loading="lazy" decoding="async"><figcaption><strong>Combined stress on the LOX tank.</strong> Predicted stress from the team model under combined pressure and thermal loading. <a href="../../assets/images/b1lv/lox-combined-stress.png">Open full-size figure</a></figcaption></figure><div class="story-copy"><h3>Compare simulation with hand calculations.</h3><p>I contributed to the team’s tank-analysis report.</p><p>The study compared SolidWorks fatigue analysis with hand calculations. Its conclusions depend on the loading assumptions.</p></div></div>
-  </section>
-  <section id="lessons" class="section wrap">
-<div class="section-heading"><p class="section-label">Lessons from testing</p><div><h2>Make assumptions visible.</h2></div></div><div class="story-pair team-pair"><figure class="b1lv-media "><img src="../../assets/images/b1lv/team-work-area.jpg" srcset="../../assets/images/b1lv/team-work-area-600.jpg 600w, ../../assets/images/b1lv/team-work-area.jpg 1000w" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 850px) calc(50vw - 36px), (max-width: 1312px) calc(50vw - 76px), 580px" width="1000" height="750" alt="Project team gathered around laptops and paperwork at tables beneath a canopy." loading="lazy" decoding="async"><figcaption>Team test-day work area.</figcaption></figure><div class="short-lessons"><article><h3>Understand the measurement path.</h3><p>Trace sensor readings back through the piping and test setup.</p></article><article><h3>Examine uncertainty.</h3><p>Check loading assumptions before using a nominal prediction.</p></article><article><h3>Record the change.</h3><p>Record configuration changes while the hardware context is fresh.</p></article></div></div>
-  </section>
-  <section id="sources" class="section wrap source-section">
-<div class="section-heading"><p class="section-label">Team credits</p><div><h2>Cal Poly Pomona Liquid Rocket Lab.</h2><p class="intro">All visuals: B1LV project team, Cal Poly Pomona Liquid Rocket Lab, 2022–2023.</p></div></div>
+<section aria-labelledby="prep-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="prep-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Hardware preparation</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Drawings to parts</span>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 12px;">
+<li class="gy-step" style="padding: 18px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">01 · Organize the piping</span><span style="font-size: 15px; line-height: 1.5;">Cross-checked the P&amp;IDs against the Hardware Utilization List and flagged missing parts.</span></li>
+<li class="gy-step" style="padding: 18px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">02 · Set up cleaning</span><span style="font-size: 15px; line-height: 1.5;">With MOCAT unavailable, designated lab sessions won on cost, cleanliness control and practicality.</span></li>
+<li class="gy-step" style="padding: 18px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">03 · Check the cleaning</span><span style="font-size: 15px; line-height: 1.5;">Water-break tests showed all five component sets needed another cycle.</span></li>
+<li class="gy-step" style="padding: 18px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">04 · Compare pressurant layouts</span><span style="font-size: 15px; line-height: 1.5;">Two concepts weighed on safety, leakage, compactness, ergonomics and simplicity.</span></li>
+</ol>
+<p style="margin: 24px 0 0; font-size: 15px; line-height: 1.6; max-width: 72ch; color: var(--muted-foreground);">I kept meeting notes, design-change records and the Hardware Utilization List, and co-authored the piping FMEA. The team recommended visual valve-position indicators so operators could confirm actuation.</p>
+</section>
 
-  </section>
+<section aria-labelledby="setup-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="setup-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8a4 4 0 0 1 4 4v10"/><path d="M3 11h8"/><path d="M11 21h8"/><path d="M3 5v8M17 21v-6"/></svg>System &amp; setup</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · See the path before the data</span>
+</div>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #000; overflow: hidden;"><img src="../../assets/images/b1lv/oxidizer-piping-replica.jpg" alt="Team CAD rendering of a long oxidizer-piping replica, with fittings and upright branches at either end." style="width: 100%; height: auto; display: block;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Oxidizer-piping replica · team CAD</figcaption>
+</figure>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: center;">
+<p style="margin: 0; font-size: 20px; line-height: 1.5;">The replica isolates the oxidizer piping from the rest of the vehicle. Valves, fittings and instrumentation tie each measurement to its physical path.</p>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="aspect-ratio: 4 / 3; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img class="gy-img" src="../../assets/images/b1lv/water-flow-test-600.jpg" alt="Close view of valves, pressure instrumentation and wiring on the water-flow test stand." style="width: 100%; height: 100%; object-fit: cover;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 3 · Instrumented assembly</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="flow-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="flow-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18a9 9 0 1 1 16 0"/><path d="m12 13 4-5"/><circle cx="12" cy="13" r="1.5"/></svg>Water-flow testing</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · Trace discrepancies to the setup</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; align-items: start;">
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="aspect-ratio: 558 / 745; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img src="../../assets/images/b1lv/annotated-piping.jpg" alt="Original red annotation brackets the extended piping between PT-02W and AV-01W." style="width: 100%; height: 100%; object-fit: cover;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · Extended piping · team annotation</figcaption>
+</figure>
+<div style="display: flex; flex-direction: column; gap: 16px;">
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Issue 1 · Leak</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">A visible leak forced a reset and repeat of run 3. Comparisons with earlier measurements stayed uncertain.</p>
+</article>
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Issue 2 · Mass accounting</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">A collection-container error needed a calculation correction.</p>
+</article>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">I co-authored the post-test report on the leak investigation, retest and correction.</p>
+</div>
+<figure class="gy-fig" style="grid-column: 1 / -1; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 24px;"><img src="../../assets/images/b1lv/pressure-flow-analysis.png" style="width: 100%; max-width: 980px; height: auto; display: block; margin: 0 auto;" alt="Team plot of tank pressure in psig versus mass flow in pounds mass per second, with experimental error bars, predicted points and fitted trends."></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 5 · Tank pressure vs. mass flow, block 1</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="tank-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="tank-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>Tank model</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail E · Simulation vs. hand calcs</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: center;">
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 12px;"><img src="../../assets/images/b1lv/lox-combined-stress.png" alt="Modeled LOX tank stress field with a von Mises stress legend in psi and an indicated maximum." style="width: 100%; max-height: 520px; object-fit: contain; display: block;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 6 · LOX tank, combined pressure and thermal load</figcaption>
+</figure>
+<div style="display: flex; flex-direction: column; gap: 16px;">
+<p style="margin: 0; font-size: 20px; line-height: 1.5;">The tank-analysis report compared SolidWorks fatigue analysis with hand calculations.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">Its conclusions depend on the loading assumptions, so the assumptions are stated with the result.</p>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="lessons-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="lessons-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/></svg>Lessons</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Make assumptions visible</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 32px; align-items: start;">
+<div style="display: flex; flex-direction: column; gap: 20px;">
+<div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">General notes</p>
+<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 14px; line-height: 1.9; text-transform: uppercase;">
+<li>Understand the measurement path.</li>
+<li>Examine uncertainty before using a nominal prediction.</li>
+<li>Record the change while the context is fresh.</li>
+</ol>
+</div>
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">All visuals: B1LV project team, Cal Poly Pomona Liquid Rocket Lab, 2022 to 2023</p>
+</div>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="aspect-ratio: 4 / 3; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img class="gy-img" src="../../assets/images/b1lv/team-work-area-600.jpg" alt="Project team gathered around laptops and paperwork at tables beneath a canopy." style="width: 100%; height: 100%; object-fit: cover;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 7 · Test-day work area</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-label="Next project" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<a class="gy-card" href="../singularity/" data-gy-glow style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 32px; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Next part · 04</span><span style="font-size: clamp(32px, 4vw, 56px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Singularity rocket</span></span>
+<svg class="gy-arrow" aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</a>
+</section>
+
 </main>
-<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="../../index.html#projects">Back to selected work</a></div><div class="wrap footer-bottom"><span>Bronco 1 / Engineering case study</span><a href="#main">Back to top</a></div></footer>
+
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px 40px; display: flex; flex-direction: column; gap: 56px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<h2 style="margin: 0; font-size: clamp(44px, 6vw, 88px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../../assets/Gavin_Yam_Resume.pdf" style="padding: 6px 0;">Resume (PDF)</a>
+</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1.5px solid var(--foreground); font-family: var(--font-mono); text-transform: uppercase; min-width: min(420px, 100%);">
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Drawn</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">G. Yam</dd></div>
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Checked</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Your team</dd></div>
+<div style="padding: 10px 14px;"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Part</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">03 Bronco 1</dd></div>
+</dl>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+<div class="gy-xh" aria-hidden="true" style="position: absolute; inset: 0; z-index: 50; pointer-events: none;">
+<div style="position: absolute; top: 0; bottom: 0; left: var(--cx, -10px); width: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: 0; right: 0; top: var(--cy, -10px); height: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: calc(var(--cx, -999px) + var(--rdx, 14px)); top: calc(var(--cy, -999px) + 14px); padding: 4px 8px; background: var(--background); border: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; font-variant-numeric: tabular-nums;">X <span data-gy-x>0.0</span>  Y <span data-gy-y>0.0</span> mm</div>
+</div>
+</div>
 </body>
 </html>

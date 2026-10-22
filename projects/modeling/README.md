@@ -92,13 +92,6 @@ The B1LV poster (`2909f74a-9fd8-402b-bf50-c75e32117b7e.png`) and SHERPA layout c
 The 117.77-second video fully decoded with FFmpeg; representative frames throughout its duration and the six images were visually inspected. Audio has not been independently reviewed or transcribed; synchronized captions remain outstanding. Native controls, an accompanying visual summary and a direct video link are provided. No autoplay or gallery script is used.
 
 
-## Inline recording reels
-
-The overview and trajectory page share `modeling-reels.js`. Previous/next controls cycle existing cases; the view control switches only between supplied recordings. The short flip is a UI transition, not a generated camera view. Case/view changes stay paused; offscreen players and background tabs pause. Starting one video pauses the others. Reduced-motion switches are instantaneous. Without JavaScript, original figures, native controls, posters and direct recording links remain available.
-
-This interface pass uses only previously published media and public copy. It adds no report-derived claims or new upload embeds. Route and Lambert sections are intentionally kept in sync across the two entry points.
-
-
 ## CAPCOM mission context
 
 Source: *Close Approach Primary Cometary Outburst Mapper (CAPCOM)*, team project report, August 12, 2021. Public summary authorized by the user; original PDF and report figures are not included. Page references below are physical PDF pages (matching printed labels for these cited pages):
@@ -121,6 +114,12 @@ The four user-supplied two-minute mission animations appear inline at `#mission-
 Replaces the four full mission recordings with the user-cleared v5 capture exports. Adds one local arrival-detail clip and the fixed-550-day annual-window comparison, with concise launch-vehicle context. The source archive's MATLAB generator files and original mission report are absent, so supplied validation records are distinguished from independently rerun results. See the mission-profile provenance for exact source sections, selected archive entries and assumptions.
 
 
-## Overview and detail organization
+## Drafting-table redesign (October 2026)
 
-The overview retains one CAPCOM Mars-assisted mission animation and one SHERPA original CAD deployment clip. Full CAPCOM profiles, arrival, energy comparison, three Encke views and route/window reels are on trajectories/index.html. The SHERPA detail page groups original CAD, servicing concepts and trajectory screening, followed by existing team presentation/media. All media paths are retained or reused without duplicate copies. See the SHERPA media README for the v2 source distinctions.
+Pages follow the approved "Portfolio Directions" design canvas. The overview (`index.html`) introduces six studies and links to three study pages: mission studies at `trajectories/` (URL kept so existing links still work), the systems architecture study at `architecture/` (new) and SHERPA at `sherpa/`. `playback/` is unchanged apart from showing "n/a" instead of an em dash for missing values.
+
+- **Mission studies:** the four v5 capture videos with phase-jump chips at 0, 22, 32, 40, 58 (Mars routes only), 85, 91, 100 and 103 s; the local arrival clip; the annual-window comparison and the C3 launch-to-arrival animation; route views (two direct, two Mars-assisted, heliocentric or angled) and the three Lambert window cases. Switching missions keeps the current time and stays paused. Picking a route or window case plays it muted unless reduced motion is set. Without JavaScript each viewer shows its default case with native controls. Reference-track credits and assumption notes remain on the page.
+- **Systems architecture:** see [the media README](../../assets/media/modeling/architecture/README.md). Scenario playback uses the five recorded runs already published in `playback/`, downsampled into the page. The recovery envelope is a native 6 by 4 button grid of executed cases. The planar flight replay is a labelled placeholder until its recording is added.
+- **SHERPA:** the redesign shows the team presentation, concept images and trajectory plot. The seven schematic concept animations in `assets/media/modeling/sherpa/`, and the original Encke view, are no longer shown. Their files and provenance notes stay in the repository.
+
+Shared behavior lives in `assets/css/gy.css`, `assets/js/gy.js` and `assets/js/gy-mesh.js`. The reel and viewer scripts used by the previous design were removed.

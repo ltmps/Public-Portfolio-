@@ -1,6 +1,6 @@
 # Bronco 1 case study
 
-Static page at `projects/b1lv/`. It uses the existing case-study palette and typography from `assets/css/orbes.css`, with B1LV-specific rules in `assets/css/b1lv.css`. No JavaScript or build step is required. ORBES remains the first selected project on the homepage.
+Static page at `projects/b1lv/`. Since the October 2026 redesign it uses the shared drafting-table styles in `assets/css/gy.css`, plus page rules inline in its `<style>` block. The shared `assets/js/gy.js` adds the theme toggle and pointer effects; the page reads fully without JavaScript and needs no build step. ORBES remains the first selected project on the homepage.
 
 ## Content scope
 
