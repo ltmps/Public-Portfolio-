@@ -54,6 +54,7 @@
     const sync = flip => {
       ui.status.textContent = `${study.selectedIndex + 1} / ${study.length} · ${study.selectedOptions[0].textContent}`;
       ui.flipButton.textContent = 'View: ' + view.selectedOptions[0].textContent + ' ↻';
+      ui.flipButton.setAttribute('aria-label', ui.flipButton.textContent + '; switch recorded view');
       animate(video, flip);
     };
     study.addEventListener('change', () => sync(false));
