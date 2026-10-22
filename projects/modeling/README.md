@@ -90,3 +90,10 @@ User-uploaded original media from main commit `667eef8` remains at its original 
 The B1LV poster (`2909f74a-9fd8-402b-bf50-c75e32117b7e.png`) and SHERPA layout containing placeholder body text (`7cfad0f4-6cb3-422d-a268-af98e451e197.png`) remain unchanged as uploaded and are omitted from this gallery.
 
 The 117.77-second video fully decoded with FFmpeg; representative frames throughout its duration and the six images were visually inspected. Audio has not been independently reviewed or transcribed; synchronized captions remain outstanding. Native controls, an accompanying visual summary and a direct video link are provided. No autoplay or gallery script is used.
+
+
+## Inline recording reels
+
+The overview and trajectory page share `modeling-reels.js`. Previous/next controls cycle existing cases; the view control switches only between supplied recordings. The short flip is a UI transition, not a generated camera view. Case/view changes stay paused; offscreen players and background tabs pause. Starting one video pauses the others. Reduced-motion switches are instantaneous. Without JavaScript, original figures, native controls, posters and direct recording links remain available.
+
+This interface pass uses only previously published media and public copy. It adds no report-derived claims or new upload embeds. Route and Lambert sections are intentionally kept in sync across the two entry points.
