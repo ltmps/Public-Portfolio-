@@ -192,6 +192,20 @@
 <h2 id="setup-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8a4 4 0 0 1 4 4v10"/><path d="M3 11h8"/><path d="M11 21h8"/><path d="M3 5v8M17 21v-6"/></svg>System &amp; setup</h2>
 <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · See the path before the data</span>
 </div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; margin: 0 0 32px;">
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">The vehicle</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">Bronco 1 is the Liquid Rocket Lab launch vehicle: 17 ft long with a 7.8 in airframe, it feeds liquid oxygen and ethanol under pressure to the Ablative Chamber Engine, rated at 600 lbf initial thrust for a 15 s burn, toward an estimated 23,000 ft apogee. Its design was finished in 2019 to 2020, and the 2022 to 2023 team returned it to integration after the engine hot-fire campaign.</p>
+</article>
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">The test stand</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">The Mobile Rocket Engine Test Stand (MRETS) is the lab’s trailer-mounted stand for ground tests. It carried the 2022 hot-fire and integrated water flow tests of the engine, and in spring 2023 it hosted the B1LV water flow test with the lab’s DAQ box and LabVIEW control software.</p>
+</article>
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Why it matters for B1LV</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">The oxidizer lines must be characterized before they carry liquid oxygen. Running water through a replica of those lines on MRETS gives measured pressure drops that set the static fire tank pressures and check the vehicle model, whose textbook loss coefficients are only estimates. A new strongback erector will hold the vehicle in launch configuration for later water and cold flow tests.</p>
+</article>
+</div>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
 <div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #000; overflow: hidden;"><img src="../../assets/images/b1lv/oxidizer-piping-replica.jpg" alt="Team CAD rendering of a long oxidizer-piping replica, with fittings and upright branches at either end." style="width: 100%; height: auto; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Oxidizer-piping replica · team CAD</figcaption>
@@ -209,6 +223,20 @@
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="flow-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18a9 9 0 1 1 16 0"/><path d="m12 13 4-5"/><circle cx="12" cy="13" r="1.5"/></svg>Water-flow testing</h2>
 <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · Trace discrepancies to the setup</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; margin: 0 0 32px;">
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Objective</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">Verify the flow characteristics of the Bronco 1 oxidizer feed system before it carries liquid oxygen, and use the measured flow to set the operating parameters for the first static fire.</p>
+</article>
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Method</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">On 17 March 2023 the team ran distilled water through replica B1LV oxidizer piping on the Mobile Rocket Engine Test Stand. The DAQ recorded pressure, temperature and mass flow, and the team reduced each run, with its uncertainty, in its IWFT MATLAB application.</p>
+</article>
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Outcome</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">The measured flow tracked the prediction closely, and the averaged block 1 values became the oxidizer-side inputs for the static fire. The scatter between paired runs was most likely caused by leakage at the extended piping, which is the issue traced below.</p>
+</article>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; align-items: start;">
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
@@ -234,6 +262,27 @@
 <div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 24px;"><img src="../../assets/images/b1lv/pressure-flow-analysis.png" style="width: 100%; max-width: 980px; height: auto; display: block; margin: 0 auto;" alt="Team plot of tank pressure in psig versus mass flow in pounds mass per second, with experimental error bars, predicted points and fitted trends."></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 5 · Tank pressure vs. mass flow, block 1</figcaption>
 </figure>
+<div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 24px; align-items: start;">
+<div style="display: flex; flex-direction: column; gap: 12px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Reading Fig. 5</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6;">Fig. 5 plots tank pressure against oxidizer mass flow. Each blue point is a measured run with its error bar, and the purple points are the values the team predicted before the test.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6;">The team expected pressure drop and mass flow to rise together as tank pressure rose, and both power-law fits follow that trend. The experimental fit is P<sub>tank</sub> = 152.6 ṁ<sup>1.813</sup>, and the predicted fit is P<sub>tank</sub> = 157.0 ṁ<sup>1.634</sup>.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6;">The measured curve sits slightly below the predicted one across the tested range, so the piping passed a little more water at a given tank pressure than the model expected. The design-optimization model for the vehicle also draws on water-flow data, taking its injector efficiency spread from the 2022 integrated water flow test.</p>
+</div>
+<div style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Block 1 results, averaged</p>
+<dl style="margin: 0;">
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--border);"><dt style="font-size: 14px;">Mass flow</dt><dd style="margin: 0; font-family: var(--font-mono); font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums;">0.713 ± 0.0004 lbm/s</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--border);"><dt style="font-size: 14px;">Reynolds number</dt><dd style="margin: 0; font-family: var(--font-mono); font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums;">30,020 ± 1,326</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--border);"><dt style="font-size: 14px;">Dimensionless pressure drop, K</dt><dd style="margin: 0; font-family: var(--font-mono); font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums;">33.8 ± 9.8</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--border);"><dt style="font-size: 14px;">Feedline pressure drop</dt><dd style="margin: 0; font-family: var(--font-mono); font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums;">14.4 ± 3.0 psid</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--border);"><dt style="font-size: 14px;">Injector plate pressure drop</dt><dd style="margin: 0; font-family: var(--font-mono); font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums;">68.4 ± 9.0 psid</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--border);"><dt style="font-size: 14px;">Tank pressure</dt><dd style="margin: 0; font-family: var(--font-mono); font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums;">82.8 ± 9.5 psig</dd></div>
+</dl>
+<p style="margin: 0; padding: 12px 16px; border-top: 1px solid var(--foreground); font-size: 14px; line-height: 1.5; color: var(--muted-foreground);">These averages became the oxidizer-side predictions for a B1LV static fire. The team noted that tests with the B1LV pressurant system would refine them.</p>
+</div>
+<p style="grid-column: 1 / -1; margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Source: B1LV Symposium presentation, 28 April 2023, water flow test slides · Model context: B1LV-ANA-2023-004A.01</p>
+</div>
 </div>
 </section>
 
@@ -268,6 +317,17 @@
 <li>Examine uncertainty before using a nominal prediction.</li>
 <li>Record the change while the context is fresh.</li>
 </ol>
+</div>
+<div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Water flow test lessons</p>
+<ol style="margin: 0; padding: 0; list-style: none;">
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Rehearse the whole procedure.</strong> The DAQ hardware and software were checked piece by piece, but a remote-access problem found on test day cost an hour. A dry run of the full procedure without sensors would have caught it.</li>
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Secure electronics for transport.</strong> The myRIO controllers could slide off their mounts when the DAQ box was moved to the test site, so the team mounted them on a laser-cut board under a fitted cover.</li>
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Choose parts that tolerate vibration.</strong> The mechanical relays that switch the solenoid valves can close under vibration and open a valve without a command. The team selected a solid-state MOSFET driver board to replace them.</li>
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Size control wiring for its length.</strong> The cable from the remote control box to the on-site box was long enough that its resistance lowered the voltage reaching the ignitor circuit.</li>
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Operate valves slowly.</strong> The FMEA added manual controls such as opening regulators and ball valves slowly, so pressure spikes do not corrupt the pressure readings, and inspecting every component before assembly.</li>
+</ol>
+<p style="margin: 0; padding: 10px 16px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; line-height: 1.6; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Sources: B1LV-RP-2023-004A.01 DAQ report · B1LV Symposium FMEA slides</p>
 </div>
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">All visuals: B1LV project team, Cal Poly Pomona Liquid Rocket Lab, 2022 to 2023</p>
 </div>
