@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html', 'projects/modeling/index.html', 'projects/modeling/playback/index.html', 'projects/modeling/trajectories/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/architecture/index.html'];
+const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html', 'projects/eureka-ii/index.html', 'projects/modeling/index.html', 'projects/modeling/playback/index.html', 'projects/modeling/trajectories/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/architecture/index.html'];
 const base = 'https://example.test/Public-Portfolio-/';
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const ids = html => [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
@@ -66,7 +66,7 @@ for (const file of pages.filter(f => !f.includes('/playback/'))) {
   // Shared assets carry a content-hash version, so browsers never pair a new page with a cached old file
   for (const m of html.matchAll(/(?:href|src)="(?:\.\.\/)*(assets\/(?:css|js)\/[^"?]+)(\?v=([0-9a-f]+))?"/g)) {
     assert(m[3], `${file}: ${m[1]} needs a ?v= content version`);
-    const want = require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, m[1]))).digest('hex').slice(0, 10);
+    const want = require('node:crypto').createHash('sha256').update(read(m[1]).replace(/\r\n/g, '\n')).digest('hex').slice(0, 10);
     assert.equal(m[3], want, `${file}: ${m[1]} version is stale; rebuild the page`);
   }
   assert(/localStorage\.getItem\('gy-theme'\)/.test(html), `${file}: theme restored before first paint`);
@@ -79,3 +79,20 @@ for (const file of [...pages, 'assets/css/gy.css', 'assets/js/gy.js', 'assets/js
   assert(!read(file).includes('—'), `${file}: no em dashes`);
 }
 console.log(`PASS: ${pages.length} pages; ${checked} local references; metadata, image alt, keyboard skip destinations, project/contact navigation, shared theme and copy rules.`);
+
+// Selected team media remain byte-identical and manually played.
+assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/singularity/singularity-workshop-assembly.png'))).digest('hex'), 'a7217d87e62374a13f9abb8a9cecafff3c4314a17363f04f6a0ebb0079ab2591', 'singularity-workshop-assembly.png: approved media hash');
+assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/singularity/singularity-field-preparation.png'))).digest('hex'), 'c43d73adefe67b71758529c75d27ec760b9ed54a1589a0313aad2e156bc3866c', 'singularity-field-preparation.png: approved media hash');
+assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/singularity/singularity-vehicle-cutaway.png'))).digest('hex'), '36c66056d19308b6eb4e3caab0e9e2744a93b03deface441f832fc62d27f424b', 'singularity-vehicle-cutaway.png: approved media hash');
+assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/eureka-ii/eureka-ii-field-integration.png'))).digest('hex'), 'be0bfec8712977e9272a2a17cf5ba7b10829b4ea4ba2df803f88cd6ed661e18f', 'eureka-ii-field-integration.png: approved media hash');
+assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/eureka-ii/eureka-ii-range-team.png'))).digest('hex'), 'f9eef906f6f556237aa3f91e341afbebe1000043badb689f5fabea94fecd79a2', 'eureka-ii-range-team.png: approved media hash');
+assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/media/singularity/singularity-2023-test-launch.mp4'))).digest('hex'), '8b04105187f233e57b28ff5dfc026b8ca13caa2d33c8d335698ee41dcc7ea4e9', 'singularity-2023-test-launch.mp4: approved media hash');
+assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/media/eureka-ii/eureka-ii-onboard-flight.mp4'))).digest('hex'), 'c890217b8fd6fc0dfe0b3c092ee6efc412eb2e200eb8576c6434dfa6c809be91', 'eureka-ii-onboard-flight.mp4: approved media hash');
+for (const file of ['projects/singularity/index.html', 'projects/eureka-ii/index.html']) {
+  const html = read(file);
+  for (const video of html.matchAll(/<video\b[^>]*>/g)) {
+    assert(/\bcontrols\b/.test(video[0]) && !/\bautoplay\b/.test(video[0]), `${file}: manual native controls`);
+    assert(!html.includes('data-gy-vid'), `${file}: no hover autoplay`);
+    assert(fs.existsSync(path.resolve(root, path.dirname(file), attr(video[0], 'poster'))), `${file}: poster exists`);
+  }
+}
