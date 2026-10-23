@@ -89,7 +89,7 @@
         orbit3.setAttribute('d', circle(1));
         axis.setAttribute('y2', (0.32 * Math.cos(el)).toFixed(3));
       }
-      svg.setAttribute('viewBox', mode === 'rotating' ? '-0.88 -0.97 1.94 1.94' : mode === '3d' ? '-1.08 -1.08 2.16 2.16' : '-1.12 -1.12 2.24 2.24');
+      svg.setAttribute('viewBox', mode === 'rotating' ? '-0.88 -0.97 1.94 1.94' : mode === '3d' ? '-1.2 -1.2 2.4 2.4' : '-1.12 -1.12 2.24 2.24');
       for (var k in burns) {
         var n = D.burns[k];
         burns[k].style.display = i >= n ? '' : 'none';
