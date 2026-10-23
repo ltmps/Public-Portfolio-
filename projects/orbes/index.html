@@ -1,89 +1,246 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ORBES controls investigations: hanging tests, camera/IMU alignment, Kalman filtering and commands beyond a fourteen-thruster platform's feasible range.">
-  <title>ORBES — Gavin / Engineering</title>
-  <link rel="stylesheet" href="../../assets/css/orbes.css">
-  <script src="../../assets/js/orbes.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ORBES controls investigations: hanging tests, camera/IMU alignment, Kalman filtering and commands beyond a fourteen-thruster platform's feasible range.">
+<title>ORBES free-flyer | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/gy.css">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-img{filter:grayscale(1) contrast(1.05);transition:filter .5s,transform .7s cubic-bezier(0,0,.2,1)}
+:root[data-theme="dark"] .gy-img{filter:none}
+.gy-part:hover .gy-img,.gy-fig:hover .gy-img,.gy-card:hover .gy-img{filter:none;transform:scale(1.03)}
+.gy-frame{transition:border-color .25s}
+.gy-fig:hover .gy-frame{border-color:rgb(var(--acc)) !important}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:var(--muted)}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-step{transition:border-color .2s,background-color .2s}
+.gy-step:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.06) !important}
+.gy-stepn{transition:color .2s}
+.gy-step:hover .gy-stepn{color:rgb(var(--acc))}
+.gy-play{transition:opacity .25s}
+.gy-fig:hover .gy-play{opacity:0}
+.gy-card{transition:border-color .25s}
+.gy-card:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+</style>
+<script src="../../assets/js/gy.js" defer></script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="masthead">
-  <div class="nav-inner"><a class="brand" href="../../index.html">Gavin <span>/ Engineering</span></a><span class="breadcrumb">Selected work <span>/ ORBES</span></span></div>
-</header>
-<nav class="page-index" aria-label="On this page">
-  <p class="index-title"><span class="index-desktop">On this page</span><span class="index-mobile">Jump to</span></p>
-  <div class="index-links"><a href="#system">System</a><a href="#contribution">Test stories</a><a href="#workshop">Workshop footage</a><a href="#evidence">On the robot</a><a href="#lessons">Lessons</a></div>
-</nav>
-<main id="main" tabindex="-1">
-  <section class="hero wrap" aria-labelledby="project-title">
-    <div class="draft-line"><span class="status-dot" aria-hidden="true"></span> Mechanical controls <span class="draft-state">ORBES</span></div>
-    <div class="hero-title"><h1 id="project-title">ORBES</h1><p>From a control command<br>to a physical response.</p></div>
-    <figure class="hardware-photo">
-      <img src="../../assets/images/orbes/hardware.png" width="875" height="630" alt="ORBES cube hardware with a front-mounted camera, white fan grilles and a purple frame." decoding="async" fetchpriority="high">
-      <figcaption><span>ORBES hardware</span><span>Fan-platform prototype</span></figcaption>
-    </figure>
-    <div class="project-summary">
-      <div><h2>Focus</h2><p>Mechanical controls</p><small>Controls, simulation and integration.</small></div>
-      <div><h2>Investigations</h2><p>State estimation and thruster allocation</p><small>Hanging tests, sensor frames and feasible motor commands.</small></div>
-      <div><h2>On the robot</h2><p>±5° attitude hold</p><small>During compound maneuvers.</small></div>
-    </div>
-    <details class="draft-notes"><summary>Role and collaboration</summary><p>My work covered fan-platform GNC architecture, reaction-wheel PID control, ROS2 simulation, motor PCB commissioning and EKF, avionics and VIO integration, including the experiments and analysis below. Ed advised on some EKF tuning weights.</p></details>
-  </section>
-  <div class="case-layout wrap">
-  <div class="case-sections">
-  <section id="system" class="section wrap" aria-labelledby="system-title">
-    <div class="section-heading"><p class="section-label">The system</p><div><h2 id="system-title">From sensor readings to motor commands.</h2><p class="intro">The fan platform connects guidance commands and sensor estimates to attitude and translation control. A requested motion must pass two practical checks: do the sensor frames agree, and can the fourteen thrusters produce the requested force and torque?</p></div></div>
-    <figure class="architecture-figure">
-      <img src="../../assets/images/orbes/fan-platform-architecture.png" width="661" height="591" loading="lazy" decoding="async" alt="ORBES fan-platform architecture: guidance setpoints and navigation estimates feed an attitude and translation controller, which commands fourteen motors." aria-describedby="architecture-caption">
-      <figcaption id="architecture-caption"><strong>ORBES fan-platform GNC architecture</strong><p>Signal paths from guidance and navigation through the fan-platform controller to fourteen motors. Reaction-wheel control was a separate part of the work.</p><a href="../../assets/images/orbes/fan-platform-architecture.png">Open full-size architecture diagram</a></figcaption>
-    </figure>
-    <details class="draft-notes architecture-description"><summary>Read the diagram as text</summary><div><p>Guidance supplies setpoints from a predefined trajectory or tracking input. Navigation uses accelerometer, gyroscope, magnetometer and computer-vision inputs to provide attitude and translation estimates. These feed the attitude and translation controller, which sends thruster commands to the fourteen-motor vehicle.</p><p>The PID-to-LQR change is described below. This diagram shows how the components connect.</p></div></details>
-    <div class="diagram">
-      <div class="diagram-header"><span>How a control loop works</span><span class="badge">Simplified walkthrough</span></div>
-      <p class="diagram-help">Select a stage to explore its role in this simplified control loop.</p>
-      <div class="stages" role="group" aria-label="How a control loop works stages">
-        <button class="stage active" type="button" data-stage="estimator" aria-pressed="true" aria-controls="stage-description"><span>Estimate state</span><strong>Estimator</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
-        <button class="stage" type="button" data-stage="controller" aria-pressed="false" aria-controls="stage-description"><span>Choose a response</span><strong>Controller</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
-        <button class="stage" type="button" data-stage="allocation" aria-pressed="false" aria-controls="stage-description"><span>Distribute effort</span><strong>Allocation</strong></button><span class="flow-arrow" aria-hidden="true">→</span>
-        <button class="stage" type="button" data-stage="motors" aria-pressed="false" aria-controls="stage-description"><span>Act on the system</span><strong>Motors</strong></button>
-      </div>
-      <div class="feedback" aria-label="Sensor feedback from the robot to the estimator"><span>←</span><p>Physical response · sensing · feedback</p></div>
-      <div id="stage-description" class="stage-description" aria-live="polite" aria-atomic="true"><h3>Estimator</h3><p>Combines sensor readings to estimate orientation and motion. The controller uses that estimate to decide how to respond.</p></div>
-      <noscript><p>JavaScript is off. A controller compares the estimated motion with the command. Allocation divides the requested response among motors, and sensor readings feed the resulting motion back to the estimator.</p></noscript>
-    </div>
-  </section>
-  <section id="contribution" class="section wrap" aria-labelledby="contribution-title">
-    <div class="section-heading"><p class="section-label">Test stories</p><div><h2 id="contribution-title">Follow the mismatch to a smaller test.</h2><p class="intro">Hanging tests exposed disagreement in the state estimate. Later, allocator diagnostics traced missing motor output to requests the thrusters could not deliver.</p></div></div>
-    <div class="decision-list">
-      <article><h3>Yaw aligned. Roll still disagreed.</h3><div><p>Hanging tests exposed a camera/IMU frame mismatch and divergence in the translation estimate. Correcting yaw left a roll mismatch, so the investigation narrowed to a two-state Kalman test for yaw and body-rate bias.</p><p>A follow-up run showed the transient spike was gone. The smaller test isolated that behavior before testing returned to all three axes.</p></div></article>
-      <article><h3>A command can ask for too much.</h3><div><p>Allocator diagnostics found requested forces and torques outside the fourteen-thruster platform's feasible wrench envelope—the combinations of force and torque its thrusters could produce. Fallback commands could be negative; flooring those values to zero could leave no motor output.</p><p>Command logs and boundary plots traced the failure path and informed scaling the requested force and torque toward feasible commands.</p></div></article>
-      <article><h3>From PID to LQR</h3><div><p>Initial hardware-in-the-loop work used PID. The fan-platform control design then moved to a linear quadratic regulator (LQR) to coordinate coupled states. Sensor-fusion work addressed a separate question: what motion could be inferred from the available measurements?</p></div></article>
-    </div>
-  </section>
-  <section id="workshop" class="section wrap" aria-labelledby="workshop-title">
-    <div class="section-heading"><p class="section-label">Workshop footage</p><div><h2 id="workshop-title">ORBES hardware in the lab.</h2><p class="intro">Two views of the prototype: suspended in the workshop and being handled at a work area.</p></div></div>
-    <div class="orbes-recordings">
-      <figure><video id="orbes-suspended" controls playsinline preload="none" width="1080" height="1920" poster="../../assets/media/orbes/suspended-hardware.jpg" aria-label="ORBES suspended hardware recording" aria-describedby="suspended-caption"><source src="../../20230603_131600.mp4" type="video/mp4"><a href="../../20230603_131600.mp4">Open the suspended hardware video</a></video><figcaption id="suspended-caption">ORBES prototype suspended in the workshop. <a href="../../20230603_131600.mp4">Open recording</a> · <a href="../../assets/media/orbes/suspended-hardware.jpg">View still</a>.</figcaption></figure>
-      <figure><video id="orbes-workbench" controls playsinline preload="none" width="400" height="712" poster="../../assets/media/orbes/workbench.jpg" aria-label="ORBES hardware handling recording, silent" aria-describedby="workbench-caption"><source src="../../assets/media/orbes/workbench.mp4" type="video/mp4"><a href="../../assets/media/orbes/workbench.mp4">Open the hardware handling video</a></video><figcaption id="workbench-caption">Handling the ORBES hardware at a work area. Silent recording converted from the supplied GIF. <a href="../../assets/media/orbes/workbench.mp4">Open recording</a> · <a href="../../assets/media/orbes/workbench.jpg">View still</a>.</figcaption></figure>
-    </div>
-  </section>
-  <section id="evidence" class="section wrap" aria-labelledby="evidence-title">
-    <div class="section-heading"><p class="section-label">On the robot</p><div><h2 id="evidence-title">Attitude hold during compound maneuvers.</h2><p class="intro">The robot held attitude within ±5° during compound maneuvers.</p></div></div>
-    <div>
-      <article><div class="results-placeholder"><span class="empty-mark" aria-hidden="true">—</span><h3>Measured hardware result</h3><p>Attitude held within ±5° in compound maneuvers, measured on the robot.</p><span class="badge">Compound maneuvers</span></div></article>
-    </div>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; cursor: crosshair; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-  </section>
-  <section id="lessons" class="section wrap" aria-labelledby="lessons-title">
-    <div class="section-heading"><p class="section-label">Lessons from testing</p><div><h2 id="lessons-title">Check the estimate, then the command.</h2><p class="intro">The two investigations exposed different ways a control loop can fail before the intended motion reaches the robot.</p></div></div>
-    <div class="lessons-grid"><article><span class="slot-label">State estimation</span><h3>Check every axis after a frame correction.</h3><p>The remaining roll mismatch after the yaw correction kept the investigation open. Narrowing the test to yaw and body-rate bias made a transient easier to isolate before returning to full-axis tests.</p></article><article><span class="slot-label">Actuation</span><h3>Check what the motors can produce.</h3><p>A requested force and torque can lie outside the thruster envelope. Command logs and boundary plots helped explain why flooring fallback values could produce zero output, and informed scaling toward feasible requests.</p></article></div>
-  </section>
-  </div>
-  </div>
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../index.html#work">Work</a>
+<a class="gy-link" href="../modeling/">Simulations</a>
+<a class="gy-link" href="../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
+<main id="main" tabindex="-1">
+<section id="top" aria-labelledby="page-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px 0;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / <a class="gy-link" href="../../index.html#work">Selected work</a> / Part 01</p>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">Mechanical controls · Jun 2025 to Jan 2026</p>
+<h1 id="page-title" style="margin: 0; font-size: clamp(64px, 9vw, 136px); line-height: 0.86; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">ORBES</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 22ch; text-wrap: pretty;">From a control command to a physical response.</p>
+</div>
+<figure class="gy-part" data-gy-glow style="position: relative; margin: 0 50px 0 0; border: 1.5px solid var(--foreground); background: #000;">
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">±5° ATTITUDE HOLD</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">14 THRUSTERS</span>
+</span>
+<div style="position: relative; aspect-ratio: 875 / 630; overflow: hidden;">
+<img class="gy-img" src="../../assets/images/orbes/hardware.png" alt="ORBES cube hardware with a front-mounted camera, white fan grilles and a purple frame." style="width: 100%; height: 100%; object-fit: cover;">
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+</figure>
+</div>
+<dl style="margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Role</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Mechanical Controls Engineer</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Focus</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">GNC, state estimation, allocation</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Platform</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">6-DOF fan platform, ROS2</dd></div>
+<div style="padding: 12px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Result</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">±5° hold, measured on the robot</dd></div>
+</dl>
+</section>
+
+<section aria-label="Key dimensions" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 32px 0;">
+<div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">±5°</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">attitude hold in compound maneuvers</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">14</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">thrusters sharing every force and torque request</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">LQR</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">after PID, to coordinate coupled states</span>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="system-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="system-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>The system</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Architecture</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 48px; align-items: start;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
+<h3 style="margin: 0; font-size: 28px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em;">From sensor readings to motor commands.</h3>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: var(--muted-foreground);">Every request passes two checks: do the sensor frames agree, and can fourteen thrusters produce the force and torque?</p>
+<ol style="margin: 8px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 10px;">
+<li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">01 · Estimate</span><span style="font-size: 15px; line-height: 1.45;">Fuse inertial, magnetic and camera data into state estimates.</span></li>
+<li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">02 · Decide</span><span style="font-size: 15px; line-height: 1.45;">Attitude and translation control picks the response.</span></li>
+<li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">03 · Allocate</span><span style="font-size: 15px; line-height: 1.45;">Split force and torque across the fourteen thrusters.</span></li>
+<li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">04 · Act</span><span style="font-size: 15px; line-height: 1.45;">Motors respond and sensing closes the loop.</span></li>
+</ol>
+</div>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 16px;"><img src="../../assets/images/orbes/fan-platform-architecture.png" alt="ORBES fan-platform architecture: guidance setpoints and navigation estimates feed an attitude and translation controller, which commands fourteen motors." style="width: 100%; height: auto; display: block;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Fan-platform GNC architecture</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="tests-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="tests-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="15" height="14" rx="1"/><path d="m22 8-5 4 5 4z"/></svg>Test stories</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · Follow the mismatch to a smaller test</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px;">
+<article style="border: 1.5px solid var(--foreground); background: var(--background); display: flex; flex-direction: column;">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Story 1 · State estimation</p>
+<div style="padding: 20px 16px 22px; display: flex; flex-direction: column; gap: 10px;">
+<h3 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 700;">Yaw aligned. Roll still disagreed.</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted-foreground);">Hanging tests exposed a camera/IMU frame mismatch. A two-state Kalman test for yaw and body-rate bias isolated the transient before testing returned to all three axes.</p>
+</div>
+</article>
+<article style="border: 1.5px solid var(--foreground); background: var(--background); display: flex; flex-direction: column;">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Story 2 · Actuation</p>
+<div style="padding: 20px 16px 22px; display: flex; flex-direction: column; gap: 10px;">
+<h3 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 700;">A command can ask for too much.</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted-foreground);">Some requests fell outside the thrusters' feasible wrench envelope. Flooring negative fallback commands could leave zero output, so requests were scaled toward feasible commands.</p>
+</div>
+</article>
+<figure class="gy-fig" data-gy-vid style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="position: relative; aspect-ratio: 3 / 4; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><video src="../../20230603_131600.mp4" poster="../../assets/media/orbes/suspended-hardware.jpg" muted loop controls preload="metadata" aria-label="ORBES prototype suspended from an overhead line in the workshop during a hanging test." style="width: 100%; height: 100%; object-fit: cover; display: block;"></video></div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 3 · Hanging test in the workshop · video</figcaption>
+</figure>
+<figure class="gy-fig" data-gy-vid style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="position: relative; aspect-ratio: 3 / 4; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><video src="../../assets/media/orbes/workbench.mp4" poster="../../assets/media/orbes/workbench.jpg" muted loop controls preload="metadata" aria-label="Handling the ORBES hardware at a work area." style="width: 100%; height: 100%; object-fit: cover; display: block;"></video></div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · Hardware at the work area · video</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="lessons-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="lessons-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/></svg>Lessons</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Check the estimate, then the command</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 32px; align-items: start;">
+<div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">General notes</p>
+<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 14px; line-height: 1.9; text-transform: uppercase;">
+<li>Check every axis after a frame correction.</li>
+<li>Check what the motors can produce.</li>
+</ol>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">My work covered fan-platform GNC architecture, reaction-wheel PID control, ROS2 simulation, motor PCB commissioning, EKF, avionics and VIO integration. Ed advised on some EKF tuning weights.</p>
+</div>
+</section>
+
+<section aria-label="Next project" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<a class="gy-card" href="../satellite/" data-gy-glow style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 32px; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Next part · 02</span><span style="font-size: clamp(32px, 4vw, 56px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Satellite jitter</span></span>
+<svg class="gy-arrow" aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</a>
+</section>
+
 </main>
-<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="#main">Back to top ↑</a></div><div class="wrap footer-bottom"><span>ORBES · Mechanical controls</span><span>Gavin / Engineering</span></div></footer>
+
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px 40px; display: flex; flex-direction: column; gap: 56px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<h2 style="margin: 0; font-size: clamp(44px, 6vw, 88px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../../assets/Gavin_Yam_Resume.pdf" style="padding: 6px 0;">Resume (PDF)</a>
+</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1.5px solid var(--foreground); font-family: var(--font-mono); text-transform: uppercase; min-width: min(420px, 100%);">
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Drawn</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">G. Yam</dd></div>
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Checked</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Your team</dd></div>
+<div style="padding: 10px 14px;"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Part</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">01 ORBES</dd></div>
+</dl>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+<div class="gy-xh" aria-hidden="true" style="position: absolute; inset: 0; z-index: 50; pointer-events: none;">
+<div style="position: absolute; top: 0; bottom: 0; left: var(--cx, -10px); width: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: 0; right: 0; top: var(--cy, -10px); height: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: calc(var(--cx, -999px) + var(--rdx, 14px)); top: calc(var(--cy, -999px) + 14px); padding: 4px 8px; background: var(--background); border: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; font-variant-numeric: tabular-nums;">X <span data-gy-x>0.0</span>  Y <span data-gy-y>0.0</span> mm</div>
+</div>
+</div>
 </body>
 </html>

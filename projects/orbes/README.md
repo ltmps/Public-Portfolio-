@@ -1,6 +1,6 @@
 # ORBES case study draft
 
-Static case study at `projects/orbes/`, linked from the existing homepage ORBES entry. Styles and interaction code are loaded only by this page from `assets/css/orbes.css` and `assets/js/orbes.js`. Relative links support the GitHub Pages project base `/Public-Portfolio-/` and local file previews.
+Static case study at `projects/orbes/`, linked from the existing homepage ORBES entry. Since the October 2026 redesign it uses the shared drafting-table styles and behavior in `assets/css/gy.css` and `assets/js/gy.js`, plus page rules inline in its `<style>` block. Relative links support the GitHub Pages project base `/Public-Portfolio-/` and local file previews.
 
 The contribution section summarizes mechanical controls, reaction-wheel PID control, ROS2 simulation, motor PCB commissioning and EKF/avionics/VIO integration. The approved hardware photograph and architecture diagram are included. Implementation constraints, recorded demonstrations and measured results remain pending. The interactive walkthrough remains conceptual. Confirm and approve content before replacing the remaining placeholders.
 

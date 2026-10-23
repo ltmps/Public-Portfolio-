@@ -1,33 +1,241 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Singularity student rocket project: system integration, parachute packing, GPS testing and lessons from a team test flight.">
-  <title>Singularity: integration, recovery and GPS testing | Gavin Yam</title>
-  <link rel="stylesheet" href="../../assets/css/orbes.css">
-  <link rel="stylesheet" href="../../assets/css/project-notes.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Singularity student rocket project: system integration, parachute packing, GPS testing and lessons from a team test flight.">
+<title>Singularity: integration, recovery and GPS testing | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/gy.css">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-frame{transition:border-color .25s}
+.gy-fig:hover .gy-frame{border-color:rgb(var(--acc)) !important}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:var(--muted)}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-test{transition:border-color .2s}
+.gy-test:hover{border-color:rgb(var(--acc)) !important}
+.gy-testh{transition:background-color .2s,color .2s}
+.gy-test:hover .gy-testh{background:var(--foreground);color:var(--background)}
+.gy-card{transition:border-color .25s}
+.gy-card:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+</style>
+<script src="../../assets/js/gy.js" defer></script>
 </head>
-<body class="project-notes">
-<a class="skip" href="#main">Skip to content</a>
-<header class="masthead"><div class="nav-inner"><a class="brand" href="../../index.html">Gavin <span>/ Engineering</span></a><span class="breadcrumb"><a href="../../index.html#projects">Selected work</a> <span>/ Singularity</span></span></div></header>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; cursor: crosshair; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
+
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../index.html#work">Work</a>
+<a class="gy-link" href="../modeling/">Simulations</a>
+<a class="gy-link" href="../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
 <main id="main" tabindex="-1">
-  <section class="hero wrap" aria-labelledby="project-title">
-    <p class="project-context">UMBRA / Cal Poly Pomona · August 2021–May 2023</p>
-    <div class="hero-title"><h1 id="project-title">Singularity</h1><p>Bring the systems together.<br>Check how they separate.</p></div>
-    <p class="project-intro">Singularity was an UMBRA student rocket project at Cal Poly Pomona for the FAR 51025 competition. I was responsible for system integration and parachute packing, and performed GPS range tests. I also troubleshot integration issues and recovery pop tests, refining the ejection-charge setup.</p>
-    <p>Avionics &amp; Recovery Engineer, Systems Liaison</p>
-    <nav class="section-nav" aria-label="Project sections"><a href="#requirements">Requirements</a><a href="#integration">Integration &amp; packing</a><a href="#verification">Altimeter testing</a><a href="#flight">Test flight</a><a href="#tracking">GPS testing</a><a href="#tooling">Fabrication</a></nav>
-  </section>
-  <section id="requirements" class="section wrap" aria-labelledby="requirements-title"><div class="section-heading"><p class="section-label">Requirements</p><div><h2 id="requirements-title">Select components for the recovery system.</h2><p class="intro">The systems subteam defined requirements for altimeters, a GPS beacon and the recovery system. The team analyzed main-parachute descent rate and developed an avionics bay around the electronics and recovery interfaces.</p></div></div></section>
-  <section id="integration" class="section wrap" aria-labelledby="integration-title"><div class="section-heading"><p class="section-label">Integration &amp; packing</p><div><h2 id="integration-title">Fit the electronics and recovery connections together.</h2><p class="intro">The team’s avionics bay accommodated GPS, redundant altimeters, batteries and wire access, with a printed sled and bulkhead interfaces carrying the assembly and recovery connections.</p><p>The launch checklist connected parachute preparation with vehicle integration: line condition, coordinated main-parachute folding, pack fit, harness connections across the payload and avionics bay, and clearance so cords could not catch on the payload.</p></div></div><figure class="project-figure bay-figure"><img src="../../assets/images/singularity/avionics-bay-cad.png" width="467" height="857" loading="lazy" decoding="async" alt="Team CAD render of an avionics bay with circular end plates, threaded rods, harness loops and an electronics mounting panel."><figcaption>Singularity team avionics-bay CAD render. <a href="../../assets/images/singularity/avionics-bay-cad.png">Open full-size figure</a></figcaption></figure><details class="image-details"><summary>View the recovery layout and parachutes</summary><figure class="project-figure "><img src="../../assets/images/singularity/recovery-slide-27.png" width="1600" height="900" loading="lazy" decoding="async" alt="Singularity recovery overview slide with drogue and main parachute photographs and their planned positions in the vehicle."><figcaption>Singularity / Cal Poly Pomona team: planned recovery sequence and parachute layout. <a href="../../assets/images/singularity/recovery-slide-27.png">Open full-size figure</a></figcaption></figure></details></section>
-  <section id="verification" class="section wrap" aria-labelledby="verification-title"><div class="section-heading"><p class="section-label">Altimeter testing</p><div><h2 id="verification-title">Troubleshoot the chamber, then repeat the test.</h2><p class="intro">Initial vacuum-chamber tests encountered calibration problems. Troubleshooting and repeat tests checked the altimeters, alongside recovery pop tests and integration checks.</p></div></div></section>
-  <section id="flight" class="section wrap" aria-labelledby="flight-title"><div class="section-heading"><p class="section-label">Test flight</p><div><h2 id="flight-title">Recovered intact, with an unexpected deployment.</h2><p class="intro">The team reported roughly 3,900 ft on the test flight. The main parachute deployed prematurely, and the complete vehicle was recovered. Follow-up work included pop testing and investigation of retention at the main-parachute and avionics-bay connection.</p></div></div></section>
-  <section id="tracking" class="section wrap" aria-labelledby="tracking-title"><div class="section-heading"><p class="section-label">GPS testing</p><div><h2 id="tracking-title">From tracker comparison to range tests.</h2><p class="intro">The initial GPS comparison favored Featherweight; the team later selected Big Red Bee as the trade study evolved.</p><p>I carried out a GPS field test across approximately six miles, with a stable connection between the two sites.</p></div></div></section>
-  <section id="tooling" class="section wrap" aria-labelledby="tooling-title"><div class="section-heading"><p class="section-label">Fabrication</p><div><h2 id="tooling-title">Make tools for fin installation.</h2><p class="intro">Hands-on fabrication included tool and part assembly, laser cutting and bulkhead surface finishing. The fin-installation work included manufacturing custom hand tools and milling jig slots for alignment.</p></div></div><figure class="project-figure "><img src="../../assets/images/singularity/manufacturing-slide-19.png" width="1600" height="900" loading="lazy" decoding="async" alt="Team manufacturing slide showing fin-alignment tools, workshop machining, a rocket tube and a fabricated component."><figcaption>Singularity / Cal Poly Pomona team: manufacturing and assembly. <a href="../../assets/images/singularity/manufacturing-slide-19.png">Open full-size figure</a></figcaption></figure></section>
-  <div class="wrap"><figure class="association-mark"><img src="../../assets/images/projects/far.png" width="320" height="312" alt="Friends of Amateur Rocketry emblem"><figcaption>FAR 51025 competition association</figcaption></figure></div>
-  <aside class="wrap" aria-label="Earlier campaign footage"><p><a href="https://www.linkedin.com/posts/gavin-yam2023_rocketry-cpp-engineering-ugcPost-6969481231717601280-Lsi2/">Earlier campaign: summer 2022 launch montage</a> <small>(LinkedIn; sign-in may be required.)</small></p></aside>
+<section id="top" aria-labelledby="page-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px 0;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / <a class="gy-link" href="../../index.html#work">Selected work</a> / Part 04</p>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">UMBRA · Cal Poly Pomona · Aug 2021 to May 2023</p>
+<h1 id="page-title" style="margin: 0; font-size: clamp(44px, 5.6vw, 80px); line-height: 0.86; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Singularity</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 22ch; text-wrap: pretty;">Bring the systems together. Check how they separate.</p>
+</div>
+<figure class="gy-part" data-gy-glow style="position: relative; margin: 0 50px 0 0; border: 1.5px solid var(--foreground); background: #fff;">
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">AVIONICS BAY</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">GPS + REDUNDANT ALTIMETERS</span>
+</span>
+<div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+<img src="../../2026, 09_07_47 PM.png" alt="Team CAD render of an avionics bay with circular end plates, threaded rods, harness loops and an electronics mounting panel." style="height: 100%; width: auto; max-width: 100%; object-fit: contain;">
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+</figure>
+</div>
+<dl style="margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Role</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Avionics &amp; Recovery, Systems Liaison</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Competition</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">FAR 51025</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Scope</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Integration, packing, GPS tests</dd></div>
+<div style="padding: 12px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Team</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">UMBRA, Cal Poly Pomona</dd></div>
+</dl>
+</section>
+
+<section aria-label="Key dimensions" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 32px 0;">
+<div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">~3,900 ft</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">reported test flight, complete vehicle recovered</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">~6 mi</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">GPS field test with a stable link between sites</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">2</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">parachutes in the recovery layout, drogue and main</span>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="int-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="int-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11a9 9 0 0 1 18 0"/><path d="M3 11l9 9 9-9M8 11l4 9 4-9"/></svg>Integration &amp; packing</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Electronics meet recovery</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: start;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
+<p style="margin: 0; font-size: 20px; line-height: 1.5;">The avionics bay carried GPS, redundant altimeters, batteries and wire access on a printed sled with bulkhead interfaces.</p>
+<div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Launch checklist</p>
+<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 13px; line-height: 1.9; text-transform: uppercase;">
+<li>Line condition.</li>
+<li>Coordinated main-parachute folding.</li>
+<li>Pack fit.</li>
+<li>Harness connections across payload and avionics bay.</li>
+<li>Clearance so cords cannot catch on the payload.</li>
+</ol>
+</div>
+</div>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../assets/images/singularity/recovery-slide-27.png" alt="Singularity recovery overview slide with drogue and main parachute photographs and their planned positions in the vehicle." style="width: 100%; height: auto; display: block;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Recovery layout · Singularity team</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="tests-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="tests-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>Testing</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · Troubleshoot, then repeat</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px;">
+<article class="gy-test" style="border: 1.5px solid var(--foreground); background: var(--background); display: flex; flex-direction: column;">
+<p class="gy-testh" style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Test 1 · Altimeters</p>
+<div style="padding: 20px 16px 22px; display: flex; flex-direction: column; gap: 10px;">
+<h3 style="margin: 0; font-size: 21px; line-height: 1.25; font-weight: 700;">Fix the chamber, then repeat.</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted-foreground);">Vacuum-chamber tests hit calibration problems. Troubleshooting and repeat tests checked the altimeters alongside recovery pop tests.</p>
+</div>
+</article>
+<article class="gy-test" style="border: 1.5px solid var(--foreground); background: var(--background); display: flex; flex-direction: column;">
+<p class="gy-testh" style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Test 2 · Flight</p>
+<div style="padding: 20px 16px 22px; display: flex; flex-direction: column; gap: 10px;">
+<h3 style="margin: 0; font-size: 21px; line-height: 1.25; font-weight: 700;">Recovered intact, with an early deployment.</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted-foreground);">The main parachute deployed prematurely. Follow-up pop tests investigated retention at the main-parachute and avionics-bay connection.</p>
+</div>
+</article>
+<article class="gy-test" style="border: 1.5px solid var(--foreground); background: var(--background); display: flex; flex-direction: column;">
+<p class="gy-testh" style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Test 3 · GPS range</p>
+<div style="padding: 20px 16px 22px; display: flex; flex-direction: column; gap: 10px;">
+<h3 style="margin: 0; font-size: 21px; line-height: 1.25; font-weight: 700;">From tracker comparison to range test.</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted-foreground);">Featherweight led the first comparison; the team later selected Big Red Bee. I ran the six-mile field test.</p>
+</div>
+</article>
+</div>
+</section>
+
+<section aria-labelledby="fab-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="fab-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Fabrication</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · Tools for fin installation</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: center;">
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../assets/images/singularity/manufacturing-slide-19.png" alt="Team manufacturing slide showing fin-alignment tools, workshop machining, a rocket tube and a fabricated component." style="width: 100%; height: auto; display: block;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 3 · Manufacturing and assembly · Singularity team</figcaption>
+</figure>
+<div style="display: flex; flex-direction: column; gap: 16px;">
+<p style="margin: 0; font-size: 20px; line-height: 1.5;">Custom hand tools for fin installation, with milled jig slots for alignment.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">Hands-on work also covered tool and part assembly, laser cutting and bulkhead surface finishing.</p>
+</div>
+</div>
+</section>
+
+<section aria-label="Next page" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<a class="gy-card" href="../modeling/" data-gy-glow style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 32px; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Next sheet · 03</span><span style="font-size: clamp(32px, 4vw, 56px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Simulations</span></span>
+<svg class="gy-arrow" aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</a>
+</section>
+
 </main>
-<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="../../index.html#projects">Back to selected work</a></div><div class="wrap footer-bottom"><span>Singularity / Engineering</span><a href="#main">Back to top</a></div></footer>
+
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px 40px; display: flex; flex-direction: column; gap: 56px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<h2 style="margin: 0; font-size: clamp(44px, 6vw, 88px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../../assets/Gavin_Yam_Resume.pdf" style="padding: 6px 0;">Resume (PDF)</a>
+</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1.5px solid var(--foreground); font-family: var(--font-mono); text-transform: uppercase; min-width: min(420px, 100%);">
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Drawn</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">G. Yam</dd></div>
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Checked</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Your team</dd></div>
+<div style="padding: 10px 14px;"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Part</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">04 Singularity</dd></div>
+</dl>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+<div class="gy-xh" aria-hidden="true" style="position: absolute; inset: 0; z-index: 50; pointer-events: none;">
+<div style="position: absolute; top: 0; bottom: 0; left: var(--cx, -10px); width: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: 0; right: 0; top: var(--cy, -10px); height: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: calc(var(--cx, -999px) + var(--rdx, 14px)); top: calc(var(--cy, -999px) + 14px); padding: 4px 8px; background: var(--background); border: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; font-variant-numeric: tabular-nums;">X <span data-gy-x>0.0</span>  Y <span data-gy-y>0.0</span> mm</div>
+</div>
+</div>
 </body>
 </html>
