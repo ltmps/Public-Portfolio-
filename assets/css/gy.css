@@ -59,6 +59,13 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
   .gy *,.gy *::before,.gy *::after{transition:none !important;animation:none !important}
 }
 
-/* Labelled placeholder for media that has not been added yet */
-.gy-pending{width:100%;height:100%;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(var(--acc),.08) 10px 11px),var(--muted);color:var(--foreground);font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-.gy-pending span+span{color:var(--muted-foreground);font-size:11px}
+
+/* A hovered row's tint lowers the contrast of gray secondary text, so it darkens to the foreground */
+.gy-row:hover [style*="--muted-foreground"],.gy-ix:hover [style*="--muted-foreground"]{color:var(--foreground) !important}
+.st-ctrl{display:none}
+.st-live .st-ctrl{display:flex}
+.st-hide-fh [data-st-key="fh"],.st-hide-sherpa [data-st-key="sherpa"],.st-hide-l1 [data-st-key="l1"]{visibility:hidden}
+.st-key{display:inline-flex;align-items:baseline;gap:6px;min-height:28px;padding:2px 6px;margin-left:-6px;border:0;border-radius:4px;background:none;color:var(--foreground);font:inherit;text-align:left;cursor:pointer}
+.st-key:hover{background:var(--muted)}
+.st-key[aria-pressed="false"]{color:var(--muted-foreground);text-decoration:line-through}
+.st-key:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:2px}

@@ -24,7 +24,7 @@
 .gy-chip{transition:border-color .2s,background-color .2s}
 .gy-chip:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.08)}
 .gy-btn{transition:background-color .2s,color .2s}
-.gy-btn:hover{background:var(--foreground) !important;color:var(--background)}
+.gy-btn:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background)) !important;border-color:rgb(var(--acc)) !important;color:var(--foreground) !important}
 .gy-btn:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:4px}
 .gy-img{filter:grayscale(1) contrast(1.05);transition:filter .5s,transform .7s cubic-bezier(0,0,.2,1)}
 :root[data-theme="dark"] .gy-img{filter:none}
@@ -32,7 +32,7 @@
 .gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
 :root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
 .gy-stat{background:var(--background);transition:background-color .2s}
-.gy-stat:hover{background:var(--muted)}
+.gy-stat:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 0 0 0 1.5px rgb(var(--acc))}
 .gy-num{transition:color .2s}
 .gy-stat:hover .gy-num{color:rgb(var(--acc))}
 .gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
@@ -169,7 +169,7 @@
 </div>
 <p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 56ch;">CAPCOM, a team concept for close-range observation of comet 2P/Encke, weighed a direct low-thrust transfer against a Mars-assisted route: flight time against propellant and launch capability.</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 24px;">
-<a class="gy-card" href="trajectories/" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<a class="gy-card" href="trajectories/#routes-title" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
 <div style="position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #0b0f1a; border-bottom: 1.5px solid var(--foreground);">
 <video src="../../assets/media/modeling/encke/heliocentric.mp4" poster="../../assets/media/modeling/encke/heliocentric.png" muted loop preload="metadata" aria-label="Heliocentric playback of the Mars-assisted transfer to comet Encke" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
@@ -180,7 +180,7 @@
 <h3 style="margin: 0; font-size: 18px; font-weight: 700; text-transform: uppercase;">Mars-assisted route to Encke</h3>
 </div>
 </a>
-<a class="gy-card" href="trajectories/" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<a class="gy-card" href="trajectories/#windows-title" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
 <div style="position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #fff; border-bottom: 1.5px solid var(--foreground);">
 <video src="../../assets/media/modeling/trajectories/window-1-2d.mp4" poster="../../assets/media/modeling/trajectories/window-1-2d.png" muted loop preload="metadata" aria-label="Lambert launch-window contour map with the replayed lowest-departure-energy transfer" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
@@ -191,10 +191,14 @@
 <h3 style="margin: 0; font-size: 18px; font-weight: 700; text-transform: uppercase;">Lowest departure energy window</h3>
 </div>
 </a>
-<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; border: 1.5px solid var(--foreground); background: var(--background);">
-<div style="aspect-ratio: 16 / 10; overflow: hidden; background: #0b0f1a; border-bottom: 1.5px solid var(--foreground);"><img src="../../assets/media/modeling/mission-profiles/mission_03_capture_v3_poster.png" alt="CAPCOM mission 03: Mars flyby at a 500 km periapsis on the Mars-assisted route to Encke." style="width: 100%; height: 100%; object-fit: cover;"></div>
-<figcaption style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Mission profile</span><span style="font-size: 18px; font-weight: 700; text-transform: uppercase;">Launch to comet orbit</span></figcaption>
-</figure>
+<a class="gy-card" href="trajectories/#profiles-title" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #0b0f1a; border-bottom: 1.5px solid var(--foreground);">
+<video src="../../assets/media/modeling/mission-profiles/mission_03_120s_capture_v3.mp4" poster="../../assets/media/modeling/mission-profiles/mission_03_capture_v3_poster.png" muted loop playsinline preload="metadata" aria-label="CAPCOM mission 03 visualization from launch through the Mars flyby to comet orbit" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Mission profile</span><h3 style="margin: 0; font-size: 18px; font-weight: 700; text-transform: uppercase;">Launch to comet orbit</h3></div>
+</a>
 </div>
 <p style="margin: 24px 0 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Earth and Mars tracks: DE405/SPICE · Encke: JPL Horizons · Lambert cases: solar two-body, prograde, zero-revolution</p>
 </section>
