@@ -33,7 +33,7 @@
 .gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
 :root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
 .gy-stat{background:var(--background);transition:background-color .2s}
-.gy-stat:hover{background:var(--muted)}
+.gy-stat:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 0 0 0 1.5px rgb(var(--acc))}
 .gy-num{transition:color .2s}
 .gy-stat:hover .gy-num{color:rgb(var(--acc))}
 .gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
@@ -46,6 +46,52 @@
 .gy-card:hover{border-color:rgb(var(--acc)) !important}
 .gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
 .gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+.gy-story{transition:border-color .25s}
+.gy-story:hover{border-color:rgb(var(--acc)) !important}
+.gy-storyh{transition:background-color .2s,box-shadow .2s}
+.gy-story:hover .gy-storyh{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 0 -1.5px 0 rgb(var(--acc))}
+.gy{--warn:190,18,60}
+:root[data-theme="dark"] .gy{--warn:251,113,133}
+.gy-dia{width:100%;height:auto;display:block;overflow:visible}
+.gy-dia text{font-family:var(--font-mono);fill:var(--foreground);font-size:10px;letter-spacing:.06em}
+.gy-dia .t-mute{fill:var(--muted-foreground)}
+.gy-dia .t-warn{fill:rgb(var(--warn));font-weight:600}
+.gy-dia .t-b{font-weight:600}
+.gy-dia .s-ink{stroke:var(--foreground);fill:none}
+.gy-dia .s-mute{stroke:var(--muted-foreground);fill:none}
+.gy-dia .s-acc{stroke:rgb(var(--acc));fill:none}
+.gy-dia .s-warn{stroke:rgb(var(--warn));fill:none}
+.gy-dia .f-acc{fill:rgb(var(--acc))}
+.gy-dia .f-acct{fill:rgba(var(--acc),.16)}
+.gy-dia .f-warn{fill:rgb(var(--warn))}
+.gy-dia .f-warnt{fill:rgba(var(--warn),.16)}
+.gy-dia .f-bg{fill:var(--background)}
+@keyframes gy-swing{0%,100%{transform:rotate(16deg)}50%{transform:rotate(3deg)}}
+.gy-swing{transform-box:view-box;transform-origin:0 0;transform:rotate(16deg);animation:gy-swing 2.6s ease-in-out infinite}
+@keyframes gy-draw{0%{stroke-dashoffset:100}55%,100%{stroke-dashoffset:0}}
+.gy-draw{stroke-dasharray:100;stroke-dashoffset:0;animation:gy-draw 4.2s ease-out infinite}
+@keyframes gy-flow{to{stroke-dashoffset:-16}}
+.gy-flow{stroke-dasharray:5 3;animation:gy-flow 1s linear infinite}
+@keyframes gy-pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.gy-pulse{animation:gy-pulse 1.6s ease-in-out infinite}
+@keyframes gy-floor{0%,25%{transform:scaleY(1)}60%,100%{transform:scaleY(0)}}
+.gy-floor{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);animation:gy-floor 3.2s ease-in-out infinite}
+@keyframes gy-drip{0%{transform:translateY(-6px);opacity:0}20%{opacity:1}100%{transform:translateY(26px);opacity:0}}
+.gy-drip{animation:gy-drip 1.5s ease-in infinite}
+@keyframes gy-fillup{0%{transform:scaleY(.12)}70%,100%{transform:scaleY(1)}}
+.gy-fillup{transform-box:fill-box;transform-origin:50% 100%;animation:gy-fillup 3.4s ease-out infinite}
+@keyframes gy-scale{0%,20%{transform:translate(0,0)}70%,100%{transform:translate(-39px,29px)}}
+.gy-scaleback{animation:gy-scale 3.2s ease-in-out infinite}
+@keyframes gy-yaw{0%,100%{transform:rotate(18deg)}50%{transform:rotate(42deg)}}
+.gy-yaw{transform-box:view-box;transform-origin:0 0;transform:rotate(30deg);animation:gy-yaw 4s ease-in-out infinite}
+@keyframes gy-dot{0%{offset-distance:0%;opacity:0}8%{opacity:1}92%{opacity:1}100%{offset-distance:100%;opacity:0}}
+.gy-dot{offset-rotate:0deg;animation:gy-dot 4.2s linear infinite}
+@keyframes gy-leakon{0%,44%{opacity:1}52%,100%{opacity:0}}
+@keyframes gy-fixon{0%,56%{opacity:0}64%,96%{opacity:1}100%{opacity:0}}
+@keyframes gy-wrench{0%,30%{opacity:0;transform:rotate(-35deg)}36%{opacity:1;transform:rotate(-35deg)}42%{transform:rotate(25deg)}47%{transform:rotate(-25deg)}52%{transform:rotate(25deg)}57%{opacity:1;transform:rotate(0deg)}63%,100%{opacity:0;transform:rotate(0deg)}}
+.gy-leakon{animation:gy-leakon 6s linear infinite}
+.gy-fixon{opacity:0;animation:gy-fixon 6s linear infinite}
+.gy-wrench{transform-box:fill-box;transform-origin:85% 15%;animation:gy-wrench 6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
 <script src="../../assets/js/gy.js" defer></script>
@@ -170,16 +216,20 @@
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · Extended piping · team annotation</figcaption>
 </figure>
 <div style="display: flex; flex-direction: column; gap: 16px;">
-<article style="border: 1.5px solid var(--foreground); background: var(--background);">
-<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Issue 1 · Leak</p>
+<article class="gy-story" style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p class="gy-storyh" style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Issue 1 · Leak</p>
 <p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">A visible leak forced a reset and repeat of run 3. Comparisons with earlier measurements stayed uncertain.</p>
 </article>
-<article style="border: 1.5px solid var(--foreground); background: var(--background);">
-<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Issue 2 · Mass accounting</p>
+<article class="gy-story" style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p class="gy-storyh" style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Issue 2 · Mass accounting</p>
 <p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">A collection-container error needed a calculation correction.</p>
 </article>
 <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">I co-authored the post-test report on the leak investigation, retest and correction.</p>
 </div>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: var(--background); padding: 16px;"><svg class="gy-dia" viewBox="0 0 320 430" role="img" aria-labelledby="dia-b1-t dia-b1-d"><title id="dia-b1-t">Water-flow test faults: a leak in run 3 and a mass-accounting correction</title><desc id="dia-b1-d">Top, water drips from a pipe joint during run 3, marked with a warning, so run 3 is reset and repeated after runs 1 and 2. Bottom, a collection-container error marks the raw mass reading with a warning, a calculation correction is applied, and the corrected mass is used for comparison.</desc><defs><marker id="dia-b1-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" class="f-acc"/></marker></defs><text x="14" y="18" class="t-b">ISSUE 1 · LEAK</text><rect x="30" y="44" width="260" height="14" class="s-ink" stroke-width="1.5" style="fill:var(--background)"/><rect x="152" y="38" width="16" height="26" class="s-warn f-warnt gy-leakon" stroke-width="1.5"/><rect x="152" y="38" width="16" height="26" class="s-acc f-acct gy-fixon" stroke-width="1.5"/><path d="M30 51 H150" class="s-acc gy-flow" stroke-width="2"/><path d="M170 51 H290" class="s-acc gy-flow" stroke-width="2"/><g class="gy-leakon"><path d="M160 70 c-3 5 -4 7 -4 9 a4 4 0 0 0 8 0 c0 -2 -1 -4 -4 -9 z" class="f-warn gy-drip" style="animation-delay:0s"/><path d="M160 70 c-3 5 -4 7 -4 9 a4 4 0 0 0 8 0 c0 -2 -1 -4 -4 -9 z" class="f-warn gy-drip" style="animation-delay:0.5s"/><path d="M160 70 c-3 5 -4 7 -4 9 a4 4 0 0 0 8 0 c0 -2 -1 -4 -4 -9 z" class="f-warn gy-drip" style="animation-delay:1.0s"/><g transform="translate(190 82) scale(1)"><path d="M0 -8 L8 6 H-8 Z" class="f-warnt s-warn" stroke-width="1.5" stroke-linejoin="round"/><path d="M0 -3 V1.5" class="s-warn" stroke-width="1.6" stroke-linecap="round"/><circle cx="0" cy="3.8" r="0.9" class="f-warn"/></g><text x="202" y="85.5" class="t-warn">VISIBLE LEAK</text></g><g class="gy-fixon"><g transform="translate(190 82)"><circle r="7.5" class="f-acct s-acc" stroke-width="1.5"/><path d="M-3.5 0 L-1 2.6 L3.8 -2.6" class="s-acc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g><text x="202" y="85.5" class="t-b">JOINT REPAIRED</text></g><g transform="translate(168 6) scale(1.05)"><path class="s-ink gy-wrench" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="fill:var(--background)" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></g><text x="206" y="22" class="t-mute">REPAIR</text><g transform="translate(42 150)"><circle r="11" class="f-acct s-acc" stroke-width="1.5"/><path d="M-3.5 0 L-1 2.6 L3.8 -2.6" class="s-acc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g><text x="42" y="178" text-anchor="middle" class="">RUN 1</text><g transform="translate(112 150)"><circle r="11" class="f-acct s-acc" stroke-width="1.5"/><path d="M-3.5 0 L-1 2.6 L3.8 -2.6" class="s-acc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g><text x="112" y="178" text-anchor="middle" class="">RUN 2</text><circle cx="182" cy="150" r="11" class="f-warnt s-warn" stroke-width="1.5"/><path d="M182 145 V151.5" class="s-warn" stroke-width="2" stroke-linecap="round"/><circle cx="182" cy="155" r="1.2" class="f-warn"/><text x="182" y="178" text-anchor="middle" class="t-warn">RUN 3</text><g transform="translate(262 150)"><circle r="11" class="f-acct s-acc" stroke-width="1.5"/><path d="M-3.5 0 L-1 2.6 L3.8 -2.6" class="s-acc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g><text x="262" y="178" text-anchor="middle" class="">REPEAT 3</text><line x1="56" y1="150" x2="98" y2="150" class="s-mute" stroke-width="1.5"/><line x1="126" y1="150" x2="168" y2="150" class="s-mute" stroke-width="1.5"/><path d="M193 142 C210 110 236 110 252 138" class="s-acc gy-flow" stroke-width="1.75" marker-end="url(#dia-b1-a)"/><text x="222" y="114" text-anchor="middle" class="t-b">RESET</text><line x1="14" y1="206" x2="306" y2="206" class="s-mute" stroke-width="1" stroke-dasharray="2 3"/><text x="14" y="232" class="t-b">ISSUE 2 · MASS ACCOUNTING</text><path d="M34 262 L44 352 H104 L114 262" class="s-ink" stroke-width="1.75" stroke-linejoin="round" style="fill:none"/><path d="M40.5 300 L44 350 H104 L107.5 300 Z" class="f-acct gy-fillup"/><line x1="24" y1="360" x2="124" y2="360" class="s-ink" stroke-width="2"/><rect x="60" y="360" width="28" height="10" class="s-ink" stroke-width="1.5" style="fill:var(--background)"/><g transform="translate(132 300) scale(1)"><path d="M0 -8 L8 6 H-8 Z" class="f-warnt s-warn" stroke-width="1.5" stroke-linejoin="round"/><path d="M0 -3 V1.5" class="s-warn" stroke-width="1.6" stroke-linecap="round"/><circle cx="0" cy="3.8" r="0.9" class="f-warn"/></g><text x="74" y="392" text-anchor="middle">CONTAINER</text><rect x="150" y="262" width="150" height="30" class="s-warn f-warnt" stroke-width="1.5" /><text x="225" y="281" text-anchor="middle" class="t-warn">RAW MASS</text><rect x="150" y="312" width="150" height="30" class="s-ink " stroke-width="1.5" style="fill:var(--background)"/><text x="225" y="331" text-anchor="middle" class="t-b">CORRECTION</text><rect x="150" y="362" width="150" height="30" class="s-acc f-acct" stroke-width="1.5" /><text x="225" y="381" text-anchor="middle" class="t-b">CORRECTED</text><path d="M225 292 V310" class="s-acc gy-flow" stroke-width="1.75" marker-end="url(#dia-b1-a)"/><path d="M225 342 V360" class="s-acc gy-flow" stroke-width="1.75" marker-end="url(#dia-b1-a)"/><path d="M140 296 C144 290 146 284 149 280" class="s-mute" stroke-width="1.2" stroke-dasharray="3 3"/><text x="225" y="414" text-anchor="middle" class="t-mute">RECALCULATED BEFORE COMPARISON</text></svg></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Diagram D1 · Leak and mass-accounting faults · schematic</figcaption>
+</figure>
 <figure class="gy-fig" style="grid-column: 1 / -1; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px;">
 <div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 24px;"><img src="../../assets/images/b1lv/pressure-flow-analysis.png" style="width: 100%; max-width: 980px; height: auto; display: block; margin: 0 auto;" alt="Team plot of tank pressure in psig versus mass flow in pounds mass per second, with experimental error bars, predicted points and fitted trends."></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 5 · Tank pressure vs. mass flow, block 1</figcaption>

@@ -21,7 +21,7 @@
 .gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
 .gy-link:focus-visible,.gy-part:focus-visible,.gy-card:focus-visible,.gy-btn:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
 .gy-btn{transition:background-color .2s,color .2s,border-color .2s}
-.gy-btn:hover{background:var(--foreground) !important;color:var(--background) !important;border-color:var(--foreground) !important}
+.gy-btn:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background)) !important;border-color:rgb(var(--acc)) !important;color:var(--foreground) !important}
 .gy-dim{opacity:0;transition:opacity .25s}
 .gy-part:hover .gy-dim,.gy-part:focus-visible .gy-dim{opacity:1}
 .gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
@@ -34,17 +34,17 @@
 .gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
 :root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
 .gy-balloon{transition:background-color .2s,color .2s}
-.gy-part:hover .gy-balloon{background:var(--foreground);color:var(--background)}
+.gy-part:hover .gy-balloon{background:color-mix(in srgb, rgb(var(--acc)) 18%, var(--background)) !important;border-color:rgb(var(--acc)) !important;color:var(--foreground)}
 .gy-cta{transition:color .2s,border-color .2s}
 .gy-cta svg{transition:transform .25s cubic-bezier(0,0,.2,1)}
 .gy-part:hover .gy-cta{border-color:rgb(var(--acc)) !important}
 .gy-part:hover .gy-cta svg{transform:translate(3px,-3px)}
 .gy-row{transition:background-color .2s}
-.gy-row:hover{background:var(--muted)}
+.gy-row:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 3px 0 0 rgb(var(--acc))}
 .gy-tri{transition:fill .2s,stroke .2s}
 .gy-row:hover .gy-tri{fill:rgb(var(--acc));stroke:rgb(var(--acc))}
 .gy-stat{background:var(--background);transition:background-color .2s}
-.gy-stat:hover{background:var(--muted)}
+.gy-stat:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 0 0 0 1.5px rgb(var(--acc))}
 .gy-num{transition:color .2s}
 .gy-stat:hover .gy-num{color:rgb(var(--acc))}
 .gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
@@ -60,7 +60,7 @@
 .gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
 .gy-card:hover .gy-arrow,.gy-ix:hover .gy-arrow{transform:translate(3px,-3px)}
 .gy-ix{transition:background-color .2s}
-.gy-ix:hover{background:var(--muted)}
+.gy-ix:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 3px 0 0 rgb(var(--acc))}
 .gy-play{transition:opacity .25s}
 .gy-card:hover .gy-play{opacity:0}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
