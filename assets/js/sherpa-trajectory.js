@@ -78,8 +78,15 @@
       place(l1, flat ? [L1 * c, L1 * s] : proj(L1 * c, L1 * s));
       // Earth-centered labels sit either side of the Earth-Moon line as drawn, so they never cross
       var len = Math.hypot(mp[0], mp[1]) || 1, uc = mp[0] / len, us = mp[1] / len;
+      // When L1 passes the Burn 2 marker, the L1 and Moon labels both move to the side away
+      // from Burn 2; the Moon sits further out, so the two stay apart along the line
+      var side = 1, lp = flat ? [L1 * c, L1 * s] : proj(L1 * c, L1 * s);
+      if (inertial && i >= D.burns.b2 && !root.classList.contains('st-hide-sherpa')) {
+        var bp = at(D.burns.b2), bx = bp[0] - lp[0], by = bp[1] + 0.09 - lp[1];
+        if (Math.hypot(bx, by) < 0.4 && (-us * bx + uc * by) > 0) side = -1;
+      }
       for (var j = 0; j < 2; j++) {
-        var sg = j ? 1 : -1, t = labels[j];
+        var sg = side < 0 ? -1 : (j ? 1 : -1), t = labels[j];
         t.setAttribute('text-anchor', inertial ? 'middle' : 'start');
         t.setAttribute('x', inertial ? (-0.1 * us * sg).toFixed(3) : home[j][0]);
         t.setAttribute('y', inertial ? (-0.1 * uc * sg + 0.022).toFixed(3) : home[j][1]);
@@ -132,12 +139,16 @@
       resume = false;
       setRunning(!running);
     });
-    var burnBtn = get('burns');
-    burnBtn.addEventListener('click', function () {
-      var on = burnBtn.getAttribute('aria-pressed') !== 'true';
-      burnBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      root.classList.toggle('st-noburns', !on);
-    });
+    // Legend entries double as toggles for their markers and labels
+    var keys = root.querySelectorAll('[data-st-toggle]');
+    for (var b = 0; b < keys.length; b++) {
+      keys[b].addEventListener('click', function (e) {
+        var btn = e.currentTarget, on = btn.getAttribute('aria-pressed') !== 'true';
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        root.classList.toggle('st-hide-' + btn.getAttribute('data-st-toggle'), !on);
+        draw();
+      });
+    }
     range.addEventListener('input', function () { resume = false; setRunning(false); i = +range.value; draw(); });
     for (var v = 0; v < views.length; v++) {
       views[v].addEventListener('click', function (e) {
