@@ -62,10 +62,3 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 
 /* A hovered row's tint lowers the contrast of gray secondary text, so it darkens to the foreground */
 .gy-row:hover [style*="--muted-foreground"],.gy-ix:hover [style*="--muted-foreground"]{color:var(--foreground) !important}
-.st-ctrl{display:none}
-.st-live .st-ctrl{display:flex}
-.st-hide-fh [data-st-key="fh"],.st-hide-sherpa [data-st-key="sherpa"],.st-hide-l1 [data-st-key="l1"]{visibility:hidden}
-.st-key{display:inline-flex;align-items:baseline;gap:6px;min-height:28px;padding:2px 6px;margin-left:-6px;border:0;border-radius:4px;background:none;color:var(--foreground);font:inherit;text-align:left;cursor:pointer}
-.st-key:hover{background:var(--muted)}
-.st-key[aria-pressed="false"]{color:var(--muted-foreground);text-decoration:line-through}
-.st-key:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:2px}
