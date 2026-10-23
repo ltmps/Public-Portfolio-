@@ -1,5 +1,5 @@
-/* Shared interactions for the drafting-table pages: theme toggle, a light-mode crosshair
-   with a mm readout inside the home hero, dark-mode card glow, hover-to-play media and
+/* Shared interactions for the drafting-table pages: theme toggle, the grid-line loupe under
+   the cursor, a light-mode crosshair with a mm readout inside the home hero, dark-mode card glow, hover-to-play media and
    hover-zoom figures. Everything degrades to static, readable markup without script. */
 (function () {
   'use strict';
@@ -27,11 +27,26 @@
       if (e.key === KEY) applyTheme(e.newValue === 'dark', false);
     });
 
-    var hero = document.querySelector('[data-gy-root] [data-gy-hero]');
+    var root = document.querySelector('[data-gy-root]');
+    if (root) bindLoupe(root);
+    var hero = root && root.querySelector('[data-gy-hero]');
     if (hero) bindHero(hero);
     bindGlow();
     bindVideos();
     bindZoom();
+  }
+
+  /* The grid-line loupe follows the pointer across the whole page. */
+  function bindLoupe(root) {
+    root.addEventListener('mousemove', function (e) {
+      var r = root.getBoundingClientRect();
+      root.style.setProperty('--cx', (e.clientX - r.left) + 'px');
+      root.style.setProperty('--cy', (e.clientY - r.top) + 'px');
+    });
+    root.addEventListener('mouseleave', function () {
+      root.style.setProperty('--cx', '-9999px');
+      root.style.setProperty('--cy', '-9999px');
+    });
   }
 
   /* Crosshair and mm readout follow the pointer inside the home hero only. */
