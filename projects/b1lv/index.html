@@ -192,6 +192,20 @@
 <h2 id="setup-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8a4 4 0 0 1 4 4v10"/><path d="M3 11h8"/><path d="M11 21h8"/><path d="M3 5v8M17 21v-6"/></svg>System &amp; setup</h2>
 <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · See the path before the data</span>
 </div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; margin: 0 0 32px;">
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">The vehicle</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">Bronco 1 is the Liquid Rocket Lab launch vehicle: 17 ft long with a 7.8 in airframe, it feeds liquid oxygen and ethanol under pressure to the Ablative Chamber Engine, rated at 600 lbf initial thrust for a 15 s burn, toward an estimated 23,000 ft apogee. Its design was finished in 2019 to 2020, and the 2022 to 2023 team returned it to integration after the engine hot-fire campaign.</p>
+</article>
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">The test stand</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">The Mobile Rocket Engine Test Stand (MRETS) is the lab’s trailer-mounted stand for ground tests. It carried the 2022 hot-fire and integrated water flow tests of the engine, and in spring 2023 it hosted the B1LV water flow test with the lab’s DAQ box and LabVIEW control software.</p>
+</article>
+<article style="border: 1.5px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Why it matters for B1LV</p>
+<p style="margin: 0; padding: 16px; font-size: 15px; line-height: 1.55;">The oxidizer lines must be characterized before they carry liquid oxygen. Running water through a replica of those lines on MRETS gives measured pressure drops that set the static fire tank pressures and check the vehicle model, whose textbook loss coefficients are only estimates. A new strongback erector will hold the vehicle in launch configuration for later water and cold flow tests.</p>
+</article>
+</div>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
 <div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #000; overflow: hidden;"><img src="../../assets/images/b1lv/oxidizer-piping-replica.jpg" alt="Team CAD rendering of a long oxidizer-piping replica, with fittings and upright branches at either end." style="width: 100%; height: auto; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Oxidizer-piping replica · team CAD</figcaption>
@@ -303,6 +317,17 @@
 <li>Examine uncertainty before using a nominal prediction.</li>
 <li>Record the change while the context is fresh.</li>
 </ol>
+</div>
+<div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Water flow test lessons</p>
+<ol style="margin: 0; padding: 0; list-style: none;">
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Rehearse the whole procedure.</strong> The DAQ hardware and software were checked piece by piece, but a remote-access problem found on test day cost an hour. A dry run of the full procedure without sensors would have caught it.</li>
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Secure electronics for transport.</strong> The myRIO controllers could slide off their mounts when the DAQ box was moved to the test site, so the team mounted them on a laser-cut board under a fitted cover.</li>
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Choose parts that tolerate vibration.</strong> The mechanical relays that switch the solenoid valves can close under vibration and open a valve without a command. The team selected a solid-state MOSFET driver board to replace them.</li>
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Size control wiring for its length.</strong> The cable from the remote control box to the on-site box was long enough that its resistance lowered the voltage reaching the ignitor circuit.</li>
+<li style="padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Operate valves slowly.</strong> The FMEA added manual controls such as opening regulators and ball valves slowly, so pressure spikes do not corrupt the pressure readings, and inspecting every component before assembly.</li>
+</ol>
+<p style="margin: 0; padding: 10px 16px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; line-height: 1.6; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Sources: B1LV-RP-2023-004A.01 DAQ report · B1LV Symposium FMEA slides</p>
 </div>
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">All visuals: B1LV project team, Cal Poly Pomona Liquid Rocket Lab, 2022 to 2023</p>
 </div>
