@@ -64,8 +64,7 @@ const recorded = JSON.parse(viewer.match(/<script id="analysis-data" type="appli
 assert.deepEqual(scen.map(s => s.name), recorded.runs.map(r => r.scenario.name), 'Scenario playback uses the recorded runs');
 for (const s of scen) assert(s.t.length === s.a.length && s.t.length === s.d.length, `${s.name}: aligned series`);
 assert.equal((arch.match(/<button type="button" class="gy-cell /g) || []).length, 24, 'Recovery envelope is a 6 by 4 grid of native buttons');
-assert(!/planar-flight\.(mp4|jpg)/.test(arch), 'Planar flight recording is a labelled placeholder until it is added');
-for (const f of ['mission-cycle.mp4', 'mission-cycle.jpg', 'coupled-domains.mp4', 'coupled-domains.jpg', 'catalog-couplings.png']) {
+for (const f of ['planar-flight.mp4', 'planar-flight.jpg', 'mission-cycle.mp4', 'mission-cycle.jpg', 'coupled-domains.mp4', 'coupled-domains.jpg', 'catalog-couplings.png']) {
   assert(arch.includes('assets/media/modeling/architecture/' + f), `Architecture must use ${f}`);
 }
 
