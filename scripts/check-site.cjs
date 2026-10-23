@@ -62,7 +62,13 @@ for (const study of ['trajectories', 'architecture', 'sherpa']) {
 for (const file of pages.filter(f => !f.includes('/playback/'))) {
   const html = read(file);
   const rel = '../'.repeat(file.split('/').length - 1);
-  assert(html.includes(`href="${rel}assets/css/gy.css"`) && html.includes(`src="${rel}assets/js/gy.js"`), `${file}: shared theme assets`);
+  assert(html.includes(`href="${rel}assets/css/gy.css?v=`) && html.includes(`src="${rel}assets/js/gy.js?v=`), `${file}: shared theme assets`);
+  // Shared assets carry a content-hash version, so browsers never pair a new page with a cached old file
+  for (const m of html.matchAll(/(?:href|src)="(?:\.\.\/)*(assets\/(?:css|js)\/[^"?]+)(\?v=([0-9a-f]+))?"/g)) {
+    assert(m[3], `${file}: ${m[1]} needs a ?v= content version`);
+    const want = require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root, m[1]))).digest('hex').slice(0, 10);
+    assert.equal(m[3], want, `${file}: ${m[1]} version is stale; rebuild the page`);
+  }
   assert(/localStorage\.getItem\('gy-theme'\)/.test(html), `${file}: theme restored before first paint`);
   assert(/<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false">/.test(html), `${file}: native dark-mode toggle`);
   assert(html.includes('<footer id="contact"'), `${file}: contact footer`);

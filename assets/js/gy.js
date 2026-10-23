@@ -1,5 +1,5 @@
-/* Shared interactions for the drafting-table pages: theme toggle, light-mode crosshair
-   with a mm readout and cursor loupe, dark-mode card glow, hover-to-play media and
+/* Shared interactions for the drafting-table pages: theme toggle, the grid-line loupe under
+   the cursor, a light-mode crosshair with a mm readout inside the home hero, dark-mode card glow, hover-to-play media and
    hover-zoom figures. Everything degrades to static, readable markup without script. */
 (function () {
   'use strict';
@@ -28,14 +28,29 @@
     });
 
     var root = document.querySelector('[data-gy-root]');
-    if (root) bindRoot(root);
+    if (root) bindLoupe(root);
+    var hero = root && root.querySelector('[data-gy-hero]');
+    if (hero) bindHero(hero);
     bindGlow();
     bindVideos();
     bindZoom();
   }
 
-  /* Crosshair, mm readout and loupe follow the pointer inside the page root. */
-  function bindRoot(root) {
+  /* The grid-line loupe follows the pointer across the whole page. */
+  function bindLoupe(root) {
+    root.addEventListener('mousemove', function (e) {
+      var r = root.getBoundingClientRect();
+      root.style.setProperty('--cx', (e.clientX - r.left) + 'px');
+      root.style.setProperty('--cy', (e.clientY - r.top) + 'px');
+    });
+    root.addEventListener('mouseleave', function () {
+      root.style.setProperty('--cx', '-9999px');
+      root.style.setProperty('--cy', '-9999px');
+    });
+  }
+
+  /* Crosshair and mm readout follow the pointer inside the home hero only. */
+  function bindHero(root) {
     var xs = root.querySelectorAll('[data-gy-x]'), ys = root.querySelectorAll('[data-gy-y]');
     var pend = null, raf = 0;
     function mm(v) { return (v * 0.2646).toFixed(1); }
