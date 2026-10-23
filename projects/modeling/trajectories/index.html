@@ -1,54 +1,332 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Compare comet route studies and a separate Lambert launch-window study."><title>CAPCOM trajectory studies | Gavin Yam</title><link rel="stylesheet" href="../../../assets/css/orbes.css"><link rel="stylesheet" href="../../../assets/css/project-notes.css"><link rel="stylesheet" href="../../../assets/css/modeling.css"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"></head>
-<body class="project-notes modeling"><a class="skip" href="#main">Skip to content</a><header class="masthead"><div class="nav-inner"><a class="brand" href="../../../index.html">Gavin <span>/ Engineering</span></a><a href="../#missions">Back to modeling studies</a></div></header><main id="main" tabindex="-1"><section class="hero wrap"><div class="hero-title"><h1>CAPCOM mission studies</h1><p>Comet routes &amp;<br>launch-window tradeoffs.</p></div><p>CAPCOM (Close Approach Primary Cometary Outburst Mapper) is a team mission concept for close-range observation of comet 2P/Encke and its outbursts. The study compared a direct low-thrust transfer with a Mars-assisted route, balancing flight time against propellant demand and launch-vehicle escape capability. The launch-window comparison below uses a separate Lambert model.</p><nav class="section-nav" aria-label="Trajectory studies"><a href="#mission-profiles">Full mission animations</a><a href="#routes">Trajectory playback</a><a href="#windows">Launch windows</a></nav></section><section id="mission-profiles" class="section wrap modeling-media mission-profiles" aria-labelledby="profiles-title">
-<h2 id="profiles-title">CAPCOM: from launch to comet orbit.</h2>
-<p>Follow four mission concepts through Earth parking, departure, interplanetary transfer and a proposed polar orbit around Encke. The Mars-assisted routes include a local flyby view.</p>
-<p>These animations combine plotted solar paths with illustrative launch phases and a local two-body capture example. Timing is compressed by phase; scene transitions change coordinate frames and scale.</p>
-<figure data-title="Direct route A" data-mars="false"><video id="profile-1" controls playsinline preload="none" width="1280" height="720" poster="../../../assets/media/modeling/mission-profiles/mission_01_capture_v3_poster.png" aria-label="CAPCOM mission profile: Direct route A" aria-describedby="profile-caption-1"><source src="../../../assets/media/modeling/mission-profiles/mission_01_120s_capture_v3.mp4" type="video/mp4"><a href="../../../assets/media/modeling/mission-profiles/mission_01_120s_capture_v3.mp4">Open direct route a animation</a></video><figcaption id="profile-caption-1">Direct route A — silent, two-minute mission visualization. <a href="../../../assets/media/modeling/mission-profiles/mission_01_120s_capture_v3.mp4">Open recording</a> · <a href="../../../assets/media/modeling/mission-profiles/mission_01_capture_v3_poster.png">Static preview</a></figcaption></figure>
-<figure data-title="Direct route B" data-mars="false"><video id="profile-2" controls playsinline preload="none" width="1280" height="720" poster="../../../assets/media/modeling/mission-profiles/mission_02_capture_v3_poster.png" aria-label="CAPCOM mission profile: Direct route B" aria-describedby="profile-caption-2"><source src="../../../assets/media/modeling/mission-profiles/mission_02_120s_capture_v3.mp4" type="video/mp4"><a href="../../../assets/media/modeling/mission-profiles/mission_02_120s_capture_v3.mp4">Open direct route b animation</a></video><figcaption id="profile-caption-2">Direct route B — silent, two-minute mission visualization. <a href="../../../assets/media/modeling/mission-profiles/mission_02_120s_capture_v3.mp4">Open recording</a> · <a href="../../../assets/media/modeling/mission-profiles/mission_02_capture_v3_poster.png">Static preview</a></figcaption></figure>
-<figure data-title="Mars-assisted route A" data-mars="true"><video id="profile-3" controls playsinline preload="none" width="1280" height="720" poster="../../../assets/media/modeling/mission-profiles/mission_03_capture_v3_poster.png" aria-label="CAPCOM mission profile: Mars-assisted route A" aria-describedby="profile-caption-3"><source src="../../../assets/media/modeling/mission-profiles/mission_03_120s_capture_v3.mp4" type="video/mp4"><a href="../../../assets/media/modeling/mission-profiles/mission_03_120s_capture_v3.mp4">Open mars-assisted route a animation</a></video><figcaption id="profile-caption-3">Mars-assisted route A — silent, two-minute mission visualization. <a href="../../../assets/media/modeling/mission-profiles/mission_03_120s_capture_v3.mp4">Open recording</a> · <a href="../../../assets/media/modeling/mission-profiles/mission_03_capture_v3_poster.png">Static preview</a></figcaption></figure>
-<figure data-title="Mars-assisted route B" data-mars="true"><video id="profile-4" controls playsinline preload="none" width="1280" height="720" poster="../../../assets/media/modeling/mission-profiles/mission_04_capture_v3_poster.png" aria-label="CAPCOM mission profile: Mars-assisted route B" aria-describedby="profile-caption-4"><source src="../../../assets/media/modeling/mission-profiles/mission_04_120s_capture_v3.mp4" type="video/mp4"><a href="../../../assets/media/modeling/mission-profiles/mission_04_120s_capture_v3.mp4">Open mars-assisted route b animation</a></video><figcaption id="profile-caption-4">Mars-assisted route B — silent, two-minute mission visualization. <a href="../../../assets/media/modeling/mission-profiles/mission_04_120s_capture_v3.mp4">Open recording</a> · <a href="../../../assets/media/modeling/mission-profiles/mission_04_capture_v3_poster.png">Static preview</a></figcaption></figure>
-<noscript><p>All four recordings are available below their static previews, with native playback controls.</p></noscript>
-<p class="profile-credit">CAPCOM team mission concept. Earth imagery: <a href="https://svs.gsfc.nasa.gov/2915">NASA/Goddard SVS Blue Marble</a>. Mars imagery: NASA/JPL-Caltech/USGS Viking mosaic. Launch reference: <a href="https://www.ulalaunch.com/docs/default-source/rockets/atlasvusersguide2010.pdf">ULA Atlas V User's Guide</a>. Vehicle and body shapes are schematic; values inside the recordings retain the source-study annotations.</p>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CAPCOM mission studies to comet Encke: full mission profiles with phase jumps, local capture geometry, route comparisons and a separate launch-window study.">
+<title>CAPCOM mission studies | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../../assets/css/gy.css">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-frame{transition:border-color .25s}
+.gy-fig:hover .gy-frame{border-color:rgb(var(--acc)) !important}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:var(--muted)}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-play{transition:opacity .25s}
+.gy-part:hover .gy-play{opacity:0}
+.gy-card{transition:border-color .25s}
+.gy-card:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+.gy-step{transition:border-color .2s,background-color .2s}
+.gy-step:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.06) !important}
+.gy-stepn{transition:color .2s}
+.gy-step:hover .gy-stepn{color:rgb(var(--acc))}
+.gy-chip{appearance:none;border:0;margin:0;padding:10px 12px;background:var(--background);color:var(--foreground);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:left;display:flex;flex-direction:column;gap:3px;cursor:pointer;transition:background-color .2s,color .2s}
+.gy-chip span{font-size:10px;color:var(--muted-foreground);font-variant-numeric:tabular-nums;transition:color .2s}
+.gy-chip:hover{background:rgba(var(--acc),.1)}
+.gy-chip:hover span{color:rgb(var(--acc))}
+.gy-chip.on{background:var(--foreground);color:var(--background)}
+.gy-chip.on span{color:var(--background);opacity:.75}
+.gy-chip:disabled{cursor:not-allowed;color:var(--muted-foreground);background:var(--muted)}
+.gy-chip:disabled span{text-decoration:line-through}
+.gy-chip:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:-2px}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+</style>
+<script src="../../../assets/js/gy.js" defer></script>
+<script src="../../../assets/js/mission-studies.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root data-ms-base="../../../assets/media/modeling/" style="position: relative; overflow: hidden; cursor: crosshair; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
+
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../../index.html#work">Work</a>
+<a class="gy-link" href="../" aria-current="page" style="text-decoration-color: rgb(var(--acc)); text-decoration-thickness: 2px;">Simulations</a>
+<a class="gy-link" href="../../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
+<main id="main" tabindex="-1">
+<section id="top" aria-labelledby="page-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px 0;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../../index.html">Home</a> / <a class="gy-link" href="../">Simulations</a> / Study 03</p>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">CAPCOM · team mission concept · MALTO + Lambert</p>
+<h1 id="page-title" style="margin: 0; font-size: clamp(52px, 7vw, 104px); line-height: 0.88; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Mission<br>studies</h1>
+<p style="margin: 0; font-size: 24px; line-height: 1.4; max-width: 30ch; text-wrap: pretty;">Routes to comet 2P/Encke, and when to leave Earth to fly them.</p>
+</div>
+<figure class="gy-part" data-gy-glow data-gy-vid style="position: relative; margin: 0 50px 0 0; border: 1.5px solid var(--foreground); background: #0b0f1a;">
+<span class="gy-dim gy-dim-h" aria-hidden="true" style="position: absolute; left: -1.5px; right: -1.5px; top: -46px; height: 46px; pointer-events: none;">
+<span style="position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 0; top: 6px; bottom: 0; width: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; left: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-right: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 1px; top: 14px; width: 0; height: 0; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; border-left: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 2px 10px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">EARTH · MARS · ENCKE</span>
+</span>
+<span class="gy-dim gy-dim-v" aria-hidden="true" style="position: absolute; top: -1.5px; bottom: -1.5px; right: -50px; width: 50px; pointer-events: none;">
+<span style="position: absolute; top: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; bottom: 0; left: 0; right: 6px; height: 1px; background: rgb(var(--acc));"></span>
+<span class="gy-line" style="position: absolute; top: 0; bottom: 0; right: 18px; width: 1px; background: rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; top: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 14px; bottom: 1px; width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 10px solid rgb(var(--acc));"></span>
+<span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">HELIOCENTRIC</span>
+</span>
+<div style="position: relative; aspect-ratio: 5 / 3; overflow: hidden;">
+<video src="../../../assets/media/modeling/encke/heliocentric.mp4" poster="../../../assets/media/modeling/encke/heliocentric.png" muted loop preload="metadata" aria-label="Heliocentric playback of the Mars-assisted transfer to comet Encke" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+</figure>
+</div>
 </section>
-<section id="capcom-arrival" class="section wrap modeling-media" aria-labelledby="arrival-title">
-<h2 id="arrival-title">Braking into a comet orbit.</h2>
-<p>The local example follows an incoming approach into a capture ellipse, then combines circularization with a plane change. Beside it, a solar-system view locates the route endpoint and Encke at arrival. The local capture uses assumed incoming conditions and spherical gravity, separately from the interplanetary path.</p>
-<figure><video controls playsinline preload="none" width="1280" height="720" poster="../../../assets/media/modeling/mission-profiles/arrival_01_capture_v3_poster.png" aria-label="CAPCOM illustrative local capture and arrival geometry" aria-describedby="arrival-caption"><source src="../../../assets/media/modeling/mission-profiles/arrival_01_15s_capture_v3.mp4" type="video/mp4"><a href="../../../assets/media/modeling/mission-profiles/arrival_01_15s_capture_v3.mp4">Open arrival animation</a></video><figcaption id="arrival-caption">Direct route A: local capture geometry beside the arrival reference view. Silent, 15-second animation. <a href="../../../assets/media/modeling/mission-profiles/arrival_01_15s_capture_v3.mp4">Open recording</a> · <a href="../../../assets/media/modeling/mission-profiles/arrival_01_capture_v3_poster.png">Static preview</a></figcaption></figure>
+
+<section aria-label="Key dimensions" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 56px 32px 0;">
+<div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 220px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 56px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">4</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">mission concepts animated from launch to a polar orbit at Encke</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 220px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 56px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">550 d</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">fixed flight time for the 2029, 2030 and 2031 window comparison</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 220px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 56px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">64.66</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">km²/s² departure C3 for the 2030 window, lowest of the three</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 220px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 56px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">3.93</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">km/s arrival speed relative to Encke in 2030, down from 34.84 in 2029</span>
+</div>
+</div>
 </section>
-<section id="capcom-window-study" class="section wrap modeling-media" aria-labelledby="window-study-title">
-<h2 id="window-study-title">Departure date changes both ends of the journey.</h2>
-<p>Holding flight time at 550 Earth days, the sampled 2029, 2030 and 2031 departure windows give different launch-energy and arrival-speed requirements. Among these three candidates, 2030 has the lowest departure energy and arrival speed. This comparison uses solar two-body Lambert transfers.</p>
-<figure><a href="../../../assets/media/modeling/mission-profiles/neighbor_window_comparison.png"><img src="../../../assets/media/modeling/mission-profiles/neighbor_window_comparison.png" width="1526" height="924" loading="lazy" alt="For the 2029, 2030 and 2031 candidates, departure C3 is 323.01, 64.66 and 96.54 square kilometres per square second; arrival relative speed is 34.84, 3.93 and 10.02 kilometres per second."></a><figcaption>Three sampled annual candidates at the same 550-day duration. <a href="../../../assets/media/modeling/mission-profiles/neighbor_window_comparison.png">Open full-size comparison</a></figcaption></figure>
-<figure><video controls playsinline preload="none" width="1280" height="720" poster="../../../assets/media/modeling/mission-profiles/c3_launch_to_arrival_poster.png" aria-label="CAPCOM launch-window energy comparison and transfer playback" aria-describedby="energy-caption"><source src="../../../assets/media/modeling/mission-profiles/c3_launch_to_arrival.mp4" type="video/mp4"><a href="../../../assets/media/modeling/mission-profiles/c3_launch_to_arrival.mp4">Open launch-window animation</a></video><figcaption id="energy-caption">Each candidate travels from departure to arrival while its departure-energy marker stays fixed. Silent, 15-second animation. <a href="../../../assets/media/modeling/mission-profiles/c3_launch_to_arrival.mp4">Open recording</a> · <a href="../../../assets/media/modeling/mission-profiles/c3_launch_to_arrival_poster.png">Static preview</a></figcaption></figure>
-<h3>Match the vehicle to the departure requirement.</h3>
-<p>The original team study favored Atlas V 541 for its lower-energy Mars-assisted concept. The later four route variants use a different departure-energy assumption and a range of spacecraft masses. Comparing those cases calls for configuration-specific payload-versus-energy data, alongside the launch window and arrival conditions.</p>
+
+<section aria-labelledby="profiles-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
+<h2 id="profiles-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-25 12 12)"/></svg>From launch to comet orbit</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Pick a mission, jump to a phase</span>
+</div>
+<p style="margin: 0 0 28px; font-size: 20px; line-height: 1.5; max-width: 60ch;">Follow each concept through Earth parking, departure and the interplanetary transfer into a proposed polar orbit around Encke.</p>
+<div role="group" aria-label="Mission" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
+<button type="button" class="gy-toggle" data-ms-pick="m:0" aria-pressed="false">01 · Direct A</button>
+<button type="button" class="gy-toggle" data-ms-pick="m:1" aria-pressed="false">02 · Direct B</button>
+<button type="button" class="gy-toggle" data-ms-pick="m:2" aria-pressed="true">03 · Mars-assisted A</button>
+<button type="button" class="gy-toggle" data-ms-pick="m:3" aria-pressed="false">04 · Mars-assisted B</button>
+</div>
+<figure style="margin: 0; border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="aspect-ratio: 16 / 9; background: #05070c; overflow: hidden;">
+<video id="ms-mission-video" src="../../../assets/media/modeling/mission-profiles/mission_03_120s_capture_v3.mp4" poster="../../../assets/media/modeling/mission-profiles/mission_03_capture_v3_poster.png" muted controls playsinline preload="metadata" aria-label="CAPCOM Mission 03 · Mars-assisted route A, two-minute mission visualization" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+</div>
+<div role="group" aria-label="Jump to phase" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); border-top: 1.5px solid var(--foreground); gap: 1px; background: var(--foreground);">
+<button type="button" class="gy-chip on" data-ms-jump="0"><span>0:00</span>Launch</button>
+<button type="button" class="gy-chip" data-ms-jump="1"><span>0:22</span>Parking</button>
+<button type="button" class="gy-chip" data-ms-jump="2"><span>0:32</span>Departure</button>
+<button type="button" class="gy-chip" data-ms-jump="3"><span>0:40</span>Transfer</button>
+<button type="button" class="gy-chip" data-ms-jump="4" title="Jump to the Mars flyby"><span>0:58</span>Mars flyby</button>
+<button type="button" class="gy-chip" data-ms-jump="5"><span>1:25</span>Approach</button>
+<button type="button" class="gy-chip" data-ms-jump="6"><span>1:31</span>Capture</button>
+<button type="button" class="gy-chip" data-ms-jump="7"><span>1:40</span>Plane change</button>
+<button type="button" class="gy-chip" data-ms-jump="8"><span>1:43</span>Final orbit</button>
+</div>
+<figcaption style="padding: 14px 18px; border-top: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px;">
+<span style="font-size: 18px; font-weight: 700; text-transform: uppercase;"><span data-ms-text="mName">Mission 03 · Mars-assisted route A</span></span>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-foreground);">Silent 2 min visualization · switching keeps your place</span>
+</figcaption>
+</figure>
+<p style="margin: 16px 0 0; font-size: 15px; line-height: 1.6; max-width: 80ch; color: var(--muted-foreground);">Plotted solar paths are combined with illustrative launch phases and a local two-body capture example. Timing is compressed by phase, and scene changes switch coordinate frames and scale.</p>
 </section>
-  <div class="wrap modeling-media encke-preview" aria-labelledby="encke-title">
-    <p><a href="#mission-profiles">Full mission animations</a> · <a href="#routes">Four route studies</a> · <a href="#windows">Launch-window comparison</a></p>
-    <h3 id="encke-title">CAPCOM: Encke trajectory</h3>
-    <p>Three views of the CAPCOM Earth–Mars–Encke study. Earth and Mars reference tracks use DE405/SPICE; Encke uses JPL Horizons.</p>
-    <div id="encke-views" class="encke-views" role="group" aria-label="Trajectory view" hidden>
-      <button type="button" data-view="heliocentric" aria-pressed="true" aria-controls="encke-video">Heliocentric</button>
-      <button type="button" data-view="angled" aria-pressed="false" aria-controls="encke-video">Angled</button>
-      <button type="button" data-view="original" aria-pressed="false" aria-controls="encke-video">Original</button>
-    </div>
-    <figure><video id="encke-video" controls playsinline preload="none" width="1500" height="900" poster="../../../assets/media/modeling/encke/heliocentric.png" aria-label="Earth–Mars–Encke trajectory playback" aria-describedby="encke-caption"><source src="../../../assets/media/modeling/encke/heliocentric.mp4" type="video/mp4"><a href="../../../assets/media/modeling/encke/heliocentric.mp4">Open the heliocentric recording</a></video><figcaption id="encke-caption">Heliocentric view · silent 10-second trajectory playback.</figcaption></figure>
-    <p class="encke-downloads">Open a recording directly: <a href="../../../assets/media/modeling/encke/heliocentric.mp4">Heliocentric</a> · <a href="../../../assets/media/modeling/encke/angled.mp4">Angled</a> · <a href="../../../assets/media/modeling/encke/original.mp4">Original</a>.</p>
-    <noscript><p>The heliocentric recording plays with native controls. The links above open the other views.</p></noscript>
-  </div>
-<section id="routes" class="section wrap trajectory-player" aria-labelledby="routes-title">
-<h2 id="routes-title">CAPCOM route studies</h2><p>Choose from two direct and two Mars-assisted CAPCOM route studies, each with heliocentric and angled views. Earth and Mars reference tracks use DE405/SPICE; Encke uses JPL Horizons.</p>
-<div class="trajectory-controls" hidden><label for="routes-case">Study<select id="routes-case" class="case-select" aria-controls="routes-video"><option value="direct-a">Direct route A</option><option value="direct-b">Direct route B</option><option value="mars-assisted">Mars-assisted route A</option><option value="encke">Mars-assisted route B / Encke</option></select></label><label for="routes-view">View<select id="routes-view" class="view-select" aria-controls="routes-video"><option value="heliocentric">Heliocentric</option><option value="angled">Angled</option></select></label></div>
-<div class="modeling-media"><figure><video id="routes-video" controls playsinline preload="none" width="1500" height="900" poster="../../../assets/media/modeling/trajectories/direct-a-heliocentric.png" aria-label="CAPCOM route studies" aria-describedby="routes-caption"><source src="../../../assets/media/modeling/trajectories/direct-a-heliocentric.mp4" type="video/mp4"><a href="../../../assets/media/modeling/trajectories/direct-a-heliocentric.mp4">Open the first recording</a></video><figcaption id="routes-caption" aria-live="polite">Direct route A · Heliocentric · silent 10-second recording.</figcaption></figure></div>
-<details class="recording-links"><summary>All recordings and static previews</summary><div class="recording-grid"><article><h3>Direct route A</h3><img loading="lazy" width="1500" height="900" src="../../../assets/media/modeling/trajectories/direct-a-heliocentric.png" alt="Direct route A, heliocentric preview"><p><a data-case="direct-a" data-view="heliocentric" data-poster="../../../assets/media/modeling/trajectories/direct-a-heliocentric.png" href="../../../assets/media/modeling/trajectories/direct-a-heliocentric.mp4">Heliocentric</a> <a data-case="direct-a" data-view="angled" data-poster="../../../assets/media/modeling/trajectories/direct-a-angled.png" href="../../../assets/media/modeling/trajectories/direct-a-angled.mp4">Angled</a></p></article><article><h3>Direct route B</h3><img loading="lazy" width="1500" height="900" src="../../../assets/media/modeling/trajectories/direct-b-heliocentric.png" alt="Direct route B, heliocentric preview"><p><a data-case="direct-b" data-view="heliocentric" data-poster="../../../assets/media/modeling/trajectories/direct-b-heliocentric.png" href="../../../assets/media/modeling/trajectories/direct-b-heliocentric.mp4">Heliocentric</a> <a data-case="direct-b" data-view="angled" data-poster="../../../assets/media/modeling/trajectories/direct-b-angled.png" href="../../../assets/media/modeling/trajectories/direct-b-angled.mp4">Angled</a></p></article><article><h3>Mars-assisted route A</h3><img loading="lazy" width="1500" height="900" src="../../../assets/media/modeling/trajectories/mars-assisted-heliocentric.png" alt="Mars-assisted route A, heliocentric preview"><p><a data-case="mars-assisted" data-view="heliocentric" data-poster="../../../assets/media/modeling/trajectories/mars-assisted-heliocentric.png" href="../../../assets/media/modeling/trajectories/mars-assisted-heliocentric.mp4">Heliocentric</a> <a data-case="mars-assisted" data-view="angled" data-poster="../../../assets/media/modeling/trajectories/mars-assisted-angled.png" href="../../../assets/media/modeling/trajectories/mars-assisted-angled.mp4">Angled</a></p></article><article><h3>Mars-assisted route B / Encke</h3><img loading="lazy" width="1500" height="900" src="../../../assets/media/modeling/encke/heliocentric.png" alt="Mars-assisted route B / Encke, heliocentric preview"><p><a data-case="encke" data-view="heliocentric" data-poster="../../../assets/media/modeling/encke/heliocentric.png" href="../../../assets/media/modeling/encke/heliocentric.mp4">Heliocentric</a> <a data-case="encke" data-view="angled" data-poster="../../../assets/media/modeling/encke/angled.png" href="../../../assets/media/modeling/encke/angled.mp4">Angled</a></p></article></div></details>
-<noscript><p>Use the native player above, or open any recording from the links and previews.</p></noscript>
-</section><section id="windows" class="section wrap trajectory-player" aria-labelledby="windows-title">
-<h2 id="windows-title">Lambert launch-window comparison</h2><p>This separate study uses solar two-body, prograde, zero-revolution Lambert transfers with Earth and Encke states from NASA JPL Horizons. Three selected cases emphasize departure energy, the sum of departure excess speed and arrival relative speed, or shorter flight time.</p><p>The contour map locates each selected departure date and flight time; the adjacent replay follows its propagated spacecraft path in physical time. The speed sum is a screening score. Numbers shown are outputs retained from the supplied study.</p>
-<div class="trajectory-controls" hidden><label for="windows-case">Study<select id="windows-case" class="case-select" aria-controls="windows-video"><option value="window-1">Lowest departure energy</option><option value="window-2">Lowest speed sum</option><option value="window-3">Shorter flight time</option></select></label><label for="windows-view">View<select id="windows-view" class="view-select" aria-controls="windows-video"><option value="2d">2D top view</option><option value="3d">3D view</option></select></label></div>
-<div class="modeling-media"><figure><video id="windows-video" controls playsinline preload="none" width="1600" height="900" poster="../../../assets/media/modeling/trajectories/window-1-2d.png" aria-label="Lambert launch-window comparison" aria-describedby="windows-caption"><source src="../../../assets/media/modeling/trajectories/window-1-2d.mp4" type="video/mp4"><a href="../../../assets/media/modeling/trajectories/window-1-2d.mp4">Open the first recording</a></video><figcaption id="windows-caption" aria-live="polite">Lowest departure energy · 2D top view · silent 10-second recording.</figcaption></figure></div>
-<details class="recording-links"><summary>All recordings and static previews</summary><div class="recording-grid"><article><h3>Lowest departure energy</h3><img loading="lazy" width="1600" height="900" src="../../../assets/media/modeling/trajectories/window-1-2d.png" alt="Lowest departure energy, 2d top view preview"><p><a data-case="window-1" data-view="2d" data-poster="../../../assets/media/modeling/trajectories/window-1-2d.png" href="../../../assets/media/modeling/trajectories/window-1-2d.mp4">2D top view</a> <a data-case="window-1" data-view="3d" data-poster="../../../assets/media/modeling/trajectories/window-1-3d.png" href="../../../assets/media/modeling/trajectories/window-1-3d.mp4">3D view</a></p></article><article><h3>Lowest speed sum</h3><img loading="lazy" width="1600" height="900" src="../../../assets/media/modeling/trajectories/window-2-2d.png" alt="Lowest speed sum, 2d top view preview"><p><a data-case="window-2" data-view="2d" data-poster="../../../assets/media/modeling/trajectories/window-2-2d.png" href="../../../assets/media/modeling/trajectories/window-2-2d.mp4">2D top view</a> <a data-case="window-2" data-view="3d" data-poster="../../../assets/media/modeling/trajectories/window-2-3d.png" href="../../../assets/media/modeling/trajectories/window-2-3d.mp4">3D view</a></p></article><article><h3>Shorter flight time</h3><img loading="lazy" width="1600" height="900" src="../../../assets/media/modeling/trajectories/window-3-2d.png" alt="Shorter flight time, 2d top view preview"><p><a data-case="window-3" data-view="2d" data-poster="../../../assets/media/modeling/trajectories/window-3-2d.png" href="../../../assets/media/modeling/trajectories/window-3-2d.mp4">2D top view</a> <a data-case="window-3" data-view="3d" data-poster="../../../assets/media/modeling/trajectories/window-3-3d.png" href="../../../assets/media/modeling/trajectories/window-3-3d.mp4">3D view</a></p></article></div></details>
-<noscript><p>Use the native player above, or open any recording from the links and previews.</p></noscript>
-</section></main><footer><div class="wrap footer-inner"><a href="../#missions">Return to Modeling &amp; Simulation</a><a href="../../../index.html#contact">Contact Gavin</a></div></footer><script src="../../../assets/js/trajectory-viewer.js" defer></script><script src="../../../assets/js/modeling-reels.js" defer></script><script src="../../../assets/js/encke-viewer.js" defer></script>
-<script src="../../../assets/js/mission-profiles.js" defer></script>
-</body></html>
+
+<section aria-labelledby="capture-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
+<h2 id="capture-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>Braking into a comet orbit</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · Local capture example</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 32px 48px; align-items: center;">
+<div style="display: flex; flex-direction: column; gap: 20px;">
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px;">
+<li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; gap: 14px; align-items: baseline;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">01</span><span style="font-size: 16px;">Incoming approach on a hyperbola</span></li>
+<li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; gap: 14px; align-items: baseline;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">02</span><span style="font-size: 16px;">Braking into a capture ellipse</span></li>
+<li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; gap: 14px; align-items: baseline;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">03</span><span style="font-size: 16px;">Circularization combined with a plane change</span></li>
+</ol>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">A solar-system view beside the capture locates the route endpoint and Encke at arrival. The capture uses assumed incoming conditions and spherical gravity, separately from the interplanetary path.</p>
+</div>
+<figure class="gy-part" data-gy-glow data-gy-vid style="position: relative; margin: 0; border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="position: relative; aspect-ratio: 16 / 9; background: #05070c; overflow: hidden;">
+<video src="../../../assets/media/modeling/mission-profiles/arrival_01_15s_capture_v3.mp4" poster="../../../assets/media/modeling/mission-profiles/arrival_01_capture_v3_poster.png" muted loop controls preload="metadata" aria-label="Direct route A: local capture geometry beside the arrival reference view" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<figcaption style="padding: 12px 16px; border-top: 1.5px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Direct route A · capture beside arrival reference · silent 15 s</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="annual-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
+<h2 id="annual-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Departure year</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · Same 550-day flight, three windows</span>
+</div>
+<p style="margin: 0 0 28px; font-size: 20px; line-height: 1.5; max-width: 60ch;">The departure date changes both ends of the journey. With flight time held at 550 days, 2030 needs the least launch energy and arrives slowest.</p>
+<div style="display: flex; flex-wrap: wrap; border: 1.5px solid var(--foreground); gap: 1px; background: var(--foreground); margin-bottom: 24px;">
+<div class="gy-stat" style="flex: 1 1 200px; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;">2029</span><span style="font-size: 15px; line-height: 1.5;"><b class="gy-num" style="font-size: 26px;">323.01</b> km²/s² C3 · <b>34.84</b> km/s arrival</span></div>
+<div class="gy-stat" style="flex: 1 1 200px; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px; box-shadow: inset 0 -3px 0 rgb(var(--acc));"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;">2030 · SELECTED</span><span style="font-size: 15px; line-height: 1.5;"><b class="gy-num" style="font-size: 26px;">64.66</b> km²/s² C3 · <b>3.93</b> km/s arrival</span></div>
+<div class="gy-stat" style="flex: 1 1 200px; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;">2031</span><span style="font-size: 15px; line-height: 1.5;"><b class="gy-num" style="font-size: 26px;">96.54</b> km²/s² C3 · <b>10.02</b> km/s arrival</span></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 24px; align-items: start;">
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<a class="gy-frame" href="../../../assets/media/modeling/mission-profiles/neighbor_window_comparison.png" target="_blank" rel="noopener" style="display: block; border: 1.5px solid var(--foreground); background: #0a0e17; aspect-ratio: 16 / 9; overflow: hidden;"><img src="../../../assets/media/modeling/mission-profiles/neighbor_window_comparison.png" alt="For the 2029, 2030 and 2031 candidates, departure C3 is 323.01, 64.66 and 96.54 square kilometres per square second; arrival relative speed is 34.84, 3.93 and 10.02 kilometres per second." style="width: 100%; height: 100%; object-fit: contain; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. D1 · Departure C3 and arrival speed · select to enlarge</figcaption>
+</figure>
+<figure class="gy-part" data-gy-glow data-gy-vid style="position: relative; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="gy-frame" style="position: relative; aspect-ratio: 16 / 9; border: 1.5px solid var(--foreground); background: #05070c; overflow: hidden;">
+<video src="../../../assets/media/modeling/mission-profiles/c3_launch_to_arrival.mp4" poster="../../../assets/media/modeling/mission-profiles/c3_launch_to_arrival_poster.png" muted loop controls preload="metadata" aria-label="Launch-window energy comparison and transfer playback" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. D2 · Each candidate flies to arrival, C3 marker fixed at departure · silent 15 s</figcaption>
+</figure>
+</div>
+<div style="margin-top: 24px; padding: 20px 24px; border: 1.5px dashed var(--foreground); display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline;">
+<span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Launch vehicle</span>
+<p style="margin: 0; flex: 1 1 520px; font-size: 16px; line-height: 1.6;">The original team study favored Atlas V 541 for its lower-energy Mars-assisted concept. The later route variants assume a different departure energy and a range of spacecraft masses, so each configuration needs its own payload-versus-energy check.</p>
+</div>
+<p style="margin: 16px 0 0; font-size: 14px; line-height: 1.6; color: var(--muted-foreground);">Prograde, zero-revolution solar two-body Lambert transfers on sampled grids. This comparison is separate from the low-thrust and Mars-assisted profiles and is not a global optimum.</p>
+</section>
+
+<section aria-labelledby="routes-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
+<h2 id="routes-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/></svg>Route studies</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail E · Pick a route and a view</span>
+</div>
+<p style="margin: 0 0 28px; font-size: 20px; line-height: 1.5; max-width: 60ch;">CAPCOM compared a direct low-thrust transfer with a Mars-assisted route, balancing flight time against propellant demand and launch escape capability.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 16px;">
+<div role="group" aria-label="Route" style="display: flex; flex-wrap: wrap; gap: 8px;">
+<button type="button" class="gy-toggle" data-ms-pick="route:0" aria-pressed="false">Direct A</button>
+<button type="button" class="gy-toggle" data-ms-pick="route:1" aria-pressed="false">Direct B</button>
+<button type="button" class="gy-toggle" data-ms-pick="route:2" aria-pressed="false">Mars-assisted A</button>
+<button type="button" class="gy-toggle" data-ms-pick="route:3" aria-pressed="true">Mars-assisted B / Encke</button>
+</div>
+<div role="group" aria-label="View" style="display: flex; flex-wrap: wrap; gap: 8px;">
+<button type="button" class="gy-toggle" data-ms-pick="view:h" aria-pressed="true">Heliocentric</button>
+<button type="button" class="gy-toggle" data-ms-pick="view:a" aria-pressed="false">Angled</button>
+</div>
+</div>
+<figure style="margin: 0; border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="aspect-ratio: 16 / 9; background: #0b0f1a; overflow: hidden;">
+<video id="ms-route-video" src="../../../assets/media/modeling/encke/heliocentric.mp4" poster="../../../assets/media/modeling/encke/heliocentric.png" muted loop controls playsinline preload="metadata" aria-label="Mars-assisted route B / Encke, heliocentric view playback" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+</div>
+<figcaption style="padding: 14px 18px; border-top: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px;">
+<span style="font-size: 18px; font-weight: 700; text-transform: uppercase;"><span data-ms-text="routeName">Mars-assisted route B / Encke</span></span>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-foreground);"><span data-ms-text="routeDesc">Earth, Mars, Encke</span> · <span data-ms-text="viewName">Heliocentric</span> view · silent 10 s playback</span>
+</figcaption>
+</figure>
+</section>
+
+
+<section aria-labelledby="windows-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
+<h2 id="windows-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Lambert window cases</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail F · Three screening cases</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 32px; align-items: start;">
+<div style="display: flex; flex-direction: column; gap: 20px;">
+<p style="margin: 0; font-size: 18px; line-height: 1.55;">Solar two-body, prograde, zero-revolution Lambert transfers with Earth and Encke states from NASA JPL Horizons.</p>
+<div style="display: flex; flex-direction: column; gap: 14px;">
+<div role="group" aria-label="Case" style="display: flex; flex-wrap: wrap; gap: 8px;">
+<button type="button" class="gy-toggle" data-ms-pick="win:0" aria-pressed="true">Lowest departure energy</button>
+<button type="button" class="gy-toggle" data-ms-pick="win:1" aria-pressed="false">Lowest speed sum</button>
+<button type="button" class="gy-toggle" data-ms-pick="win:2" aria-pressed="false">Shorter flight time</button>
+</div>
+<div role="group" aria-label="Plot" style="display: flex; flex-wrap: wrap; gap: 8px;">
+<button type="button" class="gy-toggle" data-ms-pick="wview:2" aria-pressed="true">2D top view</button>
+<button type="button" class="gy-toggle" data-ms-pick="wview:3" aria-pressed="false">3D view</button>
+</div>
+</div>
+<div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Reading the plot</p>
+<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-size: 15px; line-height: 1.6;">
+<li>The contour map locates each departure date and flight time.</li>
+<li>The replay follows the propagated path in physical time.</li>
+<li>Speed sum, departure excess speed plus arrival relative speed, is a screening score.</li>
+</ol>
+</div>
+</div>
+<figure style="margin: 0; border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="aspect-ratio: 16 / 9; background: #fff; overflow: hidden;">
+<video id="ms-window-video" src="../../../assets/media/modeling/trajectories/window-1-2d.mp4" poster="../../../assets/media/modeling/trajectories/window-1-2d.png" muted loop controls playsinline preload="metadata" aria-label="Lambert launch-window replay, Lowest departure energy" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+</div>
+<figcaption style="padding: 12px 16px; border-top: 1.5px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;"><span data-ms-text="winName">Lowest departure energy</span> · <span data-ms-text="winView">2D top view</span> · silent 10 s playback</figcaption>
+</figure>
+</div>
+<p style="margin: 28px 0 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Earth and Mars tracks: DE405/SPICE · Encke: JPL Horizons · Shapes schematic, timing compressed by phase · CAPCOM team mission concept · Earth imagery: NASA/Goddard SVS Blue Marble · Mars imagery: NASA/JPL-Caltech/USGS Viking mosaic · Launch reference: ULA Atlas V User's Guide (2010)</p>
+</section>
+
+<section aria-label="Next study" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<a class="gy-card" href="../architecture/" data-gy-glow style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 32px; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Next study · 04</span><span style="font-size: clamp(32px, 4vw, 56px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Systems architecture</span></span>
+<svg class="gy-arrow" aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</a>
+</section>
+
+</main>
+
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px 40px; display: flex; flex-direction: column; gap: 40px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px;">
+<h2 style="margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../" style="padding: 6px 0;">All simulations</a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+<div class="gy-xh" aria-hidden="true" style="position: absolute; inset: 0; z-index: 50; pointer-events: none;">
+<div style="position: absolute; top: 0; bottom: 0; left: var(--cx, -10px); width: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: 0; right: 0; top: var(--cy, -10px); height: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: calc(var(--cx, -999px) + var(--rdx, 14px)); top: calc(var(--cy, -999px) + 14px); padding: 4px 8px; background: var(--background); border: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; font-variant-numeric: tabular-nums;">X <span data-gy-x>0.0</span>  Y <span data-gy-y>0.0</span> mm</div>
+</div>
+</div>
+</body>
+</html>

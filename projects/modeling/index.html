@@ -1,48 +1,287 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Engineering studies connecting system requirements, reaction-wheel dynamics, mission concepts, trajectory studies and ROS2 integration.">
-  <title>Modeling &amp; Simulation | Gavin Yam</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/orbes.css">
-  <link rel="stylesheet" href="../../assets/css/project-notes.css">
-  <link rel="stylesheet" href="../../assets/css/modeling.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Engineering studies connecting system requirements, reaction-wheel dynamics, mission concepts, trajectory studies and ROS2 integration.">
+<title>Modeling &amp; Simulation | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/gy.css">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-mesh{display:none}
+:root[data-theme="dark"] .gy-mesh{display:block}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible,.gy-chip:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-chip{transition:border-color .2s,background-color .2s}
+.gy-chip:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.08)}
+.gy-btn{transition:background-color .2s,color .2s}
+.gy-btn:hover{background:var(--foreground) !important;color:var(--background)}
+.gy-btn:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:4px}
+.gy-img{filter:grayscale(1) contrast(1.05);transition:filter .5s,transform .7s cubic-bezier(0,0,.2,1)}
+:root[data-theme="dark"] .gy-img{filter:none}
+.gy-card:hover .gy-img,.gy-fig:hover .gy-img{filter:none;transform:scale(1.03)}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:var(--muted)}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-card{transition:border-color .25s}
+.gy-card:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+.gy-play{transition:opacity .25s}
+.gy-card:hover .gy-play{opacity:0}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+</style>
+<script src="../../assets/js/gy.js" defer></script>
+<script src="../../assets/js/gy-mesh.js" defer></script>
 </head>
-<body class="project-notes modeling">
-<a class="skip" href="#main">Skip to content</a>
-<header class="masthead"><div class="nav-inner"><a class="brand" href="../../index.html">Gavin <span>/ Engineering</span></a><span class="breadcrumb"><a href="../../index.html#project-details">Projects</a> <span>/ Modeling</span></span></div></header>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; cursor: crosshair; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
+
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../index.html#work">Work</a>
+<a class="gy-link" href="./" aria-current="page" style="text-decoration-color: rgb(var(--acc)); text-decoration-thickness: 2px;">Simulations</a>
+<a class="gy-link" href="../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
 <main id="main" tabindex="-1">
-  <section class="hero wrap" aria-labelledby="project-title">
-    <div class="hero-title"><h1 id="project-title">Modeling &amp; simulation</h1><p>Connect a system question<br>to a model that can answer it.</p></div>
-    <p class="project-intro">From requirements and interfaces to dynamics and mission studies, these projects explore how engineering assumptions shape a model's behavior. The work spans historical coursework, reaction-wheel control development and continued model exploration.</p>
-    <nav class="section-nav" aria-label="Modeling studies"><a href="#architecture">Systems architecture</a><a href="#dynamics">Reaction-wheel dynamics</a><a href="#missions">Mission studies</a><a href="#sherpa">SHERPA</a><a href="#integration">ROS2 integration</a></nav>
-  </section>
-  <section id="architecture" class="section wrap" aria-labelledby="architecture-title">
-    <div class="section-heading"><p class="section-label">SCExample / System Composer</p><div><h2 id="architecture-title">Connect requirements to the parts that fulfill them.</h2><p>The educational Mars-helicopter example separates operations, functions and physical subsystems. Architecture and allocation views make it possible to follow a requirement through the system and inspect the interfaces between components.</p><p>Work on the inherited SCExample teaching project began with System Composer models, stereotypes and allocation diagrams. Later development added typed interfaces, requirement traceability and executable mission-state behavior using synthetic events and educational assumptions.</p></div></div>
-  </section>
-  <div class="wrap modeling-media"><figure><img src="../../assets/media/modeling/traceability-example.svg" width="1500" height="670" loading="lazy" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component."><figcaption>SCExample educational model: selected altitude-sensing relationships. Solid lines show native relationships; the dashed line marks a proposed metric.</figcaption></figure><p><a href="playback/">Open the recorded SCExample operational playback</a></p><p>Explore five simulated scenarios, operational timelines and resource use. Faults are represented by signal proxies; playback starts only when requested.</p></div>
-  <section id="dynamics" class="section wrap" aria-labelledby="dynamics-title">
-    <div class="section-heading"><p class="section-label">Reaction wheels / Simscape &amp; PID</p><div><h2 id="dynamics-title">Follow wheel torque into body motion.</h2><p>The reaction-wheel study connects a multibody model with attitude-control scripts. Quaternion-based PID work, wheel sizing and log analysis explore how rotor inertia, torque and speed limits affect the commanded response.</p><p>Model checks exposed unit-conversion issues, inconsistent inertia assumptions and a mismatch between the tuning objective and the final controller. Those issues make parameter consistency and stress-case behavior central to the next model iteration. The scope here is simulated reaction-wheel dynamics.</p></div></div>
-  </section>
-  <div class="wrap modeling-media dynamics-reel"><figure><video controls playsinline preload="none" width="1600" height="902" poster="../../assets/media/modeling/case01_preview.png" aria-label="Reaction-wheel simulation: roll slew, angle acquisition and hold" aria-describedby="case01-caption"><source src="../../assets/media/modeling/case01_cad.mp4" type="video/mp4"><a href="../../assets/media/modeling/case01_cad.mp4">Open the roll simulation video</a></video><figcaption id="case01-caption">Case 01: roll slew, angle acquisition and hold. Imported CAD geometry follows saved simulated states; colored wheels identify body axes. Silent recording from the Simscape study.</figcaption></figure><figure><video controls playsinline preload="none" width="1600" height="902" poster="../../assets/media/modeling/case10_preview.png" aria-label="Reaction-wheel simulation: prescribed target tracking" aria-describedby="case10-caption"><source src="../../assets/media/modeling/case10_cad.mp4" type="video/mp4"><a href="../../assets/media/modeling/case10_cad.mp4">Open the target-tracking simulation video</a></video><figcaption id="case10-caption">Case 10: compound slew and tracking of a prescribed planar target path. The panels show the simulated assembly, target direction and geometric bearing in a fixed camera view. Silent recording from the Simscape study.</figcaption></figure><p>These selected recordings illustrate simulated behavior under their stated assumptions. The broader study also includes stress cases that exceeded their tracking or wheel-speed limits.</p></div>
-  <section id="missions" class="section wrap" aria-labelledby="missions-title">
-    <div class="section-heading"><p class="section-label">MALTO / Earth–Encke</p><div><h2 id="missions-title">CAPCOM: routes to comet Encke.</h2><p>Saved MALTO mission configurations cover comet, Encke and Psyche studies. They record work with an existing mission-design tool and provide a starting point for examining mission assumptions.</p><p>CAPCOM (Close Approach Primary Cometary Outburst Mapper) is a team mission concept for close-range observation of comet 2P/Encke and its outbursts. The study compared a direct low-thrust transfer with a Mars-assisted route, balancing flight time against propellant demand and launch-vehicle escape capability.</p>
-    </div></div>
-  </section>
-<div class="wrap modeling-media capcom-preview"><figure><video id="capcom-preview" controls playsinline preload="none" width="1280" height="720" poster="../../assets/media/modeling/mission-profiles/mission_03_capture_v3_poster.png" aria-label="CAPCOM mission profile: Mars-assisted route A" aria-describedby="capcom-preview-caption"><source src="../../assets/media/modeling/mission-profiles/mission_03_120s_capture_v3.mp4" type="video/mp4"><a href="../../assets/media/modeling/mission-profiles/mission_03_120s_capture_v3.mp4">Open mars-assisted route a animation</a></video><figcaption id="capcom-preview-caption">Mars-assisted route A — silent, two-minute mission visualization. <a href="../../assets/media/modeling/mission-profiles/mission_03_120s_capture_v3.mp4">Open recording</a> · <a href="../../assets/media/modeling/mission-profiles/mission_03_capture_v3_poster.png">Static preview</a></figcaption></figure><p><a href="trajectories/">Explore CAPCOM: mission profiles, arrival and launch-window studies</a></p></div>
-  <section id="sherpa" class="section wrap" aria-labelledby="sherpa-title">
-    <div class="section-heading"><p class="section-label">SHERPA / NASA RASC-AL concept</p><div><h2 id="sherpa-title">Turn a servicing mission into a system concept.</h2><p>The student team's SHERPA proposal explored a multi-use platform near Earth–Moon L1 for spacecraft servicing, refueling and communications relay. Its concept of operations connects arrival, docking and servicing with architecture choices, technology assumptions, mass estimates and budget planning.</p><p>As part of the proposal team, I contributed to this shared mission-concept study.</p></div></div>
-  </section>
-<div class="wrap modeling-media"><figure><video controls playsinline preload="none" width="1280" height="720" poster="../../assets/media/modeling/sherpa/cad_deployment_original.png" aria-label="SHERPA original CAD deployment"><source src="../../assets/media/modeling/sherpa/cad_deployment_original.mp4" type="video/mp4"></video><figcaption>Original team CAD deployment: solar arrays and radiators unfold. Silent recording.</figcaption></figure><p><a href="sherpa/">Explore SHERPA: deployment, servicing and trajectory concepts</a></p></div>
-  <section id="integration" class="section wrap" aria-labelledby="integration-title">
-    <div class="section-heading"><p class="section-label">ROS2 / ORBES integration</p><div><h2 id="integration-title">Exercise the data path before connecting every sensor.</h2><p>ROS2 simulation work used CSV and IMU replay alongside synthetic camera data to exercise integration. Replayed and generated inputs provide a controlled setting for following data through the pipeline and separating interface behavior from physical sensor behavior.</p><p>The related ORBES case study follows the fan platform's hanging tests, frame-alignment investigation and motor-allocation work.</p><p><a href="../orbes/">Read the ORBES control and integration story</a></p></div></div>
-  </section>
+<section id="top" aria-labelledby="page-title" style="position: relative; z-index: 1; border-bottom: 1.5px solid var(--foreground); overflow: hidden;">
+<canvas class="gy-mesh" data-gy-mesh="field" data-refinement="110" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;"></canvas>
+<div style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 88px 32px 72px; display: flex; flex-direction: column; gap: 28px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / Sheet 03 · Modeling and simulation</p>
+<h1 id="page-title" style="margin: 0; font-size: clamp(44px, 10vw, 148px); line-height: 0.86; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Simulations</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 26ch; text-wrap: pretty;">Connect a system question to a model that can answer it.</p>
+<nav aria-label="Studies on this page" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-chip" href="#cfd" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">01 CFD + FEA</a>
+<a class="gy-chip" href="#wheels" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">02 Reaction wheels</a>
+<a class="gy-chip" href="trajectories/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">03 Mission studies ↗</a>
+<a class="gy-chip" href="architecture/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">04 Architecture ↗</a>
+<a class="gy-chip" href="sherpa/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">05 SHERPA ↗</a>
+<a class="gy-chip" href="../orbes/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">06 ROS2 · ORBES ↗</a>
+</nav>
+</div>
+</section>
+
+<section id="cfd" aria-labelledby="cfd-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 96px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="cfd-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l3-7 4 14 3-7h7"/></svg>Production CFD + FEA</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 01 · Khorium SimOps</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px; align-items: start;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<p style="margin: 0; font-size: 20px; line-height: 1.5; max-width: 40ch;">Python orchestration for OpenFOAM and CalculiX, from external flow and conjugate heat transfer to structural statics.</p>
+<div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 150px; padding: 20px 18px; display: flex; flex-direction: column; gap: 18px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 44px; line-height: 0.9; font-weight: 700; letter-spacing: -0.04em;">7</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -12px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 14px; line-height: 1.4; color: var(--muted-foreground);">solver templates</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 150px; padding: 20px 18px; display: flex; flex-direction: column; gap: 18px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 44px; line-height: 0.9; font-weight: 700; letter-spacing: -0.04em;">100+</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -12px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 14px; line-height: 1.4; color: var(--muted-foreground);">validation studies vs. benchmarks and Fluent</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 150px; padding: 20px 18px; display: flex; flex-direction: column; gap: 18px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 44px; line-height: 0.9; font-weight: 700; letter-spacing: -0.04em;">100%</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -12px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 14px; line-height: 1.4; color: var(--muted-foreground);">boundary-layer coverage, up from 1.45%</span>
+</div>
+</div>
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase;">Gmsh + snappyHexMesh boundary layers · 12 platform defects found from the data alone</p>
+</div>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div style="aspect-ratio: 4 / 3; border: 1.5px dashed var(--foreground); background: var(--background); display: flex; align-items: center; justify-content: center; padding: 32px; box-sizing: border-box;">
+<span style="font-family: var(--font-mono); font-size: 13px; line-height: 1.7; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; max-width: 30ch;">[ Add a cleared Khorium validation render or mesh image ]</span>
+</div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 1 · Placeholder for an approved figure</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="wheels" aria-labelledby="wheels-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="wheels-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>Reaction-wheel dynamics</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 02 · Simscape &amp; PID</span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 52ch;">A multibody model tied to quaternion-based PID scripts. Wheel sizing and log analysis show how rotor inertia, torque and speed limits shape the response.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 24px;">
+<a class="gy-card" href="#wheels" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #a0a0a0; border-bottom: 1.5px solid var(--foreground);">
+<video src="../../assets/media/modeling/case01_cad.mp4" poster="../../assets/media/modeling/case01_preview.png" muted loop preload="metadata" aria-label="Simscape recording of a roll slew, angle acquisition and hold" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Case 01</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">Roll slew, acquisition and hold</h3>
+</div>
+</a>
+<a class="gy-card" href="#wheels" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #a0a0a0; border-bottom: 1.5px solid var(--foreground);">
+<video src="../../assets/media/modeling/case10_cad.mp4" poster="../../assets/media/modeling/case10_preview.png" muted loop preload="metadata" aria-label="Simscape recording of a compound slew tracking a prescribed planar target" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Case 10</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">Compound slew + target tracking</h3>
+</div>
+</a>
+</div>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 24px; align-items: start;">
+<div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Model checks found</p>
+<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 13px; line-height: 1.9; text-transform: uppercase;">
+<li>Unit-conversion issues.</li>
+<li>Inconsistent inertia assumptions.</li>
+<li>A tuning objective that did not match the final controller.</li>
+</ol>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">Recordings show simulated behavior under their stated assumptions. The broader study also includes stress cases that exceeded tracking or wheel-speed limits.</p>
+</div>
+</section>
+
+<section id="missions" aria-labelledby="missions-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="missions-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-25 12 12)"/></svg>Mission studies</h2>
+<span style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 03 · MALTO + Lambert</span><a class="gy-btn" href="trajectories/" style="padding: 10px 14px; border: 1.5px solid var(--foreground); background: var(--background); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;">Open study ↗</a></span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 56ch;">CAPCOM, a team concept for close-range observation of comet 2P/Encke, weighed a direct low-thrust transfer against a Mars-assisted route: flight time against propellant and launch capability.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 24px;">
+<a class="gy-card" href="trajectories/" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #0b0f1a; border-bottom: 1.5px solid var(--foreground);">
+<video src="../../assets/media/modeling/encke/heliocentric.mp4" poster="../../assets/media/modeling/encke/heliocentric.png" muted loop preload="metadata" aria-label="Heliocentric playback of the Mars-assisted transfer to comet Encke" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Heliocentric view</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 700; text-transform: uppercase;">Mars-assisted route to Encke</h3>
+</div>
+</a>
+<a class="gy-card" href="trajectories/" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #fff; border-bottom: 1.5px solid var(--foreground);">
+<video src="../../assets/media/modeling/trajectories/window-1-2d.mp4" poster="../../assets/media/modeling/trajectories/window-1-2d.png" muted loop preload="metadata" aria-label="Lambert launch-window contour map with the replayed lowest-departure-energy transfer" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
+<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Lambert screening</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 700; text-transform: uppercase;">Lowest departure energy window</h3>
+</div>
+</a>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="aspect-ratio: 16 / 10; overflow: hidden; background: #0b0f1a; border-bottom: 1.5px solid var(--foreground);"><img src="../../assets/media/modeling/mission-profiles/mission_03_capture_v3_poster.png" alt="CAPCOM mission 03: Mars flyby at a 500 km periapsis on the Mars-assisted route to Encke." style="width: 100%; height: 100%; object-fit: cover;"></div>
+<figcaption style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Mission profile</span><span style="font-size: 18px; font-weight: 700; text-transform: uppercase;">Launch to comet orbit</span></figcaption>
+</figure>
+</div>
+<p style="margin: 24px 0 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Earth and Mars tracks: DE405/SPICE · Encke: JPL Horizons · Lambert cases: solar two-body, prograde, zero-revolution</p>
+</section>
+
+<section id="architecture" aria-labelledby="arch-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="arch-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Systems architecture</h2>
+<span style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 04 · System Composer</span><a class="gy-btn" href="architecture/" style="padding: 10px 14px; border: 1.5px solid var(--foreground); background: var(--background); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;">Open study ↗</a></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
+<p style="margin: 0; flex: 1 1 300px; font-size: 20px; line-height: 1.5;">SCExample, an educational Mars-helicopter model, traces each requirement to the operations, functions and components that fulfill it. Later work added typed interfaces and executable mission-state behavior.</p>
+<figure style="margin: 0; flex: 2.4 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+<div style="border: 1.5px solid var(--foreground); background: #f8fafc; overflow: hidden;"><img src="../../assets/media/modeling/traceability-example.svg" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component." style="width: 100%; height: auto; display: block;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Altitude-sensing traceability · solid lines native, dashed line a proposed metric</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="sherpa" aria-labelledby="sherpa-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="sherpa-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/></svg>SHERPA concept</h2>
+<span style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 05 · NASA RASC-AL</span><a class="gy-btn" href="sherpa/" style="padding: 10px 14px; border: 1.5px solid var(--foreground); background: var(--background); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;">Open study ↗</a></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 24px; align-items: stretch;">
+<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 24px;">
+<p style="margin: 0; font-size: 20px; line-height: 1.5;">A student proposal for a multi-use platform near Earth-Moon L1: servicing, refueling and communications relay, with mass, schedule and cost planning.</p>
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Shared team study · Concept artwork: SHERPA team, Cal Poly Pomona / NASA RASC-AL</p>
+</div>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div style="aspect-ratio: 1 / 1; border: 1.5px solid var(--foreground); background: #000; overflow: hidden;"><img src="../../6cef784d-f6e6-4ffb-ae6e-0b2495440058.png" alt="SHERPA spacecraft concept with two circular solar arrays, antennas and a servicing deck." style="width: 100%; height: 100%; object-fit: contain;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 3 · Deployed configuration</figcaption>
+</figure>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<div style="aspect-ratio: 1 / 1; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../a5a1ff89-22f1-48f2-b422-f697dd5d80f5.png" alt="Earth-Moon trajectory study plot with SHERPA and Falcon Heavy burn locations marked." style="width: 100%; height: 100%; object-fit: contain;"></div>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · Trajectory study with burn locations</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="ros2" aria-labelledby="ros2-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="ros2-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>ROS2 integration</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 06 · ORBES</span>
+</div>
+<a class="gy-card" href="../orbes/" data-gy-glow style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="padding: 32px; display: flex; flex-direction: column; justify-content: space-between; gap: 28px;">
+<p style="margin: 0; font-size: 20px; line-height: 1.5;">CSV and IMU replay with synthetic camera data exercised the data path before every sensor was connected, separating interface behavior from physical sensor behavior.</p>
+<span style="display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; text-transform: uppercase;">Read the ORBES case study <svg class="gy-arrow" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span>
+</div>
+<div style="position: relative; min-height: 300px; background: #fff; border-left: 1.5px solid var(--foreground); overflow: hidden;">
+<img src="../../assets/images/orbes/fan-platform-architecture.png" alt="ORBES fan-platform architecture: guidance and navigation feed an attitude and translation controller that commands fourteen motors." style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box;">
+</div>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</a>
+</section>
+
 </main>
-<footer id="contact"><div class="wrap footer-inner"><div><p class="footer-brand">Gavin / Engineering</p><h2>Continue the conversation.</h2><p><a href="../../index.html#contact">Contact Gavin</a></p></div><a href="../../index.html#projects">Back to selected work</a></div><div class="wrap footer-bottom"><span>Modeling &amp; Simulation</span><a href="#main">Back to top</a></div></footer>
-<script src="../../assets/js/modeling-reels.js" defer></script>
+
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px 40px; display: flex; flex-direction: column; gap: 56px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<h2 style="margin: 0; font-size: clamp(44px, 6vw, 88px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../../assets/Gavin_Yam_Resume.pdf" style="padding: 6px 0;">Resume (PDF)</a>
+</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1.5px solid var(--foreground); font-family: var(--font-mono); text-transform: uppercase; min-width: min(420px, 100%);">
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Drawn</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">G. Yam</dd></div>
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Checked</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Your team</dd></div>
+<div style="padding: 10px 14px;"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Sheet</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">3 of 6</dd></div>
+</dl>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+<div class="gy-xh" aria-hidden="true" style="position: absolute; inset: 0; z-index: 50; pointer-events: none;">
+<div style="position: absolute; top: 0; bottom: 0; left: var(--cx, -10px); width: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: 0; right: 0; top: var(--cy, -10px); height: 1px; background: rgba(var(--acc), .55);"></div>
+<div style="position: absolute; left: calc(var(--cx, -999px) + var(--rdx, 14px)); top: calc(var(--cy, -999px) + 14px); padding: 4px 8px; background: var(--background); border: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; font-variant-numeric: tabular-nums;">X <span data-gy-x>0.0</span>  Y <span data-gy-y>0.0</span> mm</div>
+</div>
+</div>
 </body>
 </html>
