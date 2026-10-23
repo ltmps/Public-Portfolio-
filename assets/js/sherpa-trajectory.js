@@ -1,6 +1,7 @@
-/* SHERPA Fig. 4 replay: the reconstructed Earth-Moon trajectory drawn over time, either in
-   an Earth-centered frame where the Moon and L1 turn around Earth or in the rotating frame
-   of the team plot. Without script the page keeps the static rotating-frame path.
+/* SHERPA Fig. 4 replay: the reconstructed Earth-Moon trajectory drawn over time in an
+   Earth-centered frame where the Moon and L1 turn around Earth, in the rotating frame of the
+   team plot, or in a tilted 3D view of the Earth-centered frame that can be turned by drag or
+   arrow keys. Without script the page keeps the static rotating-frame path.
    Samples are Earth-centered rotating-frame positions (Earth-Moon distance = 1, x 1000)
    every DT nondimensional time units; one lunar orbit is 2 pi units, about 27.3 days. */
 (function () {
@@ -20,12 +21,15 @@
     var link = get('link'), orbit = get('orbit'), range = get('range'), day = get('day'), play = get('play');
     var views = root.querySelectorAll('[data-st-view]');
     var burns = { fh: get('fh'), b1: get('b1'), b2: get('b2') };
+    var rings = get('rings'), rings3 = get('rings3'), orbit3 = get('orbit3'), axis = get('axis');
+    var mode = 'inertial', az = -0.35, el = 0.5, turned = false, drag = null;
     var inertial = true, i = 0, running = false, last = 0, acc = 0, hold = 0, raf = 0, seen = false, resume = false;
-    var cache = { r: [], e: [] };
+    var cache = { r: [], e: [] }, ex = new Float64Array(N), ey = new Float64Array(N);
     for (var k = 0; k < N; k++) {
       var p = rot(k), a = angle(k), c = Math.cos(a), s = Math.sin(a);
+      ex[k] = p[0] * c - p[1] * s; ey[k] = p[0] * s + p[1] * c;
       cache.r.push(p[0].toFixed(3) + ',' + p[1].toFixed(3));
-      cache.e.push((p[0] * c - p[1] * s).toFixed(3) + ',' + (p[0] * s + p[1] * c).toFixed(3));
+      cache.e.push(ex[k].toFixed(3) + ',' + ey[k].toFixed(3));
     }
 
     var labels = [moon.querySelector('text'), l1.querySelector('text')];
@@ -33,32 +37,59 @@
     range.max = String(N - 1);
     root.classList.add('st-live');
 
-    function at(k) {
-      var p = rot(k);
-      if (!inertial) return p;
-      var a = angle(k), c = Math.cos(a), s = Math.sin(a);
-      return [p[0] * c - p[1] * s, p[0] * s + p[1] * c];
+    // 3D: turn the Earth-centered plane by az, tilt it by the camera elevation el, and add a
+    // mild perspective so the near side of the orbit reads larger
+    function proj(x, y) {
+      var ca = Math.cos(az), sa = Math.sin(az), X = x * ca - y * sa, Y = x * sa + y * ca;
+      var f = 4 / (4 + Y * Math.cos(el));
+      return [X * f, Y * Math.sin(el) * f];
     }
-    function pts(a, b) { return (inertial ? cache.e : cache.r).slice(a, b + 1).join(' '); }
+    function at(k) {
+      if (mode === 'rotating') return rot(k);
+      return mode === '3d' ? proj(ex[k], ey[k]) : [ex[k], ey[k]];
+    }
+    function pts(a, b) {
+      if (mode !== '3d') return (inertial ? cache.e : cache.r).slice(a, b + 1).join(' ');
+      var out = [];
+      for (var k = a; k <= b; k++) { var q = proj(ex[k], ey[k]); out.push(q[0].toFixed(3) + ',' + q[1].toFixed(3)); }
+      return out.join(' ');
+    }
+    function circle(r) {
+      var d = '';
+      for (var k = 0; k <= 72; k++) {
+        var q = proj(r * Math.cos(k * Math.PI / 36), r * Math.sin(k * Math.PI / 36));
+        d += (k ? 'L' : 'M') + q[0].toFixed(3) + ' ' + q[1].toFixed(3);
+      }
+      return d;
+    }
     function place(el, p) { el.setAttribute('transform', 'translate(' + p[0].toFixed(4) + ' ' + p[1].toFixed(4) + ')'); }
 
     function draw() {
       var a = inertial ? angle(i) : 0, c = Math.cos(a), s = Math.sin(a);
       hist.setAttribute('points', pts(0, i));
       trail.setAttribute('points', pts(Math.max(0, i - TRAIL), i));
+      var flat = mode !== '3d', mp = flat ? [c, s] : proj(c, s);
       place(craft, at(i));
-      place(moon, [c, s]);
-      place(l1, [L1 * c, L1 * s]);
-      // Earth-centered labels sit either side of the Earth-Moon line so they never cross
+      place(moon, mp);
+      place(l1, flat ? [L1 * c, L1 * s] : proj(L1 * c, L1 * s));
+      // Earth-centered labels sit either side of the Earth-Moon line as drawn, so they never cross
+      var len = Math.hypot(mp[0], mp[1]) || 1, uc = mp[0] / len, us = mp[1] / len;
       for (var j = 0; j < 2; j++) {
         var sg = j ? 1 : -1, t = labels[j];
         t.setAttribute('text-anchor', inertial ? 'middle' : 'start');
-        t.setAttribute('x', inertial ? (-0.1 * s * sg).toFixed(3) : home[j][0]);
-        t.setAttribute('y', inertial ? (-0.1 * c * sg + 0.022).toFixed(3) : home[j][1]);
+        t.setAttribute('x', inertial ? (-0.1 * us * sg).toFixed(3) : home[j][0]);
+        t.setAttribute('y', inertial ? (-0.1 * uc * sg + 0.022).toFixed(3) : home[j][1]);
       }
-      link.setAttribute('x2', c.toFixed(4)); link.setAttribute('y2', s.toFixed(4));
-      orbit.style.display = inertial ? '' : 'none';
-      svg.setAttribute('viewBox', inertial ? '-1.12 -1.12 2.24 2.24' : '-0.88 -0.97 1.94 1.94');
+      link.setAttribute('x2', mp[0].toFixed(4)); link.setAttribute('y2', mp[1].toFixed(4));
+      orbit.style.display = mode === 'inertial' ? '' : 'none';
+      rings.style.display = flat ? '' : 'none';
+      rings3.style.display = orbit3.style.display = axis.style.display = flat ? 'none' : '';
+      if (!flat) {
+        rings3.setAttribute('d', circle(0.25) + circle(0.5) + circle(0.75));
+        orbit3.setAttribute('d', circle(1));
+        axis.setAttribute('y2', (0.32 * Math.cos(el)).toFixed(3));
+      }
+      svg.setAttribute('viewBox', mode === 'rotating' ? '-0.88 -0.97 1.94 1.94' : mode === '3d' ? '-1.08 -1.08 2.16 2.16' : '-1.12 -1.12 2.24 2.24');
       for (var k in burns) {
         var n = D.burns[k];
         burns[k].style.display = i >= n ? '' : 'none';
@@ -86,6 +117,7 @@
       } else {
         acc += dt * 0.075;                       // samples per ms: the full study in about 40 s
         var step = Math.floor(acc); acc -= step;
+        if (mode === '3d' && !turned) az += dt * 0.00012;   // a slow camera turn until the reader takes over
         if (step) { i = Math.min(N - 1, i + step); draw(); }
       }
       raf = requestAnimationFrame(tick);
@@ -99,12 +131,39 @@
     range.addEventListener('input', function () { resume = false; setRunning(false); i = +range.value; draw(); });
     for (var v = 0; v < views.length; v++) {
       views[v].addEventListener('click', function (e) {
-        inertial = e.currentTarget.getAttribute('data-st-view') === 'inertial';
+        mode = e.currentTarget.getAttribute('data-st-view');
+        inertial = mode !== 'rotating';
         for (var w = 0; w < views.length; w++) views[w].setAttribute('aria-pressed', views[w] === e.currentTarget ? 'true' : 'false');
-        svg.setAttribute('aria-label', inertial ? svg.getAttribute('data-label-inertial') : svg.getAttribute('data-label-rotating'));
+        svg.setAttribute('aria-label', svg.getAttribute('data-label-' + mode));
+        if (mode === '3d') { svg.setAttribute('tabindex', '0'); svg.style.touchAction = 'none'; svg.style.cursor = 'grab'; }
+        else { svg.removeAttribute('tabindex'); svg.style.touchAction = ''; svg.style.cursor = ''; }
         draw();
       });
     }
+
+    function turn(dAz, dEl) {
+      turned = true;
+      az += dAz; el = Math.max(0.12, Math.min(1.45, el + dEl));
+      draw();
+    }
+    svg.addEventListener('pointerdown', function (e) {
+      if (mode !== '3d') return;
+      e.preventDefault();
+      drag = [e.clientX, e.clientY]; svg.setPointerCapture(e.pointerId); svg.style.cursor = 'grabbing';
+    });
+    svg.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      turn((e.clientX - drag[0]) * 0.008, (e.clientY - drag[1]) * 0.006);
+      drag = [e.clientX, e.clientY];
+    });
+    function end() { if (drag) { drag = null; svg.style.cursor = mode === '3d' ? 'grab' : ''; } }
+    svg.addEventListener('pointerup', end);
+    svg.addEventListener('pointercancel', end);
+    svg.addEventListener('keydown', function (e) {
+      if (mode !== '3d') return;
+      var m = { ArrowLeft: [-0.12, 0], ArrowRight: [0.12, 0], ArrowUp: [0, -0.08], ArrowDown: [0, 0.08] }[e.key];
+      if (m) { e.preventDefault(); turn(m[0], m[1]); }
+    });
 
     // Reduced motion shows the whole path and waits for Play; otherwise the replay starts
     // the first time the figure scrolls into view and pauses while it is off screen.
