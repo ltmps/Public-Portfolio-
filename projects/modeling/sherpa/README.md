@@ -1,3 +1,7 @@
 # SHERPA detail page
 
 Curated original CAD deployment, schematic servicing and transfer-model sections use the existing portfolio design. The overview shows one original CAD clip and links here. Existing team media remain in the original presentation section. See [media provenance](../../../assets/media/modeling/sherpa/README.md) for source scope and attribution. Both reels progressively enhance static figures; no-JavaScript users can play every recording directly.
+
+## Fig. 4B trajectory replay
+
+`assets/js/sherpa-trajectory.js` replays the team's Fig. 4 trajectory plot in an Earth-centered frame, where the Moon and L1 turn around Earth, or in the rotating frame of the original plot. The path is a reconstruction. The departure leg was traced from the plot pixels, and the rest was fitted to the plotted lines as a chain of short circular restricted three-body arcs (Earth-Moon mass ratio 0.01215), so the timing is approximate and some loops of the original are not retraced. The small orbit around L1 follows the drawn ellipse. The page keeps the original figure, and the replay markup holds a static rotating-frame path for readers without JavaScript. Reduced motion shows the whole path and waits for Play.

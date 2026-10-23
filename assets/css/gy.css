@@ -62,3 +62,5 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 
 /* A hovered row's tint lowers the contrast of gray secondary text, so it darkens to the foreground */
 .gy-row:hover [style*="--muted-foreground"],.gy-ix:hover [style*="--muted-foreground"]{color:var(--foreground) !important}
+.st-ctrl{display:none}
+.st-live .st-ctrl{display:flex}
