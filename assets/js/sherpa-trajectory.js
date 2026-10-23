@@ -28,6 +28,8 @@
       cache.e.push((p[0] * c - p[1] * s).toFixed(3) + ',' + (p[0] * s + p[1] * c).toFixed(3));
     }
 
+    var labels = [moon.querySelector('text'), l1.querySelector('text')];
+    var home = labels.map(function (t) { return [t.getAttribute('x'), t.getAttribute('y')]; });
     range.max = String(N - 1);
     root.classList.add('st-live');
 
@@ -47,6 +49,13 @@
       place(craft, at(i));
       place(moon, [c, s]);
       place(l1, [L1 * c, L1 * s]);
+      // Earth-centered labels sit either side of the Earth-Moon line so they never cross
+      for (var j = 0; j < 2; j++) {
+        var sg = j ? 1 : -1, t = labels[j];
+        t.setAttribute('text-anchor', inertial ? 'middle' : 'start');
+        t.setAttribute('x', inertial ? (-0.1 * s * sg).toFixed(3) : home[j][0]);
+        t.setAttribute('y', inertial ? (-0.1 * c * sg + 0.022).toFixed(3) : home[j][1]);
+      }
       link.setAttribute('x2', c.toFixed(4)); link.setAttribute('y2', s.toFixed(4));
       orbit.style.display = inertial ? '' : 'none';
       svg.setAttribute('viewBox', inertial ? '-1.12 -1.12 2.24 2.24' : '-0.88 -0.97 1.94 1.94');
