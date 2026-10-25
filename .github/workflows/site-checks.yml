@@ -1,0 +1,24 @@
+name: Portfolio checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  static-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-site.cjs
+      - run: node scripts/check-modeling-media.cjs
+      - run: node scripts/check-sherpa-missions.cjs
+      - name: JavaScript syntax
+        run: |
+          node --check assets/js/gy.js
+          node --check assets/js/gy-mesh.js
+          node --check assets/js/mission-studies.js
+          node --check assets/js/architecture-study.js
