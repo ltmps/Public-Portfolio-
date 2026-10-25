@@ -96,6 +96,19 @@ const encke = {
   'heliocentric.png': 'eb4bc09880f65a5ec1b52ef0b00bec270604f707d1741bba551961a13c0df334'
 };
 for (const [file, hash] of Object.entries(encke)) assert.equal(sha('assets/media/modeling/encke/' + file), hash, `Approved Encke bytes: ${file}`);
+// ORBES localization study (Draft-A mc2): approved set from ltmps/ORBES-sim portfolio-media @ 0fc670d
+const localization = {
+  'fig_mc2_sizing.png': '7811cf36eb78fae2c8c6b641a61c0e44e02d0564a6e339f51c99102a10739a89',
+  'fig_mc2_sweep.png': 'f57ba5b4920a052419b192498e2fb4e3947cf028122b320c73473b029280ed12',
+  'fig_mc2_trace.png': '4d7a66cd551ec99a0f533d4c73850bf29f7eb6651047059a86842058a8a29999',
+  'orbes_modes.mp4': '28b36e683eb636d96281021257e018118736d1fb82b75c94a78ab892b8e155fb',
+  'orbes_modes_poster.png': 'b67ada51ebea3e1860e91d6a9187acc0f95d43a20b08bdc6e218117c4e069dd2'
+};
+const sims = read('projects/modeling/index.html');
+for (const [file, hash] of Object.entries(localization)) {
+  assert.equal(sha('assets/media/modeling/localization/' + file), hash, `Approved localization bytes: ${file}`);
+  assert(sims.includes('assets/media/modeling/localization/' + file), `Simulations page must show ${file}`);
+}
 const selection = JSON.parse(read('assets/media/modeling/trajectories/manifest.json'));
 assert.equal(selection.length, 24);
 for (const item of selection) {
@@ -103,4 +116,4 @@ for (const item of selection) {
   assert.equal(fs.statSync(path.join(root, file)).size, item.bytes);
   assert.equal(sha(file), item.sha256);
 }
-console.log('PASS: media dependencies and playback rules, CAPCOM phase jumps and v5 media, architecture data and envelope, playback viewer privacy and approved media hashes.');
+console.log('PASS: media dependencies and playback rules, CAPCOM phase jumps and v5 media, architecture data and envelope, playback viewer privacy and approved media hashes, including the ORBES localization set.');
