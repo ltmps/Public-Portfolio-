@@ -18,6 +18,11 @@
       });
       sequence.querySelector('[data-sm-current-time]').textContent = phases[index].querySelector('.sm-phase-time').textContent;
       sequence.querySelector('[data-sm-current-description]').textContent = phases[index].getAttribute('data-sm-description');
+      var strip = sequence.querySelector('.sm-phase-grid');
+      var frame = strip.getBoundingClientRect();
+      var selected = phases[index].getBoundingClientRect();
+      if (selected.left < frame.left + 6) strip.scrollLeft += selected.left - frame.left - 6;
+      else if (selected.right > frame.right - 6) strip.scrollLeft += selected.right - frame.right + 6;
     }
     function seek(time) {
       // A seek never starts playback. Native controls retain the user's play/pause choice.
