@@ -12,6 +12,9 @@ for (const slug of slugs) {
   const html = fs.readFileSync(path.join(root, `projects/modeling/sherpa/${slug}/index.html`), 'utf8');
   assert(!html.includes('data-gy-vid'), `${slug}: no hover playback`);
   assert(!html.includes('sherpa-trajectory.js'), `${slug}: no unrelated trajectory script`);
+  assert(html.includes('assets/js/sherpa-missions.js?v='), `${slug}: phase controls`);
+  assert(!html.includes('sm-download'), `${slug}: no visible MP4 download row`);
+  assert(!/[\u00e2\u00c3\ufffd]/.test(html), `${slug}: no garbled encoding`);
   for (const block of html.matchAll(/<video\b[^>]*>[\s\S]*?<\/video>/g)) {
     const tag = block[0].split('>')[0];
     assert(/\bcontrols\b/.test(tag) && /\bplaysinline\b/.test(tag));
@@ -21,9 +24,16 @@ for (const slug of slugs) {
     const name = block[0].match(/src="[^" ]+\/([^/]+)\.mp4"/)[1];
     assert(!seen.has(name), `${name}: duplicated video`);
     seen.add(name);
-    assert(html.includes(`Sequence in text:`));
+    assert(html.includes('class="sm-phase-grid"'), `${slug}: static phase panels`);
     assert(html.includes(`href="../../../../assets/media/modeling/sherpa/${name}.mp4"`));
     assert(fs.statSync(path.join(dir, name + '.jpg')).size > 1000);
+  }
+  for (const section of html.matchAll(/<section class="sm-film"[\s\S]*?<\/section>/g)) {
+    const name = section[0].match(/src="[^" ]+\/([^/]+)\.mp4"/)[1];
+    const times = [...section[0].matchAll(/data-sm-time="([\d.]+)"/g)].map(m => Number(m[1]));
+    assert(times.length > 1 && times[0] === 0, `${name}: sequence starts at zero`);
+    assert(times.every((t, i) => !i || t > times[i - 1]), `${name}: ordered timestamps`);
+    assert(times.at(-1) < manifest.find(m => m.name === name).duration_s, `${name}: timestamps within video`);
   }
 }
 assert.equal(manifest.length, 17);
@@ -36,4 +46,4 @@ for (const item of manifest) {
   assert.equal(item.fps, 24);
   assert(Math.abs(item.frames / item.fps - item.duration_s) < 0.05);
 }
-console.log('PASS: 7 SHERPA pages; all 17 source-matched videos, posters, text sequences and manual playback.');
+console.log('PASS: 7 SHERPA pages; 17 source-matched videos, posters, clean text, valid timestamp panels and manual playback.');
