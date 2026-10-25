@@ -1,0 +1,58 @@
+[
+  {
+    "file": "01_falcon_heavy_deployment-preview.mp4",
+    "source": "01_falcon_heavy_deployment.mp4",
+    "start_s": 11,
+    "duration_s": 6,
+    "bytes": 59986,
+    "sha256": "537ddac848eca585ddf19a44cf7c558ef70bb4df5f97a635a1176f341dabbe47"
+  },
+  {
+    "file": "02_customer_capture_docking-preview.mp4",
+    "source": "02_customer_capture_docking.mp4",
+    "start_s": 4,
+    "duration_s": 6,
+    "bytes": 24186,
+    "sha256": "318eb2cc8599bbdb59b35a9f160a5f9d16796a4626f8f94f9196a98ed5991e73"
+  },
+  {
+    "file": "04_customer_refueling-preview.mp4",
+    "source": "04_customer_refueling.mp4",
+    "start_s": 48.8333,
+    "duration_s": 6,
+    "bytes": 21729,
+    "sha256": "3efc80b686d21189f89fe267e2774e2d0c5e9d0f55244662e28a2d190af5fbfb"
+  },
+  {
+    "file": "05_communications_relay-preview.mp4",
+    "source": "05_communications_relay.mp4",
+    "start_s": 7,
+    "duration_s": 6,
+    "bytes": 20396,
+    "sha256": "1b24e7afbdc0e5ee29986a5257873d1d948324e3eaa323414b87bd74ffab8f60"
+  },
+  {
+    "file": "06_yac_resupply-preview.mp4",
+    "source": "06_yac_resupply.mp4",
+    "start_s": 2,
+    "duration_s": 6,
+    "bytes": 27212,
+    "sha256": "808b4c7b47cbac0d38f57b17999c46508f354860626b843cbc522be10ce6134b"
+  },
+  {
+    "file": "13_robot_motion_clean-preview.mp4",
+    "source": "13_robot_motion_clean.mp4",
+    "start_s": 3,
+    "duration_s": 6,
+    "bytes": 20684,
+    "sha256": "710a2bd9371ebff18b75ee80c3a2f772d1a856ffae45e8efd01718fcf7062200"
+  },
+  {
+    "file": "10_sherpa_disposal-preview.mp4",
+    "source": "10_sherpa_disposal.mp4",
+    "start_s": 28,
+    "duration_s": 6,
+    "bytes": 22478,
+    "sha256": "a13a966bbd1620c6b59d2ab0011b7ecbefb0d7b9cbe7d285285c10d16473502b"
+  }
+]
