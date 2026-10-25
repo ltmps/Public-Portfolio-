@@ -1,35 +1,53 @@
 /* Single-row navigation and lazy, silent mission-card previews. */
 (function () {
   'use strict';
-  document.querySelectorAll('[data-sm-strip]').forEach(function (strip) {
-    var tools = document.createElement('div');
-    tools.className = 'sm-strip-tools';
-    var previous = document.createElement('button');
-    var next = document.createElement('button');
-    previous.type = next.type = 'button';
-    previous.textContent = '\u2190'; next.textContent = '\u2192';
-    previous.setAttribute('aria-label', 'Scroll ' + strip.dataset.smStrip + ' left');
-    next.setAttribute('aria-label', 'Scroll ' + strip.dataset.smStrip + ' right');
-    tools.append(previous, next); strip.before(tools);
-    function update() {
-      var max = strip.scrollWidth - strip.clientWidth;
-      tools.hidden = max < 2;
-      previous.disabled = strip.scrollLeft < 2;
-      next.disabled = strip.scrollLeft >= max - 2;
-    }
-    function move(direction) { strip.scrollLeft += direction * Math.max(180, strip.clientWidth * 0.8); }
-    previous.addEventListener('click', function () { move(-1); });
-    next.addEventListener('click', function () { move(1); });
-    strip.addEventListener('keydown', function (event) {
-      if (event.target !== strip) return;
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        event.preventDefault(); move(event.key === 'ArrowLeft' ? -1 : 1);
+  window.initSherpaStrips = function (root) {
+    root.querySelectorAll('[data-sm-strip]').forEach(function (strip) {
+      if (strip.dataset.smReady) return;
+      strip.dataset.smReady = 'true';
+      var tools = document.createElement('div');
+      tools.className = 'sm-strip-tools';
+      var previous = document.createElement('button');
+      var next = document.createElement('button');
+      previous.type = next.type = 'button';
+      previous.textContent = '\u2190'; next.textContent = '\u2192';
+      previous.setAttribute('aria-label', 'Scroll ' + strip.dataset.smStrip + ' left');
+      next.setAttribute('aria-label', 'Scroll ' + strip.dataset.smStrip + ' right');
+      tools.append(previous, next); strip.before(tools);
+      function update() {
+        var max = strip.scrollWidth - strip.clientWidth;
+        tools.hidden = max < 2;
+        previous.disabled = strip.scrollLeft < 2;
+        next.disabled = strip.scrollLeft >= max - 2;
       }
+      function move(direction) { strip.scrollLeft += direction * Math.max(180, strip.clientWidth * 0.8); }
+      previous.addEventListener('click', function () { move(-1); });
+      next.addEventListener('click', function () { move(1); });
+      strip.addEventListener('keydown', function (event) {
+        if (event.target !== strip) return;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+          event.preventDefault(); move(event.key === 'ArrowLeft' ? -1 : 1);
+        }
+      });
+      strip.addEventListener('scroll', update, { passive: true });
+      if ('ResizeObserver' in window) {
+        var observer = new ResizeObserver(update);
+        observer.observe(strip);
+        strip.smDispose = function () { observer.disconnect(); };
+      } else {
+        window.addEventListener('resize', update);
+        strip.smDispose = function () { window.removeEventListener('resize', update); };
+      }
+      update();
     });
-    strip.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
-  });
+
+  };
+  window.disposeSherpaStrips = function (root) {
+    root.querySelectorAll('[data-sm-strip]').forEach(function (strip) {
+      if (strip.smDispose) strip.smDispose();
+    });
+  };
+  window.initSherpaStrips(document);
 
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var hover = window.matchMedia('(hover: hover) and (pointer: fine)');
