@@ -23,3 +23,4 @@ jobs:
           node --check assets/js/mission-studies.js
           node --check assets/js/architecture-study.js
           node --check assets/js/sherpa-missions.js
+          node --check assets/js/sherpa-strips.js
