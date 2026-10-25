@@ -1,0 +1,36 @@
+/* SHERPA mission pages share the site's theme, type and figure language. */
+.sm-main,.sm-catalog{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:72px 32px 0}
+.sm-main{padding-bottom:96px}
+.sm-intro{max-width:880px}
+.sm-eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;line-height:1.6}
+.sm-intro h1{font-size:clamp(48px,8vw,104px);line-height:.95;letter-spacing:-.045em;text-transform:uppercase;margin:24px 0}
+.sm-lead{font-size:clamp(21px,3vw,28px);max-width:36ch;line-height:1.4}
+.sm-main p,.sm-catalog>p{max-width:80ch;line-height:1.65}
+.sm-nav{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0}
+.sm-nav a{padding:10px 15px;border:1px solid var(--foreground);text-decoration:none;font-family:var(--font-mono);font-size:13px;min-height:44px;box-sizing:border-box}
+.sm-nav a[aria-current],.sm-nav a:hover{background:var(--foreground);color:var(--background)}
+.sm-main a:focus-visible,.sm-operation a:focus-visible,.sm-catalog a:focus-visible,.sm-main summary:focus-visible{outline:3px solid rgb(var(--acc));outline-offset:5px}
+.sm-index{padding:24px;border:1px solid var(--foreground);background:var(--background)}
+.sm-index ul{display:flex;flex-wrap:wrap;gap:12px 32px;padding-left:20px;margin-bottom:0}
+.sm-film{padding-top:72px;scroll-margin-top:24px}
+.sm-film h2,.sm-catalog h2,.sm-end h2{font-size:clamp(28px,4vw,40px);line-height:1.15;letter-spacing:-.025em;margin:12px 0 20px}
+.sm-film figure{margin:24px 0 12px;border:1.5px solid var(--foreground);background:var(--background)}
+.sm-film video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
+.sm-film figcaption{padding:12px 16px;border-top:1px solid var(--foreground);font-size:14px;line-height:1.5}
+.sm-download{font-size:14px}
+.sm-main details{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--background)}
+.sm-main summary{padding:16px 8px;cursor:pointer;line-height:1.5}
+.sm-sequence{padding:0 24px 12px 38px;line-height:1.7}
+.sm-sequence li{padding:4px 0}
+.sm-end{margin-top:72px;border-top:1.5px solid var(--foreground);padding-top:32px}
+.sm-catalog{padding-top:80px}
+.sm-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px;margin-top:32px}
+.sm-card{display:flex;flex-direction:column;text-decoration:none;border:1.5px solid var(--foreground);background:var(--background);min-width:0}
+.sm-card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#000}
+.sm-card-body{padding:20px;display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--foreground)}
+.sm-card strong{font-size:28px;text-transform:uppercase;letter-spacing:-.025em}
+.sm-card-body>span{line-height:1.5}
+.sm-operation{list-style:none;min-width:0}
+.sm-operation a{box-sizing:border-box;color:inherit;text-decoration:none;height:100%}
+@media(max-width:600px){.sm-main,.sm-catalog{padding-left:20px;padding-right:20px}.sm-film{padding-top:48px}.sm-nav a{flex-grow:1;text-align:center}.sm-index{padding:18px}.sm-index ul{display:block}.sm-index li{padding:5px 0}}
+@media(prefers-reduced-motion:reduce){.sm-main *,.sm-catalog *{scroll-behavior:auto;transition:none!important;animation:none!important}}

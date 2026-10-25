@@ -10,7 +10,7 @@ const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const sha = file => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
 
 const pages = ['index.html', 'projects/modeling/index.html', 'projects/modeling/trajectories/index.html',
-  'projects/modeling/architecture/index.html', 'projects/modeling/sherpa/index.html', 'projects/orbes/index.html'];
+  'projects/modeling/architecture/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/sherpa/deployment/index.html', 'projects/modeling/sherpa/repair/index.html', 'projects/modeling/sherpa/refuel/index.html', 'projects/modeling/sherpa/relay/index.html', 'projects/modeling/sherpa/resupply/index.html', 'projects/modeling/sherpa/robotics/index.html', 'projects/modeling/sherpa/disposal/index.html', 'projects/orbes/index.html'];
 for (const file of pages) {
   const html = read(file);
   const dir = path.dirname(file);
