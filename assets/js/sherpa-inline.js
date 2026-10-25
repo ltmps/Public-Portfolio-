@@ -104,6 +104,10 @@
     var selected = current.querySelector('.sm-nav a[aria-current]');
     var target = url.hash && current.querySelector('[id="' + CSS.escape(url.hash.slice(1)) + '"]');
     if (target && selected && route(new URL(selected.href)) === slug) {
+      // A local index selection supersedes any in-flight mission navigation.
+      serial++;
+      if (controller) controller.abort();
+      status.hidden = true;
       var local = new URL(location.href); local.searchParams.set('mission', slug); local.hash = url.hash;
       history.pushState(null, '', local);
       target.setAttribute('tabindex', '-1'); target.focus({ preventScroll: true }); target.scrollIntoView();
