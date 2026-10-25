@@ -1,0 +1,172 @@
+[
+  {
+    "name": "01_falcon_heavy_deployment",
+    "duration_s": 46,
+    "bytes": 3572190,
+    "sha256": "c4a801909f750dabacf624fb3e69223de1a97e730f5e99c50b69e8fbd910e012",
+    "fps": 24,
+    "frames": 1104,
+    "audio": false,
+    "poster_time_s": 23.0
+  },
+  {
+    "name": "02_customer_capture_docking",
+    "duration_s": 55,
+    "bytes": 4496802,
+    "sha256": "9846fd7b36be2213bd8702b4861d9f9a73a6a6cba6f1007f1f9b26195afe0723",
+    "fps": 24,
+    "frames": 1320,
+    "audio": false,
+    "poster_time_s": 27.5
+  },
+  {
+    "name": "03_repair_operations",
+    "duration_s": 100.25,
+    "bytes": 3001622,
+    "sha256": "5837e79bbd4c95275aaf43cd7573df9a46bde597f7dc4987fdce773b849b4ca1",
+    "fps": 24,
+    "frames": 2406.0,
+    "audio": false,
+    "poster_time_s": 50.12
+  },
+  {
+    "name": "04_customer_refueling",
+    "duration_s": 159.04166666666666,
+    "bytes": 6071631,
+    "sha256": "4ff7cc0a314b65b0bebd40f1d59722296f06f9e0d97f53832ff5055cb1ae373f",
+    "fps": 24,
+    "frames": 3817,
+    "audio": false,
+    "poster_time_s": 79.52
+  },
+  {
+    "name": "05_communications_relay",
+    "duration_s": 96,
+    "bytes": 4573579,
+    "sha256": "3a9e85e4f6ea9c2c85624908a74f3a0cbafc38d6915f55203dd4a692ea9ba0c5",
+    "fps": 24,
+    "frames": 2304,
+    "audio": false,
+    "poster_time_s": 14.4
+  },
+  {
+    "name": "06_yac_resupply",
+    "duration_s": 38,
+    "bytes": 2854710,
+    "sha256": "cbb6bd50e09ebf62df2de52d634ac90725a4f2378bfe1c91e2cbffe18b9ebbf0",
+    "fps": 24,
+    "frames": 912,
+    "audio": false,
+    "poster_time_s": 5.7
+  },
+  {
+    "name": "07_xray_liquid_and_helium",
+    "duration_s": 32,
+    "bytes": 2232564,
+    "sha256": "ebdd1b8bb092e2fd9d93fb1c7d2ecbb5354b00ed7a29cc4b9fc151a737bb9a15",
+    "fps": 24,
+    "frames": 768,
+    "audio": false,
+    "poster_time_s": 16.0
+  },
+  {
+    "name": "08_customer_xray_liquid_and_helium",
+    "duration_s": 32,
+    "bytes": 2154403,
+    "sha256": "f7b84caa9ca9822e280ddb238ad2682077994bcb267421a8cb2b4b9cd557aa05",
+    "fps": 24,
+    "frames": 768,
+    "audio": false,
+    "poster_time_s": 16.0
+  },
+  {
+    "name": "09_yac_reentry_recovery",
+    "duration_s": 84,
+    "bytes": 5436794,
+    "sha256": "cf5700ff21bb7a1504db28a2218fe68f80219e02192e307db42e758c0da778a5",
+    "fps": 24,
+    "frames": 2016,
+    "audio": false,
+    "poster_time_s": 42.0
+  },
+  {
+    "name": "10_sherpa_disposal",
+    "duration_s": 48,
+    "bytes": 1531383,
+    "sha256": "76f33ed7451e916cc5d0b0168c085c2a623d64e5bff5b62ab73dc6fac144f221",
+    "fps": 24,
+    "frames": 1152,
+    "audio": false,
+    "poster_time_s": 24.0
+  },
+  {
+    "name": "11_yac_cruise_deployment",
+    "duration_s": 32,
+    "bytes": 1286830,
+    "sha256": "ea8fb9bea62a28ea93f369b7c767a13626b7d428de8a7dc2f07f715dbdec694e",
+    "fps": 24,
+    "frames": 768,
+    "audio": false,
+    "poster_time_s": 16.0
+  },
+  {
+    "name": "12_robot_workspace_clearance",
+    "duration_s": 301.2916666666667,
+    "bytes": 10027149,
+    "sha256": "2eed8c39ee25252c7d680a70b8814d56aa6a1b5b85f1772230977380fa4cfcf4",
+    "fps": 24,
+    "frames": 7231,
+    "audio": false,
+    "poster_time_s": 150.65
+  },
+  {
+    "name": "13_robot_motion_clean",
+    "duration_s": 301.2916666666667,
+    "bytes": 8358401,
+    "sha256": "9fcbbdcc0f998e22056e7d93bc8c4e04fd4ed5582e590447ac3d4678fa8d8691",
+    "fps": 24,
+    "frames": 7231,
+    "audio": false,
+    "poster_time_s": 150.65
+  },
+  {
+    "name": "14_client_axis_lidar_access",
+    "duration_s": 36,
+    "bytes": 893346,
+    "sha256": "17bf19f87b65fce79387d8054b076d6f04073fd7afe5971052a50f3c4f2e5152",
+    "fps": 24,
+    "frames": 864,
+    "audio": false,
+    "poster_time_s": 18.0
+  },
+  {
+    "name": "03_oru_cutaway_candidate",
+    "duration_s": 100.25,
+    "bytes": 2763811,
+    "sha256": "507f7cfe38887a24e64fa6d26df0b74ceffc12986c05e047af7ee086996157b5",
+    "fps": 24,
+    "frames": 2406,
+    "audio": false,
+    "poster_time_s": 50.12
+  },
+  {
+    "name": "14_client_axis_hose_operations",
+    "duration_s": 159.04166666666666,
+    "bytes": 5054197,
+    "sha256": "74590b2de2aabc56753239b2d045ea21364041cd16beab29faae75e8e4d71962",
+    "fps": 24,
+    "frames": 3817,
+    "audio": false,
+    "poster_time_s": 79.52
+  },
+  {
+    "name": "native_client_region_xray_candidate",
+    "duration_s": 36,
+    "bytes": 1117526,
+    "sha256": "08cbdc50bc721905ae801bbc06e68752e7319dd6fd2886b5025afb3785a4fc15",
+    "fps": 24,
+    "frames": 864,
+    "audio": false,
+    "poster_time_s": 18.0
+  }
+]
