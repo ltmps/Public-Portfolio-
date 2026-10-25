@@ -9,6 +9,7 @@ With Node.js available, run:
 ```sh
 node scripts/check-site.cjs
 node scripts/check-modeling-media.cjs
+node scripts/check-sherpa-missions.cjs
 node --check assets/js/gy.js
 node --check assets/js/gy-mesh.js
 node --check assets/js/mission-studies.js
@@ -18,3 +19,5 @@ node --check assets/js/architecture-study.js
 `check-site.cjs` covers all eleven entry points: local resources and fragments, project-base paths, page metadata, image alt attributes, focusable skip-link targets, project and contact navigation, the shared theme assets and toggle, and the no-em-dash copy rule. `check-modeling-media.cjs` covers media dependencies, no autoplay, muted hover-to-play media, caption-strip labels, CAPCOM phase-jump timing and v5 media, the architecture scenario data and envelope grid, playback-viewer privacy guards and approved media hashes. Neither renders pages or verifies external services.
 
 Before merging visual changes, check desktop and phone layouts in both themes, keyboard navigation and horizontal overflow in a browser, and preserve the reduced-motion behavior. Headless Chromium builds without H.264 cannot play the MP4s; use a full Chrome or substitute a WebM when testing playback.
+
+The SHERPA section adds seven mission pages for deployment, repair, refueling, relay, resupply, robotics and disposal. The site check includes these pages (18 total). `check-sherpa-missions.cjs` verifies the 17 v5 MP4 hashes, poster files, sequence text and manual playback settings. Pull requests run these checks through `.github/workflows/site-checks.yml`.

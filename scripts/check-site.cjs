@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html', 'projects/eureka-ii/index.html', 'projects/modeling/index.html', 'projects/modeling/playback/index.html', 'projects/modeling/trajectories/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/architecture/index.html'];
+const pages = ['index.html', 'projects/orbes/index.html', 'projects/b1lv/index.html', 'projects/satellite/index.html', 'projects/singularity/index.html', 'projects/eureka-ii/index.html', 'projects/modeling/index.html', 'projects/modeling/playback/index.html', 'projects/modeling/trajectories/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/sherpa/deployment/index.html', 'projects/modeling/sherpa/repair/index.html', 'projects/modeling/sherpa/refuel/index.html', 'projects/modeling/sherpa/relay/index.html', 'projects/modeling/sherpa/resupply/index.html', 'projects/modeling/sherpa/robotics/index.html', 'projects/modeling/sherpa/disposal/index.html', 'projects/modeling/architecture/index.html'];
 const base = 'https://example.test/Public-Portfolio-/';
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const ids = html => [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);

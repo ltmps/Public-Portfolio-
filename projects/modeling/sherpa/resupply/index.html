@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Bring propellant to SHERPA and follow the YAC recovery concept. SHERPA mission concept animations.">
+<title>SHERPA resupply | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../../../assets/css/gy.css?v=a05a6aeacd">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible,.gy-shot:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow,:root[data-theme="dark"] .gy-shot:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 0 0 0 1.5px rgb(var(--acc))}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-step{transition:border-color .2s,background-color .2s}
+.gy-step:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.06) !important}
+.gy-stepn{transition:color .2s}
+.gy-step:hover .gy-stepn{color:rgb(var(--acc))}
+.gy-card,.gy-shot{transition:border-color .25s}
+.gy-card:hover,.gy-shot:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+.gy-shot img{transition:transform .5s cubic-bezier(0,0,.2,1)}
+.gy-shot:hover img{transform:scale(1.025)}
+.gy-tag{transition:color .2s,background-color .2s}
+.gy-shot:hover .gy-tag{background:color-mix(in srgb, rgb(var(--acc)) 18%, var(--background));border-color:rgb(var(--acc)) !important;color:var(--foreground)}
+.gy-svi{flex:0 0 auto;color:var(--muted-foreground);transition:color .2s,transform .3s cubic-bezier(0,0,.2,1)}
+.gy-svc:hover .gy-svi{color:rgb(var(--acc));transform:translateY(-3px) scale(1.06)}
+.gy-hi{flex:0 0 auto;color:rgb(var(--acc));transition:transform .3s cubic-bezier(0,0,.2,1)}
+h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
+.gy-si{position:absolute;top:18px;right:18px;color:var(--muted-foreground);transition:color .2s,transform .3s}
+.gy-stat:hover .gy-si{color:rgb(var(--acc));transform:scale(1.12)}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+.st-ctrl{display:none}
+.st-live .st-ctrl{display:flex}
+.st-hide-fh [data-st-key="fh"],.st-hide-sherpa [data-st-key="sherpa"],.st-hide-l1 [data-st-key="l1"]{visibility:hidden}
+.st-key{display:inline-flex;align-items:baseline;gap:6px;min-height:28px;padding:2px 6px;margin-left:-6px;border:0;border-radius:4px;background:none;color:var(--foreground);font:inherit;text-align:left;cursor:pointer}
+.st-key:hover{background:var(--muted)}
+.st-key[aria-pressed="false"]{color:var(--muted-foreground);text-decoration:line-through}
+.st-key:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:2px}
+
+</style>
+<script src="../../../../assets/js/gy.js?v=3690351b4b" defer></script>
+<link rel="stylesheet" href="../../../../assets/css/sherpa-missions.css?v=3daeb7fa04">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
+
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../../../index.html#work">Work</a>
+<a class="gy-link" href="../../" aria-current="page" style="text-decoration-color: rgb(var(--acc)); text-decoration-thickness: 2px;">Simulations</a>
+<a class="gy-link" href="../../../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
+<main id="main" tabindex="-1" class="sm-main">
+<header class="sm-intro"><p class="sm-eyebrow"><a href="../../../../index.html">Home</a> / <a href="../../">Simulations</a> / <a href="../">SHERPA</a></p>
+<p class="sm-eyebrow">SHERPA / Mission animations</p><h1>Resupply</h1><p class="sm-lead">Bring propellant to SHERPA and follow the YAC recovery concept.</p>
+<p>CAD-based concept animations of the proposed servicing platform. Select a video to play; every sequence includes a text description. All clips are silent.</p></header>
+<nav class="sm-nav" aria-label="SHERPA missions"><a href="../deployment/">Deployment</a><a href="../repair/">Repair</a><a href="../refuel/">Refuel</a><a href="../relay/">Relay</a><a href="../resupply/" aria-current="page">Resupply</a><a href="../robotics/">Robotics</a><a href="../disposal/">Disposal</a></nav>
+<nav class="sm-index" aria-label="Videos on this page"><span class="sm-eyebrow">On this page</span><ul><li><a href="#06_yac_resupply">YAC docking and resupply</a></li><li><a href="#07_xray_liquid_and_helium">YAC fluid and gas cutaway</a></li><li><a href="#09_yac_reentry_recovery">YAC entry and recovery</a></li></ul></nav>
+<section class="sm-film" id="06_yac_resupply" aria-labelledby="06_yac_resupply-title"><p class="sm-eyebrow">0:38 / Silent / 24 fps</p><h2 id="06_yac_resupply-title">YAC docking and resupply</h2>
+<p id="06_yac_resupply-description">YAC approaches SHERPA and docks at its side-mounted interface. Cutaways show an isolated gas check, liquid transfer with helium pressurization, purge to recovery and dry-break closure before departure. The native vehicle layout is retained with a proposed 350 mm clearance neck and service connections. Colors identify liquid, helium, purge and isolated states.</p>
+<figure><video controls playsinline preload="none" width="1280" height="720" poster="../../../../assets/media/modeling/sherpa/06_yac_resupply.jpg" aria-label="YAC docking and resupply" aria-describedby="06_yac_resupply-description"><source src="../../../../assets/media/modeling/sherpa/06_yac_resupply.mp4" type="video/mp4"><p><a href="../../../../assets/media/modeling/sherpa/06_yac_resupply.mp4">Open YAC docking and resupply MP4</a></p></video><figcaption>YAC docking and resupply. Concept animation using project CAD.</figcaption></figure>
+<p class="sm-download"><a href="../../../../assets/media/modeling/sherpa/06_yac_resupply.mp4">Open or download MP4 (2.9 MB)</a></p>
+<details><summary>Sequence in text: YAC docking and resupply</summary><ol class="sm-sequence"><li>0s â€” YAC approach / FREND arms stowed</li><li>10s â€” Native sidewall docking site / proposed clearance neck</li><li>13.5s â€” X-ray service interface / tank valves isolated</li><li>14s â€” AMBER isolated gas leak check / tank valves closed</li><li>18s â€” CYAN fill + AMBER helium / YAC tank and native feed</li><li>21s â€” CYAN fill / SHERPA tank and assumed service tie-in</li><li>25s â€” PURPLE purge to recovery / both tank valves closed</li><li>28s â€” Isolate dry-break channels</li><li>30s â€” Axial departure / clear repair bay</li></ol></details></section>
+<section class="sm-film" id="07_xray_liquid_and_helium" aria-labelledby="07_xray_liquid_and_helium-title"><p class="sm-eyebrow">0:32 / Silent / 24 fps</p><h2 id="07_xray_liquid_and_helium-title">YAC fluid and gas cutaway</h2>
+<p id="07_xray_liquid_and_helium-description">The cutaway follows the YAC and SHERPA tanks through line isolation, pressure hold, transfer and enclosed purge. Cyan liquid and amber helium tracers show the proposed flow paths; purple identifies purge recovery. Tank labels track mass, pressure, temperature and ullage. Enlarged tracking symbols make the flow visible while native propulsion pipes remain CAD context for the assumed service tie-ins.</p>
+<figure><video controls playsinline preload="none" width="1280" height="720" poster="../../../../assets/media/modeling/sherpa/07_xray_liquid_and_helium.jpg" aria-label="YAC fluid and gas cutaway" aria-describedby="07_xray_liquid_and_helium-description"><source src="../../../../assets/media/modeling/sherpa/07_xray_liquid_and_helium.mp4" type="video/mp4"><p><a href="../../../../assets/media/modeling/sherpa/07_xray_liquid_and_helium.mp4">Open YAC fluid and gas cutaway MP4</a></p></video><figcaption>YAC fluid and gas cutaway. Concept animation using project CAD.</figcaption></figure>
+<p class="sm-download"><a href="../../../../assets/media/modeling/sherpa/07_xray_liquid_and_helium.mp4">Open or download MP4 (2.2 MB)</a></p>
+<details><summary>Sequence in text: YAC fluid and gas cutaway</summary><ol class="sm-sequence"><li>0s â€” Native CAD network / tank isolation</li><li>2s â€” AMBER isolated service-line pressure hold</li><li>6s â€” Native pipe macro / CYAN liquid and AMBER helium</li><li>12s â€” Propulsion-pipe CAD context / assumed service tie-in</li><li>18s â€” Regulated transfer / vessel levels</li><li>22s â€” Close tank valves / isolate service segment</li><li>23s â€” PURPLE enclosed purge to recovery</li><li>28s â€” Dry-break closure / residual gas accounted</li></ol></details></section>
+<section class="sm-film" id="09_yac_reentry_recovery" aria-labelledby="09_yac_reentry_recovery-title"><p class="sm-eyebrow">1:24 / Silent / 24 fps</p><h2 id="09_yac_reentry_recovery-title">YAC entry and recovery</h2>
+<p id="09_yac_reentry_recovery-description">The radio antenna stows, the inflatable entry shield deploys, and YAC proceeds through an atmospheric-entry illustration. A parachute and airbags complete the recovery sequence. The native YAC and shield geometry are paired with representative textiles, plasma, heating appearance and timing. These effects visualize the recovery concept rather than calculate entry loads.</p>
+<figure><video controls playsinline preload="none" width="1280" height="720" poster="../../../../assets/media/modeling/sherpa/09_yac_reentry_recovery.jpg" aria-label="YAC entry and recovery" aria-describedby="09_yac_reentry_recovery-description"><source src="../../../../assets/media/modeling/sherpa/09_yac_reentry_recovery.mp4" type="video/mp4"><p><a href="../../../../assets/media/modeling/sherpa/09_yac_reentry_recovery.mp4">Open YAC entry and recovery MP4</a></p></video><figcaption>YAC entry and recovery. Concept animation using project CAD.</figcaption></figure>
+<p class="sm-download"><a href="../../../../assets/media/modeling/sherpa/09_yac_reentry_recovery.mp4">Open or download MP4 (5.4 MB)</a></p>
+<details><summary>Sequence in text: YAC entry and recovery</summary><ol class="sm-sequence"><li>0s â€” Antenna stow / native bearing axis and continuous mount</li><li>12s â€” HIAD inflation / retained native shield</li><li>24s â€” Atmospheric interface / bow shock develops</li><li>30s â€” Plasma wake / windward hue and illumination</li><li>42s â€” Heating decreases / charred TPS appearance</li><li>52s â€” Parachute inflation / HIAD release</li><li>62s â€” Airbags inflate / stabilized descent</li><li>76s â€” Airbag touchdown / canopy collapse</li><li>80s â€” Recovery perimeter / vehicle secured</li></ol></details></section>
+<section class="sm-end"><h2>Explore the mission</h2><nav class="sm-nav" aria-label="SHERPA missions"><a href="../deployment/">Deployment</a><a href="../repair/">Repair</a><a href="../refuel/">Refuel</a><a href="../relay/">Relay</a><a href="../resupply/" aria-current="page">Resupply</a><a href="../robotics/">Robotics</a><a href="../disposal/">Disposal</a></nav><p><a class="gy-link" href="../#conops-title">Back to SHERPA concept of operations</a></p></section></main>
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px 40px; display: flex; flex-direction: column; gap: 40px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px;">
+<h2 style="margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../../" style="padding: 6px 0;">All simulations</a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+</div>
+</body>
+</html>
