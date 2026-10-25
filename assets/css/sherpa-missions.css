@@ -54,7 +54,7 @@
 [data-sm-strip]::-webkit-scrollbar-track{background:var(--muted);border:1px solid var(--border)}
 [data-sm-strip]::-webkit-scrollbar-thumb{background:var(--foreground);border:3px solid var(--muted);border-radius:8px}
 [data-sm-strip]:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:3px}
-.sm-strip-tools{display:flex;justify-content:flex-end;gap:8px;margin:12px 0 0}
+.sm-strip-tools{display:flex;justify-content:flex-end;gap:8px;margin:4px 0 0}
 .sm-strip-tools[hidden]{display:none}
 .sm-strip-tools button{min-width:44px;min-height:44px;background:var(--background);color:var(--foreground);border:1px solid var(--foreground);cursor:pointer;font:inherit}
 .sm-strip-tools button:disabled{opacity:.35;cursor:default}
@@ -71,3 +71,7 @@
 .sm-inline .sm-intro h2{font-size:clamp(32px,5vw,56px);margin:12px 0}
 .sm-inline .sm-intro .sm-eyebrow{display:none}
 .sm-inline .sm-film:first-of-type{padding-top:24px}
+
+/* Keep introductory copy and its horizontal navigation vertically connected. */
+.sm-catalog>p:has(+ .sm-strip-tools),.sm-intro:has(+ .sm-strip-tools)>p:last-child,.sm-end>h2:has(+ .sm-strip-tools){margin-bottom:4px}
+.sm-strip-tools+.sm-cards,.sm-strip-tools+.sm-nav{margin-top:8px}
