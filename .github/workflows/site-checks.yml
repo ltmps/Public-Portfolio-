@@ -16,6 +16,7 @@ jobs:
       - run: node scripts/check-site.cjs
       - run: node scripts/check-modeling-media.cjs
       - run: node scripts/check-sherpa-missions.cjs
+      - run: node scripts/check-sherpa-navigation.cjs
       - name: JavaScript syntax
         run: |
           node --check assets/js/gy.js
@@ -24,3 +25,4 @@ jobs:
           node --check assets/js/architecture-study.js
           node --check assets/js/sherpa-missions.js
           node --check assets/js/sherpa-strips.js
+          node --check assets/js/sherpa-inline.js
