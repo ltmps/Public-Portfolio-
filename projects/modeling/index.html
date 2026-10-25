@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Engineering studies connecting system requirements, reaction-wheel dynamics, mission concepts, trajectory studies and ROS2 integration.">
+<meta name="description" content="Engineering studies connecting system requirements, reaction-wheel model checks, mission concepts, trajectory studies and ROS2 integration.">
 <title>Modeling &amp; Simulation | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/gy.css?v=a05a6aeacd">
@@ -121,10 +121,10 @@
 
 <section id="wheels" aria-labelledby="wheels-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
-<h2 id="wheels-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>Reaction-wheel dynamics</h2>
+<h2 id="wheels-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>Reaction-wheel model checks</h2>
 <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 02 · Simscape &amp; PID</span>
 </div>
-<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 52ch;">A multibody model tied to quaternion-based PID scripts. Wheel sizing and log analysis show how rotor inertia, torque and speed limits shape the response.</p>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 52ch;">I checked the multibody model and its quaternion PID scripts against hand calculations and unit tests before trusting any result. The checks found three bugs.</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 24px;">
 <a class="gy-card" href="#wheels" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
 <div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #a0a0a0; border-bottom: 1.5px solid var(--foreground);">
@@ -151,14 +151,14 @@
 </div>
 <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 24px; align-items: start;">
 <div style="border: 1px solid var(--foreground); background: var(--background);">
-<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Model checks found</p>
-<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 13px; line-height: 1.9; text-transform: uppercase;">
-<li>Unit-conversion issues.</li>
-<li>Inconsistent inertia assumptions.</li>
-<li>A tuning objective that did not match the final controller.</li>
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Three bugs the checks found</p>
+<ol style="margin: 0; padding: 0; list-style: none;">
+<li style="padding: 10px 14px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>RPM unit.</strong> The constraint diagram stored a rad/s value as the required wheel RPM without converting it. A unit test reproduced the error at all 500 plotted points.</li>
+<li style="padding: 10px 14px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Acceleration unit.</strong> Wheel acceleration already in rad/s² was multiplied by 2π/60 again before plotting.</li>
+<li style="padding: 10px 14px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Tuning objective.</strong> The open-loop tuning optimized a two-controller loop, but the final response was evaluated with a single controller.</li>
 </ol>
 </div>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">Recordings show simulated behavior under their stated assumptions. The broader study also includes stress cases that exceeded tracking or wheel-speed limits.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">Recordings show simulated behavior under their stated assumptions, not validated dynamics. The selected PID holds ±0.5° in the nominal case, but only 9 of 27 inertia and friction cases pass, so it is not a hardware-ready controller.</p>
 </div>
 </section>
 
