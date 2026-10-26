@@ -102,7 +102,12 @@ const localization = {
   'fig_mc2_sweep.png': 'f57ba5b4920a052419b192498e2fb4e3947cf028122b320c73473b029280ed12',
   'fig_mc2_trace.png': '4d7a66cd551ec99a0f533d4c73850bf29f7eb6651047059a86842058a8a29999',
   'orbes_modes.mp4': '28b36e683eb636d96281021257e018118736d1fb82b75c94a78ab892b8e155fb',
-  'orbes_modes_poster.png': 'b67ada51ebea3e1860e91d6a9187acc0f95d43a20b08bdc6e218117c4e069dd2'
+  'orbes_modes_poster.png': 'b67ada51ebea3e1860e91d6a9187acc0f95d43a20b08bdc6e218117c4e069dd2',
+  // portfolio-media @ 5a122d1 (design-cone Mode 3 animations); posters are their final frames
+  'mc_mode3_design.mp4': '491588c26a4457eb9d2301ae0580143ec5f007c2a974474e6caa4fcd8d749eb5',
+  'mc_mode3_design_3d.mp4': '8308782733bdf90d6d601e062264db3ba57356e963d25f2087949fa30c12d5cb',
+  'mc_mode3_design_poster.png': '00e816aa3bb5c226185d73299adb8f2b2c57f74a19eb5a1a78c12f4304c5494f',
+  'mc_mode3_design_3d_poster.png': 'bff9e25617c083fd14e229f8f6bb6adfe85b48714da47db4c9675b505e4a9052'
 };
 const sims = read('projects/modeling/index.html');
 for (const [file, hash] of Object.entries(localization)) {
