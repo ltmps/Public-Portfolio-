@@ -90,15 +90,15 @@ assert(!/<script\b|(?:href|src)=/.test(svg), 'Selected SVG must be self-containe
 const orbesPage = read('projects/orbes/index.html');
 for (const [file, hash] of Object.entries({
   'mc_mode3_full_compare.mp4': '7e7cdd7e895ef9fcfac7bcb434f8912927b2c8e30120c13abd58a49f85e5c9a4',
-  'mc_mode3_full_compare_poster.png': 'f74d2ccaaf87868fc8f45ef5a8e2a48e3106d13697c486ec1a9f099c0c1df9e4',
+  'mc_mode3_full_compare_poster.png': 'd53b7fb24ee6f623caedace4c8440fd0812e962ad7eadb7b7f7d9a5c83d5b555',
   'mc_mode4_cliff.mp4': 'bed8be1d5f9c3f9b6ccb7ae2b5ca6530bba52ded7c7a08435b9c2f1fd20c2d23',
-  'mc_mode4_cliff_poster.png': '47192bc92da1fc3678229d6e118aec6efbf7e19aed073b97a44e11445bb682ce',
+  'mc_mode4_cliff_poster.png': 'd7e8f0cf62455fdba83b26a91a4313c30b5e3e57581564954b8a9d57a415047a',
   'mc_mode2_cameras.mp4': 'b26931f498c1401b817b3a6806fde36f2e43fd8300837c7bb9892942de0a47f3',
-  'mc_mode2_cameras_poster.png': '155234ebd4f652fa04ef41d68807002c44754a236dcbcf1454eacd1b6395a837',
+  'mc_mode2_cameras_poster.png': '7c36e7d5ef27e3c09ef79df372318db33baf816b3dbdb81287b73ae00a4bd7ef',
   'onboard_pov.mp4': '0b9f7209468ce9474451c1061ab387e370dbb1f3c608d49e2df045b88f1717f2',
-  'onboard_pov_poster.png': 'a0d57d9fa6086cafd37c011855b80361112dfc9e07371e78f132ee3d0de50d67',
+  'onboard_pov_poster.png': '66a37794341c6dea4e231f3f8e13e18d0c31b248abefe63216bb112520a89dc4',
   'mc_mode3_layouts.mp4': '2b238f1e0ba780c7288d5e872317c70c64750cb48337179d62c3ee251887a221',
-  'mc_mode3_layouts_poster.png': '1c1c55b25579ff840489df01d2cd6bf60854e70a9c3c941c83377c182a5c2465'
+  'mc_mode3_layouts_poster.png': 'ce26395555fe0c4a26d24caa5b909be79fe1c9dbe04c619e721ba679be84d443'
 })) {
   assert.equal(sha('assets/media/modeling/localization/' + file), hash, `Approved ORBES comparison bytes: ${file}`);
   assert(orbesPage.includes('assets/media/modeling/localization/' + file), `ORBES page must show ${file}`);
@@ -121,14 +121,14 @@ const localization = {
   'fig_mc2_trace.png': '4d7a66cd551ec99a0f533d4c73850bf29f7eb6651047059a86842058a8a29999',
   'orbes_modes.mp4': '28b36e683eb636d96281021257e018118736d1fb82b75c94a78ab892b8e155fb',
   'orbes_modes_poster.png': 'b67ada51ebea3e1860e91d6a9187acc0f95d43a20b08bdc6e218117c4e069dd2',
-  // portfolio-media @ 5a122d1 (design-cone Mode 3 animations); posters are their final frames
+  // portfolio-media @ 5a122d1 (design-cone Mode 3 animations); posters re-exported at portfolio-media 50d04da
   'mc_mode3_design.mp4': '491588c26a4457eb9d2301ae0580143ec5f007c2a974474e6caa4fcd8d749eb5',
   'mc_mode3_design_3d.mp4': '8308782733bdf90d6d601e062264db3ba57356e963d25f2087949fa30c12d5cb',
-  'mc_mode3_design_poster.png': '00e816aa3bb5c226185d73299adb8f2b2c57f74a19eb5a1a78c12f4304c5494f',
-  'mc_mode3_design_3d_poster.png': 'bff9e25617c083fd14e229f8f6bb6adfe85b48714da47db4c9675b505e4a9052',
+  'mc_mode3_design_poster.png': '1ad30c387dc5d90b83bb1a67411a1596016bca4a7da8d5a5c96daa4a81a362e9',
+  'mc_mode3_design_3d_poster.png': '91a82d250c5c50260e8e6ee80dedb22ba9f5a6eca32865aff5294f7f3b6e9450',
   // portfolio-media @ 74ffda3 (MuJoCo-scene render of the same runs, poster from the manifest)
   'mc_mode3_design_mj.mp4': '2f2a3a31bd80706a5f159a69921b41d0a9f2983aef2c025545f65696390290ea',
-  'mc_mode3_design_mj_poster.png': 'd0700bfee67dbc81bce391f31c9b2050019ccb6cca4ad89b69d07f46945db380'
+  'mc_mode3_design_mj_poster.png': 'b51cb94f12dd33c5f838bd4b744bc726d9b6ae1332adc343c7c4c746928c34fb'
 };
 const sims = read('projects/modeling/localization/index.html');
 for (const [file, hash] of Object.entries(localization)) {
