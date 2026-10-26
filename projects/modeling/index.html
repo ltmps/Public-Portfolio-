@@ -81,8 +81,7 @@
 <a class="gy-chip" href="trajectories/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">03 Mission studies ↗</a>
 <a class="gy-chip" href="architecture/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">04 Architecture ↗</a>
 <a class="gy-chip" href="sherpa/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">05 SHERPA ↗</a>
-<a class="gy-chip" href="../orbes/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">06 ROS2 · ORBES ↗</a>
-<a class="gy-chip" href="#localization" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">07 Localization MC</a>
+<a class="gy-chip" href="#orbes" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">06 ORBES</a>
 </nav>
 </div>
 </section>
@@ -239,11 +238,12 @@
 </div>
 </section>
 
-<section id="ros2" aria-labelledby="ros2-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<section id="orbes" aria-labelledby="orbes-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
-<h2 id="ros2-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>ROS2 integration</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 06 · ORBES</span>
+<h2 id="orbes-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>ORBES GNC</h2>
+<span style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 06 · ROS2 + MuJoCo</span><a class="gy-btn" href="localization/" style="padding: 10px 14px; border: 1.5px solid var(--foreground); background: var(--background); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;">Open study ↗</a></span>
 </div>
+<h3 id="ros2" style="margin: 0 0 16px; font-size: 24px; line-height: 1.2; font-weight: 700; text-transform: uppercase;">ROS2 integration</h3>
 <a class="gy-card" href="../orbes/" data-gy-glow style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
 <div style="padding: 32px; display: flex; flex-direction: column; justify-content: space-between; gap: 28px;">
 <p style="margin: 0; font-size: 20px; line-height: 1.5;">CSV and IMU replay with synthetic camera data exercised the data path before every sensor was connected, separating interface behavior from physical sensor behavior.</p>
@@ -254,17 +254,11 @@
 </div>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </a>
-</section>
-
-<section id="localization" aria-labelledby="localization-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
-<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
-<h2 id="localization-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>Localization-aware mission design</h2>
-<span style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 07 · MuJoCo Monte Carlo</span><a class="gy-btn" href="localization/" style="padding: 10px 14px; border: 1.5px solid var(--foreground); background: var(--background); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;">Open study ↗</a></span>
-</div>
+<h3 id="localization" style="margin: 64px 0 16px; font-size: 24px; line-height: 1.2; font-weight: 700; text-transform: uppercase;"><a class="gy-link" href="localization/">Localization-aware mission design ↗</a></h3>
 <p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 60ch;">I sized each flight mode to what the tag camera can see, then tested the rule in 3,817 MuJoCo runs. It found both failure boundaries within one sweep step.</p>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
 <div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 12px;"><img src="../../assets/media/modeling/localization/fig_mc2_sizing.png" width="2100" height="720" loading="lazy" alt="Two pass-rate plots. Left: Mode 4 orbit pass rate falls from 1.0 to 0 between 0.25 and 0.35 m radius on the measured cone, and between 0.50 and 0.60 m on the design cone. Right: Mode 6 figure-eight pass rate falls between 0.21 and 0.31 m amplitude on the measured cone, and between 0.45 and 0.51 m on the design cone. Dotted lines mark each predicted bound, just inside the drop." style="width: 100%; height: auto; display: block;"></div>
-<figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 7A · Sizing sweeps · the predicted bound (dotted) sits one step inside each failure edge</figcaption>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 6A · Sizing sweeps · the predicted bound (dotted) sits one step inside each failure edge</figcaption>
 </figure>
 </section>
 
