@@ -18,6 +18,8 @@ Added 2026-10-26 from `portfolio-media` head 5a122d1 (Gavin-approved, producing 
 | mc_mode3_design_3d.mp4 | src/mc_anim3d.py | The same 50 runs from an orbiting 3D camera |
 | mc_mode3_design_poster.png, mc_mode3_design_3d_poster.png | ffmpeg final frame | Posters taken from the last frame of each MP4 here, so they show the complete outcome count. They are not part of the manifest. |
 
+Added 2026-10-26 from `portfolio-media` head 74ffda3 (Gavin-approved, producing commit c78430b): `mc_mode3_design_mj.mp4` and `mc_mode3_design_mj_poster.png` (src/mc_anim_mj.py). They show the same 50 design-cone runs rendered in the MuJoCo scene as a fleet with outcome-colored trails over the tag field, seen from an orbiting camera. Both match the manifest hashes, and the poster is the manifest's own file.
+
 The GIF versions are not published because the MP4s carry the same frames at about 5% of the size.
 
 The PNGs are published instead of the SVGs because the branch stores the SVGs with LF line endings, while the manifest hashes were taken over CRLF bytes. The PNGs match their manifest hashes exactly.
