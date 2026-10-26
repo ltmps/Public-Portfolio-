@@ -24,6 +24,8 @@ Added 2026-10-26 from `portfolio-media` head d63b541 (approved by Gavin in the P
 
 Added 2026-10-26 from `portfolio-media` head 123c7d3 (Gavin-approved per the ORBES-sim session, producing commit c78430b, src/mc_anim_cmp.py): `mc_mode4_cliff.mp4` and `mc_mode2_cameras.mp4` with their manifest posters. Both are 12 s split-screen MuJoCo renders on the measured cone with 20 seeds per arm. The first compares the inward orbit at r = 0.25 m (20/20) with r = 0.30 m, one step past the corners-gate bound (3/20). The second compares Mode 2 tracking with a single forward lens (0/20) against the two-camera build (20/20), with trail color showing fix age. Both appear on the ORBES case study.
 
+Added 2026-10-27 from `portfolio-media` head 673ec5f (Gavin-approved per the ORBES-sim session, producing commit c78430b): `onboard_pov.mp4` (src/pov_anim.py) and `mc_mode3_layouts.mp4` (src/layout4_anim.py), each with its manifest poster. Both are measured-cone renders with 0.10 m/s² residual acceleration. The first is a 20 s rendered onboard tag-camera view during a Mode 3 slide over five tags; the pupil-apriltags detector draws corner boxes and IDs live, and the overlay shows fix age, EKF position error, supervisor mode and a NO FIX banner through a 2 s blind gap. The second is a 12.5 s four-panel ladder of 1, 3, 5 and 7 tags with the same 12 seeds each, passing 0/12, 2/12, 7/12 and 12/12. Both appear on the ORBES case study.
+
 The GIF versions are not published because the MP4s carry the same frames at about 5% of the size.
 
 The PNGs are published instead of the SVGs because the branch stores the SVGs with LF line endings, while the manifest hashes were taken over CRLF bytes. The PNGs match their manifest hashes exactly.
