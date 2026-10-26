@@ -20,6 +20,8 @@ Added 2026-10-26 from `portfolio-media` head 5a122d1 (Gavin-approved, producing 
 
 Added 2026-10-26 from `portfolio-media` head 74ffda3 (Gavin-approved, producing commit c78430b): `mc_mode3_design_mj.mp4` and `mc_mode3_design_mj_poster.png` (src/mc_anim_mj.py). They show the same 50 design-cone runs rendered in the MuJoCo scene as a fleet with outcome-colored trails over the tag field, seen from an orbiting camera. Both match the manifest hashes, and the poster is the manifest's own file.
 
+Added 2026-10-26 from `portfolio-media` head d63b541 (approved by Gavin in the Personal Website session, producing commit c78430b): `mc_mode3_full_compare.mp4` and its manifest poster (src/mc_anim_full.py). It is a 13 s split-screen MuJoCo render of the full ±2 m Mode 3 slide on the design cone, 30 seeds per arm. With a single tag 2/30 pass (16 endpoint drift, 12 floor strike); with the three-tag field 23/30 pass. It appears on the ORBES case study.
+
 The GIF versions are not published because the MP4s carry the same frames at about 5% of the size.
 
 The PNGs are published instead of the SVGs because the branch stores the SVGs with LF line endings, while the manifest hashes were taken over CRLF bytes. The PNGs match their manifest hashes exactly.

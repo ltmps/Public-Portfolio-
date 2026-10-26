@@ -86,6 +86,16 @@ for (const file of ['assets/js/gy.js', 'assets/js/gy-mesh.js']) new vm.Script(re
 const svg = read('assets/media/modeling/traceability-example.svg');
 assert(!/<script\b|(?:href|src)=/.test(svg), 'Selected SVG must be self-contained');
 
+// ORBES case study: full Mode 3 comparison, approved set from ltmps/ORBES-sim portfolio-media @ d63b541
+const orbesPage = read('projects/orbes/index.html');
+for (const [file, hash] of Object.entries({
+  'mc_mode3_full_compare.mp4': '7e7cdd7e895ef9fcfac7bcb434f8912927b2c8e30120c13abd58a49f85e5c9a4',
+  'mc_mode3_full_compare_poster.png': 'f74d2ccaaf87868fc8f45ef5a8e2a48e3106d13697c486ec1a9f099c0c1df9e4'
+})) {
+  assert.equal(sha('assets/media/modeling/localization/' + file), hash, `Approved ORBES comparison bytes: ${file}`);
+  assert(orbesPage.includes('assets/media/modeling/localization/' + file), `ORBES page must show ${file}`);
+}
+
 // Approved media bytes stay unchanged
 const encke = {
   'original.mp4': '40bcc0010decf91b0979f1b3fa49cb905f4e9b5dfdfb5962a86e0591d45cc4ad',
