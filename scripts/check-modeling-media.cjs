@@ -107,7 +107,10 @@ const localization = {
   'mc_mode3_design.mp4': '491588c26a4457eb9d2301ae0580143ec5f007c2a974474e6caa4fcd8d749eb5',
   'mc_mode3_design_3d.mp4': '8308782733bdf90d6d601e062264db3ba57356e963d25f2087949fa30c12d5cb',
   'mc_mode3_design_poster.png': '00e816aa3bb5c226185d73299adb8f2b2c57f74a19eb5a1a78c12f4304c5494f',
-  'mc_mode3_design_3d_poster.png': 'bff9e25617c083fd14e229f8f6bb6adfe85b48714da47db4c9675b505e4a9052'
+  'mc_mode3_design_3d_poster.png': 'bff9e25617c083fd14e229f8f6bb6adfe85b48714da47db4c9675b505e4a9052',
+  // portfolio-media @ 74ffda3 (MuJoCo-scene render of the same runs, poster from the manifest)
+  'mc_mode3_design_mj.mp4': '2f2a3a31bd80706a5f159a69921b41d0a9f2983aef2c025545f65696390290ea',
+  'mc_mode3_design_mj_poster.png': 'd0700bfee67dbc81bce391f31c9b2050019ccb6cca4ad89b69d07f46945db380'
 };
 const sims = read('projects/modeling/index.html');
 for (const [file, hash] of Object.entries(localization)) {
