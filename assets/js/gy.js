@@ -34,6 +34,7 @@
     bindGlow();
     bindVideos();
     bindZoom();
+    bindExpand();
   }
 
   /* The grid-line loupe follows the pointer across the whole page. */
@@ -124,6 +125,48 @@
         el.style.setProperty('--zx', ((e.clientX - r.left) / r.width * 100).toFixed(2) + '%');
         el.style.setProperty('--zy', ((e.clientY - r.top) / r.height * 100).toFixed(2) + '%');
       });
+    }
+  }
+
+  /* Clicking a [data-gy-expand] card opens its video large in a modal dialog with
+     controls, in place on the page (not fullscreen). Esc, the close button or a
+     click on the backdrop closes it; reduced motion opens it paused. */
+  function bindExpand() {
+    var els = document.querySelectorAll('[data-gy-expand]');
+    if (!els.length || typeof HTMLDialogElement === 'undefined') return;
+    var dlg = document.createElement('dialog');
+    dlg.className = 'gy-lb';
+    dlg.innerHTML = '<div class="gy-lb-bar"><span class="gy-lb-cap"></span>' +
+      '<button type="button" class="gy-lb-x" aria-label="Close enlarged video">Close ✕</button></div>' +
+      '<video controls muted loop playsinline preload="metadata"></video>';
+    document.body.appendChild(dlg);
+    var big = dlg.querySelector('video'), cap = dlg.querySelector('.gy-lb-cap');
+    function close() { if (dlg.open) dlg.close(); }
+    dlg.querySelector('.gy-lb-x').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+    dlg.addEventListener('close', function () {
+      big.pause(); big.removeAttribute('src'); big.load();
+      if (dlg.opener && dlg.opener.focus) dlg.opener.focus();
+    });
+    function open(e) {
+      var card = e.currentTarget, v = card.querySelector('video');
+      if (!v) return;
+      e.preventDefault();
+      v.pause();
+      var title = card.querySelector('h3');
+      cap.textContent = title ? title.textContent : (card.getAttribute('data-gy-expand') || '');
+      big.setAttribute('aria-label', v.getAttribute('aria-label') || cap.textContent);
+      big.poster = v.getAttribute('poster') || '';
+      big.src = v.currentSrc || v.getAttribute('src');
+      dlg.opener = card;
+      dlg.showModal();
+      if (!reduced()) { var p = big.play(); if (p && p.catch) p.catch(function () {}); }
+    }
+    for (var i = 0; i < els.length; i++) {
+      els[i].addEventListener('click', open);
+      if (els[i].tagName !== 'A' && els[i].tagName !== 'BUTTON') {
+        els[i].addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') open(e); });
+      }
     }
   }
 

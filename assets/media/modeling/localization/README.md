@@ -16,7 +16,7 @@ Added 2026-10-26 from `portfolio-media` head 5a122d1 (Gavin-approved, producing 
 |---|---|---|
 | mc_mode3_design.mp4 | src/mc_anim.py | 9.9 s animation of 50 design-cone (44.3 x 33.6 deg) Mode 3 runs on the three-tag field, top and side views, colored by outcome: 44 pass, 6 fail |
 | mc_mode3_design_3d.mp4 | src/mc_anim3d.py | The same 50 runs from an orbiting 3D camera |
-| mc_mode3_design_poster.png, mc_mode3_design_3d_poster.png | ffmpeg final frame | Posters taken from the last frame of each MP4 here, so they show the complete outcome count. They are not part of the manifest. |
+| mc_mode3_design_poster.png, mc_mode3_design_3d_poster.png | ffmpeg final frame | Final-frame posters; since 50d04da these are the manifest's own files. |
 
 Added 2026-10-26 from `portfolio-media` head 74ffda3 (Gavin-approved, producing commit c78430b): `mc_mode3_design_mj.mp4` and `mc_mode3_design_mj_poster.png` (src/mc_anim_mj.py). They show the same 50 design-cone runs rendered in the MuJoCo scene as a fleet with outcome-colored trails over the tag field, seen from an orbiting camera. Both match the manifest hashes, and the poster is the manifest's own file.
 
@@ -33,3 +33,5 @@ The PNGs are published instead of the SVGs because the branch stores the SVGs wi
 Run totals come from the manifest: 910 design-cone runs and 2,907 measured-cone runs, 3,817 in all. Conditions: 1 m altitude, 0.149 m tag, corners-in-view gate, 28.8 x 21.4 deg measured worst-side cone, 0.075 s fix latency, LSM6DS-class IMU with bench calibration, mass randomized from 1.98 to 2.7 kg against a fixed 2.7 kg controller model, and camera extrinsics perturbed by up to 1 deg and 5 mm per axis.
 
 `mc2_results.csv`, `mc2_summary.md` and `mc2_traces.npz` are not published. All results are simulation, not hardware flights.
+
+On 2026-10-27 every animation poster was replaced from `portfolio-media` head 50d04da (src/final_posters.py). The posters now show completed tallies: the MuJoCo renders were re-rendered one frame past episode end, and the two plot animations use their final frames. The onboard POV poster now shows a fresh fix with a NOMINAL supervisor. All poster hashes match the manifest.
