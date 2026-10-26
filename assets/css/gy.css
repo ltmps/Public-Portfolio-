@@ -62,3 +62,11 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 
 /* A hovered row's tint lowers the contrast of gray secondary text, so it darkens to the foreground */
 .gy-row:hover [style*="--muted-foreground"],.gy-ix:hover [style*="--muted-foreground"]{color:var(--foreground) !important}
+/* Enlarged-video dialog opened from [data-gy-expand] cards */
+.gy-lb{width:min(92vw,1280px);max-width:none;max-height:92vh;padding:0;border:1.5px solid var(--foreground);background:var(--background);color:var(--foreground);overflow:hidden}
+.gy-lb::backdrop{background:rgba(0,0,0,.75)}
+.gy-lb-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;border-bottom:1.5px solid var(--foreground);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.gy-lb-x{flex:0 0 auto;padding:6px 10px;border:1px solid var(--foreground);border-radius:0;background:var(--background);color:var(--foreground);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+.gy-lb-x:hover{background:var(--muted)}
+.gy-lb-x:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:2px}
+.gy-lb video{display:block;width:100%;max-height:calc(92vh - 48px);background:#000}

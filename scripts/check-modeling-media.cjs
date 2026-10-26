@@ -10,7 +10,7 @@ const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const sha = file => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
 
 const pages = ['index.html', 'projects/modeling/index.html', 'projects/modeling/trajectories/index.html',
-  'projects/modeling/architecture/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/sherpa/deployment/index.html', 'projects/modeling/sherpa/repair/index.html', 'projects/modeling/sherpa/refuel/index.html', 'projects/modeling/sherpa/relay/index.html', 'projects/modeling/sherpa/resupply/index.html', 'projects/modeling/sherpa/robotics/index.html', 'projects/modeling/sherpa/disposal/index.html', 'projects/orbes/index.html'];
+  'projects/modeling/architecture/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/sherpa/deployment/index.html', 'projects/modeling/sherpa/repair/index.html', 'projects/modeling/sherpa/refuel/index.html', 'projects/modeling/sherpa/relay/index.html', 'projects/modeling/sherpa/resupply/index.html', 'projects/modeling/sherpa/robotics/index.html', 'projects/modeling/sherpa/disposal/index.html', 'projects/orbes/index.html', 'projects/modeling/localization/index.html'];
 for (const file of pages) {
   const html = read(file);
   const dir = path.dirname(file);
@@ -130,10 +130,10 @@ const localization = {
   'mc_mode3_design_mj.mp4': '2f2a3a31bd80706a5f159a69921b41d0a9f2983aef2c025545f65696390290ea',
   'mc_mode3_design_mj_poster.png': 'd0700bfee67dbc81bce391f31c9b2050019ccb6cca4ad89b69d07f46945db380'
 };
-const sims = read('projects/modeling/index.html');
+const sims = read('projects/modeling/localization/index.html');
 for (const [file, hash] of Object.entries(localization)) {
   assert.equal(sha('assets/media/modeling/localization/' + file), hash, `Approved localization bytes: ${file}`);
-  assert(sims.includes('assets/media/modeling/localization/' + file), `Simulations page must show ${file}`);
+  assert(sims.includes('assets/media/modeling/localization/' + file), `Localization study page must show ${file}`);
 }
 const selection = JSON.parse(read('assets/media/modeling/trajectories/manifest.json'));
 assert.equal(selection.length, 24);

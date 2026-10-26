@@ -6,7 +6,7 @@
 <meta name="description" content="Engineering studies connecting system requirements, reaction-wheel model checks, mission concepts, trajectory studies and ROS2 integration.">
 <title>Modeling &amp; Simulation | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../assets/css/gy.css?v=a05a6aeacd">
+<link rel="stylesheet" href="../../assets/css/gy.css?v=c7d3b0db52">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
@@ -45,7 +45,7 @@
 .gy-card:hover .gy-play{opacity:0}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../assets/js/gy.js?v=3690351b4b" defer></script>
+<script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
 <script src="../../assets/js/gy-mesh.js?v=6657c4c060" defer></script>
 </head>
 <body>
@@ -259,87 +259,13 @@
 <section id="localization" aria-labelledby="localization-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="localization-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>Localization-aware mission design</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 07 · MuJoCo Monte Carlo</span>
+<span style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 07 · MuJoCo Monte Carlo</span><a class="gy-btn" href="localization/" style="padding: 10px 14px; border: 1.5px solid var(--foreground); background: var(--background); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;">Open study ↗</a></span>
 </div>
-<p style="margin: 0 0 16px; font-size: 20px; line-height: 1.5; max-width: 60ch;">I sized each flight mode to what the tag camera can see, then tested the rule in 3,817 MuJoCo runs. It found both failure boundaries within one sweep step.</p>
-<p style="margin: 0 0 32px; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground); max-width: 110ch;">1 m altitude · 0.149 m tag · 28.8 × 21.4° measured cone · 0.075 s latency · bench-calibrated IMU · randomized mass and camera mount</p>
-<div role="region" aria-labelledby="cone-table-caption" tabindex="0" style="overflow-x: auto; border: 1.5px solid var(--foreground); background: var(--background);">
-<table style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px; line-height: 1.45;">
-<caption id="cone-table-caption" style="caption-side: top; text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Design cone versus measured cone</caption>
-<thead>
-<tr style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-<th scope="col" style="padding: 10px 14px; border-bottom: 1.5px solid var(--foreground); font-weight: 600; text-align: left; width: 200px;">Rule</th><th scope="col" style="padding: 10px 14px; border-bottom: 1.5px solid var(--foreground); font-weight: 600; text-align: left;">Design value</th><th scope="col" style="padding: 10px 14px; border-bottom: 1.5px solid var(--foreground); font-weight: 600; text-align: left;">Measured value</th><th scope="col" style="padding: 10px 14px; border-bottom: 1.5px solid var(--foreground); font-weight: 600; text-align: left; width: 110px;">Flown value</th><th scope="col" style="padding: 10px 14px; border-bottom: 1.5px solid var(--foreground); font-weight: 600; text-align: left; width: 170px;">MC pass k/n</th>
-</tr>
-</thead>
-<tbody>
-<tr><th scope="row" style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; font-weight: 600; text-align: left;">Camera half-FOV</th><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">44.3 × 33.6°</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">28.8 × 21.4°</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">n/a</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">n/a</td></tr>
-<tr><th scope="row" style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; font-weight: 600; text-align: left;">Footprint half-width at 1 m</th><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">0.590 m</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">0.317 m</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">n/a</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">n/a</td></tr>
-<tr><th scope="row" style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; font-weight: 600; text-align: left;">Orbit radius</th><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">0.50 m</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">Boundary near 0.28 m</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">0.25 m</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">48/50</td></tr>
-<tr><th scope="row" style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; font-weight: 600; text-align: left;">Lemniscate amplitude</th><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">0.476 m</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">Boundary near 0.24 m</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">0.21 m</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">50/50</td></tr>
-<tr><th scope="row" style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; font-weight: 600; text-align: left;">Mode 3 tag field</th><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">3 tags</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">7 tags</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">7 tags</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">49/50 out, 50/50 back</td></tr>
-<tr><th scope="row" style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; font-weight: 600; text-align: left;">Residual acceleration</th><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">0.03 m/s²</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">0.05 m/s² (17/20)</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">n/a</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;">12/20 at 0.10 m/s²</td></tr>
-</tbody>
-</table>
-</div>
-<p style="margin: 16px 0 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground); max-width: 80ch;">Flown values are simulated runs, not hardware flights.</p>
-<div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 24px 20px; align-items: start;">
-<figure class="gy-fig" style="grid-column: 1 / -1; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 60ch;">I sized each flight mode to what the tag camera can see, then tested the rule in 3,817 MuJoCo runs. It found both failure boundaries within one sweep step.</p>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
 <div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 12px;"><img src="../../assets/media/modeling/localization/fig_mc2_sizing.png" width="2100" height="720" loading="lazy" alt="Two pass-rate plots. Left: Mode 4 orbit pass rate falls from 1.0 to 0 between 0.25 and 0.35 m radius on the measured cone, and between 0.50 and 0.60 m on the design cone. Right: Mode 6 figure-eight pass rate falls between 0.21 and 0.31 m amplitude on the measured cone, and between 0.45 and 0.51 m on the design cone. Dotted lines mark each predicted bound, just inside the drop." style="width: 100%; height: auto; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 7A · Sizing sweeps · the predicted bound (dotted) sits one step inside each failure edge</figcaption>
 </figure>
-<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 12px;"><img src="../../assets/media/modeling/localization/fig_mc2_sweep.png" width="1050" height="720" loading="lazy" alt="Mode 3 pass rate against residual acceleration from 0 to 0.2 m/s² for four tag layouts. Seven tags stay near 1.0 and end at 0.9; five tags hold 0.85 to 0.9 through 0.05 then fall to 0.6; three tags fall from 0.55 to near 0.1; a single tag stays near 0." style="width: 100%; height: auto; display: block;"></div>
-<figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 7B · Residual-acceleration sweep, Wilson bands · seven tags hold Mode 3 longest</figcaption>
-</figure>
-<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 12px;"><img src="../../assets/media/modeling/localization/fig_mc2_trace.png" width="1050" height="840" loading="lazy" alt="Mode 3 exemplar trace over 20 s with a seven-tag field. Estimated position error stays below 0.08 m. Fix age stays near 0.07 s except three gaps, the longest reaching the 1 s limit at about 13.5 s, followed by a shaded BLIND interval of about 0.7 s." style="width: 100%; height: auto; display: block;"></div>
-<figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 7C · Mode 3 trace · one short BLIND gap, error under 0.08 m</figcaption>
-</figure>
-<a class="gy-card" href="#localization" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
-<div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #111; border-bottom: 1.5px solid var(--foreground);">
-<video src="../../assets/media/modeling/localization/mc_mode3_design.mp4" poster="../../assets/media/modeling/localization/mc_mode3_design_poster.png" muted loop playsinline preload="metadata" aria-label="Animation of 50 simulated Mode 3 runs on the design camera cone, seen from above and from the side, colored by outcome: 44 pass and 6 fail by endpoint drift or a floor strike." style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
-<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
-</div>
-<p class="gy-strip"><span>Video, muted · 10 s</span><span class="gy-play">Hover to play</span></p>
-<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Design cone, 44.3 × 33.6° · three tags</span>
-<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">50 Mode 3 runs: 44 pass, 6 fail</h3>
-</div>
-</a>
-<a class="gy-card" href="#localization" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
-<div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #111; border-bottom: 1.5px solid var(--foreground);">
-<video src="../../assets/media/modeling/localization/mc_mode3_design_3d.mp4" poster="../../assets/media/modeling/localization/mc_mode3_design_3d_poster.png" muted loop playsinline preload="metadata" aria-label="Rotating 3D view of the same 50 simulated Mode 3 runs on the design camera cone, colored by outcome, with the tag footprints and the 0.5 m floor margin drawn." style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
-<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
-</div>
-<p class="gy-strip"><span>Video, muted · 10 s</span><span class="gy-play">Hover to play</span></p>
-<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Design cone · 3D view</span>
-<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">The same 50 runs in 3D</h3>
-</div>
-</a>
-<a class="gy-card" href="#localization" data-gy-vid data-gy-glow style="grid-column: 1 / -1; width: 100%; max-width: 960px; position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
-<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0b0f1a; border-bottom: 1.5px solid var(--foreground);">
-<video src="../../assets/media/modeling/localization/mc_mode3_design_mj.mp4" poster="../../assets/media/modeling/localization/mc_mode3_design_mj_poster.png" muted loop playsinline preload="metadata" aria-label="MuJoCo scene with the same 50 design-cone Mode 3 runs flown together over the three-tag field, trails colored by outcome, seen from an orbiting camera." style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
-<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
-</div>
-<p class="gy-strip"><span>Video, muted · 9 s</span><span class="gy-play">Hover to play</span></p>
-<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Design cone · MuJoCo scene</span>
-<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">The same 50 runs as a fleet</h3>
-</div>
-</a>
-<a class="gy-card" href="#localization" data-gy-vid data-gy-glow style="grid-column: 1 / -1; width: 100%; max-width: 960px; position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
-<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0b0f1a; border-bottom: 1.5px solid var(--foreground);">
-<video src="../../assets/media/modeling/localization/orbes_modes.mp4" poster="../../assets/media/modeling/localization/orbes_modes_poster.png" muted loop playsinline preload="metadata" aria-label="MuJoCo recording of the six ORBES flight modes with a live fix-age overlay" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
-<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
-</div>
-<p class="gy-strip"><span>Video, muted · 78 s</span><span class="gy-play">Hover to play</span></p>
-<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">MuJoCo · fix-age overlay</span>
-<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">Six flight modes in simulation</h3>
-</div>
-</a>
-</div>
 </section>
 
 
