@@ -10,6 +10,22 @@ These files back Study 07, Localization-aware mission design, on the Simulations
 | orbes_modes.mp4 | src/mode_video.py | 78 s MuJoCo recording of the six flight modes with a fix-age overlay; H.264 High, 960 x 540, 15 fps, no audio, faststart |
 | orbes_modes_poster.png | src/mode_video.py | Poster frame for the video |
 
+Added 2026-10-26 from `portfolio-media` head 5a122d1 (Gavin-approved, producing commit c78430b). The manifest hashes match the MP4s exactly:
+
+| File | Source script | Content |
+|---|---|---|
+| mc_mode3_design.mp4 | src/mc_anim.py | 9.9 s animation of 50 design-cone (44.3 x 33.6 deg) Mode 3 runs on the three-tag field, top and side views, colored by outcome: 44 pass, 6 fail |
+| mc_mode3_design_3d.mp4 | src/mc_anim3d.py | The same 50 runs from an orbiting 3D camera |
+| mc_mode3_design_poster.png, mc_mode3_design_3d_poster.png | ffmpeg final frame | Posters taken from the last frame of each MP4 here, so they show the complete outcome count. They are not part of the manifest. |
+
+Added 2026-10-26 from `portfolio-media` head 74ffda3 (Gavin-approved, producing commit c78430b): `mc_mode3_design_mj.mp4` and `mc_mode3_design_mj_poster.png` (src/mc_anim_mj.py). They show the same 50 design-cone runs rendered in the MuJoCo scene as a fleet with outcome-colored trails over the tag field, seen from an orbiting camera. Both match the manifest hashes, and the poster is the manifest's own file.
+
+Added 2026-10-26 from `portfolio-media` head d63b541 (approved by Gavin in the Personal Website session, producing commit c78430b): `mc_mode3_full_compare.mp4` and its manifest poster (src/mc_anim_full.py). It is a 13 s split-screen MuJoCo render of the full ±2 m Mode 3 slide on the design cone, 30 seeds per arm. With a single tag 2/30 pass (16 endpoint drift, 12 floor strike); with the three-tag field 23/30 pass. It appears on the ORBES case study.
+
+Added 2026-10-26 from `portfolio-media` head 123c7d3 (Gavin-approved per the ORBES-sim session, producing commit c78430b, src/mc_anim_cmp.py): `mc_mode4_cliff.mp4` and `mc_mode2_cameras.mp4` with their manifest posters. Both are 12 s split-screen MuJoCo renders on the measured cone with 20 seeds per arm. The first compares the inward orbit at r = 0.25 m (20/20) with r = 0.30 m, one step past the corners-gate bound (3/20). The second compares Mode 2 tracking with a single forward lens (0/20) against the two-camera build (20/20), with trail color showing fix age. Both appear on the ORBES case study.
+
+The GIF versions are not published because the MP4s carry the same frames at about 5% of the size.
+
 The PNGs are published instead of the SVGs because the branch stores the SVGs with LF line endings, while the manifest hashes were taken over CRLF bytes. The PNGs match their manifest hashes exactly.
 
 Run totals come from the manifest: 910 design-cone runs and 2,907 measured-cone runs, 3,817 in all. Conditions: 1 m altitude, 0.149 m tag, corners-in-view gate, 28.8 x 21.4 deg measured worst-side cone, 0.075 s fix latency, LSM6DS-class IMU with bench calibration, mass randomized from 1.98 to 2.7 kg against a fixed 2.7 kg controller model, and camera extrinsics perturbed by up to 1 deg and 5 mm per axis.
