@@ -94,7 +94,11 @@ for (const [file, hash] of Object.entries({
   'mc_mode4_cliff.mp4': 'bed8be1d5f9c3f9b6ccb7ae2b5ca6530bba52ded7c7a08435b9c2f1fd20c2d23',
   'mc_mode4_cliff_poster.png': '47192bc92da1fc3678229d6e118aec6efbf7e19aed073b97a44e11445bb682ce',
   'mc_mode2_cameras.mp4': 'b26931f498c1401b817b3a6806fde36f2e43fd8300837c7bb9892942de0a47f3',
-  'mc_mode2_cameras_poster.png': '155234ebd4f652fa04ef41d68807002c44754a236dcbcf1454eacd1b6395a837'
+  'mc_mode2_cameras_poster.png': '155234ebd4f652fa04ef41d68807002c44754a236dcbcf1454eacd1b6395a837',
+  'onboard_pov.mp4': '0b9f7209468ce9474451c1061ab387e370dbb1f3c608d49e2df045b88f1717f2',
+  'onboard_pov_poster.png': 'a0d57d9fa6086cafd37c011855b80361112dfc9e07371e78f132ee3d0de50d67',
+  'mc_mode3_layouts.mp4': '2b238f1e0ba780c7288d5e872317c70c64750cb48337179d62c3ee251887a221',
+  'mc_mode3_layouts_poster.png': '1c1c55b25579ff840489df01d2cd6bf60854e70a9c3c941c83377c182a5c2465'
 })) {
   assert.equal(sha('assets/media/modeling/localization/' + file), hash, `Approved ORBES comparison bytes: ${file}`);
   assert(orbesPage.includes('assets/media/modeling/localization/' + file), `ORBES page must show ${file}`);
