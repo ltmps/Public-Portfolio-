@@ -90,7 +90,11 @@ assert(!/<script\b|(?:href|src)=/.test(svg), 'Selected SVG must be self-containe
 const orbesPage = read('projects/orbes/index.html');
 for (const [file, hash] of Object.entries({
   'mc_mode3_full_compare.mp4': '7e7cdd7e895ef9fcfac7bcb434f8912927b2c8e30120c13abd58a49f85e5c9a4',
-  'mc_mode3_full_compare_poster.png': 'f74d2ccaaf87868fc8f45ef5a8e2a48e3106d13697c486ec1a9f099c0c1df9e4'
+  'mc_mode3_full_compare_poster.png': 'f74d2ccaaf87868fc8f45ef5a8e2a48e3106d13697c486ec1a9f099c0c1df9e4',
+  'mc_mode4_cliff.mp4': 'bed8be1d5f9c3f9b6ccb7ae2b5ca6530bba52ded7c7a08435b9c2f1fd20c2d23',
+  'mc_mode4_cliff_poster.png': '47192bc92da1fc3678229d6e118aec6efbf7e19aed073b97a44e11445bb682ce',
+  'mc_mode2_cameras.mp4': 'b26931f498c1401b817b3a6806fde36f2e43fd8300837c7bb9892942de0a47f3',
+  'mc_mode2_cameras_poster.png': '155234ebd4f652fa04ef41d68807002c44754a236dcbcf1454eacd1b6395a837'
 })) {
   assert.equal(sha('assets/media/modeling/localization/' + file), hash, `Approved ORBES comparison bytes: ${file}`);
   assert(orbesPage.includes('assets/media/modeling/localization/' + file), `ORBES page must show ${file}`);
