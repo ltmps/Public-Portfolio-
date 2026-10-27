@@ -1,4 +1,4 @@
-/* ORBES IR beacon track replay: the logged 19:27 run of Nov 14, 2025 drawn in step with
+/* ORBES IR beacon track replay: one logged run drawn in step with
    the Fig. 4 test video. The video has no timestamp, so one loop of the video replays the
    whole log; the two run together but are not time-matched. Without script the page
    keeps the full static plot. Samples are [time s, value] pairs from the onboard log. */
