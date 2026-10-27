@@ -131,7 +131,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </div>
 <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground); max-width: 80ch;">Flown values are simulated runs, not hardware flights.</p>
 </section>
-<section id="animations" aria-labelledby="animations-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<section id="animations" aria-labelledby="animations-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="animations-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>Results and animations</h2>
 <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Figures 6A to 6C · videos</span>
@@ -194,6 +194,31 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </div>
 </a>
 </div>
+</section>
+<section id="residual" aria-labelledby="residual-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="residual-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18c4-10 12-10 16 0"/><path d="M12 4v4M8 6l1.5 3M16 6l-1.5 3"/></svg>Learned residual vs DLQR</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Negative result · 200 held-out cells</span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 62ch;">A PPO policy trained for 3 million steps added position corrections on top of the DLQR controller, using only the onboard estimate as input. On 200 held-out Mode 3 cells on the measured camera cone, every run with the policy failed.</p>
+<div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 240px; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 14px; background: var(--background);"><span class="gy-num" style="font-size: 48px; line-height: 0.9; font-weight: 700; letter-spacing: -0.04em; ">24 / 200</span><span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">plain DLQR passes · 12.0%, 95% Wilson interval 8.2 to 17.2%</span></div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 14px; background: var(--background);"><span class="gy-num" style="font-size: 48px; line-height: 0.9; font-weight: 700; letter-spacing: -0.04em; color: #c8102e;">0 / 200</span><span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">DLQR plus PPO residual passes · 0%, 95% interval 0 to 1.9%</span></div>
+<div class="gy-stat" style="flex: 1 1 240px; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 14px; background: var(--background);"><span class="gy-num" style="font-size: 48px; line-height: 0.9; font-weight: 700; letter-spacing: -0.04em; color: #c8102e;">24 → 0</span><span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">baseline successes the policy broke, with none fixed</span></div>
+</div>
+<p style="margin: 16px 0 0; font-size: 15px; line-height: 1.55; color: var(--muted-foreground); max-width: 72ch;">With the residual set to zero, the evaluation harness reproduces plain DLQR exactly, so the drop comes from the policy. Both arms fly the same paired cells with residual accelerations of 0.05 to 0.20 m/s².</p>
+<a class="gy-card" href="#residual" data-gy-vid data-gy-expand data-gy-glow style="margin-top: 32px; max-width: 960px; position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<div style="position: relative; aspect-ratio: 1280 / 456; overflow: hidden; background: #0b0f1a; border-bottom: 1.5px solid var(--foreground);">
+<video src="../../../assets/media/modeling/localization/ppo_vs_dlqr.mp4" poster="../../../assets/media/modeling/localization/ppo_vs_dlqr_poster.png" muted loop playsinline preload="metadata" aria-label="Side-by-side MuJoCo render of the same 12 held-out Mode 3 cells. Left, plain DLQR: several trails settle over the target tag and the counter ends at 4 pass, 8 fail. Right, DLQR with the PPO residual: trails tangle and fly off, and the counter ends at 0 pass, 12 fail." style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</div>
+<p class="gy-strip"><span>Video, muted · 12 s</span><span class="gy-play">Hover to play · click to enlarge</span></p>
+<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Illustrative subset · 12 of the 200 cells</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">The same 12 cells, with and without the policy</h3>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted-foreground);">The counters in the video (4 of 12 and 0 of 12) describe this subset. The headline rates above come from all 200 cells.</p>
+</div>
+</a>
 </section>
 
 </main>

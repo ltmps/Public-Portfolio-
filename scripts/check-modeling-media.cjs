@@ -128,7 +128,10 @@ const localization = {
   'mc_mode3_design_3d_poster.png': '91a82d250c5c50260e8e6ee80dedb22ba9f5a6eca32865aff5294f7f3b6e9450',
   // portfolio-media @ 74ffda3 (MuJoCo-scene render of the same runs, poster from the manifest)
   'mc_mode3_design_mj.mp4': '2f2a3a31bd80706a5f159a69921b41d0a9f2983aef2c025545f65696390290ea',
-  'mc_mode3_design_mj_poster.png': 'b51cb94f12dd33c5f838bd4b744bc726d9b6ae1332adc343c7c4c746928c34fb'
+  'mc_mode3_design_mj_poster.png': 'b51cb94f12dd33c5f838bd4b744bc726d9b6ae1332adc343c7c4c746928c34fb',
+  // portfolio-media @ 1c08c2a (PPO residual vs DLQR, 12-cell illustrative subset; headline N=200 from the sim session)
+  'ppo_vs_dlqr.mp4': '5c38685f31701d38bdc4dc8ea6f9c2fc8b0902efb8cd974fa35dcf8497bec380',
+  'ppo_vs_dlqr_poster.png': 'fdac8114d1bf40ba9a6389cf08928a4238f8f6d4e57bdf82e7213af70226928f'
 };
 const sims = read('projects/modeling/localization/index.html');
 for (const [file, hash] of Object.entries(localization)) {
