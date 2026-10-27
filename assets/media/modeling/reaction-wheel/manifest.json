@@ -30,6 +30,18 @@
       "name": "controller-block-diagram.svg",
       "bytes": 3243,
       "sha256": "c07396a3c9af6c8797371a70bcb5b443a3b112ad0834ff2a1c85ee3d506eff35"
+    },
+    {
+      "name": "controller-root-locus.png",
+      "source": "cad_tracking_15_cases_2026-10-15/plots/case10_tracking_local_root_locus.png",
+      "bytes": 104431,
+      "sha256": "790a0d291a2f0e452e95dc874d5502a262e651542c0b92f558b71b2600e31570"
+    },
+    {
+      "name": "compound-response.png",
+      "source": "cad_tracking_15_cases_2026-10-15/plots/case10_tracking_response.png",
+      "bytes": 149687,
+      "sha256": "1fe01095c5e5d4abeea60925072d8049e4d4857bf768d5f89ee1dc7ff528ebc7"
     }
   ]
 }

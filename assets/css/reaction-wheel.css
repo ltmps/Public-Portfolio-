@@ -31,4 +31,6 @@
 .rw-diagram img{min-width:900px}
 .rw-diagram:focus-visible{outline:3px solid rgb(var(--acc));outline-offset:3px}
 .rw-equations{margin:24px 0}
-.rw-equations pre{max-width:100%;overflow:auto;padding:16px;background:var(--muted);font-family:var(--font-mono);font-size:13px;line-height:1.7}
+
+
+.rw-math{overflow-x:auto;padding:16px 8px;margin:12px 0}.rw-math math{width:max-content;min-width:100%;font-size:1.1rem}.rw-math:focus-visible{outline:2px solid rgb(var(--acc))}.rw-main h3{margin:32px 0 16px;font-size:24px}
