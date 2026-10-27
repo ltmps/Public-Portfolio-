@@ -369,7 +369,7 @@
 <li><button type="button" class="st-key" data-ir-toggle="y" aria-pressed="true"><span aria-hidden="true" style="font-weight: 700;">―</span> IMU yaw</button></li>
 <li><button type="button" class="st-key" data-ir-toggle="c" aria-pressed="true"><span aria-hidden="true" style="font-weight: 700;">⌐</span> X-face command</button></li>
 </ul>
-<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">The plot is the onboard log of the 19:27 IR tracking run on Nov 14, 2025, from the button press that started tracking to the emergency stop 83 s later. Bearing is the beacon's angle from the IR camera's center, and the shaded band is the image edge. A phone recording of this run is timestamped 19:27:04, but the video shown here has no timestamp. One loop of the 11 s video replays the whole log at about 7.5 times speed, so the two play together but their timing is not confirmed.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">The ORBES cube hangs from an overhead line so it can turn freely in yaw. Its IR camera finds the brightest blob in each frame, and the bearing is that blob's angle from the image center, with the shaded band marking the image edge. When the beacon sits outside the center 10% of the frame, the controller drives the X-face motors in opposing pairs to turn the cube toward it, which is the stepped command in the bottom trace. The yaw trace shows the cube swinging past the beacon and back, and the red marks show the frames where the beacon left the view.</p>
 </div>
 </div>
 <p class="gy-strip"><span>Video, muted · onboard log</span><span class="gy-play">Hover the video or press Play · click the video to enlarge</span></p>
