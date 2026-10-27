@@ -42,6 +42,18 @@
       "source": "cad_tracking_15_cases_2026-10-15/plots/case10_tracking_response.png",
       "bytes": 149687,
       "sha256": "1fe01095c5e5d4abeea60925072d8049e4d4857bf768d5f89ee1dc7ff528ebc7"
+    },
+    {
+      "name": "controller-simulink.png",
+      "bytes": 65586,
+      "sha256": "c4ce3cb6b9580994037833d65774f452b081896b0bd50ee3a774a3d965126d55",
+      "scope": "Simulink architecture documentation export; not an executable simulation."
+    },
+    {
+      "name": "root-locus-data.json",
+      "bytes": 625569,
+      "sha256": "0f694014bee21423568a6519b8bcb7e64fff77fdaa1294449175de4f6ac24e4d",
+      "scope": "MATLAB rlocus from original stationary baseline, sample time 0.01 s."
     }
   ]
 }
