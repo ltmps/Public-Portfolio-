@@ -54,6 +54,12 @@
       "bytes": 625569,
       "sha256": "0f694014bee21423568a6519b8bcb7e64fff77fdaa1294449175de4f6ac24e4d",
       "scope": "MATLAB rlocus from original stationary baseline, sample time 0.01 s."
+    },
+    {
+      "name": "controller-detail.svg",
+      "bytes": 153000,
+      "sha256": "3c0d0025ca8cb7e67c3cb35023940103f7b6f8552cc168ec03575d3e0f74a1be",
+      "scope": "Lower-level Simulink single-axis small-angle companion; original baseline gains, sampled feedback and fixed torque cap. Not the full coupled replay."
     }
   ]
 }

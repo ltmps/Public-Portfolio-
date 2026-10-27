@@ -73,10 +73,10 @@
     svg.addEventListener('click',event=>{const rect=svg.getBoundingClientRect();const px=(event.clientX-rect.left)*620/rect.width,py=(event.clientY-rect.top)*590/rect.height;let best=400,found;plot.real.forEach((a,b)=>a.forEach((re,k)=>{const d=(x(re)-px)**2+(y(plot.imag[b][k])-py)**2;if(d<best){best=d;found=[b,k];}}));if(found){slider.value=found[1];branchSelect.value=found[0];updateGain();show(...found);}});
     slider.addEventListener('input',updateGain);select.addEventListener('change',()=>draw());branchSelect.addEventListener('change',updateGain);
     const zoomControls=document.createElement('div');zoomControls.className='rl-zoom';
-    const button=(label,action)=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',action);zoomControls.append(b);return b;};
+    const button=(label,action)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',label);b.title=label;const icon=el('svg',{viewBox:'0 0 24 24',width:18,height:18,'aria-hidden':'true',fill:'none',stroke:'currentColor','stroke-width':1.8});if(label==='Reset view'){icon.append(el('path',{d:'M4 9a8 8 0 1 1 0 6 M4 3v6h6'}));}else{icon.append(el('circle',{cx:10,cy:10,r:6}),el('path',{d:'m15 15 5 5 M7 10h6'+(label==='Zoom in'?' M10 7v6':'')}));}b.append(icon);b.addEventListener('click',action);zoomControls.append(b);return b;};
     const changeZoom=factor=>{const next=Math.max(1,Math.min(8,zoom*factor));if(next===1){zoom=1;lo=bottom=-1.6;hi=top=1.6;}else{zoom=next;const half=1.6/zoom;lo=focusPoint[0]-half;hi=focusPoint[0]+half;bottom=focusPoint[1]-half;top=focusPoint[1]+half;}draw(false);};
     const zoomIn=button('Zoom in',()=>changeZoom(2)),zoomOut=button('Zoom out',()=>changeZoom(.5));button('Reset view',()=>{zoom=1;lo=bottom=-1.6;hi=top=1.6;draw(false);});
-    const zoomOutput=document.createElement('output');zoomOutput.setAttribute('aria-label','Plot zoom');zoomControls.append(zoomOutput);host.querySelector('.rl-controls').after(zoomControls);
+    const zoomOutput=document.createElement('output');zoomOutput.setAttribute('aria-label','Plot zoom');zoomControls.append(zoomOutput);host.querySelector('.rl-controls').append(zoomControls);
     host.hidden=false;draw();
   }).catch(()=>{ /* The full-size static figure remains usable. */ });
 })();
