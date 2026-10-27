@@ -1,6 +1,5 @@
 {
   "run": "random_four_face_2026-10-15",
-  "seed": 2026101504,
   "simulationDurationSeconds": 83.168,
   "videoDurationSeconds": 83.2,
   "audio": false,
