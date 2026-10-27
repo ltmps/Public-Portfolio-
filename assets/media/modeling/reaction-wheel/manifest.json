@@ -60,6 +60,69 @@
       "bytes": 150800,
       "sha256": "fc07d62dae9b68c4a76190fd1cd459c903668e5b0d03bcbab875861a80d3102f",
       "scope": "Lower-level Simulink single-axis small-angle companion; original baseline gains, sampled feedback and fixed torque cap. Not the full coupled replay."
+    },
+    {
+      "name": "multi-target/multi_target_60s.mp4",
+      "bytes": 8417568,
+      "sha256": "0bc1c4465adc727002500f888496ee8a609eb2167ad3a825ac5900265a50ea94",
+      "source": "multi_target_tracking_2026-10-27/multi_target_60s.mp4"
+    },
+    {
+      "name": "multi-target/multi_target_poster.png",
+      "bytes": 264670,
+      "sha256": "fc831f44a5c5f7c3a25fcb5d1568f1455e6fa067bcd00eabd064d6fa34c801c5",
+      "source": "multi_target_tracking_2026-10-27/multi_target_poster.png"
+    },
+    {
+      "name": "multi-target/multi_target_response.png",
+      "bytes": 164165,
+      "sha256": "c36b0f06c0dc6294433cbc8e0a813c77823eaad6f1227c05993c0cf55a6154cb",
+      "source": "multi_target_tracking_2026-10-27/multi_target_response.png"
+    },
+    {
+      "name": "multi-target/wheel_defects_60s.mp4",
+      "bytes": 9863586,
+      "sha256": "89c69ba454bfcf55404aaccfb0cbd3054ce4780578f81baf0adafd85531dd6ff",
+      "source": "multi_target_tracking_2026-10-27/wheel_defects_60s.mp4"
+    },
+    {
+      "name": "multi-target/wheel_defects_60s_poster.png",
+      "bytes": 284765,
+      "sha256": "7dfb6a77d7f9035000cf951eaf0daf79aee9cb472c76cb5e7d182fa1211bb999",
+      "source": "multi_target_tracking_2026-10-27/wheel_defects_60s_poster.png"
+    },
+    {
+      "name": "multi-target/wheel_defects_phase_6s.mp4",
+      "bytes": 1017098,
+      "sha256": "ba8006febd8270ab7811e24de087c2ef30d01900a9587c90c000566804c4b62b",
+      "source": "multi_target_tracking_2026-10-27/wheel_defects_phase_6s.mp4"
+    },
+    {
+      "name": "multi-target/wheel_defects_phase_6s_poster.png",
+      "bytes": 280206,
+      "sha256": "df847cbd15a2100f8e086ed3f395ad531335ae88693fe3bb96014f68281b328a",
+      "source": "multi_target_tracking_2026-10-27/wheel_defects_phase_6s_poster.png"
+    },
+    {
+      "name": "multi-target/ORBES_tracking_optional_GIFs.zip",
+      "bytes": 21461148,
+      "sha256": "f145b16f73982b6db08e3f43b44e9189617c5b00a12b53d17ac3cb9ca44901ee",
+      "source": "multi_target_tracking_2026-10-27/ORBES_tracking_optional_GIFs.zip"
     }
-  ]
+  ],
+  "multiTargetStudy": {
+    "simulationSeconds": 90,
+    "replaySeconds": 60,
+    "playbackSpeed": 1.5,
+    "audio": false,
+    "phaseInspection": {
+      "replaySeconds": 6,
+      "physicalWindowSeconds": [
+        2.1522,
+        2.717039806768127
+      ],
+      "zWheelTurns": 3
+    },
+    "scope": "Prescribed independent world-space targets, scheduled handoffs, geometric camera, unchanged controller; combined XYZ rotor defects."
+  }
 }

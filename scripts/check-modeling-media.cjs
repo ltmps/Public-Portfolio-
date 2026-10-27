@@ -161,16 +161,20 @@ for (const item of selection) {
 }
 console.log('PASS: media dependencies and playback rules, CAPCOM phase jumps and v5 media, architecture data and envelope, playback viewer privacy and approved media hashes, including the ORBES localization set and the Khorium result fields.');
 
-// The Reaction Wheel page publishes one saved animation set with manual playback.
+// Two tracking studies plus optional full-run and phase-resolved wheel views.
 const rw = read('projects/modeling/reaction-wheel/index.html');
 const rwVideo = [...rw.matchAll(/<video\b[^>]*>/g)];
-assert.equal(rwVideo.length, 1, 'One reaction-wheel animation');
-assert(/\bcontrols\b/.test(rwVideo[0][0]) && /\bplaysinline\b/.test(rwVideo[0][0]));
-assert(rwVideo[0][0].includes('preload="none"') && !/\b(?:loop|autoplay)\b/.test(rwVideo[0][0]));
+assert.equal(rwVideo.length, 4, 'Two study players and two optional wheel inspections');
+for (const [tag] of rwVideo) {
+  assert(/\bcontrols\b/.test(tag) && /\bplaysinline\b/.test(tag));
+  assert(tag.includes('preload="none"') && !/\b(?:loop|autoplay)\b/.test(tag));
+  assert(/poster="[^"]+"/.test(tag) && /aria-describedby="[^"]+"/.test(tag));
+}
+assert(!/<img\b[^>]+src="[^"]+\.gif/i.test(rw),'GIFs remain optional downloads');
 const rwManifest = JSON.parse(read('assets/media/modeling/reaction-wheel/manifest.json'));
 for (const item of rwManifest.files) {
   const file = 'assets/media/modeling/reaction-wheel/' + item.name;
   assert.equal(fs.statSync(path.join(root, file)).size, item.bytes);
   assert.equal(sha(file), item.sha256, `Saved ORBES run asset changed: ${item.name}`);
 }
-console.log('PASS: one manual Reaction Wheel replay and source-matched plot/poster.');
+console.log('PASS: two manual Reaction Wheel studies, optional wheel views and source-matched media.');
