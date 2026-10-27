@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Khorium: pressure testing and validating an automated CAD-to-simulation platform, from geometry repair and meshing to OpenFOAM and CalculiX results that can be trusted.">
+<title>Khorium CAD to simulation | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/gy.css?v=c7d3b0db52">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-frame{transition:border-color .25s}
+.gy-fig:hover .gy-frame{border-color:rgb(var(--acc)) !important}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 0 0 0 1.5px rgb(var(--acc))}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-step{transition:border-color .2s,background-color .2s}
+.gy-step:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.06) !important}
+.gy-stepn{transition:color .2s}
+.gy-step:hover .gy-stepn{color:rgb(var(--acc))}
+.gy-kt td,.gy-kt th{padding:10px 14px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+.gy-kt th{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-foreground)}
+.gy-kt tr:last-child td{border-bottom:0}
+.gy-barrow{transition:background-color .2s}
+.gy-barrow:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 3px 0 0 rgb(var(--acc))}
+.gy-card{transition:border-color .25s}
+.gy-card:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+</style>
+<script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
+
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../index.html#work">Work</a>
+<a class="gy-link" href="../modeling/">Simulations</a>
+<a class="gy-link" href="../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
+<main id="main" tabindex="-1">
+<section id="top" aria-labelledby="page-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px 0;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / <a class="gy-link" href="../../index.html#experience">Experience</a> / Khorium</p>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
+<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">Khorium · Simulation Engineer · 2026 to present</p>
+<h1 id="page-title" style="margin: 0; font-size: clamp(48px, 6vw, 88px); line-height: 0.88; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">CAD to<br>simulation</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 26ch; text-wrap: pretty;">Find where automated meshing and solving break. Then make the results worth trusting.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 52ch; color: var(--muted-foreground);">Khorium builds software that takes a raw CAD file to a solved CFD or FEA study. It checks and repairs the geometry, meshes it, runs OpenFOAM or CalculiX, and checks whether the answer can be trusted. I test that pipeline on real parts and validate its results.</p>
+</div>
+<figure class="gy-part" data-gy-glow style="position: relative; margin: 0; padding: 20px; border: 1.5px solid var(--foreground); background: var(--background);">
+<svg viewBox="0 0 400 400" role="img" aria-label="Pipeline from CAD geometry through diagnosis, repair, meshing and solving to a final check against gates and references, with failures fed back to the start." style="display: block; width: 100%; height: auto; font-family: var(--font-sans);"><rect x="40" y="18" width="300" height="46" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"/><text x="56" y="38" font-family="var(--font-mono)" font-size="11" letter-spacing="1.2" fill="rgb(var(--acc))">01</text><text x="86" y="38" font-size="16" font-weight="700" fill="var(--foreground)">CAD</text><text x="86" y="55" font-size="13" fill="var(--muted-foreground)">STEP geometry</text><path d="M190 64V80" stroke="var(--foreground)" stroke-width="1.5"/><path d="M185 74L190 80L195 74" fill="none" stroke="var(--foreground)" stroke-width="1.5"/><rect x="40" y="80" width="300" height="46" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"/><text x="56" y="100" font-family="var(--font-mono)" font-size="11" letter-spacing="1.2" fill="rgb(var(--acc))">02</text><text x="86" y="100" font-size="16" font-weight="700" fill="var(--foreground)">DIAGNOSE</text><text x="86" y="117" font-size="13" fill="var(--muted-foreground)">find defects</text><path d="M190 126V142" stroke="var(--foreground)" stroke-width="1.5"/><path d="M185 136L190 142L195 136" fill="none" stroke="var(--foreground)" stroke-width="1.5"/><rect x="40" y="142" width="300" height="46" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"/><text x="56" y="162" font-family="var(--font-mono)" font-size="11" letter-spacing="1.2" fill="rgb(var(--acc))">03</text><text x="86" y="162" font-size="16" font-weight="700" fill="var(--foreground)">REPAIR</text><text x="86" y="179" font-size="13" fill="var(--muted-foreground)">fix, keep labels</text><path d="M190 188V204" stroke="var(--foreground)" stroke-width="1.5"/><path d="M185 198L190 204L195 198" fill="none" stroke="var(--foreground)" stroke-width="1.5"/><rect x="40" y="204" width="300" height="46" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"/><text x="56" y="224" font-family="var(--font-mono)" font-size="11" letter-spacing="1.2" fill="rgb(var(--acc))">04</text><text x="86" y="224" font-size="16" font-weight="700" fill="var(--foreground)">MESH</text><text x="86" y="241" font-size="13" fill="var(--muted-foreground)">boundary layers</text><path d="M190 250V266" stroke="var(--foreground)" stroke-width="1.5"/><path d="M185 260L190 266L195 260" fill="none" stroke="var(--foreground)" stroke-width="1.5"/><rect x="40" y="266" width="300" height="46" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"/><text x="56" y="286" font-family="var(--font-mono)" font-size="11" letter-spacing="1.2" fill="rgb(var(--acc))">05</text><text x="86" y="286" font-size="16" font-weight="700" fill="var(--foreground)">SOLVE</text><text x="86" y="303" font-size="13" fill="var(--muted-foreground)">OpenFOAM, CalculiX</text><path d="M190 312V328" stroke="var(--foreground)" stroke-width="1.5"/><path d="M185 322L190 328L195 322" fill="none" stroke="var(--foreground)" stroke-width="1.5"/><rect x="40" y="328" width="300" height="46" fill="var(--background)" stroke="var(--foreground)" stroke-width="1.5"/><text x="56" y="348" font-family="var(--font-mono)" font-size="11" letter-spacing="1.2" fill="rgb(var(--acc))">06</text><text x="86" y="348" font-size="16" font-weight="700" fill="var(--foreground)">CHECK</text><text x="86" y="365" font-size="13" fill="var(--muted-foreground)">gates, references</text><path d="M340 390H372V41H346" fill="none" stroke="rgb(var(--acc))" stroke-width="1.5" stroke-dasharray="5 4"/><path d="M352 36L346 41L352 46" fill="none" stroke="rgb(var(--acc))" stroke-width="1.5"/><text x="384" y="220" font-family="var(--font-mono)" font-size="10" letter-spacing="1" fill="rgb(var(--acc))" transform="rotate(90 384 220)" text-anchor="middle">FAILURES FEED BACK</text></svg>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</figure>
+</div>
+<dl style="margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); border: 1.5px solid var(--foreground); background: var(--background);">
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Role</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Simulation Engineer</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Product</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Automated CAD-to-simulation platform</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Tools</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">OpenFOAM, CalculiX, Gmsh, Python</dd></div>
+<div style="padding: 12px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Work</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Pressure testing, validation, setup design</dd></div>
+</dl>
+</section>
+
+<section aria-label="Key dimensions" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 32px 0;">
+<div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
+<div class="gy-stat" style="flex: 1 1 220px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">26</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">real CAD geometries meshed against Ansys, pass or fail logged per stage</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 220px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">82.5%</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">boundary-layer coverage on the hardest fan, above a 62 to 77% commercial reference</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 220px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">1.3%</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">flow-separation error against experiment on a NASA benchmark</span>
+</div>
+<div class="gy-stat" style="flex: 1 1 220px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 20px;">
+<span style="position: relative; align-self: flex-start;"><span class="gy-num" style="font-size: 60px; line-height: 0.9; font-weight: 700; letter-spacing: -0.045em;">100+</span><span class="gy-sline" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; height: 9px; border-left: 1px solid rgb(var(--acc)); border-right: 1px solid rgb(var(--acc)); background: linear-gradient(rgb(var(--acc)), rgb(var(--acc))) center / 100% 1px no-repeat;"></span></span>
+<span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">validation studies against benchmarks, hand calculations and Fluent</span>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="mesh-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="mesh-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L12 4l8 16z"/><path d="M8 12h8M6 16h12M12 4v16"/></svg>Meshing pressure tests</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail A · Real parts, not demos</span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 60ch;">Automated meshing has to survive real CAD: small gaps, sliver faces and parts that were never drawn to be meshed. I ran the mesher on real product geometry and logged where it broke, what fixed it and where the limits are.</p><div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">What I did</p>
+<ul style="margin: 0; padding: 14px 16px 14px 34px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.55;">
+<li><strong>Pressure-tested</strong> the mesher on 26 real CAD geometries against Ansys, logging pass or fail for each mesher and stage, so failures could be traced to a stage instead of a file.</li>
+<li><strong>Meshed</strong> 5 of 5 fan models on at least 3 paths each and raised boundary-layer coverage to 82.5% on the hardest one, the only fan above a 62 to 77% commercial reference.</li>
+<li><strong>Found</strong> a ceiling of about 10 million cells in serial post-processing.</li>
+<li><strong>Wrote</strong> a rescue sequence for geometry that would not mesh: repair the CAD, fall back to a faceted surface, then force the fuse.</li>
+</ul>
+</div>
+</section>
+
+<section aria-labelledby="solve-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="solve-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-6 6 6 9 0s6 6 9 0"/><path d="M3 18h18"/></svg>Solver validation</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Score against references</span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 60ch;">A converged run is not a correct run. I compared the open-source solver against Ansys Fluent, hand calculations and published experiments, and traced each gap to a setting I could change.</p><div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">What I did</p>
+<ul style="margin: 0; padding: 14px 16px 14px 34px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.55;">
+<li><strong>Traced</strong> a 17% wall-force gap against Fluent to the convection scheme, and the scheme change closed about 75% of it.</li>
+<li><strong>Found</strong> a scheme setting that quietly turned a turbulent run laminar. Fixing it and the wall treatment brought an aircraft model's form drag from 2.11 times high to within 2.7% of Fluent.</li>
+<li><strong>Scored</strong> the solver on textbook cases with published data, listed below.</li>
+</ul>
+</div><div style="margin-top: 32px;"><div style="border: 1.5px solid var(--foreground); background: var(--background); overflow-x: auto;">
+<table class="gy-kt" style="width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45;">
+<caption style="caption-side: top; text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Validation against references</caption>
+<thead><tr><th scope="col">Case</th><th scope="col">Difference</th><th scope="col">Compared</th><th scope="col">Result</th><th scope="col">Reference</th></tr></thead>
+<tbody>
+<tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">NASA wall-mounted hump</th><td>-1.3%</td><td>Separation location</td><td>0.657</td><td>0.665, experiment</td></tr>
+<tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">Square duct</th><td>-0.6%</td><td>Benchmark score</td><td></td><td>Published data</td></tr>
+<tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">Blunt cone</th><td>under 0.1%</td><td>Drag coefficient</td><td>0.430756</td><td>0.4308, hand calculation</td></tr>
+<tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">Heat exchanger</th><td>within 8%</td><td>Pressure drop</td><td></td><td>Darcy-Weisbach hand calculation</td></tr>
+<tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">NACA 0012 airfoil</th><td>+12.8%</td><td>Lift slope</td><td>0.1237 per degree</td><td>0.1097 per degree, thin-airfoil theory</td></tr>
+<tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">Backward-facing step</th><td>-13.2%</td><td>Reattachment length</td><td>5.435 step heights</td><td>6.26, experiment</td></tr>
+</tbody></table></div><p style="margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">References are published experiments, theory or hand calculations. A blank result means only the difference was recorded.</p></div>
+</section>
+
+<section aria-labelledby="naming-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="naming-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>Face naming</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · Labels that survive repair</span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 60ch;">Boundary conditions are set on named faces, such as an inlet or a heated wall. Repair and meshing rename and reshape faces along the way, and a label that lands on the wrong surface still gives a finished run. Nothing flags it, and the answer is wrong.</p><ol style="margin: 0 0 32px; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 10px;">
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">01 · Name</span><span style="font-size: 15px; line-height: 1.45;">The user labels CAD faces once.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">02 · Track</span><span style="font-size: 15px; line-height: 1.45;">Each label follows its face through repair and meshing, with a shape fingerprint as a fallback.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">03 · Resolve</span><span style="font-size: 15px; line-height: 1.45;">Each automatic rename is undone in a fixed order.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">04 · Reject</span><span style="font-size: 15px; line-height: 1.45;">A label that resolves to nothing stops the run before the solve.</span></li>
+</ol><div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">What I did</p>
+<ul style="margin: 0; padding: 14px 16px 14px 34px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.55;">
+<li><strong>Designed</strong> how face labels carry from the CAD upload through repair, meshing and the solver, so boundary conditions attach to the surface the user picked.</li>
+<li><strong>Diagnosed</strong> a heat-exchanger setup with mislabelled ports that showed a 99% mass imbalance. After relabelling, mass balanced to 2.36 × 10⁻⁶ and pressure drop matched the hand calculation within 8%.</li>
+</ul>
+</div>
+</section>
+
+<section aria-labelledby="fea-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="fea-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>Assembly FEA checks</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · Finished is not correct</span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 60ch;">Multi-part assemblies add contact, joints and fasteners, and each one can make a run finish with a wrong answer. I checked the results against force balance and hand calculations.</p><div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">What I did</p>
+<ul style="margin: 0; padding: 14px 16px 14px 34px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.55;">
+<li><strong>Got</strong> an assembly that would not converge to solve in about 12 s by bonding its 62 joints, with displacement and peak stress in a believable range.</li>
+<li><strong>Turned</strong> results that finished but were wrong, such as contact pressures in the gigapascals and parts that silently split apart, into force-balance checks the platform can run.</li>
+<li><strong>Checked</strong> a riveted joint against hand calculations and found the textbook equal-share estimate missed the worst rivet's load by 1.54 times.</li>
+</ul>
+</div>
+</section>
+
+<section aria-labelledby="approach-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="approach-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Validation approach</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail E · Worst axis wins</span>
+</div>
+<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 60ch;">I set how a result earns trust: compare it in layers, score it on its weakest point and never average a failure away.</p><ol style="margin: 0 0 32px; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 10px;">
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">01 · Hand calculation</span><span style="font-size: 15px; line-height: 1.45;">Closed-form checks for every study.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">02 · Design sweep</span><span style="font-size: 15px; line-height: 1.45;">One study per geometry, varied on purpose.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">03 · Other solver</span><span style="font-size: 15px; line-height: 1.45;">The same case in Ansys Fluent.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">04 · Wind tunnel</span><span style="font-size: 15px; line-height: 1.45;">Published or partner test data.</span></li>
+<li class="gy-step" style="padding: 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 6px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">05 · Flight</span><span style="font-size: 15px; line-height: 1.45;">Field data where it exists.</span></li>
+</ol><div style="border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Rules I set</p>
+<ul style="margin: 0; padding: 14px 16px 14px 34px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.55;">
+<li><strong>Score</strong> on the worst axis, not the mean.</li>
+<li><strong>Compare</strong> dimensionless quantities such as Cd, Cp and lift slope.</li>
+<li><strong>Gate</strong> on wall resolution and mass balance before any comparison counts.</li>
+<li><strong>Show</strong> anything not yet checked as a gap, never as a zero.</li>
+</ul>
+</div>
+</section>
+
+<section aria-labelledby="lessons-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
+<h2 id="lessons-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/></svg>Lessons</h2>
+<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Check the setup before the solver</span>
+</div>
+<div style="border: 1px solid var(--foreground); background: var(--background); max-width: 760px;">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">General notes</p>
+<ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 14px; line-height: 1.9; text-transform: uppercase;">
+<li>A finished run can still be wrong.</li>
+<li>Check the labels before the physics.</li>
+<li>Read the scheme settings, not just the residuals.</li>
+<li>Score on the worst axis.</li>
+</ol>
+</div>
+</section>
+
+<section aria-label="Next project" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 120px;">
+<a class="gy-card" href="../modeling/" data-gy-glow style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 32px; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
+<span style="display: flex; flex-direction: column; gap: 8px;"><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">More studies</span><span style="font-size: clamp(32px, 4vw, 56px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Simulations</span></span>
+<svg class="gy-arrow" aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
+</a>
+</section>
+
+</main>
+
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px 40px; display: flex; flex-direction: column; gap: 56px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<h2 style="margin: 0; font-size: clamp(44px, 6vw, 88px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../../assets/Gavin_Yam_Resume.pdf" style="padding: 6px 0;">Resume (PDF)</a>
+</div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1.5px solid var(--foreground); font-family: var(--font-mono); text-transform: uppercase; min-width: min(420px, 100%);">
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Drawn</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">G. Yam</dd></div>
+<div style="padding: 10px 14px; border-right: 1px solid var(--foreground);"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Checked</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Your team</dd></div>
+<div style="padding: 10px 14px;"><dt style="font-size: 10px; letter-spacing: 0.1em; color: var(--muted-foreground);">Part</dt><dd style="margin: 2px 0 0; font-size: 13px; font-weight: 600;">Khorium</dd></div>
+</dl>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+</div>
+</body>
+</html>
