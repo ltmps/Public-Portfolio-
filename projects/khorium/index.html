@@ -42,6 +42,9 @@
 .gy-kt td,.gy-kt th{padding:10px 14px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
 .gy-kt th{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-foreground)}
 .gy-kt tr:last-child td{border-bottom:0}
+.gy-zoom{cursor:zoom-in}
+.gy-zoom img{transition:transform .3s cubic-bezier(0,0,.2,1);transform-origin:var(--zx,50%) var(--zy,50%)}
+.gy-zoom:hover img{transform:scale(2.2)}
 .gy-barrow{transition:background-color .2s}
 .gy-barrow:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 3px 0 0 rgb(var(--acc))}
 .gy-card{transition:border-color .25s}
@@ -155,7 +158,25 @@
 <tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">Heat exchanger</th><td>within 8%</td><td>Pressure drop</td><td></td><td>Darcy-Weisbach hand calculation</td></tr>
 <tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">NACA 0012 airfoil</th><td>+12.8%</td><td>Lift slope</td><td>0.1237 per degree</td><td>0.1097 per degree, thin-airfoil theory</td></tr>
 <tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">Backward-facing step</th><td>-13.2%</td><td>Reattachment length</td><td>5.435 step heights</td><td>6.26, experiment</td></tr>
-</tbody></table></div><p style="margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">References are published experiments, theory or hand calculations. A blank result means only the difference was recorded.</p></div>
+</tbody></table></div><p style="margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">References are published experiments, theory or hand calculations. A blank result means only the difference was recorded.</p></div><p style="margin: 40px 0 16px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Result fields · OpenFOAM, k-omega SST · hover to magnify</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 32px 24px; align-items: start;">
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<a class="gy-frame gy-zoom" href="../../assets/media/khorium/nasa_hump.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../assets/media/khorium/nasa_hump.png" width="1600" height="612" loading="lazy" alt="Streamwise velocity on the center plane of the NASA wall-mounted hump. Flow speeds up over the crest to about 43 m/s, then separates on the downstream slope, where a white line outlines the reversed-flow bubble before the flow reattaches." style="width: 100%; height: auto; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 1 · NASA wall-mounted hump · streamwise velocity · white line marks the separation bubble</figcaption>
+</figure>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<a class="gy-frame gy-zoom" href="../../assets/media/khorium/backward_facing_step.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../assets/media/khorium/backward_facing_step.png" width="1600" height="1055" loading="lazy" alt="Streamwise velocity on the center plane of a backward-facing step. A low-speed recirculation region forms behind the step, outlined by a white line that ends where the flow reattaches to the floor." style="width: 100%; height: auto; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Backward-facing step · streamwise velocity · reattachment near 5.4 step heights against 6.26 measured</figcaption>
+</figure>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<a class="gy-frame gy-zoom" href="../../assets/media/khorium/naca0012.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../assets/media/khorium/naca0012.png" width="1600" height="1122" loading="lazy" alt="Pressure coefficient around a NACA 0012 airfoil at 4 degrees angle of attack. High pressure sits at the leading-edge stagnation point and low pressure over the upper surface near the leading edge." style="width: 100%; height: auto; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 3 · NACA 0012 at 4° · pressure coefficient · shown as computed; wall resolution sits in the buffer layer, so skin friction from this run is not used</figcaption>
+</figure>
+<figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+<a class="gy-frame gy-zoom" href="../../assets/media/khorium/blunt_cone.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../assets/media/khorium/blunt_cone.png" width="1600" height="1060" loading="lazy" alt="Pressure coefficient on the symmetry plane of a 9 degree cone with a flat base. Pressure is highest at the tip, drops at the base corners and recovers in the wake behind the base." style="width: 100%; height: auto; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · 9° cone · pressure coefficient · qualitative only; the stagnation region is coarse</figcaption>
+</figure>
+</div>
 </section>
 
 <section aria-labelledby="naming-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
