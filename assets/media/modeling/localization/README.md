@@ -35,3 +35,7 @@ Run totals come from the manifest: 910 design-cone runs and 2,907 measured-cone 
 `mc2_results.csv`, `mc2_summary.md` and `mc2_traces.npz` are not published. All results are simulation, not hardware flights.
 
 On 2026-10-27 every animation poster was replaced from `portfolio-media` head 50d04da (src/final_posters.py). The posters now show completed tallies: the MuJoCo renders were re-rendered one frame past episode end, and the two plot animations use their final frames. The onboard POV poster now shows a fresh fix with a NOMINAL supervisor. All poster hashes match the manifest.
+
+`ppo_vs_dlqr.mp4` and `ppo_vs_dlqr_poster.png` come from ltmps/ORBES-sim portfolio-media @ 1c08c2a (source `src/ppo_cmp_anim.py`, sim commit 2a8477f), checked against the manifest sha256. The video shows 12 held-out Mode 3 cells as an illustrative subset (4/12 vs 0/12). The page headline uses the sim session's N=200 paired rerun: plain DLQR 24/200 (12.0%, Wilson 95% CI 8.2 to 17.2%) vs DLQR plus PPO residual 0/200 (0%, CI 0 to 1.9%), with all 24 baseline successes broken and none fixed.
+
+`ppo_learning_curve.png` is `ppo_s0_learning_curve.png` from portfolio-media @ 340f37a (source `src/ppo_curve.py`, sim commit 2a8477f, manifest sha256 ece0e09b...), with the 50 px title strip cropped off because the page caption carries the title. Training sources are on ltmps/ORBES-sim branch `feat/ppo-recovery` (2a8477f) and in portfolio-media `src/train_ppo.py` and `src/rl_env.py`.
