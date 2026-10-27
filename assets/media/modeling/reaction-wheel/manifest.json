@@ -18,6 +18,13 @@
       "name": "random_tracking_response.png",
       "bytes": 191155,
       "sha256": "d8b2dd92d77fb7f64cb2749ede949668328793116af56d73ead09c987a43bb44"
+    },
+    {
+      "name": "controller-local-bode.png",
+      "bytes": 133898,
+      "sha256": "ee34a9362e9fd393f7c6dd3987bb207531ce1f630bd454a2bcce3e774835d7c7",
+      "source": "cad_tracking_15_cases_2026-10-15/plots/case10_tracking_local_bode.png",
+      "scope": "Earlier stationary baseline companion; original inertia, zero spin, inactive limits."
     }
   ]
 }
