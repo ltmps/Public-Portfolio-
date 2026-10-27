@@ -376,10 +376,23 @@
 <figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · IR beacon tracking test · video with the logged bearing, IMU yaw and X-face command</figcaption>
 </figure>
 <figure class="gy-fig" data-gy-vid data-gy-expand="Fig. 5 · Live IMU data in RViz" tabindex="0" aria-label="Fig. 5 · Live IMU data in RViz: hover to play, click to enlarge" style="margin: 24px 0 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="position: relative; aspect-ratio: 1280 / 716; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><video src="../../assets/media/orbes/rviz-imu-live.mp4" poster="../../assets/media/orbes/rviz-imu-live.jpg" muted loop playsinline preload="metadata" aria-label="Screen recording of the ROS2 RViz panel streaming live IMU data from the ORBES board on July 24, 2025. As the board turns, the angular-velocity plot spikes near 420 and 500 deg/s about Z, the acceleration traces show a burst of vibration, and a cube with labeled faces turns to match the board's attitude." style="width: 100%; height: 100%; object-fit: cover; display: block;"></video></div>
+<div class="gy-frame" style="position: relative; aspect-ratio: 1280 / 716; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><video src="../../assets/media/orbes/rviz-imu-live.mp4" poster="../../assets/media/orbes/rviz-imu-live.jpg" muted loop playsinline preload="metadata" aria-label="Screen recording of the ROS2 RViz panel streaming live IMU data from the ORBES board. As the board turns, the angular-velocity plot spikes near 420 and 500 deg/s about Z, the acceleration traces show a burst of vibration, and a cube with labeled faces turns to match the board's attitude." style="width: 100%; height: 100%; object-fit: cover; display: block;"></video></div>
 <p class="gy-strip"><span>Screen recording, muted</span><span class="gy-play">Hover to play · click to enlarge</span></p>
-<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 5 · Live IMU data in the ROS2 RViz panel · Jul 24, 2025</figcaption>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 5 · Live IMU data in the ROS2 RViz panel</figcaption>
 </figure>
+<div style="margin-top: 24px; border: 1px solid var(--foreground); background: var(--background);">
+<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">ROS2 data path and data acquisition</p>
+<ul style="margin: 0; padding: 14px 16px 14px 34px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.55;">
+<li><strong>Designed</strong> a custom ROS2 message that carries IMU data, AprilTag pose, Kalman state, all 14 motor commands and the desired force and torque in one timestamped record, so every subsystem is logged and plotted on the same clock.</li>
+<li><strong>Built</strong> the onboard data acquisition for every run: the IMU logged at about 225 Hz, AprilTag detections at about 23 Hz, the IR camera at about 10 Hz and motor commands at about 15 Hz, with an 86 to 93 channel CSV per run.</li>
+<li><strong>Wrote</strong> a ROS2 replay node that republishes recorded runs at their original timing and detects the 37- and 50-column log formats, so estimator and controller changes could be checked against real sensor data without the hardware.</li>
+<li><strong>Wrote</strong> a ROS2 bridge to the ESP32 motor controllers over USB serial at 115200 baud that sends timed commands and publishes the ESP32 clock, to check timing between the flight computer and the motor controllers.</li>
+<li><strong>Wrote</strong> a C++ RViz panel that plots acceleration, angular rate and Kalman position and velocity live beside the 3D attitude view in Fig. 5.</li>
+<li><strong>Logged</strong> ESC RPM telemetry against DSHOT commands over serial to map each motor command to motor speed.</li>
+<li><strong>Built</strong> the onboard mode launcher on the Raspberry Pi: button and OLED mode selection, ESP32 serial connection and reconnection, zero-throttle shutdown and a system log of every run.</li>
+</ul>
+<p style="margin: 0; padding: 12px 16px 14px; border-top: 1px dashed var(--border); font-size: 15px; line-height: 1.55; color: var(--muted-foreground);">The run logs also caught what the live view missed. In one IR tracking run only one of the two ESP32 motor links connected, and 1,352 commands to the other failed while the run carried on. A run should not start until every motor link answers.</p>
+</div>
 </section>
 
 <section aria-labelledby="lessons-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
@@ -393,9 +406,10 @@
 <ol style="margin: 0; padding: 14px 14px 14px 40px; list-style: decimal; font-family: var(--font-mono); font-size: 14px; line-height: 1.9; text-transform: uppercase;">
 <li>Check every axis after a frame correction.</li>
 <li>Check what the motors can produce.</li>
+<li>Confirm every motor link before a run.</li>
 </ol>
 </div>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">My work covered fan-platform GNC architecture, reaction-wheel PID control, ROS2 simulation, motor PCB commissioning, EKF, avionics and VIO integration. Ed advised on some EKF tuning weights.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">My work covered fan-platform GNC architecture, reaction-wheel PID control, ROS2 simulation and data acquisition, motor PCB commissioning, EKF, avionics and VIO integration. Ed advised on some EKF tuning weights.</p>
 </div>
 </section>
 
