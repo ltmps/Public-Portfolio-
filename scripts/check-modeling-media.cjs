@@ -9,7 +9,7 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const sha = file => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
 
-const pages = ['index.html', 'projects/modeling/index.html', 'projects/modeling/trajectories/index.html',
+const pages = ['index.html', 'projects/modeling/index.html', 'projects/modeling/reaction-wheel/index.html', 'projects/modeling/trajectories/index.html',
   'projects/modeling/architecture/index.html', 'projects/modeling/sherpa/index.html', 'projects/modeling/sherpa/deployment/index.html', 'projects/modeling/sherpa/repair/index.html', 'projects/modeling/sherpa/refuel/index.html', 'projects/modeling/sherpa/relay/index.html', 'projects/modeling/sherpa/resupply/index.html', 'projects/modeling/sherpa/robotics/index.html', 'projects/modeling/sherpa/disposal/index.html', 'projects/orbes/index.html', 'projects/modeling/localization/index.html'];
 for (const file of pages) {
   const html = read(file);
@@ -155,3 +155,17 @@ for (const item of selection) {
   assert.equal(sha(file), item.sha256);
 }
 console.log('PASS: media dependencies and playback rules, CAPCOM phase jumps and v5 media, architecture data and envelope, playback viewer privacy and approved media hashes, including the ORBES localization set and the Khorium result fields.');
+
+// The Reaction Wheel page publishes one saved animation set with manual playback.
+const rw = read('projects/modeling/reaction-wheel/index.html');
+const rwVideo = [...rw.matchAll(/<video\b[^>]*>/g)];
+assert.equal(rwVideo.length, 1, 'One reaction-wheel animation');
+assert(/\bcontrols\b/.test(rwVideo[0][0]) && /\bplaysinline\b/.test(rwVideo[0][0]));
+assert(rwVideo[0][0].includes('preload="none"') && !/\b(?:loop|autoplay)\b/.test(rwVideo[0][0]));
+const rwManifest = JSON.parse(read('assets/media/modeling/reaction-wheel/manifest.json'));
+for (const item of rwManifest.files) {
+  const file = 'assets/media/modeling/reaction-wheel/' + item.name;
+  assert.equal(fs.statSync(path.join(root, file)).size, item.bytes);
+  assert.equal(sha(file), item.sha256, `Saved ORBES run asset changed: ${item.name}`);
+}
+console.log('PASS: one manual Reaction Wheel replay and source-matched plot/poster.');
