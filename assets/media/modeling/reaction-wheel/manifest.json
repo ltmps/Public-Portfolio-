@@ -25,6 +25,11 @@
       "sha256": "ee34a9362e9fd393f7c6dd3987bb207531ce1f630bd454a2bcce3e774835d7c7",
       "source": "cad_tracking_15_cases_2026-10-15/plots/case10_tracking_local_bode.png",
       "scope": "Earlier stationary baseline companion; original inertia, zero spin, inactive limits."
+    },
+    {
+      "name": "controller-block-diagram.svg",
+      "bytes": 3243,
+      "sha256": "c07396a3c9af6c8797371a70bcb5b443a3b112ad0834ff2a1c85ee3d506eff35"
     }
   ]
 }
