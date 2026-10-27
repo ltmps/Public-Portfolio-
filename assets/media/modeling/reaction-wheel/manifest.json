@@ -57,8 +57,8 @@
     },
     {
       "name": "controller-detail.svg",
-      "bytes": 153000,
-      "sha256": "3c0d0025ca8cb7e67c3cb35023940103f7b6f8552cc168ec03575d3e0f74a1be",
+      "bytes": 150800,
+      "sha256": "fc07d62dae9b68c4a76190fd1cd459c903668e5b0d03bcbab875861a80d3102f",
       "scope": "Lower-level Simulink single-axis small-angle companion; original baseline gains, sampled feedback and fixed torque cap. Not the full coupled replay."
     }
   ]
