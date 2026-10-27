@@ -77,7 +77,7 @@
 <p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 26ch; text-wrap: pretty;">Connect a system question to a model that can answer it.</p>
 <nav aria-label="Studies on this page" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
 <a class="gy-chip" href="../khorium/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">01 Khorium ↗</a>
-<a class="gy-chip" href="#wheels" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">02 Reaction wheels</a>
+<a class="gy-chip" href="reaction-wheel/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">02 Reaction wheels</a>
 <a class="gy-chip" href="trajectories/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">03 Mission studies ↗</a>
 <a class="gy-chip" href="architecture/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">04 Architecture ↗</a>
 <a class="gy-chip" href="sherpa/" style="padding: 8px 12px; border: 1px solid var(--foreground); background: var(--background); text-decoration: none;">05 SHERPA ↗</a>
@@ -113,47 +113,10 @@
 </div>
 </section>
 
-<section id="wheels" aria-labelledby="wheels-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
-<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
-<h2 id="wheels-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>Reaction-wheel model checks</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Study 02 · Simscape &amp; PID</span>
-</div>
-<p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 52ch;">I checked the multibody model and its quaternion PID scripts against hand calculations and unit tests before trusting any result. The checks found three bugs.</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 24px;">
-<a class="gy-card" href="#wheels" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
-<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #a0a0a0; border-bottom: 1.5px solid var(--foreground);">
-<video src="../../assets/media/modeling/case01_cad.mp4" poster="../../assets/media/modeling/case01_preview.png" muted loop preload="metadata" aria-label="Simscape recording of a roll slew, angle acquisition and hold" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
-<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
-</div>
-<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
-<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Case 01</span>
-<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">Roll slew, acquisition and hold</h3>
-</div>
-</a>
-<a class="gy-card" href="#wheels" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
-<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #a0a0a0; border-bottom: 1.5px solid var(--foreground);">
-<video src="../../assets/media/modeling/case10_cad.mp4" poster="../../assets/media/modeling/case10_preview.png" muted loop preload="metadata" aria-label="Simscape recording of a compound slew tracking a prescribed planar target" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
-<span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
-</div>
-<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
-<div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Case 10</span>
-<h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">Compound slew + target tracking</h3>
-</div>
-</a>
-</div>
-<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 24px; align-items: start;">
-<div style="border: 1px solid var(--foreground); background: var(--background);">
-<p style="margin: 0; padding: 8px 14px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Three bugs the checks found</p>
-<ol style="margin: 0; padding: 0; list-style: none;">
-<li style="padding: 10px 14px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>RPM unit.</strong> The constraint diagram stored a rad/s value as the required wheel RPM without converting it. A unit test reproduced the error at all 500 plotted points.</li>
-<li style="padding: 10px 14px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Acceleration unit.</strong> Wheel acceleration already in rad/s² was multiplied by 2π/60 again before plotting.</li>
-<li style="padding: 10px 14px; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.55;"><strong>Tuning objective.</strong> The open-loop tuning optimized a two-controller loop, but the final response was evaluated with a single controller.</li>
-</ol>
-</div>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted-foreground);">Recordings show simulated behavior under their stated assumptions, not validated dynamics. The selected PID holds ±0.5° in the nominal case, but only 9 of 27 inertia and friction cases pass, so it is not a hardware-ready controller.</p>
-</div>
+<section id="wheels" aria-labelledby="wheels-title" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:112px 32px 0;">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1.5px solid var(--foreground);padding-bottom:12px;margin-bottom:24px;"><h2 id="wheels-title" style="margin:0;font-size:clamp(28px,4vw,40px);line-height:1.1;text-transform:uppercase;">Reaction-wheel tracking</h2><a class="gy-link" href="reaction-wheel/">Open study →</a></div>
+<p style="font-size:20px;line-height:1.5;max-width:65ch;">A fixed body-mounted camera follows a smooth random XYZ target path through three-axis attitude motion. Explore the Simscape Multibody response and one full CAD replay.</p>
+<a class="gy-card" href="reaction-wheel/" style="display:block;text-decoration:none;border:1.5px solid var(--foreground);background:var(--background);"><img loading="lazy" width="1600" height="902" src="../../assets/media/modeling/reaction-wheel/random_four_face_preview.png" alt="ORBES satellite and reaction wheels beside target-path and geometric camera-bearing plots." style="display:block;width:100%;height:auto;"><span style="display:block;padding:16px 20px;font-family:var(--font-mono);">Random XYZ tracking · 83.2 s CAD replay and response plot →</span></a>
 </section>
 
 <section id="missions" aria-labelledby="missions-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">

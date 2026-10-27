@@ -1,0 +1,24 @@
+{
+  "run": "random_four_face_2026-10-15",
+  "seed": 2026101504,
+  "simulationDurationSeconds": 83.168,
+  "videoDurationSeconds": 83.2,
+  "audio": false,
+  "files": [
+    {
+      "name": "random_four_face_cad.mp4",
+      "bytes": 8955813,
+      "sha256": "04883a6c511071c34740b698c8acb0c4d801e327be8fcca512d12ff710fb69a8"
+    },
+    {
+      "name": "random_four_face_preview.png",
+      "bytes": 99280,
+      "sha256": "71b1795869aad8fe7930dd21267e62362c3e70c4291165e2df08d7ab40b00426"
+    },
+    {
+      "name": "random_tracking_response.png",
+      "bytes": 191155,
+      "sha256": "d8b2dd92d77fb7f64cb2749ede949668328793116af56d73ead09c987a43bb44"
+    }
+  ]
+}
