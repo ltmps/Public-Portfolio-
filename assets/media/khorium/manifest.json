@@ -1,0 +1,82 @@
+{
+  "source": "Khorium SimOps, post-processed offline with VTK 9.6 (field probed onto a uniform grid on the plane)",
+  "generated": "2026-10-27",
+  "files": [
+    {
+      "file": "nasa_hump.png",
+      "case": "NASA wall-mounted hump (CFDVal2004 Case 3, NASA TMR geometry)",
+      "field": "Streamwise velocity Ux",
+      "units": "m/s",
+      "slice": "Centre (mid-span) plane z = const",
+      "conditions": "Inflow 33.78 m/s, air",
+      "overlays": "White line: Ux = 0 (separation bubble edge)",
+      "verification": "USABLE (internal checks passed; wall spacing and convergence not measured)",
+      "solver": "OpenFOAM simpleFoam (steady, incompressible RANS)",
+      "turbulence_model": "k-omega SST",
+      "colormap": "viridis",
+      "colour_range": [
+        -5.5905,
+        42.845
+      ],
+      "colour_range_note": "0.5-99.5 percentile (Ux) / 0.2-99.8 percentile (Cp) of the plotted plane; values beyond saturate",
+      "sha256": "0417c750e0633af9650291f33d9da102da32df9d5eef83aa2726a69f506ad9a8"
+    },
+    {
+      "file": "naca0012.png",
+      "case": "NACA 0012 airfoil, alpha = 4 deg (point from the lift-slope sweep at 0/2/4/6 deg)",
+      "field": "Pressure coefficient Cp = p / (0.5 U^2)",
+      "units": "dimensionless",
+      "slice": "Mid-span plane z = const",
+      "conditions": "Freestream 15 (model units), Re_c ~ 1e5, far-field boundary",
+      "overlays": "Dark outline: airfoil surface",
+      "verification": "Flagged by the automated checks: peak wall pressure 1.06x dynamic pressure and wall y+ in the 5-30 buffer band, so skin friction is not admissible; the pressure field is shown as computed",
+      "solver": "OpenFOAM simpleFoam (steady, incompressible RANS)",
+      "turbulence_model": "k-omega SST",
+      "colormap": "viridis",
+      "colour_range": [
+        -0.7763,
+        0.4005
+      ],
+      "colour_range_note": "0.5-99.5 percentile (Ux) / 0.2-99.8 percentile (Cp) of the plotted plane; values beyond saturate",
+      "sha256": "f64a226aeabc2bc0ff7c3d00f728f855677c239331b95b57e78658aea05386dd"
+    },
+    {
+      "file": "blunt_cone.png",
+      "case": "9 deg half-angle cone with blunt (flat) base, axisymmetric body in a box",
+      "field": "Pressure coefficient Cp = p / (0.5 U^2)",
+      "units": "dimensionless",
+      "slice": "Symmetry plane through the axis",
+      "conditions": "Inflow 25 m/s, air",
+      "overlays": "Dark outline: body surface",
+      "verification": "Flagged by the automated checks: peak wall pressure 0.79x dynamic pressure (coarse stagnation region); qualitative picture only",
+      "solver": "OpenFOAM simpleFoam (steady, incompressible RANS)",
+      "turbulence_model": "k-omega SST",
+      "colormap": "viridis",
+      "colour_range": [
+        -0.7922,
+        0.1474
+      ],
+      "colour_range_note": "0.5-99.5 percentile (Ux) / 0.2-99.8 percentile (Cp) of the plotted plane; values beyond saturate",
+      "sha256": "5d5fa787dc028bbcbcd2786d8b51382bd04136f7702237d2e9c35863c3a8c1eb"
+    },
+    {
+      "file": "backward_facing_step.png",
+      "case": "Backward-facing step (Driver & Seegmiller), Re_H = 38,422",
+      "field": "Streamwise velocity Ux",
+      "units": "m/s",
+      "slice": "Centre (mid-span) plane z = const",
+      "conditions": "Uref 44.2 m/s, air",
+      "overlays": "White line: Ux = 0 (recirculation edge)",
+      "verification": "USABLE (internal checks passed; wall spacing and convergence not measured). Reattachment read off the Ux = 0 line is x/H ~ 5.4 against the experimental 6.26",
+      "solver": "OpenFOAM simpleFoam (steady, incompressible RANS)",
+      "turbulence_model": "k-omega SST",
+      "colormap": "viridis",
+      "colour_range": [
+        -8.6578,
+        45.8784
+      ],
+      "colour_range_note": "0.5-99.5 percentile (Ux) / 0.2-99.8 percentile (Cp) of the plotted plane; values beyond saturate",
+      "sha256": "3bc10f504d4315f9e7bbc3983b261d74d6c2f81baf6e1ce8e3bed16b8db742f0"
+    }
+  ]
+}

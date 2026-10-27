@@ -135,6 +135,18 @@ for (const [file, hash] of Object.entries(localization)) {
   assert.equal(sha('assets/media/modeling/localization/' + file), hash, `Approved localization bytes: ${file}`);
   assert(sims.includes('assets/media/modeling/localization/' + file), `Localization study page must show ${file}`);
 }
+// Khorium result fields: rendered offline with VTK from public-geometry SimOps studies (khorium-media branch @ dd31c14)
+const khorium = {
+  'nasa_hump.png': '0417c750e0633af9650291f33d9da102da32df9d5eef83aa2726a69f506ad9a8',
+  'naca0012.png': 'f64a226aeabc2bc0ff7c3d00f728f855677c239331b95b57e78658aea05386dd',
+  'blunt_cone.png': '5d5fa787dc028bbcbcd2786d8b51382bd04136f7702237d2e9c35863c3a8c1eb',
+  'backward_facing_step.png': '3bc10f504d4315f9e7bbc3983b261d74d6c2f81baf6e1ce8e3bed16b8db742f0'
+};
+const khoriumPage = read('projects/khorium/index.html');
+for (const [file, hash] of Object.entries(khorium)) {
+  assert.equal(sha('assets/media/khorium/' + file), hash, `Approved Khorium bytes: ${file}`);
+  assert(khoriumPage.includes('assets/media/khorium/' + file), `Khorium page must show ${file}`);
+}
 const selection = JSON.parse(read('assets/media/modeling/trajectories/manifest.json'));
 assert.equal(selection.length, 24);
 for (const item of selection) {
@@ -142,4 +154,4 @@ for (const item of selection) {
   assert.equal(fs.statSync(path.join(root, file)).size, item.bytes);
   assert.equal(sha(file), item.sha256);
 }
-console.log('PASS: media dependencies and playback rules, CAPCOM phase jumps and v5 media, architecture data and envelope, playback viewer privacy and approved media hashes, including the ORBES localization set.');
+console.log('PASS: media dependencies and playback rules, CAPCOM phase jumps and v5 media, architecture data and envelope, playback viewer privacy and approved media hashes, including the ORBES localization set and the Khorium result fields.');
