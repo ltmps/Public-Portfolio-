@@ -131,7 +131,9 @@ const localization = {
   'mc_mode3_design_mj_poster.png': 'b51cb94f12dd33c5f838bd4b744bc726d9b6ae1332adc343c7c4c746928c34fb',
   // portfolio-media @ 1c08c2a (PPO residual vs DLQR, 12-cell illustrative subset; headline N=200 from the sim session)
   'ppo_vs_dlqr.mp4': '5c38685f31701d38bdc4dc8ea6f9c2fc8b0902efb8cd974fa35dcf8497bec380',
-  'ppo_vs_dlqr_poster.png': 'fdac8114d1bf40ba9a6389cf08928a4238f8f6d4e57bdf82e7213af70226928f'
+  'ppo_vs_dlqr_poster.png': 'fdac8114d1bf40ba9a6389cf08928a4238f8f6d4e57bdf82e7213af70226928f',
+  // portfolio-media @ 340f37a ppo_s0_learning_curve.png (ece0e09b...), title strip cropped for the page caption
+  'ppo_learning_curve.png': 'c9316f4b060ee57a0aaccff2ac44b27b3d6a17875b5f77ea89d17233903d8fea'
 };
 const sims = read('projects/modeling/localization/index.html');
 for (const [file, hash] of Object.entries(localization)) {
