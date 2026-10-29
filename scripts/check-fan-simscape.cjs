@@ -28,7 +28,7 @@ for (const name of ['index.html', 'engineering_checks.html']) {
     nodes.case.value = option;
     nodes.case.onchange();
     for (const ref of [nodes.movie.src, nodes.movie.poster, nodes.mp4.href, nodes.gif.href]) assert(fs.existsSync(path.resolve(replay, ref)), `Missing ${ref}`);
-    assert(nodes.csv.href.startsWith('https://raw.githubusercontent.com/ltmps/ORBES-sim/'));
+    assert(html.includes('<a id="csv" hidden>'), 'No public CSV download control');
   }
 }
 let frames = [];
