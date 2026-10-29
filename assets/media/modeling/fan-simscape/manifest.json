@@ -49,93 +49,93 @@
     },
     {
       "file": "gnc_mode1.gif",
-      "bytes": 3425654,
-      "sha256": "d6df407f388c615b5d3bf7ee1b4452bc4b01a83d00fdf78454d05174be31fa67"
+      "bytes": 3150777,
+      "sha256": "a35c14c40e8e4447dbe883e4ff2e6fa70b53f5a1280c5db3d96ace1a13db2adb"
     },
     {
       "file": "gnc_mode1.mp4",
-      "bytes": 2961209,
-      "sha256": "de45dc19e099ea58c2c4d09427ece511bd2543526395ded125e07d390c4ff590"
+      "bytes": 2490508,
+      "sha256": "b8039b6a547222252de5592cb85eef4737a77c3e58a47766573822f13c4b071b"
     },
     {
       "file": "gnc_mode1_poster.png",
-      "bytes": 239725,
-      "sha256": "93e343e30a3c650f8119c3d63c7f1584fd421ad1183714092fd4bbe66063d26c"
+      "bytes": 201576,
+      "sha256": "ac2caacfe359f9eab0b944f3ffbf00fcab7b6a4b3128a73f66361b20c67aa904"
     },
     {
       "file": "gnc_mode2.gif",
-      "bytes": 3048461,
-      "sha256": "3dcf476da7c0eb542b5986c430e794eacf0b2993845cff7978beae90e4493f25"
+      "bytes": 3027192,
+      "sha256": "2ca54b97f94d652149e3463a5d88e4357861b16af50997295c7f65bcf5659675"
     },
     {
       "file": "gnc_mode2.mp4",
-      "bytes": 3364398,
-      "sha256": "0e0760bc2e69eb85ae5a9a3ad07bc1425c3c085e51f4c6cd0139d68f6a472d86"
+      "bytes": 3459716,
+      "sha256": "dc85d0d9ec98ea1e840c2168424b004b2141d1c4888c2ab351683c7a72032dff"
     },
     {
       "file": "gnc_mode2_poster.png",
-      "bytes": 231532,
-      "sha256": "334b4ed2441a83f078179a8f93f999a3696f0496526a56e3d088464b189f72e8"
+      "bytes": 235420,
+      "sha256": "031fe245fd74c98f63d1c9785d187ede43c2532b8e3919de4a7ee3db224a1dc3"
     },
     {
       "file": "gnc_mode3.gif",
-      "bytes": 3441945,
-      "sha256": "e6f4e556ab60d56b6ccc1100399dcd1552d51c524da61f99ce151f75c84581e5"
+      "bytes": 3231825,
+      "sha256": "83bbe25fe143d6b8d402e0dcab3abfaaff2a674b1af8405bd5852cad98fae2ec"
     },
     {
       "file": "gnc_mode3.mp4",
-      "bytes": 3528281,
-      "sha256": "3bed5085b06f22a8fe1229748d7462a33c726081201ceebc2b4324a06608511d"
+      "bytes": 3061524,
+      "sha256": "9ac9abdc7578927676e764ee52938aab37cc54934c5ca5e6ba1467d1170b7f60"
     },
     {
       "file": "gnc_mode3_poster.png",
-      "bytes": 257822,
-      "sha256": "91703ca0625fe6e398e75e11d723f69b21359debfda456706b62cbd5846cde85"
+      "bytes": 230827,
+      "sha256": "dd569d0ce493991a39ba31cf07224e10eb4aa88b1728047df2fc3349aca06168"
     },
     {
       "file": "gnc_mode4.gif",
-      "bytes": 3241497,
-      "sha256": "71856648af5d07674a20d268809ab239e0fcb6847ea7e03088c7fca55e3676e0"
+      "bytes": 3289412,
+      "sha256": "4ae2d86549f039f8ea4a74374e8a40b314a5af71d561678bbc9fd39fa64d4401"
     },
     {
       "file": "gnc_mode4.mp4",
-      "bytes": 3987338,
-      "sha256": "5f027922287f8c653893fad0132c739252580971ee36b5dfdc90dc8d6a0c7a80"
+      "bytes": 4268210,
+      "sha256": "b97ad3d62096aa8785fda2b65521e185ee3880d44c51f3afb33ee7ba2a60e61e"
     },
     {
       "file": "gnc_mode4_poster.png",
-      "bytes": 237230,
-      "sha256": "e83f8a89c2303a92fc0e17c31cc5044646d8ff7e1ece849df87485969db12c99"
+      "bytes": 235874,
+      "sha256": "51a6504ebb25d2ee71cbe2ba506a133ebf857773d8e5cd2970569292d3ff3b1d"
     },
     {
       "file": "gnc_mode5.gif",
-      "bytes": 3214083,
-      "sha256": "8a09e996f4d80035b9be15a277b639b81a64ae121169beb56a7789805b32ebe8"
+      "bytes": 3186508,
+      "sha256": "87c7d602d615440e413ea267ca6f17f42be3f5ecd2370346d529092ec33abb0e"
     },
     {
       "file": "gnc_mode5.mp4",
-      "bytes": 3653176,
-      "sha256": "477cf672607fde76042cbecce5e5be2f3c6967ffb0d5fadb4ccf29b6652c2490"
+      "bytes": 3794372,
+      "sha256": "dab33dfde70fa6b44b089661fc6c39234fa893b0982f481731c16c351f84e609"
     },
     {
       "file": "gnc_mode5_poster.png",
-      "bytes": 235121,
-      "sha256": "63ed5400f9545b0f1c7e127f894efc48ab6032660c3798263dfe108e9bfb63ee"
+      "bytes": 242701,
+      "sha256": "4af3885be2464ee83539023803683eda261a224a6563d743da3484a7ed29ebae"
     },
     {
       "file": "gnc_mode6.gif",
-      "bytes": 3354294,
-      "sha256": "da1b3259e8301c189912d19413a458d77f023a5cd95999ad3dfd2d70dd63ec05"
+      "bytes": 2972023,
+      "sha256": "01d7a38065cac100ab7beab6fd689eb93ef4617186c7d1bb6d899708093148de"
     },
     {
       "file": "gnc_mode6.mp4",
-      "bytes": 4195882,
-      "sha256": "41b751430a28c88ab25742ec08730cc63e8f272028215f471e31362df746d144"
+      "bytes": 3978886,
+      "sha256": "11a6d51a4ffc5ef0884750418e89d3a2076befbeee27444efb5db167cc3bb304"
     },
     {
       "file": "gnc_mode6_poster.png",
-      "bytes": 242637,
-      "sha256": "3b8ac4e5a39a71c6c11fb9747d675691d5201e56860634aa4820bae79f1699da"
+      "bytes": 205313,
+      "sha256": "d463dd763c7d41f76ac37352e33fdb1f826070f1fbc11d05a8e2bdcccdca6e50"
     },
     {
       "file": "hold.gif",
@@ -226,6 +226,82 @@
       "file": "torque_pulse_poster.png",
       "bytes": 211782,
       "sha256": "47d9f4f6262f3132a6118425619c80480484d5943b87b1d5d9a363d5bde445a2"
+    }
+  ],
+  "renderRevision": "Closer floor-tag framing; IR target/panel active only in modes 2,4,5",
+  "focusedRendererSha256": "2d87dcb5161ff38b5326d1c94c8ca6bee21ae08035c5a3928c4c4d3f26b6e979",
+  "focusedValidation": [
+    {
+      "case": "gnc_mode1",
+      "decodedVideoFrames": 300,
+      "videoSeconds": 30,
+      "fps": 10,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "decodedGifFrames": 60,
+      "gifSeconds": 30
+    },
+    {
+      "case": "gnc_mode2",
+      "decodedVideoFrames": 300,
+      "videoSeconds": 30,
+      "fps": 10,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "decodedGifFrames": 60,
+      "gifSeconds": 30
+    },
+    {
+      "case": "gnc_mode3",
+      "decodedVideoFrames": 300,
+      "videoSeconds": 30,
+      "fps": 10,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "decodedGifFrames": 60,
+      "gifSeconds": 30
+    },
+    {
+      "case": "gnc_mode4",
+      "decodedVideoFrames": 300,
+      "videoSeconds": 30,
+      "fps": 10,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "decodedGifFrames": 60,
+      "gifSeconds": 30
+    },
+    {
+      "case": "gnc_mode5",
+      "decodedVideoFrames": 300,
+      "videoSeconds": 30,
+      "fps": 10,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "decodedGifFrames": 60,
+      "gifSeconds": 30
+    },
+    {
+      "case": "gnc_mode6",
+      "decodedVideoFrames": 300,
+      "videoSeconds": 30,
+      "fps": 10,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "decodedGifFrames": 60,
+      "gifSeconds": 30
     }
   ]
 }
