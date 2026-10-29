@@ -20,3 +20,14 @@ Source: user-cleared personal project presentation; individual embedded media, w
 - `assets/media/singularity/singularity-2023-test-launch.mp4`: slide 43; Original MP4; SHA-256 `8b04105187f233e57b28ff5dfc026b8ca13caa2d33c8d335698ee41dcc7ea4e9`. Poster is an unmodified frame at one second.
 
 The Singularity test-launch recording belongs to the April 1 test flight, separate from the later competition flight. Eureka-II media belongs to Space Enterprise, separate from B1LV. Audio streams are retained; narration/transcription has not been verified locally.
+
+## June 3, 2023 field photos
+
+User-selected personal media folder `E:/DCIM/June 3rd`. Display copies are EXIF-oriented, proportionally resized, and JPEG-encoded; metadata is omitted. No generated imagery or content edits. Clickable image links open the larger display copies.
+
+- `june-avionics-sled.jpg`: `20230603_085613.jpg`, source SHA-256 `1b1e8fc8df015306e369151161c5588fef62e616209f22e63b006ec0e8526f5c`.
+- `june-recovery-preparation.jpg`: `20230603_142621.jpg`, source SHA-256 `da54769b4b3918ff72a77d36864129e46bf074ff5628a46f3772f1c120117a82`.
+
+## June collection launch excerpt
+
+`assets/media/singularity/june-launch-excerpt.mp4` uses 12.5–24.5 seconds of `IMG_9097.MOV` from the user-selected June 3 folder. Full portrait framing is retained at 720 × 1280; H.264 faststart, 30 fps. The source has AAC audio; this web excerpt is silent and captioned accordingly. Original media is unchanged. Poster is the source frame at 14 seconds. Source hash and processing details are recorded beside the clip. The MOV creation timestamp is unset, so captions identify the collection rather than infer a flight date. No association with the EasyMini trace is asserted.

@@ -2,3 +2,6 @@
 @media(max-width:600px){.em-study{padding:56px 20px 0}.em-chart{font-size:22px}.em-tick{font-size:21px}.em-readings{flex-direction:column;gap:6px}.em-controls label:has(input){flex:1 1 100%}.em-controls input{flex:1}.em-intro{font-size:16px}}
 html[data-theme="dark"] .em-height,body[data-theme="dark"] .em-height,.dark .em-height{color:#e8e8e8}html[data-theme="dark"] .em-speed,body[data-theme="dark"] .em-speed,.dark .em-speed{color:#ff8292}html[data-theme="dark"] .em-acceleration,body[data-theme="dark"] .em-acceleration,.dark .em-acceleration{color:#ffb15c}
 .em-plot{overflow-x:auto;max-width:100%}.em-plot:focus-visible{outline:3px solid #3984c8;outline-offset:3px}@media(max-width:600px){.em-chart{min-width:600px}}
+
+.em-study figure .em-controls{position:sticky;top:8px;z-index:2;background:var(--background);padding:8px;margin:0;border:1px solid var(--foreground)}
+.prediction-full{margin-top:24px}.prediction-full summary{cursor:pointer;font-weight:600}.prediction-full figure{margin:16px 0}.prediction-pan{max-width:100%;overflow-x:auto}.prediction-pan img{display:block;width:100%;min-width:1000px;height:auto;background:#fff}.prediction-pan:focus-visible,.prediction-full summary:focus-visible{outline:3px solid #3984c8;outline-offset:3px}.prediction-full figcaption{font-size:14px;line-height:1.6;margin-top:8px}
