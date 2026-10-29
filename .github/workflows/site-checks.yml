@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/check-site.cjs
+      - run: node scripts/check-easymini-trace.cjs
       - run: node scripts/check-modeling-media.cjs
       - run: node scripts/check-fan-simscape.cjs
       - run: node scripts/check-reaction-wheel-locus.cjs
@@ -22,6 +23,7 @@ jobs:
       - name: JavaScript syntax
         run: |
           node --check assets/js/gy.js
+          node --check assets/js/easymini-trace.js
           node --check assets/js/reaction-wheel-locus.js
           node --check assets/js/gy-mesh.js
           node --check assets/js/mission-studies.js
