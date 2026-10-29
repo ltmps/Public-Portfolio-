@@ -1,0 +1,27 @@
+{
+  "sourceCommit": "58157f76d3a02ca4c251edec38f23b6943fdfe2d",
+  "exporterSha256": "cfbd78b809a5628e829ee35c08d0912f64b616073919736f91b7e37cd1ee6afb",
+  "sourceSha256": {
+    "supervisor_out\\m4_ta0.5_dead12_winner_delay10ms.csv": "5ed86798b4e76625cd1f9723533e95792764e42fb718e146952156a37e8ef3fe",
+    "supervisor_out\\m4_ta0.5_dead12_winner_delay10ms_diagnostics.csv": "4eb5bf849eea5758d9c3ce2a34cd468a40909f782be97e90c62c1f9166904f5f",
+    "supervisor_out\\m4_ta0.5_dead12_winner_delay10ms_actuation.csv": "682672a45802f7cd3d4fb2c23399a6db6e203c4ac685b83959778d93878b14ad",
+    "supervisor_review\\out\\review_m4_ta0.5_turn6_dwell40_delay0.01_delay10ms.csv": "5ed86798b4e76625cd1f9723533e95792764e42fb718e146952156a37e8ef3fe",
+    "supervisor_review\\out\\review_m4_ta0.5_turn6_dwell40_delay0.01_delay10ms_diagnostics.csv": "4eb5bf849eea5758d9c3ce2a34cd468a40909f782be97e90c62c1f9166904f5f",
+    "supervisor_review\\out\\review_m4_ta0.5_turn6_dwell40_delay0.01_delay10ms_actuation.csv": "682672a45802f7cd3d4fb2c23399a6db6e203c4ac685b83959778d93878b14ad",
+    "supervisor_out\\m4_ta2_dead12_winner_delay10ms.csv": "23144b29ef219c06ea257acf17392f00cfe77975fe008f16e65b6ec10233e9c3",
+    "supervisor_out\\m4_ta2_dead12_winner_delay10ms_diagnostics.csv": "64521bfa6ec553d97b6564e8659a1eefa6d6115eb2e9024cdb0bfb3b932f30c3",
+    "supervisor_out\\m4_ta2_dead12_winner_delay10ms_actuation.csv": "bed7fda6382ec962029d39a2a6903d31862f67bc484b3ab9735f0fb36da2d35b",
+    "supervisor_review\\out\\review_m4_ta2_turn6_dwell40_delay0.01_delay10ms.csv": "09d551fa9dcce263bf9b1ef57aa78310f52075ccf1341776bd1c95c722c8287c",
+    "supervisor_review\\out\\review_m4_ta2_turn6_dwell40_delay0.01_delay10ms_diagnostics.csv": "695780e93a0466354b840c0baa6fa6d7d83092c256e30e52522675f64ea3797e",
+    "supervisor_review\\out\\review_m4_ta2_turn6_dwell40_delay0.01_delay10ms_actuation.csv": "eecce8b41336942e4cb241d9cf8752104f6ac80307704d20bb6e65808f624633",
+    "supervisor_out\\m6_ta2_dead12_winner_delay10ms.csv": "b06abd88bbbddfee976753df8282fbfec3a4e12e9c5c656599b653095bdf7c99",
+    "supervisor_out\\m6_ta2_dead12_winner_delay10ms_diagnostics.csv": "058dcfdaebf852b90598827e643b73ac9d2e6960c64e572fde5ea060a53f30c2",
+    "supervisor_out\\m6_ta2_dead12_winner_delay10ms_actuation.csv": "df63c2179379e4cbed9085888523c50ccf415265faf51e06bada7fb5a623bf3b",
+    "supervisor_review\\out\\review_m6_ta2_turn6_dwell40_delay0.01_delay10ms.csv": "9efe7289d3d52dcbe2c964dfdfcd16bb02841320403bc469e3bbd12be24587d7",
+    "supervisor_review\\out\\review_m6_ta2_turn6_dwell40_delay0.01_delay10ms_diagnostics.csv": "1461379ecaecb12445b78c645779fc23879ef98a4e877a5cbc08a652a529c45c",
+    "supervisor_review\\out\\review_m6_ta2_turn6_dwell40_delay0.01_delay10ms_actuation.csv": "ae4e28b9eec82e99e0f92f19d21afd5bac878c60213a3f0a108d39a94b5f7627"
+  },
+  "displayHz": 20,
+  "plotHz": 100,
+  "comparisons": 3
+}

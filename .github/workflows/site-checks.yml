@@ -17,6 +17,7 @@ jobs:
       - run: node scripts/check-easymini-trace.cjs
       - run: node scripts/check-modeling-media.cjs
       - run: node scripts/check-fan-simscape.cjs
+      - run: node scripts/check-supervisor-review.cjs
       - run: node scripts/check-reaction-wheel-locus.cjs
       - run: node scripts/check-sherpa-missions.cjs
       - run: node scripts/check-sherpa-navigation.cjs
