@@ -8,7 +8,7 @@
   const darkColors = {'#25364d':'#edf0f4','#22354f':'#f5f5f5','white':'#191919','#dce3ed':'#454545','#e9edf3':'#252525','#d2dae5':'#404040','#c5dfd5':'#365c4c','#eed0d2':'#674047','#5e6c80':'#b5bec9','#55667d':'#b6beca','#d5dce7':'#454545','#56647b':'#b6beca','#586a80':'#b6beca','#e5eaf1':'#363636','#68768b':'#b6beca','#35475f':'#c5cbd4','#bfcbd9':'#595959','#59677c':'#b6beca','#f5f7fb':'#111111','#4f6178':'#b6beca','#67778d':'#b6beca','#16845e':'#62d2ab','#c63f45':'#ff8f89','#ac790a':'#ffd16c','#7f39a7':'#c69ae0','#ca560f':'#ffa66f'};
   const ink = color => document.documentElement?.getAttribute('data-theme') === 'dark' ? (darkColors[color] || color) : color;
   const green = '#16845e', red = '#c63f45', gold = '#ac790a', purple = '#7f39a7', orange = '#ca560f';
-  const regions = {world:[25,65,780,405],tag:[850,70,245,175],ir:[1125,70,245,175],body:[850,300,520,180],stats:[1125,70,245,195],pos:[30,550,420,215],att:[480,550,345,215],fans:[875,550,485,215]};
+  const regions = {world:[25,65,780,405],tag:[850,70,245,175],ir:[1125,70,245,175],body:[850,300,520,165],stats:[1125,70,245,195],pos:[30,550,420,215],att:[480,550,345,215],fans:[875,550,485,215]};
   const fanPositions=[[.087,.0633,.076],[.087,-.0527,.076],[.087,-.0527,-.04],[.087,.0633,-.04],[-.0964,.0633,.076],[-.0964,-.0527,.076],[-.0964,-.0527,-.04],[-.0964,.0633,-.04],[-.0047,-.083,.0595],[-.0047,-.083,-.0235],[-.0047,.0936,.0595],[-.0047,.0936,-.0235],[-.0047,.0053,.1063],[-.0047,.0053,-.0703]];
   const thrustAnchors=[[.5,.55,.6],[.05,.65,.85],[.2,.75,.35],[1,.7,.05],[.9,.15,.08]];
   function thrustColor(newtons){const level=Math.min(1,Math.max(0,newtons/.2834))*4,i=Math.min(3,Math.floor(level)),a=level-i;return `rgb(${thrustAnchors[i].map((v,j)=>Math.round(255*(v+a*(thrustAnchors[i+1][j]-v)))).join(',')})`;}
@@ -124,6 +124,12 @@
     for(let j=0;j<14;j++){const xx=left+j*bar;ctx.strokeStyle=thrustColor(h[8+j]);ctx.strokeRect(xx,base-h[8+j]/.3*height,bar*.35,h[8+j]/.3*height);ctx.fillStyle=thrustColor(f[8+j]);ctx.fillRect(xx+bar*.4,base-f[8+j]/.3*height,bar*.35,f[8+j]/.3*height);text(String(j),xx+bar*.35,base+18,'#59677c',11,'center');}
     text('0.3',x+5,y+24,'#68768b',11);text('0',x+20,base,'#68768b',11);
   }
+  function drawThrustLegend(){
+    const x=875,y=491,w=485,h=10;
+    text('Fan color: actual applied thrust (N)',x,y-7,'#56647b',11);
+    for(let i=0;i<100;i++){ctx.fillStyle=thrustColor(.2834*i/99);ctx.fillRect(x+i*w/100,y,w/100+.5,h);}
+    [0,.07085,.1417,.21255,.2834].forEach((v,i)=>text(i===0?'0 / off':v.toFixed(4),x+i*w/4,y+h+15,'#56647b',10,i===0?'left':i===4?'right':'center'));
+  }
   function draw(){
     ctx.fillStyle=ink('#f5f7fb');ctx.fillRect(0,0,canvas.width,canvas.height);text(`${selected.title}: original versus revised`,25,27,'#22354f',21);
     const h=sample(data.healthy,time),f=sample(selected.samples,time);
@@ -132,9 +138,9 @@
     text(`Original error: ${distance(h[22])}`,x,y+57,green,12);text(`Revised error: ${distance(f[22])}`,x,y+84,red,12);
     text(`Rate O ${h[24].toFixed(3)} rad/s`,x,y+122,green,12);text(`Rate R ${f[24].toFixed(3)} rad/s`,x,y+146,red,12);
     text(`Final-upright error ${f[23].toFixed(2)}°`,x,y+177,'#56647b',12);
-    plot(regions.pos,'Position error from frozen goal (m)',1,.05);plot(regions.att,'Body rate norm (rad/s)',2,1);drawFans(h,f);
+    plot(regions.pos,'Position error from frozen goal (m)',1,.05);plot(regions.att,'Body rate norm (rad/s)',2,1);drawFans(h,f);drawThrustLegend();
     const phases=['Rate damping','Turn','Reoriented hold','Return upright','Settle'];const phase=selected.phaseSamples[Math.min(1200,Math.floor(time/.05))];
-    text(`Revised phase: ${phases[phase[1]]} · m12 dead in BOTH runs · elapsed time after fault announcement`,30,810,'#4f6178',14);
+    text(`Revised phase: ${phases[phase[1]]} · m12 dead in BOTH runs · elapsed time after fault notification`,30,810,'#4f6178',14);
     text('Actual saved Simscape data. 20 Hz pose display; plots and summary metrics use 100 Hz logs.',30,835,'#67778d',13);
     ui.time.value=time;ui.clock.textContent=`${time.toFixed(2)} / 60.00 s`;
   }
@@ -143,7 +149,7 @@
     data.initialPositionM=selected.initialPositionM;data.commandPositionM=selected.goal;
     data.referenceSamples=selected.samples.map(s=>[s[0],...selected.goal,0,0,0,0]);
     time=0;playing=false;lastStamp=null;ui.play.textContent='Play';setProjection();
-    referenceDescription.textContent=`GNC ${mode} trigger at ${selected.announcementS} s; freeze goal (${selected.goal.map(v=>v.toFixed(3)).join(', ')}) m, upright and at rest. Both runs start from the same recorded pose, velocity and body rate. Both have the same 10 ms actuation delay.`;
+    referenceDescription.textContent=`GNC ${mode}: controller notified of the failed fan at mission time ${selected.announcementS} s. The replay starts at that notification (elapsed t=0). Hold goal (${selected.goal.map(v=>v.toFixed(3)).join(', ')}) m, upright and at rest. Both runs start from the same recorded pose, velocity and body rate, with the same 10 ms actuation delay.`;
     ui.description.textContent=selected.description;const a=selected.original,b=selected.revised;
     ui['final-error'].textContent=`${(1000*a.tailPositionM).toFixed(2)} → ${(1000*b.tailPositionM).toFixed(2)} mm`;
     ui['max-delta'].textContent=`${(1000*b.positionMarginM).toFixed(2)} mm`;
