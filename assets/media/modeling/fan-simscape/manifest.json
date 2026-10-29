@@ -49,93 +49,93 @@
     },
     {
       "file": "gnc_mode1.gif",
-      "bytes": 3150777,
-      "sha256": "a35c14c40e8e4447dbe883e4ff2e6fa70b53f5a1280c5db3d96ace1a13db2adb"
+      "bytes": 3220128,
+      "sha256": "fbb2cf3ce29101b2e08451df75aaa261607973a966d90166a00b35a9a9c90f17"
     },
     {
       "file": "gnc_mode1.mp4",
-      "bytes": 2490508,
-      "sha256": "b8039b6a547222252de5592cb85eef4737a77c3e58a47766573822f13c4b071b"
+      "bytes": 2645689,
+      "sha256": "30e0b53847bc41dad047b76d9a1e6496b16a7f9cfc0c2e6cd4d3cc2ca1f6d6b6"
     },
     {
       "file": "gnc_mode1_poster.png",
-      "bytes": 201576,
-      "sha256": "ac2caacfe359f9eab0b944f3ffbf00fcab7b6a4b3128a73f66361b20c67aa904"
+      "bytes": 218966,
+      "sha256": "ce55e92530d4784b32c501264d7fda0c294ca77e7f58d4b8e0d5e0913e601fe9"
     },
     {
       "file": "gnc_mode2.gif",
-      "bytes": 3027192,
-      "sha256": "2ca54b97f94d652149e3463a5d88e4357861b16af50997295c7f65bcf5659675"
+      "bytes": 3185102,
+      "sha256": "0c0c6a80af4ea85eda5ab07622bfbcb46acdddb7e11be2a9c92b511befd068a8"
     },
     {
       "file": "gnc_mode2.mp4",
-      "bytes": 3459716,
-      "sha256": "dc85d0d9ec98ea1e840c2168424b004b2141d1c4888c2ab351683c7a72032dff"
+      "bytes": 3689735,
+      "sha256": "7bbb4337dca8d112e7159de39b1567bfba49c0e49025fc28e4a33db2c30437b3"
     },
     {
       "file": "gnc_mode2_poster.png",
-      "bytes": 235420,
-      "sha256": "031fe245fd74c98f63d1c9785d187ede43c2532b8e3919de4a7ee3db224a1dc3"
+      "bytes": 252414,
+      "sha256": "8c3ed5eaf002a36c617f8c2012969f0b43291ba60d3534bf76186daba32b649d"
     },
     {
       "file": "gnc_mode3.gif",
-      "bytes": 3231825,
-      "sha256": "83bbe25fe143d6b8d402e0dcab3abfaaff2a674b1af8405bd5852cad98fae2ec"
+      "bytes": 3414127,
+      "sha256": "b4d7fb923c498ddb00620e4785fe599fa83c850208fa1c2a8917dcdadbd18ae8"
     },
     {
       "file": "gnc_mode3.mp4",
-      "bytes": 3061524,
-      "sha256": "9ac9abdc7578927676e764ee52938aab37cc54934c5ca5e6ba1467d1170b7f60"
+      "bytes": 3209473,
+      "sha256": "a67b170b0f100fe6179d648ef8940991101d4e9ef1144b8d37085f1dd76162e3"
     },
     {
       "file": "gnc_mode3_poster.png",
-      "bytes": 230827,
-      "sha256": "dd569d0ce493991a39ba31cf07224e10eb4aa88b1728047df2fc3349aca06168"
+      "bytes": 248160,
+      "sha256": "e8bb7ad321bc2c57b807ffda903fcb73021fdc19154a0418a9711e271346e460"
     },
     {
       "file": "gnc_mode4.gif",
-      "bytes": 3289412,
-      "sha256": "4ae2d86549f039f8ea4a74374e8a40b314a5af71d561678bbc9fd39fa64d4401"
+      "bytes": 3414568,
+      "sha256": "23d019ebdfca929564e6bc734e17d90f8b8e4f61c8149b2696984f0404d4a9e8"
     },
     {
       "file": "gnc_mode4.mp4",
-      "bytes": 4268210,
-      "sha256": "b97ad3d62096aa8785fda2b65521e185ee3880d44c51f3afb33ee7ba2a60e61e"
+      "bytes": 4585906,
+      "sha256": "b2b689b449798054aa20be25f18e897761db8fcb92c69d22f348c2bd3eca2918"
     },
     {
       "file": "gnc_mode4_poster.png",
-      "bytes": 235874,
-      "sha256": "51a6504ebb25d2ee71cbe2ba506a133ebf857773d8e5cd2970569292d3ff3b1d"
+      "bytes": 254175,
+      "sha256": "0a34556161cc494dce955a9a41146f8c771254a0b63ffbb7f664031b9ba8d06b"
     },
     {
       "file": "gnc_mode5.gif",
-      "bytes": 3186508,
-      "sha256": "87c7d602d615440e413ea267ca6f17f42be3f5ecd2370346d529092ec33abb0e"
+      "bytes": 3374006,
+      "sha256": "3e8dcb51f4fc6aecdbe0e8ed48e4d14ca4c7d4ea6ea186811098488e73571293"
     },
     {
       "file": "gnc_mode5.mp4",
-      "bytes": 3794372,
-      "sha256": "dab33dfde70fa6b44b089661fc6c39234fa893b0982f481731c16c351f84e609"
+      "bytes": 4055199,
+      "sha256": "66d107ab81f1963c8318c1493c5b38a689dfb838da86b3ae1866d3e266914455"
     },
     {
       "file": "gnc_mode5_poster.png",
-      "bytes": 242701,
-      "sha256": "4af3885be2464ee83539023803683eda261a224a6563d743da3484a7ed29ebae"
+      "bytes": 260624,
+      "sha256": "4c06c0db5d1c799318cb2ae3592ecbbcddd6a5bcdf3ff5470fa9cfc49b602183"
     },
     {
       "file": "gnc_mode6.gif",
-      "bytes": 2972023,
-      "sha256": "01d7a38065cac100ab7beab6fd689eb93ef4617186c7d1bb6d899708093148de"
+      "bytes": 3188126,
+      "sha256": "ef548080a7fd4b706c079e1e63e4de16870b89e2bb4ab05cb16f7ad0d7eb24e7"
     },
     {
       "file": "gnc_mode6.mp4",
-      "bytes": 3978886,
-      "sha256": "11a6d51a4ffc5ef0884750418e89d3a2076befbeee27444efb5db167cc3bb304"
+      "bytes": 4353642,
+      "sha256": "2e33d4732293a801699269dee9687fc2ddc0ae0eadbe51d5f7283a484170306f"
     },
     {
       "file": "gnc_mode6_poster.png",
-      "bytes": 205313,
-      "sha256": "d463dd763c7d41f76ac37352e33fdb1f826070f1fbc11d05a8e2bdcccdca6e50"
+      "bytes": 223452,
+      "sha256": "2d8b9cb97650959923cb2acb2f2ff43e8eb435340e42ba12f0926a5d95d7919c"
     },
     {
       "file": "hold.gif",
@@ -228,9 +228,9 @@
       "sha256": "47d9f4f6262f3132a6118425619c80480484d5943b87b1d5d9a363d5bde445a2"
     }
   ],
-  "renderRevision": "Closer floor-tag framing; IR target/panel active only in modes 2,4,5",
-  "focusedRendererSha256": "2d87dcb5161ff38b5326d1c94c8ca6bee21ae08035c5a3928c4c4d3f26b6e979",
-  "focusedValidation": [
+  "renderRevision": "Closer floor framing; active IR modes only; all 14 fan disks and bars colored by actual applied thrust",
+  "thrustRendererSha256": "68c6ad8baf19598601504f86291f8398715a5676c9f5c8c390547e2b78638305",
+  "thrustValidation": [
     {
       "case": "gnc_mode1",
       "decodedVideoFrames": 300,

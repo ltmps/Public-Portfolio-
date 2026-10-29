@@ -7,7 +7,10 @@
   const darkColors = {'#25364d':'#edf0f4','#22354f':'#f5f5f5','white':'#191919','#dce3ed':'#454545','#e9edf3':'#252525','#d2dae5':'#404040','#c5dfd5':'#365c4c','#eed0d2':'#674047','#5e6c80':'#b5bec9','#55667d':'#b6beca','#d5dce7':'#454545','#56647b':'#b6beca','#586a80':'#b6beca','#e5eaf1':'#363636','#68768b':'#b6beca','#35475f':'#c5cbd4','#bfcbd9':'#595959','#59677c':'#b6beca','#f5f7fb':'#111111','#4f6178':'#b6beca','#67778d':'#b6beca','#16845e':'#62d2ab','#c63f45':'#ff8f89','#ac790a':'#ffd16c','#7f39a7':'#c69ae0','#ca560f':'#ffa66f'};
   const ink = color => document.documentElement?.getAttribute('data-theme') === 'dark' ? (darkColors[color] || color) : color;
   const green = '#16845e', red = '#c63f45', gold = '#ac790a', purple = '#7f39a7', orange = '#ca560f';
-  const regions = {world:[25,65,780,405],tag:[850,70,520,175],ir:[1125,70,245,175],body:[850,290,245,175],stats:[1125,275,245,195],pos:[30,550,420,215],att:[480,550,345,215],fans:[875,550,485,215]};
+  const regions = {world:[25,65,780,405],tag:[850,70,245,175],ir:[1125,70,245,175],body:[850,300,520,180],stats:[1125,70,245,195],pos:[30,550,420,215],att:[480,550,345,215],fans:[875,550,485,215]};
+  const fanPositions=[[.087,.0633,.076],[.087,-.0527,.076],[.087,-.0527,-.04],[.087,.0633,-.04],[-.0964,.0633,.076],[-.0964,-.0527,.076],[-.0964,-.0527,-.04],[-.0964,.0633,-.04],[-.0047,-.083,.0595],[-.0047,-.083,-.0235],[-.0047,.0936,.0595],[-.0047,.0936,-.0235],[-.0047,.0053,.1063],[-.0047,.0053,-.0703]];
+  const thrustAnchors=[[.5,.55,.6],[.05,.65,.85],[.2,.75,.35],[1,.7,.05],[.9,.15,.08]];
+  function thrustColor(newtons){const level=Math.min(1,Math.max(0,newtons/.2834))*4,i=Math.min(3,Math.floor(level)),a=level-i;return `rgb(${thrustAnchors[i].map((v,j)=>Math.round(255*(v+a*(thrustAnchors[i+1][j]-v)))).join(',')})`;}
   let selected = data.faults[0], time = 0, playing = false, lastStamp = null, project = null;
   data.faults.forEach(f => {const option=document.createElement('option');option.value=f.id;option.textContent=f.title;ui.fault.appendChild(option);});
   const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
@@ -46,6 +49,15 @@
   const corners=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
   const edges=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
   function cube(p,q,color,projection,size=.115){const R=rotation(q),v=corners.map(a=>projection(add(p,mul(R,a.map(x=>x*size)))));edges.forEach(e=>line(e.map(i=>v[i]),color,1.4));}
+  function fanDisks(p,q,forces,projection,labels=false){
+    const R=rotation(q);
+    fanPositions.forEach((r,j)=>{
+      const basis=j<8?[[0,1,0],[0,0,1]]:j<12?[[1,0,0],[0,0,1]]:[[1,0,0],[0,1,0]];
+      const points=Array.from({length:25},(_,k)=>{const angle=k/24*2*Math.PI,v=r.map((x,a)=>x+.014*(basis[0][a]*Math.cos(angle)+basis[1][a]*Math.sin(angle)));return projection(add(p,mul(R,v)));});
+      const color=thrustColor(forces[j]);ctx.beginPath();ctx.moveTo(...points[0]);points.slice(1).forEach(v=>ctx.lineTo(...v));ctx.closePath();ctx.fillStyle=color;ctx.fill();line(points,color,1.5);
+      if(labels){const center=projection(add(p,mul(R,r)));text(`m${j}`,center[0]+8,center[1]-7,'#25364d',10);}
+    });
+  }
   function leader(p,label,offset,color){const a=project(p),b=[a[0]+offset[0],a[1]+offset[1]];line([a,b],color,1,[3,3]);text(label,b[0]+(offset[0]<0?-4:4),b[1],color,13,offset[0]<0?'right':'left');}
   function route(rows,t,color,width){const pts=rows.filter(s=>s[0]<=t).map(s=>project(s.slice(1,4)));line(pts,color,width);}
   function drawWorld(h,f){
@@ -59,7 +71,7 @@
     route(data.healthy,time,green,2.8);route(selected.samples,time,red,2.8);
     const hp=h.slice(1,4),fp=f.slice(1,4),command=data.commandPositionM;
     line([project([hp[0],hp[1],0]),project(hp)],green,1,[2,3]);line([project([fp[0],fp[1],0]),project(fp)],red,1,[2,3]);
-    cube(hp,h.slice(4,8),green,project);cube(fp,f.slice(4,8),red,project);dotMark(project(hp),green);dotMark(project(fp),red);
+    cube(hp,h.slice(4,8),green,project);cube(fp,f.slice(4,8),red,project);fanDisks(hp,h.slice(4,8),h.slice(8,22),project);fanDisks(fp,f.slice(4,8),f.slice(8,22),project);dotMark(project(hp),green);dotMark(project(fp),red);
     dotMark(project(command),gold,6);leader(command,'COMMAND (0,0,1) m',[30,-55],gold);
     dotMark(project([0,0,0]),purple,6);leader([0,0,0],'FLOOR TAG / z=0',[-45,35],purple);
     dotMark(project(data.initialPositionM),'#5e6c80',3);leader(data.initialPositionM,'START',[-30,-55],'#5e6c80');
@@ -85,10 +97,8 @@
     text(`H: ${projected[0].inside?'in FOV':'outside'}  F: ${projected[1].inside?'in FOV':'outside'}`,x+8,y+hg-10,'#56647b',12);
   }
   function drawBody(h,f){
-    const box=regions.body;panel(box,'Attitude comparison / same scale');const[x,y,w,hg]=box;
-    const local=p=>{const v=planar(p);return [x+w/2+v[0]*360,y+hg/2-v[1]*360];};
-    cube([0,0,0],h.slice(4,8),green,local);cube([0,0,0],f.slice(4,8),red,local);
-    text('Green healthy · red fault',x+12,y+hg-9,'#586a80',12);
+    const box=regions.body;panel(box,'14 fan indicators / actual applied thrust');const[x,y,w,hg]=box;
+    [h,f].forEach((s,i)=>{const center=x+w*(i===0?.25:.75),local=p=>{const v=planar(p);return [center+v[0]*480,y+hg/2-v[1]*480];};cube([0,0,0],s.slice(4,8),i===0?green:red,local);fanDisks([0,0,0],s.slice(4,8),s.slice(8,22),local,true);text(i===0?'HEALTHY':'FAULT',center,y+hg-8,i===0?green:red,12,'center');});
   }
   function plot(box,title,index,h,f){
     panel(box,title);const[x,y,w,hg]=box,pad={l:38,r:12,t:15,b:30},max=Math.max(.001,...data.healthy.map(s=>s[index]),...selected.samples.map(s=>s[index]))*1.1;
@@ -98,9 +108,9 @@
     [0,5,10,15,20,22].forEach(t=>text(String(t),x+pad.l+t/22*(w-pad.l-pad.r),y+hg-10,'#68768b',11,'center'));
   }
   function drawFans(h,f){
-    const box=regions.fans;panel(box,'Actual fan thrust (N): healthy / fault');const[x,y,w,hg]=box,base=y+hg-30,height=hg-50,left=x+35,bar=(w-45)/14;
+    const box=regions.fans;panel(box,'Actual thrust (N): H outline / F solid');const[x,y,w,hg]=box,base=y+hg-30,height=hg-50,left=x+35,bar=(w-45)/14;
     line([[left,y+20],[left,base],[x+w-5,base]],'#bfcbd9');
-    for(let j=0;j<14;j++){const xx=left+j*bar;ctx.fillStyle=ink(green);ctx.fillRect(xx,base-h[8+j]/.3*height,bar*.35,h[8+j]/.3*height);ctx.fillStyle=ink(red);ctx.fillRect(xx+bar*.4,base-f[8+j]/.3*height,bar*.35,f[8+j]/.3*height);text(String(j),xx+bar*.35,base+18,'#59677c',11,'center');}
+    for(let j=0;j<14;j++){const xx=left+j*bar;ctx.strokeStyle=thrustColor(h[8+j]);ctx.strokeRect(xx,base-h[8+j]/.3*height,bar*.35,h[8+j]/.3*height);ctx.fillStyle=thrustColor(f[8+j]);ctx.fillRect(xx+bar*.4,base-f[8+j]/.3*height,bar*.35,f[8+j]/.3*height);text(String(j),xx+bar*.35,base+18,'#59677c',11,'center');}
     text('0.3',x+5,y+24,'#68768b',11);text('0',x+20,base,'#68768b',11);
   }
   function draw(){
