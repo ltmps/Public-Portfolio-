@@ -23,11 +23,13 @@ for (const name of ['index.html', 'engineering_checks.html']) {
   const nodes = Object.fromEntries(['case', 'movie', 'mp4', 'gif', 'csv', 'model', 'results', 'description', 'camera-description', 'speed'].map(id => [id, {value: id === 'speed' ? '1' : options[0]}]));
   const sandbox = {document: {getElementById: id => nodes[id]}};
   vm.createContext(sandbox);
-  vm.runInContext(html.match(/<script>([\s\S]*?)<\/script>/)[1], sandbox);
+  const selectorScript = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].find(m => m[1].includes('const cases='));
+  assert(selectorScript, 'Replay selector script exists');
+  vm.runInContext(selectorScript[1], sandbox);
   for (const option of options) {
     nodes.case.value = option;
     nodes.case.onchange();
-    for (const ref of [nodes.movie.src, nodes.movie.poster, nodes.mp4.href, nodes.gif.href]) assert(fs.existsSync(path.resolve(replay, ref)), `Missing ${ref}`);
+    for (const ref of [nodes.movie.src, nodes.movie.poster, nodes.mp4.href, nodes.gif.href]) assert(fs.existsSync(path.resolve(replay, ref.split('?')[0])), `Missing ${ref}`);
     assert(html.includes('<a id="csv" hidden>'), 'No public CSV download control');
   }
 }
@@ -40,7 +42,8 @@ const ids = ['fault', 'play', 'reset', 'speed', 'time', 'clock', 'description', 
 const elements = Object.fromEntries(ids.map(id => [id, {value: '', textContent: '', appendChild() {}}]));
 elements.speed.value = '1';
 elements.view = {width: 1400, height: 850, getContext: () => ctx};
-const sandbox = {window: {}, document: {getElementById: id => elements[id], createElement: () => ({})}, requestAnimationFrame: cb => frames.push(cb)};
+let darkTheme = false;
+const sandbox = {window: {}, document: {documentElement: {getAttribute: () => darkTheme ? 'dark' : null}, getElementById: id => elements[id], createElement: () => ({})}, requestAnimationFrame: cb => frames.push(cb)};
 vm.createContext(sandbox);
 for (const file of ['comparison_data.js', 'comparison_viewer.js']) vm.runInContext(read(path.join(replay, file)), sandbox);
 assert.equal(sandbox.window.ORBES_COMPARISON.faults.length, 6);
@@ -50,6 +53,7 @@ for (const fault of sandbox.window.ORBES_COMPARISON.faults) {
   assert(elements.outcome.textContent.length > 30);
   assert(elements['pose-csv'].href.startsWith('https://raw.githubusercontent.com/ltmps/ORBES-sim/'));
   for (const mode of ['command', 'healthy']) {
+    darkTheme = mode === 'healthy';
     elements['error-mode'].value = mode;
     elements['error-mode'].onchange();
     elements.time.value = '22';
