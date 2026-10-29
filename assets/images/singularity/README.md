@@ -27,3 +27,7 @@ User-selected personal media folder `E:/DCIM/June 3rd`. Display copies are EXIF-
 
 - `june-avionics-sled.jpg`: `20230603_085613.jpg`, source SHA-256 `1b1e8fc8df015306e369151161c5588fef62e616209f22e63b006ec0e8526f5c`.
 - `june-recovery-preparation.jpg`: `20230603_142621.jpg`, source SHA-256 `da54769b4b3918ff72a77d36864129e46bf074ff5628a46f3772f1c120117a82`.
+
+## June collection launch excerpt
+
+`assets/media/singularity/june-launch-excerpt.mp4` uses 12.5–24.5 seconds of `IMG_9097.MOV` from the user-selected June 3 folder. Full portrait framing is retained at 720 × 1280; H.264 faststart, 30 fps. The source has AAC audio; this web excerpt is silent and captioned accordingly. Original media is unchanged. Poster is the source frame at 14 seconds. Source hash and processing details are recorded beside the clip. The MOV creation timestamp is unset, so captions identify the collection rather than infer a flight date. No association with the EasyMini trace is asserted.

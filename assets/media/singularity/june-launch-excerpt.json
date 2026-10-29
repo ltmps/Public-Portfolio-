@@ -1,0 +1,16 @@
+{
+  "source": "IMG_9097.MOV",
+  "source_sha256": "8d499d6cf6b1e17b5ae5d02bd81afdb4f78352cda285d6cd201816e6b47dfcc9",
+  "source_duration_s": 78.3,
+  "source_video": "1080x1920 H.264, 30 fps",
+  "source_audio": "AAC stereo, 44100 Hz, 128 kb/s",
+  "source_creation_time": "1970-01-01 (unset; not used as flight date)",
+  "start_s": 12.5,
+  "end_s": 24.5,
+  "duration_s": 12,
+  "video": "720x1280 H.264, 30 fps, yuv420p, faststart",
+  "audio": "omitted in silent web excerpt; original unchanged",
+  "poster_source_time_s": 14,
+  "spatial_crop": false,
+  "description": "Liftoff and initial climb; camera follows the white smoke trail. Date wording comes from user-selected folder, not embedded metadata."
+}
