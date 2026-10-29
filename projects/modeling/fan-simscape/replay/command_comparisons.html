@@ -75,7 +75,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
 <script src="../../../../assets/js/gy.js?v=9db17a7d34" defer></script>
-<link rel="stylesheet" href="replay.css?v=focus4">
+<link rel="stylesheet" href="replay.css?v=thrust1">
 <script>if(new URLSearchParams(location.search).has("embed"))document.documentElement.classList.add("fan-embedded");</script>
 </head>
 <body>
@@ -106,7 +106,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <p id="description"></p>
 <div class="controls"><label>Error plots <select id="error-mode"><option value="command">Error from command</option><option value="healthy">Difference from healthy baseline</option></select></label><span class="small">Use baseline difference to inspect small scaling effects.</span></div>
 <p class="small">Bottom TAG observes the floor marker. The unused IR target and IR panel are hidden for GNC 1. The floor is a reference plane without contact physics.</p>
-<canvas id="view" width="1400" height="850" aria-label="Synchronized healthy and faulty spacecraft trajectories, mounted camera views, command error plots and fan thrusts"></canvas>
+<div class="thrust-key"><strong>Fan indicator color = actual applied thrust (N)</strong><div class="thrust-ramp" role="img" aria-label="Thrust scale: gray at zero, cyan at 0.071 N, green at 0.142 N, gold at 0.213 N, red at maximum 0.2834 N"></div><div class="thrust-ticks"><span>0 / off</span><span>0.071</span><span>0.142</span><span>0.213</span><span>0.2834 / max</span></div><p class="small">m0–m13 match the fan-bar indices. Each hole uses the same actual thrust sample as its bar. Healthy bars are outlined; fault bars are solid. Green/red trajectory colors still identify healthy/fault paths.</p></div><canvas id="view" width="1400" height="850" aria-label="Synchronized healthy and faulty spacecraft trajectories, mounted camera views, command error plots and fan thrusts"></canvas>
 <div class="metrics"><div class="metric">Final position error<strong id="final-error"></strong></div><div class="metric">Maximum position difference from healthy<strong id="max-delta"></strong></div><div class="metric">Attitude RMS, last 5 s<strong id="attitude"></strong></div><div class="metric">Actual thrust at nominal 0.2834 N ceiling<strong id="saturation"></strong></div></div>
 <p id="outcome" class="command"></p>
 <details><summary>What is being commanded and compared?</summary><p>The controller requests the same position and upright attitude in every run. The fault is imposed after its fan commands, or as the selected external force/torque. The healthy trajectory was rerun in the same comparison runner; it matches the earlier healthy GNC 1 position trajectory exactly. No prescribed T1 sinusoidal wrench is mixed into these comparisons.</p><p>The bottom TAG camera looks along body −Z, and the forward IR camera along body +X, using the repository mounts. The bottom-camera panel shows healthy and faulty geometric projections of the same floor tag. GNC 1 does not use IR tracking, so its IR target and panel are hidden.</p><p>These are simple truth-state position/attitude PD demonstrations on the Simscape plant, not the flight DLQR/EKF or its acceptance suite. The floor at z=0 is a reference plane, without contact. A trajectory below it is a reference violation, not a simulated impact. Original CSVs are 100 Hz; this viewer interpolates a 20 Hz display copy. All panels use the same simulation time.</p></details>
@@ -131,4 +131,4 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </div>
 </body>
 </html>
-<script src="comparison_data.js"></script><script src="comparison_viewer.js?v=focus3"></script>
+<script src="comparison_data.js"></script><script src="comparison_viewer.js?v=thrust1"></script>
