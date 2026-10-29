@@ -15,6 +15,10 @@ for(const mode of [1,2,3,4,5,6,'recovery']){
   elements.play.onclick();for(let k=0;k<Math.ceil(data.durationS*10)+5;k++)frames.shift()(k*100);assert.equal(elements.play.textContent,'Play');elements.reset.onclick();assert.equal(elements.clock.textContent,`0.00 / ${data.durationS.toFixed(2)} s`);
   for(let i=0;i<14;i++)assert(texts.includes(`m${i}`));assert(colors.includes('rgb(230,38,20)'));assert(colors.includes('rgb(128,140,153)'));
   const file=recovery?'recovery_comparison.html':mode===1?'command_comparisons.html':`comparison_mode${mode}.html`,html=fs.readFileSync(path.join(folder,file),'utf8');assert(html.includes(recovery?'recovery_data.js':`comparison_mode${mode}_data.js`));if(!recovery)assert(html.includes(`value="${mode}" selected`));
+  // Execute page-specific inline hooks too: a removed mode selector must not leave a null dereference.
+  box.URLSearchParams=URLSearchParams;box.location={search:'',href:''};
+  elements['gnc-mode']=recovery?null:{value:String(mode)};
+  for(const script of html.matchAll(/<script>([\s\S]*?)<\/script>/g))if(script[1].includes('gnc-mode'))vm.runInContext(script[1],box);
   if(recovery){assert(data.faults.find(f=>f.id==='quarter_turn').metrics.recoveryTargetPass);assert(!data.faults.find(f=>f.id==='quarter_delay2').metrics.recoveryTargetPass);assert(!data.faults.find(f=>f.id==='full_roll').metrics.recoveryTargetPass);}
   console.log(`PASS: GNC ${mode}, six faults, ${data.durationS}s, same-clock fan colors, both plot/theme modes, exact endpoint, replay/reset.`);
 }
