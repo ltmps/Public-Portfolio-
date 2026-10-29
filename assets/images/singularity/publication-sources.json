@@ -1,0 +1,25 @@
+{
+  "source": "User-provided Camera Roll photos; originals preserved",
+  "images": [
+    {
+      "original": "20231106_081330.webp",
+      "asset": "cpp-magazine-team.webp"
+    },
+    {
+      "original": "IMG_9526.webp",
+      "asset": "far-first-place.webp"
+    },
+    {
+      "original": "20231106_081351.webp",
+      "asset": "cpp-magazine-cover.webp"
+    },
+    {
+      "original": "IMG_7092.webp",
+      "asset": "far-scoreboard.webp"
+    },
+    {
+      "original": "image.webp",
+      "asset": "far-range-map.webp"
+    }
+  ]
+}
