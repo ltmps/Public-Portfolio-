@@ -2,6 +2,7 @@
 (() => {
   'use strict';
   const data = window.ORBES_COMPARISON;
+  const duration=data.durationS,mode=data.mode||1;
   const canvas = document.getElementById('view'), ctx = canvas.getContext('2d');
   const ui = Object.fromEntries(['fault','play','reset','speed','time','clock','description','final-error','max-delta','attitude','saturation','outcome','pose-csv','actuation-csv','error-mode'].map(id => [id, document.getElementById(id)]));
   const darkColors = {'#25364d':'#edf0f4','#22354f':'#f5f5f5','white':'#191919','#dce3ed':'#454545','#e9edf3':'#252525','#d2dae5':'#404040','#c5dfd5':'#365c4c','#eed0d2':'#674047','#5e6c80':'#b5bec9','#55667d':'#b6beca','#d5dce7':'#454545','#56647b':'#b6beca','#586a80':'#b6beca','#e5eaf1':'#363636','#68768b':'#b6beca','#35475f':'#c5cbd4','#bfcbd9':'#595959','#59677c':'#b6beca','#f5f7fb':'#111111','#4f6178':'#b6beca','#67778d':'#b6beca','#16845e':'#62d2ab','#c63f45':'#ff8f89','#ac790a':'#ffd16c','#7f39a7':'#c69ae0','#ca560f':'#ffa66f'};
@@ -25,9 +26,15 @@
   const mul=(R,v)=>R.map(row=>dot(row,v));
   const transposeMul=(R,v)=>[0,1,2].map(i=>R.reduce((a,row,j)=>a+row[i]*v[j],0));
   function sample(rows,t) {
-    const i=clamp(Math.floor(t/data.sampleIntervalS),0,rows.length-2), a=clamp((t-rows[i][0])/data.sampleIntervalS,0,1);
-    return rows[i].map((v,j)=>v+a*(rows[i+1][j]-v));
+    let i=Math.min(rows.length-2,Math.max(0,Math.floor(t/data.sampleIntervalS)));
+    while(i>0&&rows[i][0]>t)i--;while(i<rows.length-2&&rows[i+1][0]<t)i++;
+    const a=clamp((t-rows[i][0])/(rows[i+1][0]-rows[i][0]),0,1);return rows[i].map((v,j)=>v+a*(rows[i+1][j]-v));
   }
+  const reference=t=>data.referenceSamples?sample(data.referenceSamples,t):[t,...data.commandPositionM,0,1.8*Math.cos(.1*t),1.8*Math.sin(.1*t),1];
+  const referenceDescription=document.getElementById('reference-description');
+  if(referenceDescription)referenceDescription.textContent=data.recovery?'GNC 1 recovery experiment. Start (0.6, −0.4, 1.3) m; final goal (0, 0, 1) m, upright and at rest. m12 fails at t=0. All cases share the same plant and 100 Hz sampled controller interface; the recovery strategy changes.':`GNC ${mode}: ${data.modeTitle}. Initial position (${data.initialPositionM.join(', ')}) m; velocity (${data.initialVelocityMps.join(', ')}) m/s; body rate (${data.initialOmegaRadS.join(', ')}) rad/s. ${duration.toFixed(2)} simulation seconds. ${data.positionControlled?'Position and attitude follow the same saved command.':'Translation coasts; position is compared to the coast reference, not controlled.'} Only the selected fault changes.`;
+  const cameraScope=document.getElementById('camera-scope');if(cameraScope)cameraScope.textContent=data.usesIR?'Bottom TAG and forward IR cameras use their actual mounts. The IR target is active in this mode.':'Bottom TAG observes the floor reference; the unused IR target and panel are hidden in this mode.';
+  ui.time.max=duration;
   function text(s,x,y,color='#25364d',size=14,align='left') {ctx.fillStyle=ink(color);ctx.font=`${size}px ui-monospace, monospace`;ctx.textAlign=align;ctx.fillText(s,x,y);}
   function line(points,color,width=1,dash=[]) {if(!points.length)return;ctx.beginPath();ctx.moveTo(...points[0]);points.slice(1).forEach(p=>ctx.lineTo(...p));ctx.strokeStyle=ink(color);ctx.lineWidth=width;ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);}
   function dotMark(p,color,r=4){ctx.beginPath();ctx.arc(p[0],p[1],r,0,2*Math.PI);ctx.fillStyle=ink(color);ctx.fill();}
@@ -38,7 +45,7 @@
   let bounds;
   function setProjection(){
     const points=[...data.healthy,...selected.samples].map(s=>s.slice(1,4));
-    points.push([0,0,0],[0,0,1]);
+    points.push([0,0,0],...data.referenceSamples.map(r=>r.slice(1,4)));if(data.usesIR)points.push(...data.referenceSamples.map(r=>r.slice(5,8)));
     const min=[0,1,2].map(j=>Math.min(...points.map(p=>p[j]))-.2), max=[0,1,2].map(j=>Math.max(...points.map(p=>p[j]))+.2);
     for(const x of [min[0],max[0]])for(const y of [min[1],max[1]])points.push([x,y,0]);
     const uv=points.map(planar), lo=[0,1].map(j=>Math.min(...uv.map(p=>p[j]))), hi=[0,1].map(j=>Math.max(...uv.map(p=>p[j])));
@@ -69,16 +76,17 @@
     for(let y=Math.ceil(min[1]/step)*step;y<=max[1];y+=step)line([project([min[0],y,0]),project([max[0],y,0])],'#d2dae5');
     line(data.healthy.map(s=>project(s.slice(1,4))),'#c5dfd5',1,[3,4]);line(selected.samples.map(s=>project(s.slice(1,4))),'#eed0d2',1,[3,4]);
     route(data.healthy,time,green,2.8);route(selected.samples,time,red,2.8);
-    const hp=h.slice(1,4),fp=f.slice(1,4),command=data.commandPositionM;
+    const hp=h.slice(1,4),fp=f.slice(1,4),command=reference(time).slice(1,4);
     line([project([hp[0],hp[1],0]),project(hp)],green,1,[2,3]);line([project([fp[0],fp[1],0]),project(fp)],red,1,[2,3]);
     cube(hp,h.slice(4,8),green,project);cube(fp,f.slice(4,8),red,project);fanDisks(hp,h.slice(4,8),h.slice(8,22),project);fanDisks(fp,f.slice(4,8),f.slice(8,22),project);dotMark(project(hp),green);dotMark(project(fp),red);
-    dotMark(project(command),gold,6);leader(command,'COMMAND (0,0,1) m',[30,-55],gold);
+    line(data.referenceSamples.map(r=>project(r.slice(1,4))),gold,1,[5,4]);dotMark(project(command),gold,6);leader(command,data.positionControlled?'CURRENT COMMAND':'COAST REFERENCE',[30,-55],gold);
     dotMark(project([0,0,0]),purple,6);leader([0,0,0],'FLOOR TAG / z=0',[-45,35],purple);
     dotMark(project(data.initialPositionM),'#5e6c80',3);leader(data.initialPositionM,'START',[-30,-55],'#5e6c80');
     leader(hp,'HEALTHY',[-35,-22],green);leader(fp,'FAULT',[35,28],red);
 
+    if(data.usesIR){const beacon=reference(time).slice(5,8);dotMark(project(beacon),orange,5);leader(beacon,'IR TARGET',[15,-20],orange);}
     ctx.restore();
-    text('Position command + upright attitude; each trace uses the same saved time.',box[0]+12,box[1]+box[3]-12,'#55667d',13);
+    text('Same mode reference and saved simulation time.',box[0]+12,box[1]+box[3]-12,'#55667d',13);
   }
   function cameraProjection(sample,point,type){
     const R=rotation(sample.slice(4,8)),pos=sample.slice(1,4);
@@ -91,7 +99,7 @@
   function drawCamera(type,h,f){
     const box=regions[type];panel(box,type==='tag'?'BOTTOM TAG camera / −Z':'FORWARD IR / reference only (+X)');const[x,y,w,hg]=box;
     line([[x+w/2,y],[x+w/2,y+hg]],'#d5dce7',1,[3,3]);line([[x,y+hg/2],[x+w,y+hg/2]],'#d5dce7',1,[3,3]);
-    const target=type==='tag'?[0,0,0]:[1.8*Math.cos(.1*time),1.8*Math.sin(.1*time),1];
+    const target=type==='tag'?[0,0,0]:reference(time).slice(5,8);
     const projected=[cameraProjection(h,target,type),cameraProjection(f,target,type)];
     projected.forEach((r,i)=>{if(!r.inside)return;const px=x+w/2+r.uv[0]*Math.min(w/88.697,hg/67),py=y+hg/2+r.uv[1]*Math.min(w/88.697,hg/67);dotMark([px,py],i===0?green:red,i===0?6:3);});
     text(`H: ${projected[0].inside?'in FOV':'outside'}  F: ${projected[1].inside?'in FOV':'outside'}`,x+8,y+hg-10,'#56647b',12);
@@ -102,10 +110,10 @@
   }
   function plot(box,title,index,h,f){
     panel(box,title);const[x,y,w,hg]=box,pad={l:38,r:12,t:15,b:30},max=Math.max(.001,...data.healthy.map(s=>s[index]),...selected.samples.map(s=>s[index]))*1.1;
-    const pr=s=>[x+pad.l+s[0]/22*(w-pad.l-pad.r),y+hg-pad.b-s[index]/max*(hg-pad.t-pad.b)];
+    const pr=s=>[x+pad.l+s[0]/duration*(w-pad.l-pad.r),y+hg-pad.b-s[index]/max*(hg-pad.t-pad.b)];
     for(let i=0;i<=4;i++){const yy=y+hg-pad.b-i/4*(hg-pad.t-pad.b);line([[x+pad.l,yy],[x+w-pad.r,yy]],'#e5eaf1');text((max*i/4).toPrecision(2),x+pad.l-5,yy+4,'#68768b',11,'right');}
-    line(data.healthy.map(pr),green,2);line(selected.samples.map(pr),red,2);const xx=x+pad.l+time/22*(w-pad.l-pad.r);line([[xx,y+pad.t],[xx,y+hg-pad.b]],'#35475f',1,[3,3]);dotMark(pr(h),green,3);dotMark(pr(f),red,3);
-    [0,5,10,15,20,22].forEach(t=>text(String(t),x+pad.l+t/22*(w-pad.l-pad.r),y+hg-10,'#68768b',11,'center'));
+    line(data.healthy.map(pr),green,2);line(selected.samples.map(pr),red,2);const xx=x+pad.l+time/duration*(w-pad.l-pad.r);line([[xx,y+pad.t],[xx,y+hg-pad.b]],'#35475f',1,[3,3]);dotMark(pr(h),green,3);dotMark(pr(f),red,3);
+    Array.from({length:6},(_,i)=>i*duration/5).forEach(t=>text(t.toFixed(1),x+pad.l+t/duration*(w-pad.l-pad.r),y+hg-10,'#68768b',11,'center'));
   }
   function drawFans(h,f){
     const box=regions.fans;panel(box,'Actual thrust (N): H outline / F solid');const[x,y,w,hg]=box,base=y+hg-30,height=hg-50,left=x+35,bar=(w-45)/14;
@@ -114,30 +122,36 @@
     text('0.3',x+5,y+24,'#68768b',11);text('0',x+20,base,'#68768b',11);
   }
   function draw(){
-    ctx.fillStyle=ink('#f5f7fb');ctx.fillRect(0,0,canvas.width,canvas.height);text(`GNC 1: ${selected.title} versus healthy`,25,27,'#22354f',21);
+    ctx.fillStyle=ink('#f5f7fb');ctx.fillRect(0,0,canvas.width,canvas.height);text(`GNC ${mode}: ${selected.title} versus healthy`,25,27,'#22354f',21);
     const h=sample(data.healthy,time),f=sample(selected.samples,time);
     drawWorld(h,f);drawCamera('tag',h,f);drawBody(h,f);
-    const[x,y]=regions.stats;text(`Time ${time.toFixed(2)} / 22.00 s`,x,y+22,'#22354f',17);
+    if(data.usesIR){drawCamera('ir',h,f);}else{
+    const[x,y]=regions.stats;text(`Time ${time.toFixed(2)} / ${duration.toFixed(2)} s`,x,y+22,'#22354f',17);
     text(`Healthy position error`,x,y+56,green,13);text(`${h[22].toFixed(4)} m`,x,y+79,green,19);
     text(`Fault position error`,x,y+110,red,13);text(`${f[22].toFixed(4)} m`,x,y+133,red,19);
-    text(`Fault attitude error: ${f[23].toFixed(2)}°`,x,y+162,red,13);
-    if(f[3]<0)text('BELOW FLOOR REFERENCE',x,y+187,red,13);
+    text(`${data.recovery?"Upright":"Attitude"} error: ${f[23].toFixed(2)}°`,x,y+162,red,13);
+    if(f[3]<0)text('BELOW FLOOR REFERENCE',x,y+187,red,13);}
+
     const delta=ui['error-mode'].value==='healthy';
-    plot(regions.pos,delta?'Position difference from healthy (m)':'Position error from commanded (0,0,1) m',delta?25:22,h,f);plot(regions.att,delta?'Attitude difference from healthy (deg)':'Attitude error from identity (deg)',delta?26:23,h,f);drawFans(h,f);
-    text('Same plant · same start · same controller · same command · only the selected fault changes',30,810,'#4f6178',15);
+    plot(regions.pos,delta?'Position difference from healthy (m)':'Position error from mode reference (m)',delta?25:22,h,f);plot(regions.att,delta?'Attitude difference from healthy (deg)':data.recovery?'Angle from final upright goal (deg)':'Attitude error from command (deg)',delta?26:23,h,f);drawFans(h,f);
+    const phases=['Nominal / before announcement','Reorient','Braking / translation','Return upright','Settle'];
+    const phase=selected.phaseSamples?[...selected.phaseSamples].reverse().find(s=>s[0]<=time):null;
+    text(data.recovery?`Recovery phase: ${phase?phases[Math.round(phase[1])]:'upright hold'} · known fault · truth-state feedback`:'Same plant · same start · same controller · same command · only the selected fault changes',30,810,'#4f6178',15);
     text('Saved Simscape trajectories. Browser draws the comparison; no simulation runs here.',30,835,'#67778d',13);
-    ui.time.value=time;ui.clock.textContent=`${time.toFixed(2)} / 22 s`;
+    ui.time.value=time;ui.clock.textContent=`${time.toFixed(2)} / ${duration.toFixed(2)} s`;
   }
   function choose(){
     selected=data.faults.find(f=>f.id===ui.fault.value)||data.faults[0];time=0;playing=false;ui.play.textContent='Play';lastStamp=null;setProjection();
     ui.description.textContent=selected.description;const m=selected.metrics;
     ui['final-error'].textContent=distance(m.finalPositionErrorM);ui['max-delta'].textContent=distance(m.maxPositionDeltaVsHealthyM);ui.attitude.textContent=`${m.tailRmsAttitudeErrorDeg.toFixed(2)}°`;ui.saturation.textContent=`${(100*m.upperSaturationDuty).toFixed(1)}% of samples`;
-    const outcomes={dead_m12:()=>`Healthy m12 demand reaches ${data.healthyMetrics.maxM12ThrustN.toFixed(3)} N; the fault forces it to zero. The vehicle cannot brake the downward acquisition properly and ends at z=${m.finalPositionM[2].toFixed(3)} m. It crosses the floor reference at ${m.firstBelowFloorReferenceS.toFixed(2)} s.`,stuck_m0:()=>`The same command now leaves ${m.finalPositionErrorM.toFixed(3)} m of position error and ${m.tailRmsAttitudeErrorDeg.toFixed(2)}° attitude RMS in the final 5 s.`,scale_09:()=>'The weaker fans change the acquisition transient; this ideal truth-state controller eventually acquires the same hold point.',scale_11:()=>'The stronger fans change the acquisition transient; actual thrust retains the physical ceiling and the same hold point is eventually acquired.',force_bias:()=>`The controller holds with a ${(1000*m.finalPositionErrorM).toFixed(2)} mm offset, rather than the uncorrected drift of the old attitude-only test. PD static prediction: 0.05/(2.7×0.8) ≈ 23.15 mm.`,torque_pulse:()=>`The pulse produces ${m.peakYawRateDegS.toFixed(2)}°/s peak yaw rate; nominal-relative recovery takes ${m.pulseRecoveryS.toFixed(2)} s after the pulse ends (1° attitude / 0.5°/s yaw-rate bounds held for 1 s).`};
-    ui.outcome.textContent=outcomes[selected.id]();ui['pose-csv'].href=`https://raw.githubusercontent.com/ltmps/ORBES-sim/8a682f6139863bac6001f42c63a7c6322ce346d6/matlab/fan_model/gnc_faults_out/mode1_${selected.id}.csv`;ui['actuation-csv'].href=`https://raw.githubusercontent.com/ltmps/ORBES-sim/8a682f6139863bac6001f42c63a7c6322ce346d6/matlab/fan_model/gnc_faults_out/mode1_${selected.id}_actuation.csv`;draw();
+    const floor=m.firstBelowFloorReferenceS===null?'No floor-reference crossing.':`Crosses below the floor reference at ${m.firstBelowFloorReferenceS.toFixed(2)} s.`;
+    ui.outcome.textContent=`Maximum position difference from the same-mode healthy run: ${distance(m.maxPositionDeltaVsHealthyM)}. Final reference error: ${distance(m.finalPositionErrorM)}. Minimum height: ${m.minimumHeightM.toFixed(3)} m. ${floor}${selected.id==='dead_m12'?` Healthy m12 demand reaches ${m.healthyMaxM12ThrustN.toFixed(4)} N; the failed fan stays at zero.`:''}`;
+    if(data.recovery)ui.outcome.textContent=`${m.recoveryTargetPass?'PASS: recovery target held through the end.':'FAIL: sustained recovery / clearance targets not met.'} Objective ${m.objectiveActual.toFixed(2)}. Minimum COM height ${m.minimumHeightM.toFixed(3)} m. Final speed ${m.finalSpeedMps.toFixed(6)} m/s; upright error ${m.finalAttitudeDeg.toFixed(4)}°. Speed arrest: ${m.arrestTimeS===null?'not achieved':m.arrestTimeS.toFixed(2)+' s'}. Sustained recovery: ${m.recoveryTimeS===null?'not achieved':m.recoveryTimeS.toFixed(2)+' s'}. TAG outside geometric FOV: ${(100*m.tagOutsideFovFraction).toFixed(1)}% of samples. ${floor}`;
+    draw();
   }
-  ui.fault.onchange=choose;ui.play.onclick=()=>{playing=!playing;if(playing&&time>=22)time=0;ui.play.textContent=playing?'Pause':'Play';lastStamp=null;};ui.reset.onclick=()=>{time=0;playing=false;ui.play.textContent='Play';draw();};ui.time.oninput=()=>{playing=false;ui.play.textContent='Play';time=Number(ui.time.value);draw();};
+  ui.fault.onchange=choose;ui.play.onclick=()=>{playing=!playing;if(playing&&time>=duration)time=0;ui.play.textContent=playing?'Pause':'Play';lastStamp=null;};ui.reset.onclick=()=>{time=0;playing=false;ui.play.textContent='Play';draw();};ui.time.oninput=()=>{playing=false;ui.play.textContent='Play';time=Number(ui.time.value);draw();};
   ui['error-mode'].onchange=draw;
-  function animate(stamp){if(playing){if(lastStamp!==null)time=Math.min(22,time+Math.min(.1,(stamp-lastStamp)/1000)*Number(ui.speed.value));if(time>=22){playing=false;ui.play.textContent='Play';}draw();}lastStamp=stamp;requestAnimationFrame(animate);}
+  function animate(stamp){if(playing){if(lastStamp!==null)time=Math.min(duration,time+Math.min(.1,(stamp-lastStamp)/1000)*Number(ui.speed.value));if(time>=duration){playing=false;ui.play.textContent='Play';}draw();}lastStamp=stamp;requestAnimationFrame(animate);}
   if (typeof MutationObserver !== 'undefined') new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-  ui.fault.value='dead_m12';choose();requestAnimationFrame(animate);
+  ui.fault.value=data.recovery?'quarter_turn':'dead_m12';choose();requestAnimationFrame(animate);
 })();
