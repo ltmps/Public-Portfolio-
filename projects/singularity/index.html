@@ -48,6 +48,15 @@
 <script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
 <link rel="stylesheet" href="../../assets/css/easymini-trace.css?v=db6786aaf6">
 <script src="../../assets/js/easymini-trace.js?v=7408f30970" defer></script>
+<style>
+.singularity-hardware{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,5fr);gap:24px;margin-top:28px;align-items:start}
+.singularity-hardware figure{margin:0;min-width:0}
+.singularity-hardware a{display:block;border:1px solid var(--foreground);background:#fff}
+.singularity-hardware a:focus-visible{outline:3px solid var(--foreground);outline-offset:5px}
+.singularity-hardware img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain}
+.singularity-hardware figcaption{margin-top:10px;font-size:14px;line-height:1.5}
+@media(max-width:640px){.singularity-hardware{grid-template-columns:1fr;gap:24px}.singularity-hardware img{max-height:480px}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -150,7 +159,10 @@
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
 <div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../assets/images/singularity/singularity-vehicle-cutaway.png" width="2048" height="317" alt="Singularity vehicle cutaway showing drogue and main recovery compartments, avionics bay and folded UAV payload." style="width: 100%; height: auto; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Vehicle layout · Singularity team. <a href="../../assets/images/singularity/singularity-vehicle-cutaway.png">Full-size layout</a> · <a href="../../assets/images/singularity/recovery-slide-27.png">Recovery overview</a></figcaption>
-</figure><details style="margin-top:24px"><summary>Recovery loads and bay dimensions</summary><p style="line-height:1.6">The instantaneous shock-force plots report peak loads of <strong>424.82 lb for the main parachute</strong> and <strong>942.48 lb for the drogue</strong>. Both plots also show velocity in ft/s over the opening interval.</p><p style="line-height:1.6">The avionics-bay drawing specifies dimensions in inches, including Ø6.00 bulkheads and a 7.80 axial dimension. The team practised main- and drogue-parachute folding and packing alongside the recovery-system work.</p></details></section>
+</figure><div class="singularity-hardware" id="field-hardware">
+<figure><a href="../../assets/images/singularity/june-avionics-sled.jpg" aria-label="Enlarge electronics sled and avionics coupler"><img src="../../assets/images/singularity/june-avionics-sled.jpg" width="900" height="1200" loading="lazy" decoding="async" alt="Electronics, batteries and wiring mounted on a black sled beside the red avionics coupler."></a><figcaption>Electronics sled beside the avionics coupler. June 3, 2023.</figcaption></figure>
+<figure><a href="../../assets/images/singularity/june-recovery-preparation.jpg" aria-label="Enlarge recovery compartment preparation"><img src="../../assets/images/singularity/june-recovery-preparation.jpg" width="1600" height="900" loading="lazy" decoding="async" alt="Team members working at the open rocket compartment, with the coupler and orange recovery harness laid out beside it."></a><figcaption>Open compartment and recovery harness during field preparation. June 3, 2023.</figcaption></figure>
+</div><details style="margin-top:24px"><summary>Recovery loads and bay dimensions</summary><p style="line-height:1.6">The instantaneous shock-force plots report peak loads of <strong>424.82 lb for the main parachute</strong> and <strong>942.48 lb for the drogue</strong>. Both plots also show velocity in ft/s over the opening interval.</p><p style="line-height:1.6">The avionics-bay drawing specifies dimensions in inches, including Ø6.00 bulkheads and a 7.80 axial dimension. The team practised main- and drogue-parachute folding and packing alongside the recovery-system work.</p></details></section>
 
 <section aria-labelledby="tests-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
