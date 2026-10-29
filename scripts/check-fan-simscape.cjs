@@ -33,46 +33,6 @@ for (const name of ['index.html', 'engineering_checks.html']) {
     assert(html.includes('<a id="csv" hidden>'), 'No public CSV download control');
   }
 }
-let frames = [];
-const ctx = {};
-const fanLabels = new Set();
-let fillColors = [];
-Object.defineProperty(ctx, 'fillStyle', {set(value) { fillColors.push(value); }});
-for (const name of ['beginPath', 'moveTo', 'lineTo', 'stroke', 'setLineDash', 'fillText', 'arc', 'fillRect', 'strokeRect', 'save', 'clip', 'restore', 'closePath', 'fill', 'rect']) {
-  ctx[name] = (...args) => { for (const n of args) if (typeof n === 'number') assert(Number.isFinite(n)); };
-}
-ctx.fillText = (value, x, y) => { assert(Number.isFinite(x) && Number.isFinite(y)); if (/^m\d+$/.test(value)) fanLabels.add(value); };
-const ids = ['fault', 'play', 'reset', 'speed', 'time', 'clock', 'description', 'final-error', 'max-delta', 'attitude', 'saturation', 'outcome', 'pose-csv', 'actuation-csv', 'error-mode'];
-const elements = Object.fromEntries(ids.map(id => [id, {value: '', textContent: '', appendChild() {}}]));
-elements.speed.value = '1';
-elements.view = {width: 1400, height: 850, getContext: () => ctx};
-let darkTheme = false;
-const sandbox = {window: {}, document: {documentElement: {getAttribute: () => darkTheme ? 'dark' : null}, getElementById: id => elements[id], createElement: () => ({})}, requestAnimationFrame: cb => frames.push(cb)};
-vm.createContext(sandbox);
-for (const file of ['comparison_data.js', 'comparison_viewer.js']) vm.runInContext(read(path.join(replay, file)), sandbox);
-assert.equal(sandbox.window.ORBES_COMPARISON.faults.length, 6);
-for (const fault of sandbox.window.ORBES_COMPARISON.faults) {
-  fillColors = [];
-  elements.fault.value = fault.id;
-  elements.fault.onchange();
-  if (fault.id === 'stuck_m0') assert(fillColors.includes('rgb(230,38,20)'), 'Full applied thrust uses the maximum color');
-  if (fault.id === 'dead_m12') assert(fillColors.includes('rgb(128,140,153)'), 'Zero applied thrust uses the off color');
-  assert(elements.outcome.textContent.length > 30);
-  assert(elements['pose-csv'].href.startsWith('https://raw.githubusercontent.com/ltmps/ORBES-sim/'));
-  for (const mode of ['command', 'healthy']) {
-    darkTheme = mode === 'healthy';
-    elements['error-mode'].value = mode;
-    elements['error-mode'].onchange();
-    elements.time.value = '22';
-    elements.time.oninput();
-    assert.equal(elements.clock.textContent, '22.00 / 22 s');
-  }
-}
-elements.play.onclick();
-for (let k = 0; k < 240; k++) frames.shift()(k * 100);
-assert.equal(elements.play.textContent, 'Play');
-elements.reset.onclick();
-assert.equal(elements.clock.textContent, '0.00 / 22 s');
-assert.equal(fanLabels.size, 14, 'All fourteen fan IDs appear in the synchronized body views');
+require('./check-fan-matrix.cjs');
 for (const file of ['projects/modeling/index.html', 'projects/modeling/localization/index.html', 'projects/orbes/index.html']) assert(read(path.join(root, file)).includes('fan-simscape/'));
-console.log('PASS: 45 byte-identical media assets, 15 dynamic video selections, six fault choices, both error plots, playback/seek/reset and three discovery links. Mock canvas checks are not browser visual QA.');
+console.log('PASS: 45 byte-identical media assets, 15 dynamic video selections, 36 fault choices across six modes, both error plots, playback/seek/reset and three discovery links. Mock canvas checks are not browser visual QA.');
