@@ -9,6 +9,10 @@ const summary = JSON.parse(fs.readFileSync(path.join(dir, 'simulation-summary.js
 const html = fs.readFileSync(path.join(root, 'projects/modeling/sherpa/training/index.html'), 'utf8');
 assert.equal(summary.rail_policy_trained, false);
 assert.equal(summary.rail_dof, 1);
+assert.equal(summary.rail_geometry, 'linear');
+assert.equal(summary.intended_rail_geometry, 'circular');
+assert.equal(summary.circular_rail_simulated, false);
+assert(html.includes('Linear versus circular rail') && html.includes('comparative performance is not measured'));
 assert(html.includes('scripted') && html.includes('not a reliability estimate'));
 assert.equal((html.match(/<video\b/g) || []).length, summary.media.length);
 for (const item of summary.media) {
