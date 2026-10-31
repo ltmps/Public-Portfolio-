@@ -313,7 +313,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail G · Six steps from catalog to replay</span>
 </div>
 <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 10px;">
-<li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">01 · PRESERVE ARCHITECTURE</span><span style="font-size: 15px; line-height: 1.55;">Carry the 57-element base catalog forward with all 224 relations and 75 flows, so every new behavior traces back to the original architecture.</span></li>
+<li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">01 · PRESERVE ARCHITECTURE</span><span style="font-size: 15px; line-height: 1.55;">Carry the 57-element base catalog forward with all 224 relations and 75 flows, so every new behavior traces back to the base architecture.</span></li>
 <li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">02 · DEFINE SCENARIO</span><span style="font-size: 15px; line-height: 1.55;">Fixed 1.785 kg mass, 3.71 m/s² Mars gravity, a 3 m cruise target and an obstacle from x = 6 to 10 m. Energy starts at 45 kJ with a 9 kJ reserve.</span></li>
 <li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">03 · LINK BEHAVIOR</span><span style="font-size: 15px; line-height: 1.55;">A System Composer component links to Simulink. A sampled controller sets thrust and pitch moment with a 0.2 s lag and ±20° pitch limit.</span></li>
 <li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">04 · EXECUTE</span><span style="font-size: 15px; line-height: 1.55;">The controller samples every 0.02 s and Aerospace 6DOF integrates at 0.01 s, keeping 5,501 samples per case.</span></li>
@@ -335,7 +335,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <h2 id="ops-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h11M10 12h11M10 18h11"/><path d="M4 6h1v4M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>Operations</h2>
 <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail H · Educational Mars-helicopter model</span>
 </div>
-<p style="margin: 0 0 28px; font-size: 18px; line-height: 1.55; max-width: 66ch; color: var(--muted-foreground);">Architecture and allocation views separate operations, functions and physical subsystems, so a requirement can be followed through the system. Later work added typed interfaces and executable mission-state behavior.</p>
+<p style="margin: 0 0 28px; font-size: 18px; line-height: 1.55; max-width: 66ch; color: var(--muted-foreground);">Architecture and allocation views separate operations, functions and physical subsystems, so a requirement can be followed through the system. The model adds typed interfaces and executable mission-state behavior.</p>
 <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 10px;">
 <li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 4px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">O01</span><span style="font-size: 15px; font-weight: 600;">Deployment</span></li>
 <li class="gy-step" style="padding: 14px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 4px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">O02</span><span style="font-size: 15px; font-weight: 600;">Commissioning</span></li>
@@ -423,7 +423,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </div>
 </div>
 </div>
-<p style="margin: 24px 0 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Educational model from the inherited SCExample teaching project · physical failures use boundary-signal proxies · timing, capacity, landing delays and the 360 W power limit are educational assumptions</p>
+<p style="margin: 24px 0 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Educational model built on the SCExample teaching project · physical failures use boundary-signal proxies · timing, capacity, landing delays and the 360 W power limit are educational assumptions</p>
 </section>
 
 <section aria-labelledby="trace-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
@@ -468,5 +468,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </footer>
 
 </div>
+<script src="../../../assets/js/gy-bar.js?v=81f2c71344" defer></script>
 </body>
 </html>

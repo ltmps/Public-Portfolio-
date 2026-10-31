@@ -9,7 +9,7 @@
     const play = host.querySelector('[data-em-play]');
     const reset = host.querySelector('[data-em-reset]');
     const range = host.querySelector('input[type="range"]');
-    const speed = host.querySelector('select');
+    const speed = 2; // fixed replay rate: 32.5 s of flight in about 16 s
     const output = host.querySelector('.em-time');
     const readings = host.querySelector('.em-readings');
     const clip = host.querySelector('#em-reveal rect');
@@ -34,7 +34,7 @@
       data.series.forEach((s,i) => {cells[i].textContent=s.label+' ≈ '+(Math.round(valueAt(s,time)) || 0).toLocaleString()+' '+s.unit;});
     }
     function stop() {running=false;cancelAnimationFrame(frame);play.textContent='Play trace';play.setAttribute('aria-pressed','false');}
-    function tick(now) {if(!running)return;if(last)draw(time+(now-last)/1000*Number(speed.value));last=now;if(time>=32.5)stop();else frame=requestAnimationFrame(tick);}
+    function tick(now) {if(!running)return;if(last)draw(time+(now-last)/1000*speed);last=now;if(time>=32.5)stop();else frame=requestAnimationFrame(tick);}
     play.addEventListener('click',() => {if(running){stop();return;}if(time>=32.5)draw(0);running=true;last=0;play.textContent='Pause';play.setAttribute('aria-pressed','true');frame=requestAnimationFrame(tick);});
     range.addEventListener('input',() => {stop();draw(Number(range.value));});
     reset.addEventListener('click',() => {stop();draw(0);});

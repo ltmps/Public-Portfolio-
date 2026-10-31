@@ -85,7 +85,7 @@
 
     if(data.usesIR){const beacon=reference(time).slice(5,8);dotMark(project(beacon),orange,5);leader(beacon,'IR TARGET',[15,-20],orange);}
     ctx.restore();
-    text('Same initial state, target and original physical parameters.',box[0]+12,box[1]+box[3]-12,'#55667d',13);
+    text('Same initial state, target and physical parameters.',box[0]+12,box[1]+box[3]-12,'#55667d',13);
   }
   function cameraProjection(sample,point,type){
     const R=rotation(sample.slice(4,8)),pos=sample.slice(1,4);
@@ -159,7 +159,7 @@
     ui['max-delta'].textContent=`${m.maxAttitudeDifferenceDeg.toFixed(4)}°`;
     ui.attitude.textContent=`${(1000*m.tailPositionM).toFixed(3)} mm`;
     ui.saturation.textContent=m.engineGatePass?'PASS':'FAIL';ui.saturation.style.color=m.engineGatePass?'#16845e':'#c63f45';
-    ui.outcome.textContent=(m.engineGatePass?'PASS':'FAIL')+`: engine gate is max position difference ≤5 mm and attitude difference ≤0.5° over the whole run. `+(selected.kind==='simscape'?'Same unchanged MPC in both engines; '+m.solverFallbackCount+' solver fallbacks. This is engine agreement, not flight acceptance.':m.engineGatePass?'Original-geometry applied-input comparison passes.':'Original-geometry replay fails. The authoritative Simscape brief rounds XML fan points by up to 40 µm per coordinate; numerical integration also contributes. These original failures are retained. See the geometry diagnostic below.');
+    ui.outcome.textContent=(m.engineGatePass?'PASS':'FAIL')+`: engine gate is max position difference ≤5 mm and attitude difference ≤0.5° over the whole run. `+(selected.kind==='simscape'?'Same MPC in both engines; '+m.solverFallbackCount+' solver fallbacks. This is engine agreement, not flight acceptance.':m.engineGatePass?'XML-geometry applied-input comparison passes.':'XML-geometry replay fails. The authoritative Simscape brief rounds XML fan points by up to 40 µm per coordinate; numerical integration also contributes. These failures stay on record. See the geometry diagnostic below.');
     draw();
   }
   ui.fault.onchange=choose;ui.play.onclick=()=>{playing=!playing;if(playing&&time>=duration)time=0;ui.play.textContent=playing?'Pause':'Play';lastStamp=null;};ui.reset.onclick=()=>{time=0;playing=false;ui.play.textContent='Play';draw();};ui.time.oninput=()=>{playing=false;ui.play.textContent='Play';time=Number(ui.time.value);draw();};

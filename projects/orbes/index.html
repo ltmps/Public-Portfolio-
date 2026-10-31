@@ -178,7 +178,7 @@
 <section id="fan-simscape" aria-labelledby="fan-simscape-title" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:64px 32px;">
 <h2 id="fan-simscape-title" style="font-size:32px;text-transform:uppercase;">14-fan ORBES · Simscape</h2>
 <p style="font-size:18px;line-height:1.6;max-width:72ch;">Six commanded flight profiles and synchronized healthy-versus-fault replays on a validated 2.7 kg Simscape Multibody plant.</p>
-<a class="gy-card" href="../modeling/fan-simscape/" style="display:block;border:1.5px solid var(--foreground);text-decoration:none;background:var(--background);"><img src="../../assets/media/modeling/fan-simscape/gnc_mode3_poster.png" width="1280" height="720" loading="lazy" alt="14-fan ORBES Simscape replay showing spacecraft motion, fan forces, mounted-camera views and telemetry." style="display:block;width:100%;height:auto;"><span style="display:block;padding:20px;font-family:var(--font-mono);">Watch the six fan profiles and fault comparisons →</span></a><p><a class="gy-link" href="../modeling/fan-simscape/replay/supervisor_review.html">Compare original and revised fault recovery →</a></p><p><a class="gy-link" href="../modeling/fan-simscape/replay/mpc_comparison.html">Watch the MPC in MuJoCo and Simscape →</a></p></section>
+<a class="gy-card" href="../modeling/fan-simscape/" style="display:block;border:1.5px solid var(--foreground);text-decoration:none;background:var(--background);"><img src="../../assets/media/modeling/fan-simscape/gnc_mode3_poster.png" width="1280" height="720" loading="lazy" alt="14-fan ORBES Simscape replay showing spacecraft motion, fan forces, mounted-camera views and telemetry." style="display:block;width:100%;height:auto;"><span style="display:block;padding:20px;font-family:var(--font-mono);">Watch the six fan profiles and fault comparisons →</span></a><p><a class="gy-link" href="../modeling/fan-simscape/replay/supervisor_review.html">Compare baseline and retimed fault recovery →</a></p><p><a class="gy-link" href="../modeling/fan-simscape/replay/mpc_comparison.html">Watch the MPC in MuJoCo and Simscape →</a></p></section>
 
 
 <section aria-label="Key dimensions" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 32px 0;">
@@ -300,7 +300,7 @@
 <h3 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 700;">A small error asked for nearly full throttle.</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted-foreground);">I ran the reaction-wheel controller on an ESP32 over <span class="or-kw">UDP</span> and logged every DShot command. The negative half of the <span class="or-kw">PID-to-DShot mapping ran backwards</span>, so an output of −1 sent 1047. I reproduced it offline and wrote a <span class="or-kw">corrected mapping</span> that still needs a bench test.</p>
 </div>
-<figure style="margin: auto 16px 16px; padding-top: 14px; border-top: 1px dashed var(--border); display: flex; flex-direction: column; gap: 8px;"><svg class="gy-dia" viewBox="0 0 320 228" role="img" aria-labelledby="dia-s3-t dia-s3-d"><title id="dia-s3-t">UDP link to the ESP32 and the inverted negative DShot mapping</title><desc id="dia-s3-d">Top, the PC sends UDP commands to the ESP32 on port 4210 and receives 100 hertz telemetry on port 4211; the ESP32 drives the ESC over DShot300, which spins the wheel. Bottom, command magnitude against PID output: the positive half rises with the PID output, the original negative half falls, so a small negative error asks for nearly full command, and the corrected negative half rises like the positive half.</desc>
+<figure style="margin: auto 16px 16px; padding-top: 14px; border-top: 1px dashed var(--border); display: flex; flex-direction: column; gap: 8px;"><svg class="gy-dia" viewBox="0 0 320 228" role="img" aria-labelledby="dia-s3-t dia-s3-d"><title id="dia-s3-t">UDP link to the ESP32 and the inverted negative DShot mapping</title><desc id="dia-s3-d">Top, the PC sends UDP commands to the ESP32 on port 4210 and receives 100 hertz telemetry on port 4211; the ESP32 drives the ESC over DShot300, which spins the wheel. Bottom, command magnitude against PID output: the positive half rises with the PID output, the inverted negative half falls, so a small negative error asks for nearly full command, and the corrected negative half rises like the positive half.</desc>
 <rect x="6" y="18" width="46" height="30" class="s-ink" stroke-width="1.5" style="fill:var(--background)"/><text x="29" y="37" text-anchor="middle" class="t-b">PC</text>
 <rect x="140" y="18" width="58" height="30" class="s-acc" stroke-width="1.5" style="fill:var(--background)"/><text x="169" y="37" text-anchor="middle" class="t-b">ESP32</text>
 <rect x="236" y="18" width="40" height="30" class="s-ink" stroke-width="1.5" style="fill:var(--background)"/><text x="256" y="37" text-anchor="middle" class="t-b">ESC</text>
@@ -315,7 +315,7 @@
 <line x1="159.7" y1="90.1" x2="30.0" y2="179.9" class="s-warn gy-flow" stroke-width="2" stroke-dasharray="4 3"/>
 <line x1="159.7" y1="179.9" x2="30.0" y2="90.1" class="s-acc" stroke-width="2" style="opacity:.45"/>
 <circle cx="159.7" cy="90.1" r="4.5" class="f-warn gy-pulse"/><text x="152" y="84" text-anchor="end" class="t-warn">−1 → 1047</text>
-<text x="37.8" y="170" class="t-warn">ORIGINAL</text><text x="37.8" y="104" class="t-b">CORRECTED</text>
+<text x="37.8" y="170" class="t-warn">INVERTED</text><text x="37.8" y="104" class="t-b">CORRECTED</text>
 <circle cx="14" cy="214" r="4" class="f-warn"/><text x="24" y="217.5">SMALL ERROR, NEAR-FULL COMMAND</text>
 </svg><figcaption style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-foreground);">Diagram C3 · UDP link and the DShot mapping defect</figcaption></figure>
 </article>
@@ -398,7 +398,7 @@
 <g data-ir="cur" style="display: none;"><line data-ir="cl" x1="0" y1="14" x2="0" y2="396" stroke="rgb(var(--acc))" stroke-width="1.2" stroke-dasharray="5 4"/><circle data-ir="bh" r="5" fill="rgb(var(--acc))" stroke="var(--background)" stroke-width="2" data-ir-key="b"/><circle data-ir="yh" r="4" fill="var(--foreground)" stroke="var(--background)" stroke-width="2" data-ir-key="y"/></g>
 </svg>
 <div class="ir-ctrl" style="flex-wrap: wrap; align-items: center; gap: 10px 14px;">
-<button type="button" class="gy-toggle" data-ir="play" aria-pressed="false"><span>Play</span></button>
+<button type="button" class="gy-toggle" data-ir="play" data-gy-ctl="play" aria-pressed="false"><span>Play</span></button>
 <output data-ir="time" style="font-family: var(--font-mono); font-size: 18px; letter-spacing: -0.02em;">82.6 s</output>
 <output data-ir="val" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-foreground);">Full 83 s log</output>
 </div>
@@ -489,5 +489,7 @@
 </footer>
 
 </div>
+<script src="../../assets/js/gy-replay.js?v=da5fe5e57e" defer></script>
+<script src="../../assets/js/gy-bar.js?v=81f2c71344" defer></script>
 </body>
 </html>
