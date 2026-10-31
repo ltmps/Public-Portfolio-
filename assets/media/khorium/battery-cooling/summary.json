@@ -1,0 +1,110 @@
+{
+  "study": "Illustrative delivery-drone battery cooling",
+  "source_assessment_date": "2026-10-31",
+  "scope": "Separate 835.651685 s constant-load thermal histories; scoped numerical verification, no hardware or full flight-envelope validation.",
+  "hot": {
+    "ambient_C": 49,
+    "initial_solids_C": 49,
+    "altitude_m": 3000,
+    "pack_2_peak_C": 60.79954809990522,
+    "peak_time_s": 835.6516851605805,
+    "peak_CAD_mm": [
+      55.0,
+      220.0,
+      11.0
+    ],
+    "conditional_upper_C": 60,
+    "conditional_margin_C": -0.7995480999052234,
+    "conditional_requirement_passed": false
+  },
+  "cold": {
+    "ambient_C": -20,
+    "initial_solids_C": 15,
+    "ideal_net_throughflow_m3_s": 0,
+    "mixing_and_radiative_ports_retained": true,
+    "pack_2_minimum_C": 11.036708110117015,
+    "minimum_time_s": 390.0,
+    "minimum_CAD_mm": [
+      252.5,
+      330.0,
+      11.0
+    ],
+    "pack_2_maximum_C": 23.241946568890796,
+    "conditional_lower_C": 10,
+    "conditional_lower_margin_C": 1.036708110117015
+  },
+  "numerical_checks": {
+    "gate_C": 0.2,
+    "hot_mesh_difference_C": 0.049332782470828285,
+    "hot_time_difference_C": 0.17698684715367285,
+    "cold_mesh_difference_C": 0.09228598735771243,
+    "cold_time_difference_C": 0.08448007933942137,
+    "all_four_checks_passed": true,
+    "cold_fine_fields_replayed": 800,
+    "difference_is_statistical_uncertainty_bound": false
+  },
+  "assumed_inputs": {
+    "pack_heat_W_each": 71.63439423654869,
+    "BMS_heat_W": 5,
+    "power_electronics_heat_W": 10,
+    "pack_cp_J_kgK": 1100,
+    "pack_conductivity_CAD_axes_W_mK": [
+      25,
+      25,
+      0.7
+    ],
+    "contact_conductance_W_m2K": 6000,
+    "inside_outside_films_W_m2K": [
+      40,
+      5
+    ],
+    "hot_prescribed_flow_m3_s": 0.032085,
+    "measured_module_temperatures_available": false,
+    "installed_airflow_qualified": false
+  },
+  "ROM": {
+    "states": 54,
+    "withheld_test_kind": "representation, not independent dynamic trajectory",
+    "maximum_error_C": 0.3719784083817439,
+    "gate_C": 0.2,
+    "gate_passed": false,
+    "accepted_for_mission_planning": false
+  },
+  "recommendations_temperature_solved": false,
+  "figures": [
+    {
+      "file": "thermal-response.png",
+      "sha256": "8e19a82f7a1d20784647a8da9e2f67e4a64ccd76e97f2b6acd3b201da9961ba0",
+      "source_figure": "64-final-thermal-response.png",
+      "visually_reviewed": true
+    },
+    {
+      "file": "numerical-checks.png",
+      "sha256": "dd8c64ac619308c0c39fb6a1a1d8bb509336b48eb73109d415ba41730553ae74",
+      "source_figure": "65-final-numerical-checks.png",
+      "visually_reviewed": true
+    },
+    {
+      "file": "khorium-vtk-diagnostic.jpg",
+      "sha256": "251303fbaa20f4037a57326e1923faecce7bb0d4cbb88a607d789315a92e7c05",
+      "source": "Authentic Khorium web VTK viewer screenshot, 2026-10-31",
+      "purpose": "Original CFD diagnostic geometry/workflow only, separate from final thermal histories",
+      "original_inlet_C": 25,
+      "original_pack_heat_W_each": 40,
+      "verification": "NOT_CONVERGED; legacy Converged UI badge conflicts with detailed verification; energy balance rejected",
+      "display": "Nine solids visible; coolant hidden; opacity 100%; streamlines and probe line off",
+      "visually_reviewed": true
+    }
+  ],
+  "CAD_viewer": {
+    "geometry_file": "cad-geometry.json",
+    "geometry_sha256": "f5a92004f6d8d9169c1aead650d7ea226e682aae05d930e7af000e903eedbaf5",
+    "source_step_sha256": "fa088e8ca7d546c092bada71f7a0d36650376666e44958f10da07ba5cc4f726c",
+    "solid_parts": 17,
+    "orthogonal_primitives": 46,
+    "part_volume_relative_tolerance": 1e-10,
+    "temperature_field": false,
+    "default": "Cutaway, roof hidden, rotation paused",
+    "external_dependencies": false
+  }
+}
