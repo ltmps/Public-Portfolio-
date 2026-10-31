@@ -22,6 +22,7 @@ jobs:
       - run: node scripts/check-mpc-replay.cjs
       - run: node scripts/check-reaction-wheel-locus.cjs
       - run: node scripts/check-sherpa-missions.cjs
+      - run: node scripts/check-sherpa-training.cjs
       - run: node scripts/check-sherpa-navigation.cjs
       - name: JavaScript syntax
         run: |
