@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Robot-arm and flexible-hose training: learned helium docking, purge stow and a rail-cart dynamics preview.">
+<title>SHERPA robot training | Gavin Yam</title>
+<script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="../../../../assets/css/gy.css?v=c7d3b0db52">
+<style>
+.gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);transition:background-color .35s,color .35s}
+:root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);cursor:default}
+.gy a{text-underline-offset:5px}
+.gy-grid{background-image:linear-gradient(to right,var(--gmaj) 1px,transparent 1px),linear-gradient(to bottom,var(--gmaj) 1px,transparent 1px),linear-gradient(to right,var(--gmin) 1px,transparent 1px),linear-gradient(to bottom,var(--gmin) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.gy-loupe{left:calc(var(--cx,-9999px) - 180px);top:calc(var(--cy,-9999px) - 180px);width:360px;height:360px;background-image:linear-gradient(to right,rgba(var(--acc),.22) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.22) 1px,transparent 1px);background-size:8px 8px;background-position:calc(180px - var(--cx,0px)) calc(180px - var(--cy,0px));-webkit-mask-image:radial-gradient(closest-side,#000 30%,transparent);mask-image:radial-gradient(closest-side,#000 30%,transparent)}
+:root[data-theme="dark"] .gy-loupe{left:calc(var(--cx,-9999px) - 230px);top:calc(var(--cy,-9999px) - 230px);width:460px;height:460px;background-image:linear-gradient(to right,rgba(var(--acc),.4) 1px,transparent 1px),linear-gradient(to bottom,rgba(var(--acc),.4) 1px,transparent 1px);background-size:16px 16px;background-position:calc(230px - var(--cx,0px)) calc(230px - var(--cy,0px))}
+.gy-xh>*{opacity:var(--xh,0);transition:opacity .2s}
+:root[data-theme="dark"] .gy-xh{display:none}
+.gy-link{text-decoration:underline;text-decoration-thickness:1px;transition:text-decoration-color .2s}
+.gy-link:hover{text-decoration-color:rgb(var(--acc));text-decoration-thickness:2px}
+.gy-link:focus-visible,.gy-card:focus-visible,.gy-shot:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:6px}
+.gy-dim{opacity:0;transition:opacity .25s}
+.gy-part:hover .gy-dim{opacity:1}
+.gy-dim-h .gy-line{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-part:hover .gy-dim-h .gy-line{transform:scaleX(1)}
+.gy-dim-v .gy-line{transform:scaleY(0);transition:transform .45s cubic-bezier(0,0,.2,1) .06s}
+.gy-part:hover .gy-dim-v .gy-line{transform:scaleY(1)}
+.gy-glow{opacity:0;transition:opacity .3s;background:radial-gradient(circle 300px at var(--x,50%) var(--y,50%),rgba(var(--acc),.18),transparent 70%)}
+:root[data-theme="dark"] .gy-part:hover .gy-glow,:root[data-theme="dark"] .gy-card:hover .gy-glow,:root[data-theme="dark"] .gy-shot:hover .gy-glow{opacity:1}
+.gy-stat{background:var(--background);transition:background-color .2s}
+.gy-stat:hover{background:color-mix(in srgb, rgb(var(--acc)) 12%, var(--background));box-shadow:inset 0 0 0 1.5px rgb(var(--acc))}
+.gy-num{transition:color .2s}
+.gy-stat:hover .gy-num{color:rgb(var(--acc))}
+.gy-sline{transform:scaleX(0);transition:transform .45s cubic-bezier(0,0,.2,1)}
+.gy-stat:hover .gy-sline{transform:scaleX(1)}
+.gy-step{transition:border-color .2s,background-color .2s}
+.gy-step:hover{border-color:rgb(var(--acc)) !important;background:rgba(var(--acc),.06) !important}
+.gy-stepn{transition:color .2s}
+.gy-step:hover .gy-stepn{color:rgb(var(--acc))}
+.gy-card,.gy-shot{transition:border-color .25s}
+.gy-card:hover,.gy-shot:hover{border-color:rgb(var(--acc)) !important}
+.gy-arrow{transition:transform .25s cubic-bezier(0,0,.2,1)}
+.gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
+.gy-shot img{transition:transform .5s cubic-bezier(0,0,.2,1)}
+.gy-shot:hover img{transform:scale(1.025)}
+.gy-tag{transition:color .2s,background-color .2s}
+.gy-shot:hover .gy-tag{background:color-mix(in srgb, rgb(var(--acc)) 18%, var(--background));border-color:rgb(var(--acc)) !important;color:var(--foreground)}
+.gy-svi{flex:0 0 auto;color:var(--muted-foreground);transition:color .2s,transform .3s cubic-bezier(0,0,.2,1)}
+.gy-svc:hover .gy-svi{color:rgb(var(--acc));transform:translateY(-3px) scale(1.06)}
+.gy-hi{flex:0 0 auto;color:rgb(var(--acc));transition:transform .3s cubic-bezier(0,0,.2,1)}
+h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
+.gy-si{position:absolute;top:18px;right:18px;color:var(--muted-foreground);transition:color .2s,transform .3s}
+.gy-stat:hover .gy-si{color:rgb(var(--acc));transform:scale(1.12)}
+@media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
+.st-ctrl{display:none}
+.st-live .st-ctrl{display:flex}
+.st-hide-fh [data-st-key="fh"],.st-hide-sherpa [data-st-key="sherpa"],.st-hide-l1 [data-st-key="l1"]{visibility:hidden}
+.st-key{display:inline-flex;align-items:baseline;gap:6px;min-height:28px;padding:2px 6px;margin-left:-6px;border:0;border-radius:4px;background:none;color:var(--foreground);font:inherit;text-align:left;cursor:pointer}
+.st-key:hover{background:var(--muted)}
+.st-key[aria-pressed="false"]{color:var(--muted-foreground);text-decoration:line-through}
+.st-key:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:2px}
+
+</style>
+<script src="../../../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<link rel="stylesheet" href="../../../../assets/css/sherpa-missions.css?v=aef162478f">
+<script src="../../../../assets/js/sherpa-missions.js?v=a734f4dc1e" defer></script>
+<script src="../../../../assets/js/sherpa-strips.js?v=401f2d6589" defer></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
+<div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
+
+<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
+<a href="../../../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
+<div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
+<nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="../../../../index.html#work">Work</a>
+<a class="gy-link" href="../../" aria-current="page" style="text-decoration-color: rgb(var(--acc)); text-decoration-thickness: 2px;">Simulations</a>
+<a class="gy-link" href="../../../../index.html#experience">Experience</a>
+<a class="gy-link" href="#contact">Contact</a>
+</nav>
+<button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
+</div>
+</div>
+</header>
+
+<main id="main" tabindex="-1" class="sm-main">
+<header class="sm-intro"><p class="sm-eyebrow"><a href="../../../../index.html">Home</a> / <a href="../../">Simulations</a> / <a href="../">SHERPA</a></p>
+<p class="sm-eyebrow">SHERPA / Robot training study</p><h1>Arm, hose and rail</h1><p class="sm-lead">Learned helium docking and a moving-base preview for the next training stage.</p></header>
+<nav class="sm-nav" data-sm-strip="Training studies" tabindex="0" aria-label="Training studies, scroll horizontally"><a href="../robotics/">Mission robotics</a><a href="../refuel/">Mission refueling</a><a href="#rail-cart">Rail cart</a><a href="#helium-connect">Connection</a><a href="#helium-stow">Purge stow</a><a href="#diagnostics">Plots</a></nav>
+<p>The local MuJoCo model uses a seven-joint Franka arm, a segmented flexible hose and zero gravity. The spacecraft deck is fixed; spacecraft recoil and attitude motion are outside this model. The rail adds one prismatic degree of freedom, with a provisional 1 m travel range. Both the arm and hose reel ride on the cart; the sockets stay fixed.</p>
+<section class="sm-film" id="rail-cart" aria-labelledby="rail-cart-title">
+<p class="sm-eyebrow">Scripted cart preview / Silent</p>
+<h2 id="rail-cart-title">Rail-mounted arm and reel</h2><p id="rail-cart-description">Scripted dynamics preview: a cart adds one translation axis beneath the seven-joint arm. The reel travels with the cart, with the valve closed and the connector clear of the socket. It travels in both directions and returns to center. Rail dimensions, mass and drive parameters are provisional; this is a SHERPA-inspired fixture, not native SHERPA CAD or a learned rail policy.</p>
+<figure><video controls playsinline preload="none" width="960" height="720" style="aspect-ratio:960/720" poster="../../../../assets/media/modeling/sherpa-training/rail-cart.jpg" aria-label="Rail-mounted arm and reel" aria-describedby="rail-cart-description"><source src="../../../../assets/media/modeling/sherpa-training/rail-cart.mp4" type="video/mp4"><p><a href="../../../../assets/media/modeling/sherpa-training/rail-cart.mp4">Open Rail-mounted arm and reel MP4</a></p></video><figcaption>Rail-mounted arm and reel. Scripted reference motion; rail PPO has not been trained.</figcaption></figure></section><section class="sm-film" id="helium-connect" aria-labelledby="helium-connect-title">
+<p class="sm-eyebrow">Learned policy evaluation / Silent</p>
+<h2 id="helium-connect-title">Learned helium connection</h2><p id="helium-connect-description">Deterministic PPO rollout: an already grasped hose starts 40 mm from the overhead socket, aligns, seats and holds a helium leak check. The policy uses estimated RGB-D marker positions, noisy encoders and simulated instruments.</p>
+<figure><video controls playsinline preload="none" width="640" height="480" style="aspect-ratio:640/480" poster="../../../../assets/media/modeling/sherpa-training/helium-connect.jpg" aria-label="Learned helium connection" aria-describedby="helium-connect-description"><source src="../../../../assets/media/modeling/sherpa-training/helium-connect.mp4" type="video/mp4"><p><a href="../../../../assets/media/modeling/sherpa-training/helium-connect.mp4">Open Learned helium connection MP4</a></p></video><figcaption>Learned helium connection. A single rendered rollout; not an aggregate success estimate.</figcaption></figure></section><section class="sm-film" id="helium-stow" aria-labelledby="helium-stow-title">
+<p class="sm-eyebrow">Learned policy evaluation / Silent</p>
+<h2 id="helium-stow-title">Learned closed-return purge stow</h2><p id="helium-stow-description">Deterministic PPO rollout into the lower, upward-facing socket. The policy establishes a sealed hold with helium returning to a closed reservoir. This tests purge initiation, not contaminant removal or a full purge-volume requirement.</p>
+<figure><video controls playsinline preload="none" width="640" height="480" style="aspect-ratio:640/480" poster="../../../../assets/media/modeling/sherpa-training/helium-stow.jpg" aria-label="Learned closed-return purge stow" aria-describedby="helium-stow-description"><source src="../../../../assets/media/modeling/sherpa-training/helium-stow.mp4" type="video/mp4"><p><a href="../../../../assets/media/modeling/sherpa-training/helium-stow.mp4">Open Learned closed-return purge stow MP4</a></p></video><figcaption>Learned closed-return purge stow. A single rendered rollout; not an aggregate success estimate.</figcaption></figure></section>
+<section class="sm-film" id="training-method"><h2>What the policy learns</h2><p>The completed fixed-base policy trained for 50,176 environment steps after initialization from four successful reference trajectories. It commands seven joint increments and a valve request, using 54 observations from simulated RGB-D localization, encoders, reel and pressure/contact instruments. Each episode begins pregrasped, 40 mm from its selected socket. Moving between sockets, picking up the hose and coordinated rail control are later stages.</p>
+<p>Reward favors alignment, seal contact coverage, adequate preload and a stable pressure hold. Leaks, unnecessary motion and blocked valve requests incur penalties. Success earns +20; leak failure, overload or invalid grasp incurs -20. Success requires at least six of eight loaded seal sectors, adequate normal force and friction margin, pressure above 85% nominal and leakage below the provisional threshold throughout a 0.5 s connection hold or 1 s stow hold.</p>
+<p>In two held-out episodes per task, connection succeeded in 2/2 and purge stow in 1/2, with no leak-failure terminations. This small diagnostic sample is not a reliability estimate. The displayed learned videos use a separate evaluation seed. The rail preview is scripted and has not undergone PPO training.</p></section>
+<section class="sm-film" id="diagnostics"><h2>Learning and physics diagnostics</h2><figure><a href="../../../../assets/media/modeling/sherpa-training/ppo-learning.png"><img src="../../../../assets/media/modeling/sherpa-training/ppo-learning.png" width="1440" height="1040" loading="lazy" decoding="async" style="display:block;width:100%;height:auto" alt="PPO per-task success, return, leak failures, final error and duration over training steps."></a><figcaption>Exploratory training outcomes, with rolling means of up to 20 episodes per task. Episode return alone does not establish task success.</figcaption></figure><figure><a href="../../../../assets/media/modeling/sherpa-training/learned-stow-physics.png"><img src="../../../../assets/media/modeling/sherpa-training/learned-stow-physics.png" width="1440" height="1040" loading="lazy" decoding="async" style="display:block;width:100%;height:auto" alt="Learned stow rollout: position error, seal contact coverage, preload, pressure, leakage and reward."></a><figcaption>Learned stow rollout. The dashed leak line is a provisional training limit, not hardware acceptance data.</figcaption></figure><figure><a href="../../../../assets/media/modeling/sherpa-training/rail-motion.png"><img src="../../../../assets/media/modeling/sherpa-training/rail-motion.png" width="1440" height="1040" loading="lazy" decoding="async" style="display:block;width:100%;height:auto" alt="Cart displacement, speed, drive force, socket distance and closed-valve leakage during the scripted rail preview."></a><figcaption>Scripted rail dynamics at a clear transit pose, with the valve closed. This preview does not establish learned rail control, combined transit-and-docking control or workspace coverage.</figcaption></figure></section>
+<section class="sm-film" id="assumptions"><h2>Model assumptions</h2><p>Helium starts at a provisional 20 kPa differential to external vacuum. A closed 5 kPa return reservoir receives purge flow. Pressure changes empirical hose stiffness and applies a separating load; effective seal area and a compressible-orifice model approximate leakage and recoil. The provisional leak limit is 10<sup>-8</sup> kg/s, with a 0.10 s failure dwell. Seal wear, molecular-flow leakage, fluid temperature coupling and real detector calibration are not represented. A liquid capillary trap is deferred.</p><p>The Franka geometry originates from NVIDIA's Isaac Sim asset library. The SimReady hose reference is by NVIDIA under CC BY 4.0; the moving hose is an authored segmented dynamics surrogate. Arm and rail geometry here are training substitutes for SHERPA hardware. These simulations do not establish flight qualification.</p>
+<p><a href="../../../../assets/media/modeling/sherpa-training/simulation-summary.json">Simulation results and render metadata</a> / <a href="https://huggingface.co/datasets/nvidia/simready-assets">NVIDIA SimReady assets</a> / <a href="../robotics/">SHERPA mission robotics</a></p></section>
+</main>
+<footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
+<div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px 40px; display: flex; flex-direction: column; gap: 40px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px;">
+<h2 style="margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 700; text-transform: uppercase; max-width: 13ch;">Continue the conversation.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;">
+<a class="gy-link" href="mailto:legendgavin00@gmail.com" style="padding: 6px 0;">legendgavin00@gmail.com</a>
+<a class="gy-link" href="https://www.linkedin.com/in/gavin-yam2023" target="_blank" rel="noopener noreferrer" style="padding: 6px 0;">LinkedIn</a>
+<a class="gy-link" href="../../" style="padding: 6px 0;">All simulations</a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<span>© 2026 Gavin Yam</span>
+<a class="gy-link" href="../../../../index.html">Back to home</a>
+</div>
+</div>
+</footer>
+
+</div>
+</body>
+</html>

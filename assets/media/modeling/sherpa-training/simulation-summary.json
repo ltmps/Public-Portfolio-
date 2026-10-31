@@ -1,0 +1,48 @@
+{
+  "model_status": "Provisional training surrogate; not hardware acceptance data",
+  "algorithm": "PPO with four reference trajectories for initialization",
+  "training_steps": 50176,
+  "evaluation": {
+    "connect": {
+      "episodes": 2,
+      "success_rate": 1.0,
+      "leak_failure_rate": 0.0
+    },
+    "stow": {
+      "episodes": 2,
+      "success_rate": 0.5,
+      "leak_failure_rate": 0.0
+    }
+  },
+  "rail_dof": 1,
+  "rail_policy_trained": false,
+  "media": [
+    {
+      "name": "rail-cart",
+      "bytes": 727586,
+      "sha256": "0fdc0b79cefe173b303c143d5e470b3c0fe0f791fe18da0edff974bb7bd636de",
+      "frames": 250,
+      "fps": 25.0,
+      "duration_s": 10.0,
+      "audio": false
+    },
+    {
+      "name": "helium-connect",
+      "bytes": 65601,
+      "sha256": "a4083ff04ac87fab07ef0dde4c2281a3e98afd55ce6944f43e2ba1d407f76d78",
+      "frames": 250,
+      "fps": 25.0,
+      "duration_s": 10.0,
+      "audio": false
+    },
+    {
+      "name": "helium-stow",
+      "bytes": 71919,
+      "sha256": "053275e6b7b72dd53072d777ef4f2a37c46e98d5f5cb53530d5ced9b18af8c86",
+      "frames": 250,
+      "fps": 25.0,
+      "duration_s": 10.0,
+      "audio": false
+    }
+  ]
+}
