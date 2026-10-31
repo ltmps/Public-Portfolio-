@@ -78,9 +78,19 @@
 .kh-decision{border:1px solid var(--border);padding:20px;background:var(--background)}
 .kh-decision h3{margin:0 0 12px;font-size:18px}.kh-decision p{margin:0;font-size:15px;line-height:1.65}
 #battery-cooling summary:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:5px}
+
+.kh-cad{margin:24px 0;padding:20px;border:1px solid var(--border);background:var(--background)}
+.kh-cad canvas{width:100%;height:clamp(320px,48vw,560px);display:block;touch-action:none;cursor:grab;border:1px solid var(--border)}
+.kh-cad canvas:active{cursor:grabbing}.kh-cad canvas:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:4px}
+.kh-cad [hidden]{display:none!important}.kh-cad-tools{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0}
+.kh-cad-tools button{padding:9px 14px;border:1px solid var(--foreground);background:var(--background);color:var(--foreground);font:inherit;cursor:pointer;min-height:44px}
+.kh-cad-tools button:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:3px}
+.kh-cad-tools label{display:flex;align-items:center;gap:8px;min-height:44px}
+.kh-cad-key{display:flex;flex-wrap:wrap;gap:12px 24px;font-size:14px;line-height:1.6}.kh-cad-key span::before{content:"";display:inline-block;width:12px;height:12px;background:var(--part-color);border:1px solid var(--foreground);margin-right:8px}
 </style>
 <script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
 <script src="../../assets/js/khorium-anim.js?v=bcda24c29b" defer></script>
+<script src="../../assets/js/battery-cad.js?v=f8379ffe0a" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -281,6 +291,19 @@
 </div>
 </div>
 <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.65; max-width: 85ch;"><strong>Scope:</strong> separate 835.65 s constant-load thermal histories with plausible pack properties, heat loads and contacts. Conduction, prescribed convection, directional radiation and solar loading are included. No measured module temperatures establish hardware accuracy. Cold isolation is ideal zero net throughflow with internal mixing and radiative ports retained; it does not establish cold-soak startup or installed fan-off performance.</p>
+
+<figure class="kh-cad" data-battery-cad data-geometry="../../assets/media/khorium/battery-cooling/cad-geometry.json" aria-labelledby="battery-cad-title">
+<h3 id="battery-cad-title" style="margin:0 0 12px;font-size:22px;">Explore the cooling-module CAD</h3>
+<p id="battery-cad-help" style="font-size:15px;line-height:1.65;">Drag to rotate; pinch to zoom on touchscreens. Click the model before using the mouse wheel. Keyboard: arrow keys rotate, + / &minus; zoom, Home resets, Space toggles spin. Spin starts only when you choose it.</p>
+<img data-cad-poster src="../../assets/media/khorium/battery-cooling/cad-poster.svg" width="960" height="680" loading="lazy" alt="Cutaway of two blue battery packs, amber thermal interfaces, green electronics and gray end-fin spreaders inside the aluminum tray; roof hidden." style="display:block;width:100%;height:auto;">
+<canvas hidden tabindex="0" role="img" aria-label="Interactive two-pack cooling-module CAD, drag or use arrow keys to rotate" aria-describedby="battery-cad-help battery-cad-caption"></canvas>
+<div data-cad-controls class="kh-cad-tools" hidden>
+<button type="button" data-cad-spin aria-pressed="false">Spin model</button><button type="button" data-cad-in>Zoom in</button><button type="button" data-cad-out>Zoom out</button><button type="button" data-cad-reset>Reset view</button><label><input type="checkbox" data-cad-cover checked> Cutaway: hide cover</label>
+</div>
+<p data-cad-status role="status" style="font-size:14px;line-height:1.6;">Static CAD view. Optional interactive controls appear when available.</p>
+<div class="kh-cad-key" aria-label="Component color key"><span style="--part-color:#3080b5;">Battery packs</span><span style="--part-color:#e09d2e;">Thermal interface pads</span><span style="--part-color:#8597a8;">Aluminum chassis / spreaders / fins</span><span style="--part-color:#61a278;">Electronics envelopes</span></div>
+<figcaption id="battery-cad-caption" style="margin-top:16px;font-size:14px;line-height:1.65;">Retained 17-part end-fin concept, represented by 46 orthogonal CAD primitives. Every solid volume matches the source CAD manifest. The roof is hidden by default to expose both packs, contact pads and parallel end-spreader paths. Colors identify parts, not temperature. This is study-authored illustrative geometry, not an aircraft manufacturer CAD release or a new simulation result. <a class="gy-link" href="../../assets/media/khorium/battery-cooling/cad-geometry.json">Geometry and provenance (JSON)</a>.</figcaption>
+</figure>
 <figure class="gy-fig" style="margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px;">
 <a class="gy-frame" href="../../assets/media/khorium/battery-cooling/thermal-response.png" target="_blank" rel="noopener" style="display: block; border: 1.5px solid var(--foreground); background: #fff;"><img src="../../assets/media/khorium/battery-cooling/thermal-response.png" width="2880" height="1620" loading="lazy" alt="Hot pack maxima rise from 49 degrees Celsius to a pack 2 peak of 60.80; cold pack temperatures fall from a preconditioned 15 to 11.04 at 390 seconds before recovering." style="display: block; width: 100%; height: auto;"></a>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6;">Saved simulation histories. Conditional temperature screens are shown with the results. Open the figure for full-size labels.</figcaption>
@@ -317,6 +340,13 @@
 <a class="gy-link" href="../../assets/media/khorium/battery-cooling/khorium-vtk-diagnostic.jpg" target="_blank" rel="noopener"><img src="../../assets/media/khorium/battery-cooling/khorium-vtk-diagnostic.jpg" width="648" height="884" loading="lazy" alt="Authentic Khorium VTK temperature viewer with nine solid regions visible, coolant hidden and a Kelvin color legend. The legacy Converged badge conflicts with detailed verification." style="display:block;width:100%;max-width:648px;height:auto;margin:auto;"></a>
 <figcaption style="margin-top:14px;font-size:14px;line-height:1.65;"><strong>Authentic Khorium VTK post-processing capture, 31 October 2026.</strong> Temperature on the original CHT geometry, coolant hidden, solid opacity 100%, streamlines and probe line off. This earlier setup used a 25 &deg;C inlet and 40 W per pack. Despite the visible legacy &ldquo;Converged&rdquo; badge, detailed verification reports NOT_CONVERGED and rejects the energy balance. Use this view to inspect geometry and the workflow. It is separate from the numerically checked hot/cold histories above and cannot support their acceptance.</figcaption>
 </figure>
+
+<div aria-labelledby="battery-conclusion" style="margin-top:24px;padding:24px;border:1.5px solid var(--foreground);background:var(--background);">
+<h3 id="battery-conclusion" style="margin:0 0 16px;font-size:24px;">Conclusion: design disposition and practical meaning</h3>
+<p style="font-size:16px;line-height:1.7;"><strong>Engineering disposition.</strong> The hot case fails the conditional upper-temperature screen by 0.80 &deg;C. The cold case has 1.04 &deg;C of conditional lower-temperature margin with preconditioning and ideal ventilation isolation. Prioritize thermal-interface control, parallel conduction paths and managed airflow. These are candidate corrective actions; their temperature benefit and installed fan operating point remain unqualified.</p>
+<p style="font-size:16px;line-height:1.7;"><strong>Scientific basis.</strong> Spatial and temporal discretization comparisons meet the declared 0.2 &deg;C criterion. This supports numerical verification within the stated load cases, while experimental validation remains open. Assumed material anisotropy, contact conductance, heat generation and convective boundary conditions limit extrapolation. The reduced-order model fails its withheld-case gate and is not accepted for mission prediction.</p>
+<p style="margin-bottom:0;font-size:16px;line-height:1.7;"><strong>In plain language.</strong> Under the assumptions tested, the module gets slightly too hot in hot weather. It stays just above the cold limit only after warming up and ideally blocking throughflow. The calculations are stable under the declared refinement checks, but they do not yet prove safe operation on a delivery drone. The next acceptance evidence is measured hardware temperatures and installed airflow against agreed limits.</p>
+</div>
 
 </section>
 

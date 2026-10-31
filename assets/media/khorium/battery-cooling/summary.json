@@ -95,5 +95,16 @@
       "display": "Nine solids visible; coolant hidden; opacity 100%; streamlines and probe line off",
       "visually_reviewed": true
     }
-  ]
+  ],
+  "CAD_viewer": {
+    "geometry_file": "cad-geometry.json",
+    "geometry_sha256": "f5a92004f6d8d9169c1aead650d7ea226e682aae05d930e7af000e903eedbaf5",
+    "source_step_sha256": "fa088e8ca7d546c092bada71f7a0d36650376666e44958f10da07ba5cc4f726c",
+    "solid_parts": 17,
+    "orthogonal_primitives": 46,
+    "part_volume_relative_tolerance": 1e-10,
+    "temperature_field": false,
+    "default": "Cutaway, roof hidden, rotation paused",
+    "external_dependencies": false
+  }
 }
