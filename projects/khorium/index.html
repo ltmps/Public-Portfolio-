@@ -69,6 +69,15 @@
 @keyframes khFail{0%,21%,46%,100%{stroke:var(--foreground)}23%,44%{stroke:#d9363e}}
 .kh-play .kh-pass{animation:khPass 9s linear infinite}
 @keyframes khPass{0%,79%{stroke:var(--foreground)}81%,96%{stroke:rgb(var(--acc))}100%{stroke:var(--foreground)}}
+
+.kh-status{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;font-weight:600;line-height:1.5;letter-spacing:.04em;text-transform:uppercase}
+.kh-status svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.kh-ok{color:#17643c}.kh-warn{color:#805000}.kh-stop{color:#a61c32}.kh-info{color:#185c94}
+:root[data-theme="dark"] .kh-ok{color:#7ee2a8}:root[data-theme="dark"] .kh-warn{color:#ffd080}:root[data-theme="dark"] .kh-stop{color:#ff9ba9}:root[data-theme="dark"] .kh-info{color:#91caff}
+.kh-decisions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:16px;margin:24px 0}
+.kh-decision{border:1px solid var(--border);padding:20px;background:var(--background)}
+.kh-decision h3{margin:0 0 12px;font-size:18px}.kh-decision p{margin:0;font-size:15px;line-height:1.65}
+#battery-cooling summary:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:5px}
 </style>
 <script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
 <script src="../../assets/js/khorium-anim.js?v=bcda24c29b" defer></script>
@@ -261,12 +270,12 @@
 <p style="margin: 0 0 24px; font-size: 20px; line-height: 1.5; max-width: 65ch;">A two-pack cooling module passes its declared mesh and time-step checks, but the hot case exceeds its conditional temperature limit. The cold case retains a small margin with preconditioning and ideal ventilation isolation.</p>
 <div style="border: 1.5px solid var(--foreground); display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground); margin-bottom: 24px;">
 <div class="gy-stat" style="flex: 1 1 300px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Hot case / conditional limit failed</span>
+<span class="kh-status kh-stop"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 8 8 8m0-8-8 8"/></svg>Hot case / conditional limit failed</span>
 <strong class="gy-num" style="font-size: 52px; line-height: 1; letter-spacing: -0.04em;">60.80 &deg;C</strong>
 <p style="margin: 0; font-size: 16px; line-height: 1.6;">Pack 2 peak at 835.65 s. Margin to the assumed 60 &deg;C upper screen: <strong>&minus;0.80 &deg;C</strong>. Air and initial solids are +49 &deg;C; altitude is 3000 m.</p>
 </div>
 <div class="gy-stat" style="flex: 1 1 300px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Cold case / conditional margin</span>
+<span class="kh-status kh-warn"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5M12 17h.01"/></svg>Cold case / conditional margin</span>
 <strong class="gy-num" style="font-size: 52px; line-height: 1; letter-spacing: -0.04em;">11.04 &deg;C</strong>
 <p style="margin: 0; font-size: 16px; line-height: 1.6;">Pack 2 minimum at 390 s, followed by recovery. Margin above the assumed 10 &deg;C lower screen: <strong>+1.04 &deg;C</strong>. Air is &minus;20 &deg;C; all solids start at +15 &deg;C.</p>
 </div>
@@ -276,13 +285,20 @@
 <a class="gy-frame" href="../../assets/media/khorium/battery-cooling/thermal-response.png" target="_blank" rel="noopener" style="display: block; border: 1.5px solid var(--foreground); background: #fff;"><img src="../../assets/media/khorium/battery-cooling/thermal-response.png" width="2880" height="1620" loading="lazy" alt="Hot pack maxima rise from 49 degrees Celsius to a pack 2 peak of 60.80; cold pack temperatures fall from a preconditioned 15 to 11.04 at 390 seconds before recovering." style="display: block; width: 100%; height: auto;"></a>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6;">Saved simulation histories. Conditional temperature screens are shown with the results. Open the figure for full-size labels.</figcaption>
 </figure>
+
+<div class="kh-decisions" aria-label="Why these design choices">
+<article class="kh-decision"><h3><span class="kh-status kh-info"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7h.01"/></svg>Conduction first</span></h3><p><strong>Why parallel spreaders?</strong> A 50 &deg;C target with 49 &deg;C air leaves only 1 K of steady driving temperature. At 71.63 W per pack, the necessary single-path resistance budget is 0.01396 K/W. The assumed bottom pad plus contacts alone is 0.02043 K/W. Retain parallel end paths and shorten narrow bridges; adding fins alone cannot remove this upstream bottleneck. This is a resistance bound, not a predicted improvement.</p></article>
+<article class="kh-decision"><h3><span class="kh-status kh-warn"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5M12 17h.01"/></svg>Airflow must be controlled</span></h3><p><strong>Why shrouds and isolation?</strong> In hot operation, direct air through the fins and separate inlet from outlet to limit bypass. In cold operation, that same heat-removal path can overcool a pack. The cold result assumes zero net throughflow and a +15 &deg;C preheat. Leakage, fan pressure, control thresholds and failure states need hardware qualification.</p></article>
+<article class="kh-decision"><h3><span class="kh-status kh-info"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7h.01"/></svg>Observe location and timing</span></h3><p><strong>Why instrument the base/end paths?</strong> The hot pack-2 peak occurs at CAD [55, 220, 11] mm at the end of the history. The cold minimum occurs at [252.5, 330, 11] mm at 390 s before recovery. Both lie at the modeled pack base elevation. These are candidate sensor regions; homogenized nodes do not identify cell cores or semiconductor junctions.</p></article>
+<article class="kh-decision"><h3><span class="kh-status kh-ok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="10"/></svg>Numerical checks passed</span></h3><p><strong>Why keep a conditional label?</strong> Finer meshes and shorter time steps change temperatures by less than the declared 0.2 &deg;C gate. That checks discretization sensitivity. It does not establish the assumed heat load, anisotropic pack properties, pad contact or installed airflow. A small cold margin still needs measured inputs and temperature traces.</p></article>
+</div>
 <details style="border: 1px solid var(--foreground); padding: 16px; background: var(--background); margin-bottom: 16px;">
 <summary style="cursor: pointer; font-size: 18px; font-weight: 600;">Numerical verification and model assumptions</summary>
 <div style="overflow-x: auto; margin-top: 20px;">
 <table class="gy-kt" style="width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5;">
 <caption style="text-align: left; padding: 0 14px 12px;">Maximum solid-temperature differences; unchanged acceptance threshold: 0.2 &deg;C.</caption>
 <thead><tr><th scope="col">Comparison</th><th scope="col">Difference</th><th scope="col">Numerical result</th></tr></thead>
-<tbody><tr><th scope="row">Hot mesh</th><td>0.0493 &deg;C</td><td>Pass</td></tr><tr><th scope="row">Hot time step</th><td>0.1770 &deg;C</td><td>Pass</td></tr><tr><th scope="row">Cold mesh</th><td>0.0923 &deg;C</td><td>Pass</td></tr><tr><th scope="row">Cold time step</th><td>0.0845 &deg;C</td><td>Pass</td></tr></tbody>
+<tbody><tr><th scope="row">Hot mesh</th><td>0.0493 &deg;C</td><td><span class="kh-status kh-ok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="10"/></svg>Pass</span></td></tr><tr><th scope="row">Hot time step</th><td>0.1770 &deg;C</td><td><span class="kh-status kh-ok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="10"/></svg>Pass</span></td></tr><tr><th scope="row">Cold mesh</th><td>0.0923 &deg;C</td><td><span class="kh-status kh-ok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="10"/></svg>Pass</span></td></tr><tr><th scope="row">Cold time step</th><td>0.0845 &deg;C</td><td><span class="kh-status kh-ok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="10"/></svg>Pass</span></td></tr></tbody>
 </table>
 </div>
 <p style="font-size: 15px; line-height: 1.65;">All 800 fine cold fields were independently replayed and the native mesh/time comparisons reproduced exactly. Named hot checks combine native geometric audits and documented local checks. These are scoped numerical comparisons, not statistical uncertainty bounds or hardware validation.</p>
@@ -293,9 +309,15 @@
 <summary style="cursor: pointer; font-size: 18px; font-weight: 600;">Design takeaways, tradeoffs and ROM limits</summary>
 <ul style="padding-left: 22px; font-size: 15px; line-height: 1.7;"><li>Retain parallel end spreaders and improve pad engagement and contact control. Shorter, wider conduction bridges are a candidate for reducing path resistance.</li><li>Shroud fin passages and separate inlet/outlet paths to reduce bypass, while allowing ventilation isolation in cold operation. Installed airflow and control thresholds remain unqualified.</li><li>Track mass and energy together: the modeled module is 11.18 kg. The examined fan pair adds 0.34 kg and about 10.13 W bus load before ducts/mounts. Preconditioning all modeled solids from &minus;20 to +15 &deg;C stores at least 114.63 Wh, excluding losses.</li></ul>
 <p style="font-size: 15px; line-height: 1.65;">These changes are recommendations; their temperature benefits have not been simulated. No aircraft range improvement or compatibility with an 8 kg payload is established.</p>
-<p style="font-size: 15px; line-height: 1.65;"><strong>ROM disposition:</strong> the 54-state reduced basis fails a withheld contact-case representation test at 0.372 &deg;C against a 0.2 &deg;C gate. A trained-condition runtime agreement did not establish independent mission accuracy. The ROM is not accepted for performance, range or mission planning.</p>
+<p style="font-size: 15px; line-height: 1.65;"><span class="kh-status kh-stop"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 8 8 8m0-8-8 8"/></svg>ROM not accepted</span><br><strong>ROM disposition:</strong> the 54-state reduced basis fails a withheld contact-case representation test at 0.372 &deg;C against a 0.2 &deg;C gate. A trained-condition runtime agreement did not establish independent mission accuracy. The ROM is not accepted for performance, range or mission planning.</p>
 <p style="margin-bottom: 0; font-size: 14px; line-height: 1.6;"><a class="gy-link" href="../../assets/media/khorium/battery-cooling/summary.json">Summary data and figure provenance (JSON)</a></p>
 </details>
+<figure style="margin:24px 0;padding:20px;border:1px solid var(--border);background:var(--background);">
+<p style="margin:0 0 12px;"><span class="kh-status kh-warn"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5M12 17h.01"/></svg>Original CFD diagnostic only</span></p>
+<a class="gy-link" href="../../assets/media/khorium/battery-cooling/khorium-vtk-diagnostic.jpg" target="_blank" rel="noopener"><img src="../../assets/media/khorium/battery-cooling/khorium-vtk-diagnostic.jpg" width="648" height="884" loading="lazy" alt="Authentic Khorium VTK temperature viewer with nine solid regions visible, coolant hidden and a Kelvin color legend. The legacy Converged badge conflicts with detailed verification." style="display:block;width:100%;max-width:648px;height:auto;margin:auto;"></a>
+<figcaption style="margin-top:14px;font-size:14px;line-height:1.65;"><strong>Authentic Khorium VTK post-processing capture, 31 October 2026.</strong> Temperature on the original CHT geometry, coolant hidden, solid opacity 100%, streamlines and probe line off. This earlier setup used a 25 &deg;C inlet and 40 W per pack. Despite the visible legacy &ldquo;Converged&rdquo; badge, detailed verification reports NOT_CONVERGED and rejects the energy balance. Use this view to inspect geometry and the workflow. It is separate from the numerically checked hot/cold histories above and cannot support their acceptance.</figcaption>
+</figure>
+
 </section>
 
 <section aria-labelledby="lessons-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">

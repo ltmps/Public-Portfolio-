@@ -83,6 +83,17 @@
       "sha256": "dd8c64ac619308c0c39fb6a1a1d8bb509336b48eb73109d415ba41730553ae74",
       "source_figure": "65-final-numerical-checks.png",
       "visually_reviewed": true
+    },
+    {
+      "file": "khorium-vtk-diagnostic.jpg",
+      "sha256": "251303fbaa20f4037a57326e1923faecce7bb0d4cbb88a607d789315a92e7c05",
+      "source": "Authentic Khorium web VTK viewer screenshot, 2026-10-31",
+      "purpose": "Original CFD diagnostic geometry/workflow only, separate from final thermal histories",
+      "original_inlet_C": 25,
+      "original_pack_heat_W_each": 40,
+      "verification": "NOT_CONVERGED; legacy Converged UI badge conflicts with detailed verification; energy balance rejected",
+      "display": "Nine solids visible; coolant hidden; opacity 100%; streamlines and probe line off",
+      "visually_reviewed": true
     }
   ]
 }
