@@ -16,6 +16,10 @@
   },
   "rail_dof": 1,
   "rail_policy_trained": false,
+  "rail_geometry": "linear",
+  "rail_role": "trade-study baseline",
+  "intended_rail_geometry": "circular",
+  "circular_rail_simulated": false,
   "media": [
     {
       "name": "rail-cart",
