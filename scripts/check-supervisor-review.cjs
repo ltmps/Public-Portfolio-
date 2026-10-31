@@ -22,7 +22,7 @@ for(const c of data.cases){
   elements.tail.onclick();assert.equal(elements.clock.textContent,'58.00 / 60.00 s');assert.equal(elements['plot-window'].value,'full');
   elements.time.value='59.9';elements.time.oninput();elements.play.onclick();frames.shift()(0);frames.shift()(100);assert.equal(elements.play.textContent,'Play');assert.equal(elements.clock.textContent,'60.00 / 60.00 s');elements.reset.onclick();assert.equal(elements.clock.textContent,'0.00 / 60.00 s');
 }
-for(let i=0;i<14;i++)assert(texts.includes(`m${i}`));assert(!texts.some(s=>s==='HEALTHY'||s==='FAULT'));assert(texts.some(s=>s.includes('O:')&&s.includes('R:')));
+for(let i=0;i<14;i++)assert(texts.includes(`m${i}`));assert(!texts.some(s=>s==='HEALTHY'||s==='FAULT'));assert(texts.some(s=>s.includes('B:')&&s.includes('R:')));
 assert(data.cases[2].revised.positionMarginM>.025);assert(data.cases[2].revised.peakRateAllRadS>1);
 const html=fs.readFileSync(path.join(folder,'supervisor_review.html'),'utf8');assert(html.includes('supervisor_review_data.js'));assert(html.includes('supervisor_review_viewer.js'));assert(!html.includes('src="comparison_viewer.js'));
 console.log('PASS: three paired schedule replays, matched faulty plant/interface, 100 Hz peaks, 14 fan indicators, early/tail seeking, both themes, finite drawing, exact endpoint and reset. Mock-canvas checks are not browser visual QA.');

@@ -20,7 +20,7 @@ for (const name of ['index.html', 'engineering_checks.html']) {
   const html = read(path.join(replay, name));
   const options = [...html.matchAll(/<option value="((?:gnc_mode|T1_|hold|dead_|stuck_|scale_|force_|torque_|conservation)[^"]*)"/g)].map(m => m[1]);
   assert.equal(options.length, name === 'index.html' ? 6 : 9);
-  const nodes = Object.fromEntries(['case', 'movie', 'mp4', 'gif', 'csv', 'model', 'results', 'description', 'camera-description', 'speed'].map(id => [id, {value: id === 'speed' ? '1' : options[0]}]));
+  const nodes = Object.fromEntries(['case', 'movie', 'csv', 'model', 'results', 'description', 'camera-description', 'speed'].map(id => [id, {value: id === 'speed' ? '1' : options[0]}]));
   const sandbox = {document: {getElementById: id => nodes[id]}};
   vm.createContext(sandbox);
   const selectorScript = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].find(m => m[1].includes('const cases='));
@@ -29,7 +29,7 @@ for (const name of ['index.html', 'engineering_checks.html']) {
   for (const option of options) {
     nodes.case.value = option;
     nodes.case.onchange();
-    for (const ref of [nodes.movie.src, nodes.movie.poster, nodes.mp4.href, nodes.gif.href]) assert(fs.existsSync(path.resolve(replay, ref.split('?')[0])), `Missing ${ref}`);
+    for (const ref of [nodes.movie.src, nodes.movie.poster]) assert(fs.existsSync(path.resolve(replay, ref.split('?')[0])), `Missing ${ref}`);
     assert(html.includes('<a id="csv" hidden>'), 'No public CSV download control');
   }
 }

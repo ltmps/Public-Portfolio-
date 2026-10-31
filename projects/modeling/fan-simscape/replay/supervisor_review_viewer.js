@@ -67,7 +67,7 @@
   function leader(p,label,offset,color){const a=project(p),b=[a[0]+offset[0],a[1]+offset[1]];line([a,b],color,1,[3,3]);text(label,b[0]+(offset[0]<0?-4:4),b[1],color,13,offset[0]<0?'right':'left');}
   function route(rows,t,color,width){const pts=rows.filter(s=>s[0]<=t).map(s=>project(s.slice(1,4)));line(pts,color,width);}
   function drawWorld(h,f){
-    const box=regions.world;panel(box,'Same failed fan: original versus revised schedule');ctx.save();ctx.beginPath();ctx.rect(...box);ctx.clip();
+    const box=regions.world;panel(box,'Same failed fan: baseline versus retimed schedule');ctx.save();ctx.beginPath();ctx.rect(...box);ctx.clip();
     const {min,max}=bounds;const floor=[[min[0],min[1],0],[max[0],min[1],0],[max[0],max[1],0],[min[0],max[1],0]].map(project);
     ctx.beginPath();ctx.moveTo(...floor[0]);floor.slice(1).forEach(p=>ctx.lineTo(...p));ctx.closePath();ctx.fillStyle=ink('#e9edf3');ctx.fill();
     const step=Math.max(.5,Math.ceil(Math.max(max[0]-min[0],max[1]-min[1])/10)*.5);
@@ -81,7 +81,7 @@
     line(data.referenceSamples.map(r=>project(r.slice(1,4))),gold,1,[5,4]);dotMark(project(command),gold,6);leader(command,data.positionControlled?'CURRENT COMMAND':'COAST REFERENCE',[30,-55],gold);
     dotMark(project([0,0,0]),purple,6);leader([0,0,0],'FLOOR TAG / z=0',[-45,35],purple);
     dotMark(project(data.initialPositionM),'#5e6c80',3);leader(data.initialPositionM,'START',[-30,-55],'#5e6c80');
-    leader(hp,'ORIGINAL',[-35,-22],green);leader(fp,'REVISED',[35,28],red);
+    leader(hp,'BASELINE',[-35,-22],green);leader(fp,'RETIMED',[35,28],red);
 
     if(data.usesIR){const beacon=reference(time).slice(5,8);dotMark(project(beacon),orange,5);leader(beacon,'IR TARGET',[15,-20],orange);}
     ctx.restore();
@@ -101,11 +101,11 @@
     const target=type==='tag'?[0,0,0]:reference(time).slice(5,8);
     const projected=[cameraProjection(h,target,type),cameraProjection(f,target,type)];
     projected.forEach((r,i)=>{if(!r.inside)return;const px=x+w/2+r.uv[0]*Math.min(w/88.697,hg/67),py=y+hg/2+r.uv[1]*Math.min(w/88.697,hg/67);dotMark([px,py],i===0?green:red,i===0?6:3);});
-    text(`O: ${projected[0].inside?'in FOV':'outside'}  R: ${projected[1].inside?'in FOV':'outside'}`,x+8,y+hg-10,'#56647b',12);
+    text(`B: ${projected[0].inside?'in FOV':'outside'}  R: ${projected[1].inside?'in FOV':'outside'}`,x+8,y+hg-10,'#56647b',12);
   }
   function drawBody(h,f){
     const box=regions.body;panel(box,'14 fan indicators / actual applied thrust');const[x,y,w,hg]=box;
-    [h,f].forEach((s,i)=>{const center=x+w*(i===0?.25:.75),local=p=>{const v=planar(p);return [center+v[0]*480,y+hg/2-v[1]*480];};cube([0,0,0],s.slice(4,8),i===0?green:red,local);fanDisks([0,0,0],s.slice(4,8),s.slice(8,22),local,true);text(i===0?'ORIGINAL':'REVISED',center,y+hg-8,i===0?green:red,12,'center');});
+    [h,f].forEach((s,i)=>{const center=x+w*(i===0?.25:.75),local=p=>{const v=planar(p);return [center+v[0]*480,y+hg/2-v[1]*480];};cube([0,0,0],s.slice(4,8),i===0?green:red,local);fanDisks([0,0,0],s.slice(4,8),s.slice(8,22),local,true);text(i===0?'BASELINE':'RETIMED',center,y+hg-8,i===0?green:red,12,'center');});
   }
   function plot(box,title,index,limit){
     panel(box,title);const[x,y,w,hg]=box,pad={l:48,r:12,t:18,b:32};
@@ -119,7 +119,7 @@
     for(let i=0;i<=4;i++)text((i*windowEnd/4).toFixed(windowEnd===2?1:0),x+pad.l+i/4*(w-pad.l-pad.r),y+hg-10,'#68768b',11,'center');
   }
   function drawFans(h,f){
-    const box=regions.fans;panel(box,'Actual thrust (N): original outline / revised solid');const[x,y,w,hg]=box,base=y+hg-30,height=hg-50,left=x+35,bar=(w-45)/14;
+    const box=regions.fans;panel(box,'Actual thrust (N): baseline outline / retimed solid');const[x,y,w,hg]=box,base=y+hg-30,height=hg-50,left=x+35,bar=(w-45)/14;
     line([[left,y+20],[left,base],[x+w-5,base]],'#bfcbd9');
     for(let j=0;j<14;j++){const xx=left+j*bar;ctx.strokeStyle=thrustColor(h[8+j]);ctx.strokeRect(xx,base-h[8+j]/.3*height,bar*.35,h[8+j]/.3*height);ctx.fillStyle=thrustColor(f[8+j]);ctx.fillRect(xx+bar*.4,base-f[8+j]/.3*height,bar*.35,f[8+j]/.3*height);text(String(j),xx+bar*.35,base+18,'#59677c',11,'center');}
     text('0.3',x+5,y+24,'#68768b',11);text('0',x+20,base,'#68768b',11);
@@ -131,16 +131,16 @@
     [0,.07085,.1417,.21255,.2834].forEach((v,i)=>text(i===0?'0 / off':v.toFixed(4),x+i*w/4,y+h+15,'#56647b',10,i===0?'left':i===4?'right':'center'));
   }
   function draw(){
-    ctx.fillStyle=ink('#f5f7fb');ctx.fillRect(0,0,canvas.width,canvas.height);text(`${selected.title}: original versus revised`,25,27,'#22354f',21);
+    ctx.fillStyle=ink('#f5f7fb');ctx.fillRect(0,0,canvas.width,canvas.height);text(`${selected.title}: baseline versus retimed`,25,27,'#22354f',21);
     const h=sample(data.healthy,time),f=sample(selected.samples,time);
     drawWorld(h,f);drawCamera('tag',h,f);drawBody(h,f);
     const[x,y]=regions.stats;text(`Elapsed ${time.toFixed(2)} / 60 s`,x,y+22,'#22354f',16);
-    text(`Original error: ${distance(h[22])}`,x,y+57,green,12);text(`Revised error: ${distance(f[22])}`,x,y+84,red,12);
-    text(`Rate O ${h[24].toFixed(3)} rad/s`,x,y+122,green,12);text(`Rate R ${f[24].toFixed(3)} rad/s`,x,y+146,red,12);
+    text(`Baseline error: ${distance(h[22])}`,x,y+57,green,12);text(`Retimed error: ${distance(f[22])}`,x,y+84,red,12);
+    text(`Rate B ${h[24].toFixed(3)} rad/s`,x,y+122,green,12);text(`Rate R ${f[24].toFixed(3)} rad/s`,x,y+146,red,12);
     text(`Final-upright error ${f[23].toFixed(2)}°`,x,y+177,'#56647b',12);
     plot(regions.pos,'Position error from frozen goal (m)',1,.05);plot(regions.att,'Body rate norm (rad/s)',2,1);drawFans(h,f);drawThrustLegend();
     const phases=['Rate damping','Turn','Reoriented hold','Return upright','Settle'];const phase=selected.phaseSamples[Math.min(1200,Math.floor(time/.05))];
-    text(`Revised phase: ${phases[phase[1]]} · m12 dead in BOTH runs · elapsed time after fault notification`,30,810,'#4f6178',14);
+    text(`Retimed phase: ${phases[phase[1]]} · m12 dead in BOTH runs · elapsed time after fault notification`,30,810,'#4f6178',14);
     text('Actual saved Simscape data. 20 Hz pose display; plots and summary metrics use 100 Hz logs.',30,835,'#67778d',13);
     ui.time.value=time;ui.clock.textContent=`${time.toFixed(2)} / 60.00 s`;
   }
@@ -155,7 +155,7 @@
     ui['max-delta'].textContent=`${(1000*b.positionMarginM).toFixed(2)} mm`;
     ui.attitude.textContent=`${a.peakRateAllRadS.toFixed(3)} → ${b.peakRateAllRadS.toFixed(3)} rad/s`;
     ui.saturation.textContent=`${a.strictProtocolPass?'PASS':'FAIL'} / ${b.strictProtocolPass?'PASS':'FAIL'}`;
-    ui.outcome.textContent=selected.unchangedControl?'Unchanged control: identical schedule and trajectory. Both fail the all-run rate gate because the recorded initial rate is already 1.004533 rad/s. It enters below 1 rad/s at 0.02 s; the separate entry diagnostic passes.':`Both recover under the source criterion, which caps rate only after elapsed 5 s. Both FAIL the all-run rate criterion. Revised rate peaks at ${b.peakRateAllRadS.toFixed(3)} rad/s during the early turn. Improved position margin does not establish rate compliance or timing robustness.`;
+    ui.outcome.textContent=selected.unchangedControl?'Same-schedule control: identical schedule and trajectory. Both fail the all-run rate gate because the recorded initial rate is already 1.004533 rad/s. It enters below 1 rad/s at 0.02 s; the separate entry diagnostic passes.':`Both recover under the source criterion, which caps rate only after elapsed 5 s. Both FAIL the all-run rate criterion. Retimed rate peaks at ${b.peakRateAllRadS.toFixed(3)} rad/s during the early turn. Improved position margin does not establish rate compliance or timing robustness.`;
     draw();
   }
   ui.fault.onchange=choose;ui.play.onclick=()=>{playing=!playing;if(playing&&time>=duration)time=0;ui.play.textContent=playing?'Pause':'Play';lastStamp=null;};ui.reset.onclick=()=>{time=0;playing=false;ui.play.textContent='Play';draw();};ui.time.oninput=()=>{playing=false;ui.play.textContent='Play';time=Number(ui.time.value);draw();};
