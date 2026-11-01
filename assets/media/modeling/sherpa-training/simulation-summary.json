@@ -2,6 +2,7 @@
   "model_status": "Provisional training surrogate; not hardware acceptance data",
   "algorithm": "PPO with four reference trajectories for initialization",
   "training_steps": 50176,
+  "training_steps_scope": "Original fixed-base policy; coordinated rail training is recorded under rail_training",
   "evaluation": {
     "connect": {
       "episodes": 2,
@@ -15,11 +16,11 @@
     }
   },
   "rail_dof": 1,
-  "rail_policy_trained": false,
-  "rail_geometry": "linear",
-  "rail_role": "trade-study baseline",
+  "rail_policy_trained": true,
+  "rail_geometry": "linear and circular",
+  "rail_role": "Matched near-socket PPO comparison; scripted travel previews",
   "intended_rail_geometry": "circular",
-  "circular_rail_simulated": false,
+  "circular_rail_simulated": true,
   "media": [
     {
       "name": "rail-cart",
@@ -47,6 +48,59 @@
       "fps": 25.0,
       "duration_s": 10.0,
       "audio": false
+    },
+    {
+      "name": "circular-rail",
+      "bytes": 1155804,
+      "sha256": "78ee6416a3516fbc5eaa8f9c1dac516d9fbe4fbcfe8e20d4e0ade184996625aa",
+      "frames": 388,
+      "fps": 12.5,
+      "duration_s": 31.04,
+      "audio": false
+    },
+    {
+      "name": "circular-ppo-connect",
+      "bytes": 87698,
+      "sha256": "4cdca8e9cd7a19625f07394a2af6abfec7aff0684d26f79bd61cdfedd1f50a30",
+      "frames": 250,
+      "fps": 25.0,
+      "duration_s": 10.0,
+      "audio": false
     }
-  ]
+  ],
+  "rail_training": {
+    "stage": "near_socket",
+    "steps_per_geometry": 16384,
+    "observations": 61,
+    "actions": 9,
+    "matched_total_travel_m": 0.875,
+    "initial_cart_offset_m": 0.003,
+    "held_out_seeds": [
+      40000,
+      40009
+    ],
+    "counts": {
+      "linear": {
+        "successes": 14,
+        "episodes": 20
+      },
+      "circular": {
+        "successes": 11,
+        "episodes": 20
+      }
+    }
+  },
+  "circular_configuration": {
+    "radius_m": 1.25,
+    "angle_range_rad": [
+      -0.35,
+      0.35
+    ],
+    "carriage_orientation": "Yaw follows carriage angle; arm and reel mounted to cart",
+    "usable_arc_status": "Provisional screening arc; CAD does not establish hardware travel limits"
+  },
+  "continuous_transfer": {
+    "status": "Experimental training in progress; no learned full-mission result published",
+    "separate_from_near_socket_evaluation": true
+  }
 }
