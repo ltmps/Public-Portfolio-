@@ -13,4 +13,23 @@
 .gy-read-top:hover{border-color:rgb(var(--acc));background:color-mix(in srgb,rgb(var(--acc)) 12%,var(--background))}
 @media (max-width:700px){.gy-read-strip{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px!important;padding-bottom:8px}.gy-read-strip>*{flex:0 0 86%;scroll-snap-align:start;min-width:0}}
 @media (max-width:600px){.gy-stat{flex:1 1 40%!important;padding:16px 14px!important;gap:12px!important}.gy-stat .gy-num{font-size:36px!important}}
-@media (prefers-reduced-motion:reduce){.gy-read-top{transition:none}}
+
+/* Motion: strong ease-out, UI under 300 ms, hover motion only on fine pointers. */
+:root{--gy-ease-out:cubic-bezier(.23,1,.32,1)}
+html .gy-bar{transition:transform .22s var(--gy-ease-out),visibility 0s .22s}
+html .gy-bar.on{transition:transform .22s var(--gy-ease-out)}
+.gy-read-top{transform:translateY(8px);transition:opacity .2s var(--gy-ease-out),transform .2s var(--gy-ease-out)}
+.gy-read-top.on{transform:none}
+.gy-read-top:active,.gy-btn:active,.gy-chip:active{transform:scale(.97);transition:transform .12s var(--gy-ease-out)}
+.gy-dim-h .gy-line,.gy-dim-v .gy-line,.gy-sline{transition-duration:.24s;transition-timing-function:var(--gy-ease-out)}
+.gy-img{transition:filter .3s ease,transform .3s var(--gy-ease-out)}
+.gy-hi,.gy-arrow,.gy-zoom img{transition-duration:.2s;transition-timing-function:var(--gy-ease-out)}
+@media not all and (hover:hover) and (pointer:fine){
+.gy-part:hover .gy-img,.gy-fig:hover .gy-img,.gy-card:hover .gy-img,.gy-card:hover .gy-arrow,h2:hover .gy-hi,.gy-zoom:hover img{transform:none!important}
+.gy-stat:hover .gy-sline{transform:scaleX(0)!important}}
+@media (prefers-reduced-motion:reduce){html .gy-bar,html .gy-bar.on,.gy-read-top{transition:opacity .2s ease!important;transform:none}}
+/* Browser surfaces carry the palette. */
+::selection{background:rgba(var(--acc),.22);color:var(--foreground)}
+html{scrollbar-color:var(--muted-foreground) transparent;accent-color:rgb(var(--acc))}
+input,textarea{caret-color:rgb(var(--acc))}
+.gy-ext{display:inline-block;margin-left:6px;vertical-align:-1px;flex:0 0 auto}
