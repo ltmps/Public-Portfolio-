@@ -325,5 +325,27 @@
     "matched_baseline_file": "operational-cycle-comparison.json",
     "final_finetune_file": "feedback-finetune-evaluation.json",
     "observability_file": "tool-observability-comparison.json"
+  },
+  "design_alignment": {
+    "intended_arm": "FREND arm on a rail cart",
+    "intended_camera": "Camera may be positioned by any available FREND arm, including an assisting arm",
+    "intended_hose_carriage_stow": "Below the rail",
+    "current_arm": "Seven-joint Franka training proxy",
+    "current_camera": {
+      "mount": "Fixed external world camera",
+      "resolution_px": [
+        320,
+        240
+      ],
+      "rate_hz": 10,
+      "measurement_latency_s": 0.1,
+      "policy_input": "Marker-position estimates fused with noisy encoders and simulated instruments; not raw RGB"
+    },
+    "current_hose_mount": "Reel and arm on one simplified cart; lower purge socket",
+    "validation_scope": "Existing results cover the current proxy arrangement. FREND-positioned camera visibility and below-rail hose-carriage retrieval/stow are not yet evaluated.",
+    "mission_references": [
+      "projects/modeling/sherpa/robotics/#14_client_axis_lidar_access",
+      "projects/modeling/sherpa/refuel/#04_customer_refueling"
+    ]
   }
 }
