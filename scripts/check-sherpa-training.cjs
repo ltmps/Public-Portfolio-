@@ -53,7 +53,7 @@ for (const geometry of ['linear', 'circular']) {
     assert.equal(result.mean_success_drive_work_j, null);
   }
 }
-assert(html.includes('scripted') && html.includes('four diagnostic episodes provide a small initial sample'));
+assert(html.includes('id="continuous-cycle"') && html.includes('id="training-method"'));
 assert.equal((html.match(/<video\b/g) || []).length, summary.media.length);
 for (const item of summary.media) {
   const buffer = fs.readFileSync(path.join(dir, item.name+'.mp4'));
