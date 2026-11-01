@@ -35,6 +35,7 @@ jobs:
           node --check assets/js/sherpa-missions.js
           node --check assets/js/sherpa-strips.js
           node --check assets/js/sherpa-inline.js
+          node --check assets/js/sherpa-training.js
           node --check assets/js/ir-track.js
           node --check assets/js/gy-replay.js
           node --check assets/js/gy-bar.js
