@@ -1,0 +1,35 @@
+/* Reading aids, paired with gy-read.js. */
+.gy-read-clip{position:relative}
+.gy-read-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.gy-read-more{appearance:none;border:0;margin:0;padding:0 0 0 6px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--foreground);background:none;line-height:inherit;vertical-align:baseline}
+.gy-read-clamp .gy-read-more{position:absolute;right:0;bottom:0;padding-left:40px;background:linear-gradient(to right,transparent,var(--background) 34px)}
+.gy-read-more span{text-decoration:underline;text-underline-offset:3px}
+.gy-read-more:hover span{text-decoration-color:rgb(var(--acc))}
+.gy-read-more[aria-expanded="true"] svg{transform:rotate(180deg)}
+.gy-read-more:focus-visible,.gy-read-top:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:2px}
+.gy-read-list{margin-top:8px;min-height:36px;padding:0}
+.gy-read-top{position:fixed;right:max(20px,env(safe-area-inset-right,0px));bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:1000;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--foreground);background:var(--background);color:var(--foreground);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s}
+.gy-read-top.on{opacity:1;pointer-events:auto}
+.gy-read-top:hover{border-color:rgb(var(--acc));background:color-mix(in srgb,rgb(var(--acc)) 12%,var(--background))}
+@media (max-width:700px){.gy-read-strip{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px!important;padding-bottom:8px}.gy-read-strip>*{flex:0 0 86%;scroll-snap-align:start;min-width:0}}
+@media (max-width:600px){.gy-stat{flex:1 1 40%!important;padding:16px 14px!important;gap:12px!important}.gy-stat .gy-num{font-size:36px!important}}
+
+/* Motion: strong ease-out, UI under 300 ms, hover motion only on fine pointers. */
+:root{--gy-ease-out:cubic-bezier(.23,1,.32,1)}
+html .gy-bar{transition:transform .22s var(--gy-ease-out),visibility 0s .22s}
+html .gy-bar.on{transition:transform .22s var(--gy-ease-out)}
+.gy-read-top{transform:translateY(8px);transition:opacity .2s var(--gy-ease-out),transform .2s var(--gy-ease-out)}
+.gy-read-top.on{transform:none}
+.gy-read-top:active,.gy-btn:active,.gy-chip:active{transform:scale(.97);transition:transform .12s var(--gy-ease-out)}
+.gy-dim-h .gy-line,.gy-dim-v .gy-line,.gy-sline{transition-duration:.24s;transition-timing-function:var(--gy-ease-out)}
+.gy-img{transition:filter .3s ease,transform .3s var(--gy-ease-out)}
+.gy-hi,.gy-arrow,.gy-zoom img{transition-duration:.2s;transition-timing-function:var(--gy-ease-out)}
+@media not all and (hover:hover) and (pointer:fine){
+.gy-part:hover .gy-img,.gy-fig:hover .gy-img,.gy-card:hover .gy-img,.gy-card:hover .gy-arrow,h2:hover .gy-hi,.gy-zoom:hover img{transform:none!important}
+.gy-stat:hover .gy-sline{transform:scaleX(0)!important}}
+@media (prefers-reduced-motion:reduce){html .gy-bar,html .gy-bar.on,.gy-read-top{transition:opacity .2s ease!important;transform:none}}
+/* Browser surfaces carry the palette. */
+::selection{background:rgba(var(--acc),.22);color:var(--foreground)}
+html{scrollbar-color:var(--muted-foreground) transparent;accent-color:rgb(var(--acc))}
+input,textarea{caret-color:rgb(var(--acc))}
+.gy-ext{display:inline-block;margin-left:6px;vertical-align:-1px;flex:0 0 auto}
