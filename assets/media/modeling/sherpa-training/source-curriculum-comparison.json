@@ -1,0 +1,64 @@
+{
+  "scope": "Source helium pressure/contact check only; NOT full transfer or cycle success",
+  "training_steps": 8192,
+  "seeds": [
+    31000,
+    31001,
+    31002,
+    31003,
+    31004,
+    31005,
+    31006,
+    31007,
+    31008,
+    31009
+  ],
+  "results": {
+    "linear": {
+      "policy_sha256": "e2f857cc4eaa6640868edf9c29b43daa7a426dbf8a6771f0d9999e1ab334bcff",
+      "by_source": {
+        "connect": {
+          "successes": 9,
+          "episodes": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958499732047615,
+            0.9821237869049271
+          ]
+        },
+        "stow": {
+          "successes": 4,
+          "episodes": 10,
+          "rate": 0.4,
+          "wilson_95": [
+            0.16818032970623614,
+            0.6873262302663417
+          ]
+        }
+      }
+    },
+    "circular": {
+      "policy_sha256": "362136d194d2f6d962cfb99597b8bf1bdd03be095f475f75e96a2b913c1257a8",
+      "by_source": {
+        "connect": {
+          "successes": 6,
+          "episodes": 10,
+          "rate": 0.6,
+          "wilson_95": [
+            0.31267376973365824,
+            0.8318196702937638
+          ]
+        },
+        "stow": {
+          "successes": 7,
+          "episodes": 10,
+          "rate": 0.7,
+          "wilson_95": [
+            0.39677814746114537,
+            0.8922087325936989
+          ]
+        }
+      }
+    }
+  }
+}
