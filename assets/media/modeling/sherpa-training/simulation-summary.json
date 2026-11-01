@@ -224,5 +224,80 @@
         }
       }
     }
+  },
+  "full_transfer_baseline": {
+    "scope": "Matched direct PPO actions on frozen v3 physics; held-out evaluation, not training outcomes",
+    "reward_scheme": "continuous_progress_v3",
+    "training_steps_per_geometry": 32768,
+    "results": {
+      "linear": {
+        "policy_sha256": "f425ace78fd345efeadf4d11b97758936fbb757d034f6799e5d0dec328681a0e",
+        "episodes": 20,
+        "successes": 0,
+        "success_rate": 0.0,
+        "success_wilson_95_interval": [
+          0.0,
+          0.16112515805281938
+        ],
+        "by_source": {
+          "connect": {
+            "successes": 0,
+            "episodes": 10,
+            "source_checks": 6
+          },
+          "stow": {
+            "successes": 0,
+            "episodes": 10,
+            "source_checks": 0
+          }
+        },
+        "mean_success_cycle_time_s": null,
+        "mean_success_drive_work_j": null,
+        "source_check_rate": 0.3,
+        "minimum_bend_radius_m": 0.07996918771062536,
+        "maximum_hose_twist_rad": 1.5788015956186108,
+        "failures": {
+          "leak_failure": 3,
+          "routing_failure": 8,
+          "collision_failure": 9,
+          "overload": 0,
+          "invalid": 0
+        }
+      },
+      "circular": {
+        "policy_sha256": "e47558b2800e6d495d637472487d0801b5d0f8f02c78f889580d2ec7322fbe69",
+        "episodes": 20,
+        "successes": 0,
+        "success_rate": 0.0,
+        "success_wilson_95_interval": [
+          0.0,
+          0.16112515805281938
+        ],
+        "by_source": {
+          "connect": {
+            "successes": 0,
+            "episodes": 10,
+            "source_checks": 5
+          },
+          "stow": {
+            "successes": 0,
+            "episodes": 10,
+            "source_checks": 4
+          }
+        },
+        "mean_success_cycle_time_s": null,
+        "mean_success_drive_work_j": null,
+        "source_check_rate": 0.45,
+        "minimum_bend_radius_m": 0.08005957164794476,
+        "maximum_hose_twist_rad": 1.573614529866984,
+        "failures": {
+          "leak_failure": 0,
+          "routing_failure": 6,
+          "collision_failure": 14,
+          "overload": 0,
+          "invalid": 0
+        }
+      }
+    }
   }
 }
