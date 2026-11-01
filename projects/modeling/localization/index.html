@@ -6,7 +6,7 @@
 <meta name="description" content="ORBES localization-aware mission design: flight modes sized to the tag camera's view and tested in 3,817 MuJoCo Monte Carlo runs.">
 <title>Localization-aware mission design | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);cursor:default}
@@ -74,7 +74,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 .gy-zoom:hover img{transform:scale(2.2)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="../../../assets/js/gy.js?v=5f0b7efd82" defer></script>
 <link rel="stylesheet" href="../../../assets/css/project-brief.css?v=clarity1">
 </head>
 <body>
@@ -82,7 +82,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -162,7 +162,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <video src="../../../assets/media/modeling/localization/mc_mode3_design.mp4" poster="../../../assets/media/modeling/localization/mc_mode3_design_poster.png" muted loop playsinline preload="metadata" aria-label="Animation of 50 simulated Mode 3 runs on the design camera cone, seen from above and from the side, colored by outcome: 44 pass and 6 fail by endpoint drift or a floor strike." style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<p class="gy-strip"><span>Video, muted · 10 s</span><span class="gy-play">Hover to play · click to enlarge</span></p>
 <div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
 <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Design cone, 44.3 × 33.6° · three tags</span>
 <h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">50 Mode 3 runs: 44 pass, 6 fail</h3>
@@ -173,7 +172,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <video src="../../../assets/media/modeling/localization/mc_mode3_design_3d.mp4" poster="../../../assets/media/modeling/localization/mc_mode3_design_3d_poster.png" muted loop playsinline preload="metadata" aria-label="Rotating 3D view of the same 50 simulated Mode 3 runs on the design camera cone, colored by outcome, with the tag footprints and the 0.5 m floor margin drawn." style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<p class="gy-strip"><span>Video, muted · 10 s</span><span class="gy-play">Hover to play · click to enlarge</span></p>
 <div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
 <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Design cone · 3D view</span>
 <h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">The same 50 runs in 3D</h3>
@@ -184,7 +182,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <video src="../../../assets/media/modeling/localization/mc_mode3_design_mj.mp4" poster="../../../assets/media/modeling/localization/mc_mode3_design_mj_poster.png" muted loop playsinline preload="metadata" aria-label="MuJoCo scene with the same 50 design-cone Mode 3 runs flown together over the three-tag field, trails colored by outcome, seen from an orbiting camera." style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<p class="gy-strip"><span>Video, muted · 9 s</span><span class="gy-play">Hover to play · click to enlarge</span></p>
 <div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
 <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Design cone · MuJoCo scene</span>
 <h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">The same 50 runs as a fleet</h3>
@@ -195,7 +192,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <video src="../../../assets/media/modeling/localization/orbes_modes.mp4" poster="../../../assets/media/modeling/localization/orbes_modes_poster.png" muted loop playsinline preload="metadata" aria-label="MuJoCo recording of the six ORBES flight modes with a live fix-age overlay" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<p class="gy-strip"><span>Video, muted · 78 s</span><span class="gy-play">Hover to play · click to enlarge</span></p>
 <div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
 <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">MuJoCo · fix-age overlay</span>
 <h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">Six flight modes in simulation</h3>
@@ -232,7 +228,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <video src="../../../assets/media/modeling/localization/ppo_vs_dlqr.mp4" poster="../../../assets/media/modeling/localization/ppo_vs_dlqr_poster.png" muted loop playsinline preload="metadata" aria-label="Side-by-side MuJoCo render of the same 12 held-out Mode 3 cells. Left, plain DLQR: several trails settle over the target tag and the counter ends at 4 pass, 8 fail. Right, DLQR with the PPO residual: trails tangle and fly off, and the counter ends at 0 pass, 12 fail." style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<p class="gy-strip"><span>Video, muted · 12 s</span><span class="gy-play">Hover to play · click to enlarge</span></p>
 <div style="padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
 <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Replay subset · 12 of the 200 cells</span>
 <h3 style="margin: 0; font-size: 19px; font-weight: 700; text-transform: uppercase;">The same 12 cells, with and without the policy</h3>

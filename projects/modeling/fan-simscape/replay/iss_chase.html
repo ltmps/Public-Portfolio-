@@ -6,7 +6,7 @@
 <meta name="description" content="An eight-minute ISS MPC chase with moving keepouts, body-facing cues, playback-speed readouts and synchronized prediction maps, alongside native Simscape comparisons.">
 <title>ISS chase and recovery | ORBES</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);cursor:default}
@@ -74,7 +74,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 .gy-zoom:hover img{transform:scale(2.2)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="../../../../assets/js/gy.js?v=5f0b7efd82" defer></script>
 <link rel="stylesheet" href="replay.css?v=recovery1">
 <link rel="stylesheet" href="iss_planning.css?v=planning2">
 <script src="iss_planning.js?v=planning2" defer></script>
@@ -86,7 +86,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -120,7 +120,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div class="planning-controls"><label>Video speed <select data-mounted-rate><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><output data-mounted-clock>Simulation clock loading</output></div>
 <p>Gray rims and brackets support the dock and twelve rear range sensors. Blue fingers flex over the orange collar; purple magnetic contacts assist capture. Charging stops before release and withdrawal.</p>
 <p class="scope-note">31.6-second near-dock test using fourteen bounded fans and ideal pose feedback. Zero unintended collisions; charging and undocking checks pass. This is a recorded physical MuJoCo simulation, not validation of autonomous sensor-based docking.</p>
-<details><summary>Sensor positions and test assumptions</summary><img class="iss-figure" src="../../../../assets/media/modeling/fan-simscape/mounted-dock/sensor-layout.png" alt="Supported docking rim and brackets beside the drone rear face; four central range lenses numbered one to four and eight outer lenses numbered five to twelve"><p>Four central lenses measure approach distance; eight outer beams observe the shaped target for lateral alignment. These are simulated range sensors, not specified radar hardware. The forward camera faces away during docking. The added sensor frame contributes about 56 g of assumed mass. Spring, magnetic and material properties are uncalibrated; structural strength and electrical hardware remain unqualified.</p><p>The <a href="#mounted-dock">sensor-driven cycle above</a> completes docking and departure; the earlier incomplete trial remains below. This animation replays every articulated joint from the completed near-dock test. <a href="https://github.com/ltmps/ORBES-sim/pull/67">Source and review</a>.</p></details>
+<details><summary>Sensor positions and test assumptions</summary><img width="1280" height="560" class="iss-figure" src="../../../../assets/media/modeling/fan-simscape/mounted-dock/sensor-layout.png" alt="Supported docking rim and brackets beside the drone rear face; four central range lenses numbered one to four and eight outer lenses numbered five to twelve"><p>Four central lenses measure approach distance; eight outer beams observe the shaped target for lateral alignment. These are simulated range sensors, not specified radar hardware. The forward camera faces away during docking. The added sensor frame contributes about 56 g of assumed mass. Spring, magnetic and material properties are uncalibrated; structural strength and electrical hardware remain unqualified.</p><p>The <a href="#mounted-dock">sensor-driven cycle above</a> completes docking and departure; the earlier incomplete trial remains below. This animation replays every articulated joint from the completed near-dock test. <a href="https://github.com/ltmps/ORBES-sim/pull/67">Source and review</a>.</p></details>
 </section>
 <section id="mounted-sensor-trial" class="iss-video" aria-labelledby="mounted-sensor-title" data-mounted-player data-clock-url="../../../../assets/media/modeling/fan-simscape/mounted-dock/sensor-clock.json">
 <h2 id="mounted-sensor-title">Earlier sensor-driven trial: incomplete</h2>
@@ -205,9 +205,9 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="course-title"><h2 id="course-title">Completed physical corner course</h2>
 <div class="iss-summary"><div><strong>157 / 157</strong>target checkpoints</div><div><strong>0</strong>contact steps</div><div><strong>9606.3 s</strong>simulation duration</div><div><strong>19 / 20</strong>chaser module bounds</div></div>
 <p>The contact-enabled MuJoCo source course completes with 0.480 m minimum target separation, 0.166 m sampled envelope clearance and 65 feasible observed-space braking interventions. Every recorded visual loss recovers. The chaser tracks Cupola from outside at standoff. Module bounds overlap, and the station is a mixed NASA/schematic mock-up, not verified whole-ISS CAD.</p>
-<img class="iss-figure" src="../../../../assets/media/modeling/fan-simscape/iss-chase/corner_course.png" alt="Completed off-center course, camera recovery modes and fan thrust histories">
+<img loading="lazy" decoding="async" width="2250" height="1500" class="iss-figure" src="../../../../assets/media/modeling/fan-simscape/iss-chase/corner_course.png" alt="Completed off-center course, camera recovery modes and fan thrust histories">
 <details><summary>Methods and native dynamics limits</summary><p>The 9606.3 s recorded-thrust native replay differs from the original Euler source by 0.868 m / 0.739°. Without controller feedback, accumulated numerical drift brings target separation down to 0.213 m. A separate unchanged-plant RK4 replay agrees with native to 38.54 micrometres / 0.000007443°. The full recorded-thrust propagation exceeds the engine and separation limits. The 250 s sequence is a separately checked interval.</p>
-<img class="iss-figure" src="../../../../assets/media/modeling/fan-simscape/iss-chase/native_drift.png" alt="Full native replay drift and keepout violation; the qualified first 250 seconds are shaded green"></details></section>
+<img loading="lazy" decoding="async" width="2340" height="1620" class="iss-figure" src="../../../../assets/media/modeling/fan-simscape/iss-chase/native_drift.png" alt="Full native replay drift and keepout violation; the qualified first 250 seconds are shaded green"></details></section>
 </main><footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px 40px; display: flex; flex-direction: column; gap: 40px;">
 <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px;">

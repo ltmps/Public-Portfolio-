@@ -6,7 +6,7 @@
 <meta name="description" content="Engineering studies connecting system requirements, reaction-wheel model checks, mission concepts, trajectory studies and ROS2 integration.">
 <title>Modeling &amp; Simulation | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
@@ -45,8 +45,8 @@
 .gy-card:hover .gy-play{opacity:0}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
-<link rel="stylesheet" href="../../assets/css/gy-read.css?v=c3c4adb5b4">
+<script src="../../assets/js/gy.js?v=5f0b7efd82" defer></script>
+<link rel="stylesheet" href="../../assets/css/gy-read.css?v=6216795ac4">
 <script src="../../assets/js/gy-bar.js?v=81f2c71344" defer></script>
 <script src="../../assets/js/gy-read.js?v=3d3bf85bb9" defer></script>
 <script src="../../assets/js/gy-mesh.js?v=6657c4c060" defer></script>
@@ -57,7 +57,7 @@
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -174,7 +174,7 @@
 <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
 <p style="margin: 0; flex: 1 1 300px; font-size: 20px; line-height: 1.5;">SCExample, an educational Mars-helicopter model, traces each requirement to the operations, functions and components that fulfill it. The model adds typed interfaces and executable mission-state behavior.</p>
 <figure style="margin: 0; flex: 2.4 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
-<div style="border: 1.5px solid var(--foreground); background: #f8fafc; overflow: hidden;"><img src="../../assets/media/modeling/traceability-example.svg" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component." style="width: 100%; height: auto; display: block;"></div>
+<div style="border: 1.5px solid var(--foreground); background: #f8fafc; overflow: hidden;"><img loading="lazy" decoding="async" src="../../assets/media/modeling/traceability-example.svg" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component." style="width: 100%; height: auto; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Altitude-sensing traceability · solid lines native, dashed line a proposed metric</figcaption>
 </figure>
 </div>
@@ -191,11 +191,11 @@
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">Shared team study · Concept artwork: SHERPA team, Cal Poly Pomona / NASA RASC-AL</p>
 </div>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div style="aspect-ratio: 1 / 1; border: 1.5px solid var(--foreground); background: #000; overflow: hidden;"><img src="../../6cef784d-f6e6-4ffb-ae6e-0b2495440058.png" alt="SHERPA spacecraft concept with two circular solar arrays, antennas and a servicing deck." style="width: 100%; height: 100%; object-fit: contain;"></div>
+<div style="aspect-ratio: 1 / 1; border: 1.5px solid var(--foreground); background: #000; overflow: hidden;"><img loading="lazy" decoding="async" width="950" height="982" src="../../6cef784d-f6e6-4ffb-ae6e-0b2495440058.png" alt="SHERPA spacecraft concept with two circular solar arrays, antennas and a servicing deck." style="width: 100%; height: 100%; object-fit: contain;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 3 · Deployed configuration</figcaption>
 </figure>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div style="aspect-ratio: 1 / 1; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../a5a1ff89-22f1-48f2-b422-f697dd5d80f5.png" alt="Earth-Moon trajectory study plot with SHERPA and Falcon Heavy burn locations marked." style="width: 100%; height: 100%; object-fit: contain;"></div>
+<div style="aspect-ratio: 1 / 1; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img loading="lazy" decoding="async" width="569" height="488" src="../../a5a1ff89-22f1-48f2-b422-f697dd5d80f5.png" alt="Earth-Moon trajectory study plot with SHERPA and Falcon Heavy burn locations marked." style="width: 100%; height: 100%; object-fit: contain;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · Trajectory study with burn locations</figcaption>
 </figure>
 </div>
@@ -216,7 +216,7 @@
 <span style="display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; text-transform: uppercase;">Read the ORBES case study <svg class="gy-arrow" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span>
 </div>
 <div style="position: relative; min-height: 300px; background: #fff; border-left: 1.5px solid var(--foreground); overflow: hidden;">
-<img src="../../assets/images/orbes/fan-platform-architecture.svg" alt="ORBES fan-platform architecture: guidance and navigation feed an attitude and translation controller that commands fourteen motors." style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box;">
+<img loading="lazy" decoding="async" src="../../assets/images/orbes/fan-platform-architecture.svg" alt="ORBES fan-platform architecture: guidance and navigation feed an attitude and translation controller that commands fourteen motors." style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box;">
 </div>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </a>

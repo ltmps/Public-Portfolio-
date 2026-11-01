@@ -6,7 +6,7 @@
 <meta name="description" content="SPACEJAM satellite jitter analysis: a coupled spacecraft model connecting disturbances, structural dynamics and attitude control to detector motion and image blur.">
 <title>Jitter analysis and mitigation | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
@@ -47,14 +47,14 @@
 .gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="../../assets/js/gy.js?v=5f0b7efd82" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -96,7 +96,7 @@
 <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">MODEL TO IMAGE</span>
 </span>
 <div style="position: relative; aspect-ratio: 960 / 720; overflow: hidden;">
-<img src="../../2026, 09_07_53 PM.png" alt="Block diagram linking spacecraft disturbances and flexible dynamics to attitude control, detector motion and a blurred point spread function." style="width: 100%; height: 100%; object-fit: contain;">
+<img width="960" height="720" src="../../2026, 09_07_53 PM.png" alt="Block diagram linking spacecraft disturbances and flexible dynamics to attitude control, detector motion and a blurred point spread function." style="width: 100%; height: 100%; object-fit: contain;">
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
 </figure>
@@ -148,7 +148,7 @@
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px; align-items: center;">
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 16px;"><img src="../../2026, 09_08_05 PM.png" alt="Four-stage cycle: update the plant, refine sensors and plant, update jitter models, assess impact and revise." style="width: 100%; height: auto; display: block;"></div>
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 16px;"><img loading="lazy" decoding="async" width="1257" height="595" src="../../2026, 09_08_05 PM.png" alt="Four-stage cycle: update the plant, refine sensors and plant, update jitter models, assess impact and revise." style="width: 100%; height: auto; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · SPACEJAM model-improvement cycle</figcaption>
 </figure>
 <div style="border: 1px solid var(--foreground); background: var(--background);">

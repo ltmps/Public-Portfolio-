@@ -6,7 +6,7 @@
 <meta name="description" content="An educational SCExample systems architecture study connecting physical, functional and operational domains through planar flight, a two-sortie mission cycle and heater-loss recovery.">
 <title>Systems architecture study | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);cursor:default}
@@ -74,7 +74,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 .gy-zoom:hover img{transform:scale(2.2)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="../../../assets/js/gy.js?v=5f0b7efd82" defer></script>
 <script src="../../../assets/js/architecture-study.js?v=0adb9ccece" defer></script>
 <link rel="stylesheet" href="../../../assets/css/project-brief.css?v=clarity1">
 </head>
@@ -83,7 +83,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -129,7 +129,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <video src="../../../assets/media/modeling/architecture/planar-flight.mp4" poster="../../../assets/media/modeling/architecture/planar-flight.jpg" muted loop preload="metadata" aria-label="Planar flight replay: nominal and reduced-power paths over an obstacle with constraint, resource and phase panels" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<figcaption style="padding: 8px 12px; border-top: 1px solid var(--foreground); background: var(--background); display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;"><span>Planar flight replay</span><span class="gy-play" style="color: var(--muted-foreground);">Hover to play</span></figcaption>
+<figcaption style="padding: 8px 12px; border-top: 1px solid var(--foreground); background: var(--background); display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;"><span>Planar flight replay</span></figcaption>
 </figure>
 </div>
 </section>
@@ -200,7 +200,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </figure>
 <div style="border: 1.5px solid var(--foreground); background: var(--background); overflow-x: auto;">
 <table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
-<thead><tr style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left;"><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground);">Measurement</th><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-left: 1px solid var(--foreground);">Nominal 350 W</th><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-left: 1px solid var(--foreground); color: rgb(var(--acc));">Reduced to 200 W</th></tr></thead>
+<thead><tr style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left;"><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground);">Measurement</th><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-left: 1px solid var(--foreground);">Nominal 350 W</th><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-left: 1px solid var(--foreground); text-decoration: underline 2px rgb(var(--acc)); text-underline-offset: 4px;">Reduced to 200 W</th></tr></thead>
 <tbody style="font-variant-numeric: tabular-nums;">
 <tr class="gy-row"><td style="padding: 10px 16px; border-bottom: 1px solid var(--border);">Survey outcome</td><td style="padding: 10px 16px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--foreground);">Full configured route</td><td style="padding: 10px 16px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--foreground);">Return triggered at 27.00 s</td></tr>
 <tr class="gy-row"><td style="padding: 10px 16px; border-bottom: 1px solid var(--border);">Landing and downlink complete</td><td style="padding: 10px 16px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--foreground);">95.74 s</td><td style="padding: 10px 16px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--foreground);">62.56 s</td></tr>
@@ -239,8 +239,8 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </figure>
 </div>
 <figure class="gy-fig" style="margin: 24px 0 0; display: flex; flex-direction: column; gap: 10px;">
-<a class="gy-frame gy-zoom" href="../../../assets/media/modeling/architecture/catalog-couplings.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../../assets/media/modeling/architecture/catalog-couplings.png" alt="Catalog allocation map of all 57 base elements: 10 operational activities, 19 functions and 28 physical components or groups, joined by 43 allocation lines." style="width: 100%; height: auto; display: block;"></a>
-<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. D2 · Catalog allocation map · 10 OA, 19 functions, 28 physical · lines are allocations, not signals · hover to zoom, select to open</figcaption>
+<a class="gy-frame gy-zoom" href="../../../assets/media/modeling/architecture/catalog-couplings.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img width="2909" height="2520" src="../../../assets/media/modeling/architecture/catalog-couplings.png" alt="Catalog allocation map of all 57 base elements: 10 operational activities, 19 functions and 28 physical components or groups, joined by 43 allocation lines." style="width: 100%; height: auto; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. D2 · Catalog allocation map · 10 OA, 19 functions, 28 physical · lines are allocations, not signals</figcaption>
 </figure>
 </section>
 
@@ -327,7 +327,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <p style="margin: 0; flex: 0 0 auto; padding: 16px 20px; border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Resource to authority</p>
 <div style="flex: 1 1 420px; padding: 16px 20px; font-family: var(--font-mono); font-size: 14px; line-height: 1.9; overflow-x: auto;">
 <div>P<sub>flight</sub> = P<sub>idle</sub> + T<sup>3/2</sup> / (η √(2ρA)) + P<sub>drag</sub></div>
-<div style="color: rgb(var(--acc));">T<sub>cap</sub> = [max(P<sub>bus</sub> − P<sub>heater</sub> − P<sub>idle</sub> − P<sub>drag</sub>, 0) · η √(2ρA)]<sup>2/3</sup></div>
+<div style="color: var(--foreground); font-weight: 600;">T<sub>cap</sub> = [max(P<sub>bus</sub> − P<sub>heater</sub> − P<sub>idle</sub> − P<sub>drag</sub>, 0) · η √(2ρA)]<sup>2/3</sup></div>
 <div>ΔE = (P<sub>charge</sub> − P<sub>heater</sub> − P<sub>flight</sub>) · Δt</div>
 </div>
 </div>
@@ -437,8 +437,8 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div style="display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: flex-start;">
 <p style="margin: 0; flex: 1 1 280px; font-size: 18px; line-height: 1.55;">Altitude-sensing requirements trace to the preparation and survey operations, the sensing function and the altimeter that fulfills them.</p>
 <figure class="gy-fig" style="margin: 0; flex: 2 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
-<a class="gy-frame gy-zoom" href="../../../assets/media/modeling/traceability-example.svg" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #f8fafc; overflow: hidden;"><img src="../../../assets/media/modeling/traceability-example.svg" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component." style="width: 100%; height: auto; display: block;"></a>
-<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. J1 · Solid lines native, dashed line a proposed metric · hover to zoom, select to open</figcaption>
+<a class="gy-frame gy-zoom" href="../../../assets/media/modeling/traceability-example.svg" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #f8fafc; overflow: hidden;"><img loading="lazy" decoding="async" src="../../../assets/media/modeling/traceability-example.svg" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component." style="width: 100%; height: auto; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. J1 · Solid lines native, dashed line a proposed metric</figcaption>
 </figure>
 </div>
 </section>

@@ -33,3 +33,6 @@ html .gy-bar.on{transition:transform .22s var(--gy-ease-out)}
 html{scrollbar-color:var(--muted-foreground) transparent;accent-color:rgb(var(--acc))}
 input,textarea{caret-color:rgb(var(--acc))}
 .gy-ext{display:inline-block;margin-left:6px;vertical-align:-1px;flex:0 0 auto}
+/* Larger hit area for the More control without moving text */
+.gy-read-more:not(.gy-read-clamp .gy-read-more){position:relative}
+.gy-read-more::before{content:"";position:absolute;inset:-8px -4px}

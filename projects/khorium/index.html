@@ -6,7 +6,7 @@
 <meta name="description" content="Khorium: pressure testing and validating an automated CAD-to-simulation platform, from geometry repair and meshing to OpenFOAM and CalculiX results that can be trusted.">
 <title>Khorium CAD to simulation | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
@@ -88,8 +88,8 @@
 .kh-cad-tools label{display:flex;align-items:center;gap:8px;min-height:44px}
 .kh-cad-key{display:flex;flex-wrap:wrap;gap:12px 24px;list-style:none;padding:0;margin:16px 0 20px;font-size:14px;line-height:1.5}.kh-cad-key li{display:flex;gap:10px;align-items:center;flex:1 1 210px}.kh-cad-key i{display:block;flex:none;width:22px;height:34px;background:var(--part-color);border:1px solid var(--foreground)}.kh-cad-key strong{display:block;font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em}.kh-cad-key span::before{content:none}
 </style>
-<script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
-<link rel="stylesheet" href="../../assets/css/gy-read.css?v=c3c4adb5b4">
+<script src="../../assets/js/gy.js?v=5f0b7efd82" defer></script>
+<link rel="stylesheet" href="../../assets/css/gy-read.css?v=6216795ac4">
 <script src="../../assets/js/gy-bar.js?v=81f2c71344" defer></script>
 <script src="../../assets/js/gy-read.js?v=3d3bf85bb9" defer></script>
 <script src="../../assets/js/khorium-anim.js?v=bcda24c29b" defer></script>
@@ -101,7 +101,7 @@
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -201,7 +201,7 @@
 <tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">Heat exchanger</th><td>within 8%</td><td>Pressure drop</td><td></td><td>Darcy-Weisbach hand calculation</td></tr>
 <tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">NACA 0012 airfoil</th><td>+12.8%</td><td>Lift slope</td><td>0.1237 per degree</td><td>0.1097 per degree, thin-airfoil theory</td></tr>
 <tr><th scope="row" style="font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--foreground);">Backward-facing step</th><td>-13.2%</td><td>Reattachment length</td><td>5.435 step heights</td><td>6.26, experiment</td></tr>
-</tbody></table></div><p style="margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">References are published experiments, theory or hand calculations. A blank result means only the difference was recorded.</p></div><p style="margin: 40px 0 16px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Result fields · OpenFOAM, k-omega SST · hover to magnify</p>
+</tbody></table></div><p style="margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">References are published experiments, theory or hand calculations. A blank result means only the difference was recorded.</p></div><p style="margin: 40px 0 16px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Result fields · OpenFOAM, k-omega SST</p>
 <div class="gy-read-strip" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 32px 24px; align-items: start;">
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
 <a class="gy-frame gy-zoom" href="../../assets/media/khorium/nasa_hump.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../assets/media/khorium/nasa_hump.png" width="1600" height="612" loading="lazy" alt="Streamwise velocity on the center plane of the NASA wall-mounted hump. Flow speeds up over the crest to about 43 m/s, then separates on the downstream slope, where a white line outlines the reversed-flow bubble before the flow reattaches." style="width: 100%; height: auto; display: block;"></a>
