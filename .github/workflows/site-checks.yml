@@ -18,6 +18,7 @@ jobs:
       - run: node scripts/check-singularity-gallery.cjs
       - run: node scripts/check-modeling-media.cjs
       - run: node scripts/check-fan-simscape.cjs
+      - run: node scripts/check-arm-fixtures.cjs
       - run: node scripts/check-supervisor-review.cjs
       - run: node scripts/check-mpc-replay.cjs
       - run: node scripts/check-reaction-wheel-locus.cjs
@@ -27,6 +28,7 @@ jobs:
       - name: JavaScript syntax
         run: |
           node --check assets/js/gy.js
+          node --check projects/modeling/fan-simscape/replay/arm_fixtures.js
           node --check assets/js/easymini-trace.js
           node --check assets/js/reaction-wheel-locus.js
           node --check assets/js/gy-mesh.js
