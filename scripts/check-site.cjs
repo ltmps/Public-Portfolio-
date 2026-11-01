@@ -7,6 +7,7 @@ const pages = ['projects/modeling/fan-simscape/replay/recovery_comparison.html',
 pages.push('projects/modeling/sherpa/training/index.html');
 pages.push('projects/modeling/fan-simscape/replay/supervisor_review.html', 'projects/modeling/fan-simscape/replay/mpc_comparison.html');
 pages.push('projects/modeling/fan-simscape/replay/arm_fixtures.html');
+pages.push('projects/modeling/fan-simscape/replay/fault_comparisons.html');
 const base = 'https://example.test/Public-Portfolio-/';
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const ids = html => [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
