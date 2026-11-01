@@ -18,7 +18,7 @@
   "rail_dof": 1,
   "rail_policy_trained": true,
   "rail_geometry": "linear and circular",
-  "rail_role": "Matched near-socket PPO comparison; scripted travel previews",
+  "rail_role": "Near-socket and full-cycle PPO comparisons; verified circular learned-cycle development case",
   "intended_rail_geometry": "circular",
   "circular_rail_simulated": true,
   "media": [
@@ -75,6 +75,15 @@
       "fps": 25.0,
       "duration_s": 69.12,
       "audio": false
+    },
+    {
+      "name": "learned-full-cycle",
+      "bytes": 3466177,
+      "sha256": "aaf61a464e0255e1afe2b650072a9593ceb76ed7c8dceaf581badec2c6a5ea3a",
+      "frames": 1736,
+      "fps": 25.0,
+      "duration_s": 69.44,
+      "audio": false
     }
   ],
   "rail_training": {
@@ -109,7 +118,7 @@
     "usable_arc_status": "Provisional screening arc; CAD does not establish hardware travel limits"
   },
   "continuous_transfer": {
-    "status": "Experimental training in progress; no learned full-mission result published",
+    "status": "One circular learned full-cycle development case verified; selected early PPO checkpoint, robustness unproven",
     "separate_from_near_socket_evaluation": true
   },
   "continuous_cycle_reference": {
@@ -299,5 +308,22 @@
         }
       }
     }
+  },
+  "full_cycle_study": {
+    "demonstration": {
+      "training_stage": "ppo_checkpoint",
+      "seed": 42,
+      "seed_role": "seen in initialization and recovery",
+      "full_cycle_success": true,
+      "independent_policy_run": true,
+      "simulation_duration_s": 67.43999999995796,
+      "checkpoint_environment_steps": 1024,
+      "ppo_updates": 3,
+      "policy_sha256": "907433bdfddfdc004ee804ce5c5ccfb44fd2874fa0d9ddab3f3c7a036cd53f4c",
+      "verification_file": "learned-cycle-verification.json"
+    },
+    "matched_baseline_file": "operational-cycle-comparison.json",
+    "final_finetune_file": "feedback-finetune-evaluation.json",
+    "observability_file": "tool-observability-comparison.json"
   }
 }
