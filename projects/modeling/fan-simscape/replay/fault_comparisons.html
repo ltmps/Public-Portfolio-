@@ -77,7 +77,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <script src="../../../../assets/js/gy.js?v=9db17a7d34" defer></script>
 <link rel="stylesheet" href="replay.css?v=thrust1">
 <script>if(new URLSearchParams(location.search).has("embed"))document.documentElement.classList.add("fan-embedded");</script>
-<style>.fault-frame{display:block;width:100%;height:1600px;border:1.5px solid var(--foreground);background:var(--background)}@media(max-width:650px){.fault-frame{height:950px}}</style></head>
+<style>.fault-preview{margin:24px 0}.fault-preview video{display:block;width:100%;height:auto;border:1.5px solid var(--foreground);background:#111}.fault-preview figcaption{margin-top:12px}</style></head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
@@ -99,8 +99,10 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </header>
 
 <main id="main" class="fan-replay" tabindex="-1"><nav class="replay-back"><a href="../#faults">Back to fan simulation study</a></nav><h1>Same command. Healthy versus fault.</h1><p>Choose any of the six GNC modes, then compare its healthy trajectory with the six imposed faults. Each pair shares that mode’s reference, initial position, velocity, angular rate, controller and simulation duration. Only the selected fault changes. Choose a dead fan, stuck fan, thrust-scale error, force bias or torque pulse; all views and plots share one clock.</p>
-<p><a class="gy-link" href="command_comparisons.html?v=matrix1">Open the full-size synchronized fault viewer →</a></p>
-<iframe class="fault-frame" loading="lazy" src="command_comparisons.html?embed=1&amp;v=matrix1" title="Six-mode synchronized healthy and faulty Simscape replay"></iframe>
+<figure class="fault-preview">
+<video controls muted playsinline preload="none" poster="../../../../assets/media/modeling/fan-simscape/gnc_mode6_poster.png?v=matrix1" aria-label="Preview animation of the healthy GNC 6 figure-eight trajectory"><source src="../../../../assets/media/modeling/fan-simscape/gnc_mode6.mp4?v=matrix1" type="video/mp4">Your browser does not support embedded video.</video>
+<figcaption><p class="fan-small">Preview: healthy GNC 6 figure-eight motion. Open the full-size viewer to select any of the six modes and compare faults.</p><a class="gy-link" href="comparison_mode6.html?v=matrix1">Open the full-size synchronized fault viewer →</a></figcaption>
+</figure>
 <p class="fan-small">Operational comparisons cover all six GNC modes: 36 fault runs and six matched healthy runs. No mitigation is included in this matrix. The viewer replays recorded data, without running physics in your browser. The floor is a reference plane, without contact. Camera panels are geometric projections, without image noise, occlusion or a vision estimator.</p></main><footer id="contact" style="position: relative; z-index: 1; border-top: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px 40px; display: flex; flex-direction: column; gap: 40px;">
 <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px;">
