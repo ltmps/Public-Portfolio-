@@ -75,7 +75,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
 <script src="../../../assets/js/gy.js?v=9db17a7d34" defer></script>
-<script src="../../../assets/js/architecture-study.js?v=44ac87d83a" defer></script>
+<script src="../../../assets/js/architecture-study.js?v=0adb9ccece" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -174,7 +174,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </div>
 <div style="flex: 1 1 360px; padding: 24px; display: flex; flex-direction: column; gap: 10px;">
 <p style="margin: 0; font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em;" data-ar-text="evTitle">Available bus power drops at 27.00 s</p>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 62ch;" data-ar-text="evText">The reduced case steps from 350 W to 200 W. With the heater drawing 8 W, 192 W remains before modeled propulsion demand. This is a configured power step, not a simulated battery fault.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 62ch;" data-ar-text="evText">The reduced case prescribes a bus-power step from 350 W to 200 W. With the heater drawing 8 W, 192 W remains before modeled propulsion demand.</p>
 </div>
 <div style="flex: 0 0 auto; padding: 24px; display: flex; align-items: flex-end; gap: 8px;">
 <button type="button" class="gy-nav" data-ar-step="-1" aria-label="Previous step">←</button>
@@ -226,7 +226,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div class="gy-stat" style="flex: 1 1 120px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px;"><span class="gy-num" style="font-size: 30px; font-weight: 700; letter-spacing: -0.03em;">121.3 s</span><span style="font-size: 13px; color: var(--muted-foreground);">sortie 2 complete</span></div>
 <div class="gy-stat" style="flex: 1 1 120px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px;"><span class="gy-num" style="font-size: 30px; font-weight: 700; letter-spacing: -0.03em;">253.0 K</span><span style="font-size: 13px; color: var(--muted-foreground);">cold start gates warmup</span></div>
 </div>
-<p style="margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted-foreground);">Each handover needs every frame acknowledged, a grounded vehicle and a confirmed rotor stop. Altitude and speed are supplied boundaries, so this is not a flight-dynamics plant.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted-foreground);">Each handover needs every frame acknowledged, a grounded vehicle and a confirmed rotor stop. This sequence model uses prescribed altitude and speed.</p>
 </div>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
 <div class="gy-frame" style="aspect-ratio: 1583 / 848; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;">
@@ -262,7 +262,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <li class="gy-step" style="padding: 12px 16px; border: 1px solid var(--foreground); background: var(--background); display: flex; gap: 14px; align-items: baseline;"><span class="gy-stepn" style="flex: 0 0 64px; font-family: var(--font-mono); font-size: 12px; font-variant-numeric: tabular-nums;">79.1 s</span><span style="font-size: 15px;">Two seconds of continuous readiness confirmed</span></li>
 <li class="gy-step" style="padding: 12px 16px; border: 1px dashed var(--foreground); display: flex; gap: 14px; align-items: baseline;"><span class="gy-stepn" style="flex: 0 0 64px; font-family: var(--font-mono); font-size: 12px; font-variant-numeric: tabular-nums;">140 s</span><span style="font-size: 15px;">Persistent loss still has not recovered</span></li>
 </ol>
-<p style="margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted-foreground);">Restoration is an imposed scenario event, not autonomous repair, and thermal recovery is not mission completion.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted-foreground);">The scenario restores heater power at a scheduled time. Temperature recovery and mission completion are tracked separately.</p>
 </div>
 </div>
 </section>
@@ -302,7 +302,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div class="gy-stat" style="flex: 1 1 110px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;"><span class="gy-num" style="font-size: 26px; font-weight: 700;">12</span><span style="font-size: 12px; color: var(--muted-foreground);">safe returns</span></div>
 <div class="gy-stat" style="flex: 1 1 110px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;"><span class="gy-num" style="font-size: 26px; font-weight: 700;">17</span><span style="font-size: 12px; color: var(--muted-foreground);">unsuccessful</span></div>
 </div>
-<p style="margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted-foreground);">Totals cover all 47 runs: control, this 24-cell envelope, a fault campaign and 16 seeded uncertainty runs. Each cell is one executed case, with no interpolation or continuous safety claim.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted-foreground);">Totals cover all 47 runs: control, this 24-cell envelope, a fault campaign and 16 seeded uncertainty runs. Each cell shows one simulated case.</p>
 </div>
 </div>
 </section>
@@ -318,7 +318,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">03 · LINK BEHAVIOR</span><span style="font-size: 15px; line-height: 1.55;">A System Composer component links to Simulink. A sampled controller sets thrust and pitch moment with a 0.2 s lag and ±20° pitch limit.</span></li>
 <li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">04 · EXECUTE</span><span style="font-size: 15px; line-height: 1.55;">The controller samples every 0.02 s and Aerospace 6DOF integrates at 0.01 s, keeping 5,501 samples per case.</span></li>
 <li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">05 · CHECK INDEPENDENTLY</span><span style="font-size: 15px; line-height: 1.55;">Recompute force balance, energy and thermal closure, clearance, landing gates and telemetry conservation across 47 acceptance and regression checks.</span></li>
-<li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">06 · PRESENT RESULTS</span><span style="font-size: 15px; line-height: 1.55;">Replay the retained traces in MATLAB and export the animations. The browser plays a precomputed export and does not run MATLAB.</span></li>
+<li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">06 · PRESENT RESULTS</span><span style="font-size: 15px; line-height: 1.55;">Export the MATLAB simulation traces as synchronized motion and response plots.</span></li>
 </ol>
 <div style="margin-top: 20px; border: 1.5px solid var(--foreground); background: var(--background); display: flex; flex-wrap: wrap;">
 <p style="margin: 0; flex: 0 0 auto; padding: 16px 20px; border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Resource to authority</p>

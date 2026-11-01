@@ -2,6 +2,7 @@
   "model_status": "Provisional training surrogate; not hardware acceptance data",
   "algorithm": "PPO with four reference trajectories for initialization",
   "training_steps": 50176,
+  "training_steps_scope": "Original fixed-base policy; coordinated rail training is recorded under rail_training",
   "evaluation": {
     "connect": {
       "episodes": 2,
@@ -15,11 +16,11 @@
     }
   },
   "rail_dof": 1,
-  "rail_policy_trained": false,
-  "rail_geometry": "linear",
-  "rail_role": "trade-study baseline",
+  "rail_policy_trained": true,
+  "rail_geometry": "linear and circular",
+  "rail_role": "Near-socket and full-cycle PPO comparisons; verified circular learned-cycle development case",
   "intended_rail_geometry": "circular",
-  "circular_rail_simulated": false,
+  "circular_rail_simulated": true,
   "media": [
     {
       "name": "rail-cart",
@@ -47,6 +48,282 @@
       "fps": 25.0,
       "duration_s": 10.0,
       "audio": false
+    },
+    {
+      "name": "circular-rail",
+      "bytes": 1155804,
+      "sha256": "78ee6416a3516fbc5eaa8f9c1dac516d9fbe4fbcfe8e20d4e0ade184996625aa",
+      "frames": 388,
+      "fps": 12.5,
+      "duration_s": 31.04,
+      "audio": false
+    },
+    {
+      "name": "circular-ppo-connect",
+      "bytes": 87698,
+      "sha256": "4cdca8e9cd7a19625f07394a2af6abfec7aff0684d26f79bd61cdfedd1f50a30",
+      "frames": 250,
+      "fps": 25.0,
+      "duration_s": 10.0,
+      "audio": false
+    },
+    {
+      "name": "circular-roundtrip",
+      "bytes": 3758828,
+      "sha256": "43da39510b6ad149f12ced71234b8e00236985ffed1b2f65075aa1e1f03c7ff6",
+      "frames": 1728,
+      "fps": 25.0,
+      "duration_s": 69.12,
+      "audio": false
+    },
+    {
+      "name": "learned-full-cycle",
+      "bytes": 3466177,
+      "sha256": "aaf61a464e0255e1afe2b650072a9593ceb76ed7c8dceaf581badec2c6a5ea3a",
+      "frames": 1736,
+      "fps": 25.0,
+      "duration_s": 69.44,
+      "audio": false
     }
-  ]
+  ],
+  "rail_training": {
+    "stage": "near_socket",
+    "steps_per_geometry": 16384,
+    "observations": 61,
+    "actions": 9,
+    "matched_total_travel_m": 0.875,
+    "initial_cart_offset_m": 0.003,
+    "held_out_seeds": [
+      40000,
+      40009
+    ],
+    "counts": {
+      "linear": {
+        "successes": 14,
+        "episodes": 20
+      },
+      "circular": {
+        "successes": 11,
+        "episodes": 20
+      }
+    }
+  },
+  "circular_configuration": {
+    "radius_m": 1.25,
+    "angle_range_rad": [
+      -0.35,
+      0.35
+    ],
+    "carriage_orientation": "Yaw follows carriage angle; arm and reel mounted to cart",
+    "usable_arc_status": "Provisional screening arc; CAD does not establish hardware travel limits"
+  },
+  "continuous_transfer": {
+    "status": "One circular learned full-cycle development case verified; selected early PPO checkpoint, robustness unproven",
+    "separate_from_near_socket_evaluation": true
+  },
+  "continuous_cycle_reference": {
+    "scope": "Scripted continuous mechanical cycle, not learned PPO success",
+    "simulation_duration_s": 67.07999999995624,
+    "steps": 3354,
+    "turnaround": {
+      "physical_state_max_jump": 0.0,
+      "waypoints": 36,
+      "reorientation_cart_position_m": -0.4,
+      "sequence": "Withdraw; retreat carriage; reverse arm path while parked; return carriage; dock",
+      "final_approach": "Reverse measured source withdrawal joint path",
+      "docking_joint_targets": 11
+    },
+    "minimum_bend_radius_m": 0.08052147078848358,
+    "maximum_hose_twist_rad": 1.1769000126818054,
+    "peak_drive_force_n": 21.185950368225896,
+    "final_helium_leak_kg_s": 7.247527000311112e-11,
+    "final_pressure_pa": 19970.734203677323,
+    "minimum_bend_bound_m": 0.06,
+    "maximum_hose_twist_bound_rad": 1.5707963267948966,
+    "physical_state_jump_at_turnaround": 0.0,
+    "independent_audit": {
+      "scope": "Independent geometric replay; non-mate payload/arm and reel/arm-or-fixture pairs; not hardware qualification",
+      "stride": 1,
+      "checked_states": 3354,
+      "geometric_tolerance_m": 0.0001,
+      "minimum_reel_clearance_m": 0.1,
+      "violation_count": 0,
+      "maximum_penetration_m": 0.0
+    },
+    "source_sha256": {
+      "transfer_rail_env.py": "a9d5ecb1d7b67dd8f4dbc13dcb65a1f62d2ac0120e8301a9f97cee42a37af93e",
+      "transfer_axial_swivel.py": "e5e3ba0d9153db03a4bf077524826cb21d0333ace11b298f3180a4750fdbea22",
+      "transfer_axial_safe.py": "a1c8d91fb1ce01bedea52cada1c99465740805193ce7d8329302e0942d824069",
+      "reference_return_path.py": "25018c72bf384f3c33ba4073a4cc6068505bfe7373edccd266bb4deaa6c83ed6",
+      "transfer_progress_reward.py": "9675b5cc6aae21d16b79435209e90c65ba846491c42e894d2fa16fc4f750705a",
+      "service_env.py": "1e4b6fbdd9a8b5ba1b9077254786f20e9e22fbd5fa96dc9fc11d6302472ec855",
+      "refuel_env.py": "e404d9187f67eca8c6064ead298417599975c14f94a8289c3ed85a439d3bddfd",
+      "rail_refuel_env.py": "dfbac1538a0dbd293a997400e28f0a439f0283a924c500cf61f26c87b08c7dbc",
+      "circular_rail_env.py": "ab84a315186be3c8ec2633180b7ec63be708f39e9019469e1abcd1c5ae694607",
+      "geometry_utils.py": "e922cc2ed4464c50b8f41a0b2ddc1db6982de93335220d6853500e5c4029d5b0",
+      "helium_circuit.py": "6db1ab46fcf98e0d52321e76763d7d1f53d4c1e74216c2ee0bbde719320b9e2a",
+      "transfer_mechanism.json": "6d4c2368360d56952808701b5d5202dde8c800530df5290f30d56b39740be22b",
+      "refuel_config.json": "eb8895ef707b2cb61934a0ac5cc6e1e7d01a75006210215b52f13dc430e8186a",
+      "circular_rail_config.json": "94d460e70d9ed2443f190da189c48686fdbd8ff7545ca36865fec38b0c2a616b",
+      "rail_config.json": "dd754a287ee839a69445ccea12e6f09be5dfba20d133e7e5f0c492a43fb98384",
+      "reference_return_full.py": "487f8cdacd7deaa38217012c22cda126a3dec2d9a2e8bcd84052c8e5314c69d8",
+      "reference_return_parked.py": "bca9571aba3399b30eb061a7eaae8989712e99d6f4a72956244a9d51c3e82fff"
+    }
+  },
+  "source_curriculum": {
+    "scope": "Source helium pressure/contact check only; NOT full transfer or cycle success",
+    "training_steps": 8192,
+    "seeds": [
+      31000,
+      31001,
+      31002,
+      31003,
+      31004,
+      31005,
+      31006,
+      31007,
+      31008,
+      31009
+    ],
+    "results": {
+      "linear": {
+        "policy_sha256": "e2f857cc4eaa6640868edf9c29b43daa7a426dbf8a6771f0d9999e1ab334bcff",
+        "by_source": {
+          "connect": {
+            "successes": 9,
+            "episodes": 10,
+            "rate": 0.9,
+            "wilson_95": [
+              0.5958499732047615,
+              0.9821237869049271
+            ]
+          },
+          "stow": {
+            "successes": 4,
+            "episodes": 10,
+            "rate": 0.4,
+            "wilson_95": [
+              0.16818032970623614,
+              0.6873262302663417
+            ]
+          }
+        }
+      },
+      "circular": {
+        "policy_sha256": "362136d194d2f6d962cfb99597b8bf1bdd03be095f475f75e96a2b913c1257a8",
+        "by_source": {
+          "connect": {
+            "successes": 6,
+            "episodes": 10,
+            "rate": 0.6,
+            "wilson_95": [
+              0.31267376973365824,
+              0.8318196702937638
+            ]
+          },
+          "stow": {
+            "successes": 7,
+            "episodes": 10,
+            "rate": 0.7,
+            "wilson_95": [
+              0.39677814746114537,
+              0.8922087325936989
+            ]
+          }
+        }
+      }
+    }
+  },
+  "full_transfer_baseline": {
+    "scope": "Matched direct PPO actions on frozen v3 physics; held-out evaluation, not training outcomes",
+    "reward_scheme": "continuous_progress_v3",
+    "training_steps_per_geometry": 32768,
+    "results": {
+      "linear": {
+        "policy_sha256": "f425ace78fd345efeadf4d11b97758936fbb757d034f6799e5d0dec328681a0e",
+        "episodes": 20,
+        "successes": 0,
+        "success_rate": 0.0,
+        "success_wilson_95_interval": [
+          0.0,
+          0.16112515805281938
+        ],
+        "by_source": {
+          "connect": {
+            "successes": 0,
+            "episodes": 10,
+            "source_checks": 6
+          },
+          "stow": {
+            "successes": 0,
+            "episodes": 10,
+            "source_checks": 0
+          }
+        },
+        "mean_success_cycle_time_s": null,
+        "mean_success_drive_work_j": null,
+        "source_check_rate": 0.3,
+        "minimum_bend_radius_m": 0.07996918771062536,
+        "maximum_hose_twist_rad": 1.5788015956186108,
+        "failures": {
+          "leak_failure": 3,
+          "routing_failure": 8,
+          "collision_failure": 9,
+          "overload": 0,
+          "invalid": 0
+        }
+      },
+      "circular": {
+        "policy_sha256": "e47558b2800e6d495d637472487d0801b5d0f8f02c78f889580d2ec7322fbe69",
+        "episodes": 20,
+        "successes": 0,
+        "success_rate": 0.0,
+        "success_wilson_95_interval": [
+          0.0,
+          0.16112515805281938
+        ],
+        "by_source": {
+          "connect": {
+            "successes": 0,
+            "episodes": 10,
+            "source_checks": 5
+          },
+          "stow": {
+            "successes": 0,
+            "episodes": 10,
+            "source_checks": 4
+          }
+        },
+        "mean_success_cycle_time_s": null,
+        "mean_success_drive_work_j": null,
+        "source_check_rate": 0.45,
+        "minimum_bend_radius_m": 0.08005957164794476,
+        "maximum_hose_twist_rad": 1.573614529866984,
+        "failures": {
+          "leak_failure": 0,
+          "routing_failure": 6,
+          "collision_failure": 14,
+          "overload": 0,
+          "invalid": 0
+        }
+      }
+    }
+  },
+  "full_cycle_study": {
+    "demonstration": {
+      "training_stage": "ppo_checkpoint",
+      "seed": 42,
+      "seed_role": "seen in initialization and recovery",
+      "full_cycle_success": true,
+      "independent_policy_run": true,
+      "simulation_duration_s": 67.43999999995796,
+      "checkpoint_environment_steps": 1024,
+      "ppo_updates": 3,
+      "policy_sha256": "907433bdfddfdc004ee804ce5c5ccfb44fd2874fa0d9ddab3f3c7a036cd53f4c",
+      "verification_file": "learned-cycle-verification.json"
+    },
+    "matched_baseline_file": "operational-cycle-comparison.json",
+    "final_finetune_file": "feedback-finetune-evaluation.json",
+    "observability_file": "tool-observability-comparison.json"
+  }
 }

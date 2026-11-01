@@ -1,0 +1,19 @@
+{
+  "radius_m": 1.25,
+  "usable_arc_rad": [
+    -0.35,
+    0.35
+  ],
+  "orientation": "carriage yaw follows track angle",
+  "static_kinematic_max_error_m": 2.2887833992611187e-16,
+  "integration_pose_lag_max_m": 7.39958772035712e-05,
+  "minimum_arc_m": -0.41792452690866205,
+  "maximum_arc_m": 0.41792440049262347,
+  "maximum_grasp_error_m": 4.9354980413599435e-05,
+  "maximum_drive_force_n": 17.37843075826977,
+  "minimum_bend_radius_m": 0.07932490210796196,
+  "maximum_hose_twist_rad": 0.006935545735391853,
+  "forbidden_contact_penetrations": [],
+  "success": true,
+  "clearance_scope": "Modeled track/socket contacts during full scripted sweep; not native CAD or full workspace clearance"
+}

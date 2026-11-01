@@ -1,0 +1,29 @@
+{
+  "scope": "Matched scripted physical cycle, observer comparison only; not learned success or calibrated hardware uncertainty",
+  "steps": 3366,
+  "full_physical_state_and_action_arrays_bit_identical": true,
+  "physical_state_sha256": "f7ffff3e25142aa4265dbcb97e056ac64bd5d830c901a274cb4ddb4a8b72dcaa",
+  "same_inherited_scene_sources": true,
+  "additional_sensor_source": "fused_parity_env.py",
+  "camera_stale_samples": 269,
+  "old_error_max_m": 0.40781936533955243,
+  "fused_error_max_m": 0.009794487099503646,
+  "old_error_95th_m": 0.06587290687332553,
+  "fused_error_95th_m": 0.007477653151893382,
+  "fused_stale_error_95th_m": 0.00765300953748241,
+  "empirical_within_three_provisional_sigmas_fraction": 0.9961378490790256,
+  "imposed_marker_outage_check": {
+    "scope": "Synthetic marker dropout, identical physical actions/states; not a learned-policy success",
+    "seed": 42,
+    "steps": 320,
+    "marker_disabled_at_step": 100,
+    "physics_and_planner_bit_identical": true,
+    "stale_final_tool_error_m": 0.38548656752268917,
+    "fused_final_tool_error_m": 0.004812854061265538,
+    "fused_outage_95th_percentile_error_m": 0.007840555334537617,
+    "camera_measurement_age_s": 4.50000000000057,
+    "fusion_updates": 19,
+    "fusion_rejections": 0,
+    "reported_provisional_sigma_m": 0.002971807361046054
+  }
+}

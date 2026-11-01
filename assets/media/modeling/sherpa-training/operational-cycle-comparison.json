@@ -1,0 +1,412 @@
+{
+  "scope": "Direct learned full connection/stow/connection cycles; same physical reset seeds and PPO budget",
+  "initialization_caveat": "Reference-data availability differs: linear: failed-reference safe prefix, 2408 retained steps; circular: failed-reference safe prefix, 2426 retained steps. Initialization and recovery data differ; this does not isolate rail geometry alone.",
+  "requested_steps": 16384,
+  "reward_scheme": "coherent_cycle_progress_v6_normalized",
+  "source_sha256": {
+    "transfer_rail_env.py": "a9d5ecb1d7b67dd8f4dbc13dcb65a1f62d2ac0120e8301a9f97cee42a37af93e",
+    "service_env.py": "1e4b6fbdd9a8b5ba1b9077254786f20e9e22fbd5fa96dc9fc11d6302472ec855",
+    "refuel_env.py": "e404d9187f67eca8c6064ead298417599975c14f94a8289c3ed85a439d3bddfd",
+    "rail_refuel_env.py": "dfbac1538a0dbd293a997400e28f0a439f0283a924c500cf61f26c87b08c7dbc",
+    "circular_rail_env.py": "ab84a315186be3c8ec2633180b7ec63be708f39e9019469e1abcd1c5ae694607",
+    "coordinated_rail_env.py": "7105183619f4a7aba187c94ded91c9e768344a86e0a811f0102b1e7b2f22233e",
+    "geometry_utils.py": "e922cc2ed4464c50b8f41a0b2ddc1db6982de93335220d6853500e5c4029d5b0",
+    "camera_observer.py": "6e9bb736f4f376fe2f53e55f5fdf8fe00de7dd41f097dc022ea92fb601497d79",
+    "helium_circuit.py": "6db1ab46fcf98e0d52321e76763d7d1f53d4c1e74216c2ee0bbde719320b9e2a",
+    "train_transfer.py": "0c01373832e5c193a40d90c9206147c29732238684de989caeff5ce39eb0ab8b",
+    "render_rollout.py": "5c5f9d909188b4fecec6af9c2f3298decd6a8d834564ab0acd18dc113fa4dacf",
+    "transfer_mechanism.json": "6d4c2368360d56952808701b5d5202dde8c800530df5290f30d56b39740be22b",
+    "refuel_config.json": "eb8895ef707b2cb61934a0ac5cc6e1e7d01a75006210215b52f13dc430e8186a",
+    "rail_config.json": "dd754a287ee839a69445ccea12e6f09be5dfba20d133e7e5f0c492a43fb98384",
+    "circular_rail_config.json": "94d460e70d9ed2443f190da189c48686fdbd8ff7545ca36865fec38b0c2a616b",
+    "transfer_progress_reward.py": "9675b5cc6aae21d16b79435209e90c65ba846491c42e894d2fa16fc4f750705a",
+    "transfer_axial_swivel.py": "e5e3ba0d9153db03a4bf077524826cb21d0333ace11b298f3180a4750fdbea22",
+    "transfer_axial_safe.py": "a1c8d91fb1ce01bedea52cada1c99465740805193ce7d8329302e0942d824069",
+    "coherent_cycle_env.py": "be561d59259364621d00b7de51e2e09b4b51641437d608392a48a0ffa5545ac1",
+    "coherent_sensor_env.py": "ed7b1f6460d7a02581e7741202a33c420085794d4400f5faf7838029cc6b8fba",
+    "reference_return_path.py": "25018c72bf384f3c33ba4073a4cc6068505bfe7373edccd266bb4deaa6c83ed6",
+    "reference_return_parked.py": "bca9571aba3399b30eb061a7eaae8989712e99d6f4a72956244a9d51c3e82fff",
+    "reference_return_full.py": "487f8cdacd7deaa38217012c22cda126a3dec2d9a2e8bcd84052c8e5314c69d8",
+    "operational_cycle_env.py": "381ff2ed9fa5f0c0092c4283b3fb08692eec318349e5c3479d4b5ff6f6afdd77",
+    "train_coherent_cycle.py": "0c0e3fb4f8f09ed920bd60f0e48eaa430486fe3f9d7302eca2e92272237b3883",
+    "train_transfer_balanced.py": "b0dd5d69e0811cca65f75ab23bba20804696da8771c6d1c402cb33267edb556b",
+    "train_operational_cycle.py": "42342de35f8fc3e74b03bfa9f4d662ded844e5d641b4dccdf593abd15c05c35c",
+    "refuel_plots.py": "d519e52de34aa63dc88a8256f2483fdb2c4ec462b0e509e7c175b77259be070d"
+  },
+  "results": {
+    "linear": {
+      "episodes": 10,
+      "full_cycle_successes": 0,
+      "full_cycle_rate": 0.0,
+      "full_cycle_wilson_95": [
+        0.0,
+        0.2775327998628892
+      ],
+      "outbound_successes": 0,
+      "mean_success_cycle_time_s": null,
+      "mean_success_drive_work_j": null,
+      "minimum_bend_radius_m": 0.07996617323826734,
+      "maximum_twist_rad": 1.1829559741907256,
+      "failure_flags": {
+        "leak_failure": 0,
+        "routing_failure": 0,
+        "collision_failure": 9,
+        "overload": 0,
+        "invalid": 0
+      },
+      "reference_full_cycle_success": false,
+      "reference_retained_steps": 2408,
+      "fitted_samples": 9559,
+      "policy_sha256": "8b98a66cd9be4171f94e9e43bcad04a9391825491f9c076d8ebc5f04ca72b417",
+      "outcomes": [
+        {
+          "seed": 40000,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 21.3,
+          "rail_absolute_work_j": 3.3617925737841734,
+          "minimum_bend_radius_m": 0.08030752088767155,
+          "maximum_twist_rad": 0.8341139334857729,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40001,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 80.0,
+          "rail_absolute_work_j": 15.756647335206122,
+          "minimum_bend_radius_m": 0.08209829374201151,
+          "maximum_twist_rad": 1.1829559741907256,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": false,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40002,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 17.22,
+          "rail_absolute_work_j": 2.5240546794765515,
+          "minimum_bend_radius_m": 0.07997215051121573,
+          "maximum_twist_rad": 0.8249261526901795,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40003,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 16.1,
+          "rail_absolute_work_j": 2.0610752595221133,
+          "minimum_bend_radius_m": 0.07996617323826734,
+          "maximum_twist_rad": 0.8433704682564931,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40004,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 28.26,
+          "rail_absolute_work_j": 1.6432917898650934,
+          "minimum_bend_radius_m": 0.08200915370294874,
+          "maximum_twist_rad": 0.9623106048608119,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40005,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 29.64,
+          "rail_absolute_work_j": 5.023008078841729,
+          "minimum_bend_radius_m": 0.08035395760489261,
+          "maximum_twist_rad": 0.8379922261267417,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40006,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 15.120000000000001,
+          "rail_absolute_work_j": 2.0372701024436646,
+          "minimum_bend_radius_m": 0.07996713932436005,
+          "maximum_twist_rad": 0.8441701745206798,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40007,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 10.52,
+          "rail_absolute_work_j": 1.4270054301342059,
+          "minimum_bend_radius_m": 0.07999602517699003,
+          "maximum_twist_rad": 0.8406343617365338,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40008,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 12.08,
+          "rail_absolute_work_j": 1.645550046463365,
+          "minimum_bend_radius_m": 0.07997110724751842,
+          "maximum_twist_rad": 0.8559702003746,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40009,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 33.72,
+          "rail_absolute_work_j": 5.666429848595826,
+          "minimum_bend_radius_m": 0.08019864921585211,
+          "maximum_twist_rad": 0.8292730554404223,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        }
+      ]
+    },
+    "circular": {
+      "episodes": 10,
+      "full_cycle_successes": 0,
+      "full_cycle_rate": 0.0,
+      "full_cycle_wilson_95": [
+        0.0,
+        0.2775327998628892
+      ],
+      "outbound_successes": 0,
+      "mean_success_cycle_time_s": null,
+      "mean_success_drive_work_j": null,
+      "minimum_bend_radius_m": 0.08006447047910789,
+      "maximum_twist_rad": 1.5718877846286168,
+      "failure_flags": {
+        "leak_failure": 0,
+        "routing_failure": 1,
+        "collision_failure": 9,
+        "overload": 0,
+        "invalid": 0
+      },
+      "reference_full_cycle_success": false,
+      "reference_retained_steps": 2426,
+      "fitted_samples": 3735,
+      "policy_sha256": "66f660c55eb4d689909cb8b358c05a88c8e6470e2abb7c4d4832ef25ceaf856e",
+      "outcomes": [
+        {
+          "seed": 40000,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 11.16,
+          "rail_absolute_work_j": 1.9058007009885936,
+          "minimum_bend_radius_m": 0.08023451769656205,
+          "maximum_twist_rad": 1.5673772999059443,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40001,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 7.5600000000000005,
+          "rail_absolute_work_j": 0.29184893883328566,
+          "minimum_bend_radius_m": 0.08028055141247845,
+          "maximum_twist_rad": 0.4197157599044088,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40002,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 29.94,
+          "rail_absolute_work_j": 4.627271358355652,
+          "minimum_bend_radius_m": 0.08040465802374484,
+          "maximum_twist_rad": 0.8083357644340191,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40003,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 18.34,
+          "rail_absolute_work_j": 1.2183858981722548,
+          "minimum_bend_radius_m": 0.08037474450364965,
+          "maximum_twist_rad": 0.9477899292652455,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40004,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 11.42,
+          "rail_absolute_work_j": 0.8859447712288102,
+          "minimum_bend_radius_m": 0.08011700974683342,
+          "maximum_twist_rad": 0.576712677234367,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40005,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 2.5,
+          "rail_absolute_work_j": 0.08248341078089186,
+          "minimum_bend_radius_m": 0.08023558142878073,
+          "maximum_twist_rad": 0.8285861385839688,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40006,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 2.84,
+          "rail_absolute_work_j": 0.09510512262245722,
+          "minimum_bend_radius_m": 0.08027865355078921,
+          "maximum_twist_rad": 0.8239132302044267,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40007,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 12.74,
+          "rail_absolute_work_j": 1.9723339363384467,
+          "minimum_bend_radius_m": 0.08006447047910789,
+          "maximum_twist_rad": 1.5718877846286168,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": true,
+            "collision_failure": false,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40008,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 20.34,
+          "rail_absolute_work_j": 1.425105529090161,
+          "minimum_bend_radius_m": 0.08020083945216011,
+          "maximum_twist_rad": 0.9775312335108451,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        },
+        {
+          "seed": 40009,
+          "full_cycle_success": false,
+          "outbound_success": false,
+          "cycle_or_trial_time_s": 2.7800000000000002,
+          "rail_absolute_work_j": 0.07982114444667324,
+          "minimum_bend_radius_m": 0.08018982376234517,
+          "maximum_twist_rad": 0.8391827904059304,
+          "failure_flags": {
+            "leak_failure": false,
+            "routing_failure": false,
+            "collision_failure": true,
+            "overload": false,
+            "invalid": false
+          }
+        }
+      ]
+    }
+  }
+}

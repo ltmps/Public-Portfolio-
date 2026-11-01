@@ -4,7 +4,7 @@
 (function () {
   'use strict';
   var EV = [
-    ['Physical resource', 'Available bus power drops at 27.00 s', 'The reduced case steps from 350 W to 200 W. With the heater drawing 8 W, 192 W remains before modeled propulsion demand. This is a configured power step, not a simulated battery fault.'],
+    ['Physical resource', 'Available bus power drops at 27.00 s', 'The reduced case prescribes a bus-power step from 350 W to 200 W. With the heater drawing 8 W, 192 W remains before modeled propulsion demand.'],
     ['Functional authority', 'The thrust cap shrinks', 'The power limiter recomputes how much thrust the remaining bus power can support. In the reduced case the cap falls to 7.11 N.'],
     ['Supervision', 'The guard requests a return', 'The soft power guard goes negative, at -7.2 W against a 15% hover-headroom policy, while the hard bus margin stays positive.'],
     ['Operational activity', 'Survey becomes return', 'The O07 survey stops short of the configured route and the vehicle heads home instead of finishing it.'],
@@ -16,7 +16,7 @@
   var OT = {
     ok: ['Mission completed', 'Full configured survey, safe home landing and every record acknowledged, with no checked hard-safety violation.'],
     safe: ['Safe return', 'The survey aborted with recovery requested, then landed safely at home with no checked hard-safety violation. Delivery is reported separately.'],
-    fail: ['Unsuccessful recovery', 'Physical, recovery or completion criteria were not all met. This can include a physically safe landing with missing delivery and does not mean the vehicle crashed.']
+    fail: ['Unsuccessful recovery', 'At least one physical, recovery or completion criterion failed. A safe landing with incomplete delivery also falls in this category.']
   };
   var state = { ev: 0, cell: 9, sc: 1 };
 
