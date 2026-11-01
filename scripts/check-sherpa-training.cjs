@@ -23,8 +23,8 @@ for (const geometry of ['linear', 'circular']) {
   assert.equal(trials.filter(x => x.success).length, summary.rail_training.counts[geometry].successes);
   for (const mode of ['connect', 'stow']) assert.equal(trials.filter(x => x.source_or_task === mode).length, 10);
 }
-assert(html.includes('Linear versus circular rail') && html.includes('no learned continuous-transfer success is claimed'));
-assert(html.includes('scripted') && html.includes('not a reliability estimate'));
+assert(html.includes('Linear versus circular rail') && html.includes('successful learned continuous transfer is still an open objective'));
+assert(html.includes('scripted') && html.includes('four diagnostic episodes provide a small initial sample'));
 assert.equal((html.match(/<video\b/g) || []).length, summary.media.length);
 for (const item of summary.media) {
   const buffer = fs.readFileSync(path.join(dir, item.name+'.mp4'));
