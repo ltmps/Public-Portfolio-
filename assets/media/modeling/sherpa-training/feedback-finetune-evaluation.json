@@ -1,0 +1,89 @@
+{
+  "scope": "Final4096-step continuation, distinct from selected early checkpoint",
+  "environment_steps": 4096,
+  "evaluation_seed_roles": {
+    "seen": [
+      42
+    ],
+    "fresh_after_development": [
+      61000,
+      61001,
+      61002
+    ],
+    "prior_development_set": [
+      40000,
+      40001,
+      40002,
+      40003,
+      40004,
+      40005,
+      40006,
+      40007,
+      40008,
+      40009
+    ]
+  },
+  "policy_sha256": "51321f397e15b0be790840da1d9770bd7636dafa441156d53514ca3f683acc7d",
+  "outcomes": [
+    {
+      "seed": 42,
+      "steps": 2894,
+      "full_cycle_success": false,
+      "outbound_transfer_completed": true,
+      "final_leg": 1,
+      "final_phase": 2,
+      "failures": {
+        "leak_failure": false,
+        "routing_failure": false,
+        "collision_failure": true,
+        "overload": false,
+        "invalid": false
+      }
+    },
+    {
+      "seed": 61000,
+      "steps": 960,
+      "full_cycle_success": false,
+      "outbound_transfer_completed": false,
+      "final_leg": 0,
+      "final_phase": 0,
+      "failures": {
+        "leak_failure": false,
+        "routing_failure": false,
+        "collision_failure": true,
+        "overload": false,
+        "invalid": false
+      }
+    },
+    {
+      "seed": 61001,
+      "steps": 1016,
+      "full_cycle_success": false,
+      "outbound_transfer_completed": false,
+      "final_leg": 0,
+      "final_phase": 0,
+      "failures": {
+        "leak_failure": false,
+        "routing_failure": false,
+        "collision_failure": true,
+        "overload": false,
+        "invalid": false
+      }
+    },
+    {
+      "seed": 61002,
+      "steps": 2858,
+      "full_cycle_success": false,
+      "outbound_transfer_completed": true,
+      "final_leg": 1,
+      "final_phase": 0,
+      "failures": {
+        "leak_failure": false,
+        "routing_failure": false,
+        "collision_failure": true,
+        "overload": false,
+        "invalid": false
+      }
+    }
+  ]
+}
