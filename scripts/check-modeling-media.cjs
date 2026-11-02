@@ -170,7 +170,8 @@ for (const [tag] of rwVideo) {
   assert(tag.includes('preload="none"') && !/\b(?:loop|autoplay)\b/.test(tag));
   assert(/poster="[^"]+"/.test(tag) && /aria-describedby="[^"]+"/.test(tag));
 }
-assert(!/<img\b[^>]+src="[^"]+\.gif/i.test(rw),'GIFs remain optional downloads');
+assert(!/<img\b[^>]+src="[^"]+\.gif/i.test(rw),'Reaction-wheel playback remains video-based');
+assert(!rw.includes('rw-gif-download'), 'No GIF archive download section');
 const rwManifest = JSON.parse(read('assets/media/modeling/reaction-wheel/manifest.json'));
 for (const item of rwManifest.files) {
   const file = 'assets/media/modeling/reaction-wheel/' + item.name;
