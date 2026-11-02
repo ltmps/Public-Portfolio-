@@ -27,7 +27,7 @@ for (const slug of slugs) {
     assert(!seen.has(name), `${name}: duplicated video`);
     seen.add(name);
     assert(html.includes('class="sm-phase-grid"'), `${slug}: static phase panels`);
-    assert(html.includes(`href="../../../../assets/media/modeling/sherpa/${name}.mp4"`));
+    assert(!html.includes(`href="../../../../assets/media/modeling/sherpa/${name}.mp4"`), `${slug}: embedded playback without a direct media link`);
     assert(fs.statSync(path.join(dir, name + '.jpg')).size > 1000);
   }
   for (const section of html.matchAll(/<section class="sm-film"[\s\S]*?<\/section>/g)) {
