@@ -1,5 +1,5 @@
-.project-brief{position:relative;z-index:1;max-width:1136px;margin:28px auto 40px;padding:0 24px;box-sizing:border-box;color:var(--foreground)}
-.project-brief dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:0;border:1.5px solid var(--foreground);background:var(--background)}
-.project-brief dl>div{padding:18px 20px;border-bottom:1px solid var(--border);min-width:0}.project-brief dl>div:nth-child(odd){border-right:1px solid var(--border)}.project-brief dl>div:nth-last-child(-n+2){border-bottom:0}
-.project-brief dt{font-family:var(--font-mono,monospace);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-foreground);margin-bottom:8px}.project-brief dd{margin:0;font-size:15px;line-height:1.6;overflow-wrap:anywhere}
-@media(max-width:640px){.project-brief{padding:0 20px}.project-brief dl{grid-template-columns:1fr}.project-brief dl>div:nth-child(odd){border-right:0}.project-brief dl>div:nth-last-child(2){border-bottom:1px solid var(--border)}}
+.project-brief{position:relative;z-index:1;max-width:1136px;margin:28px auto 40px;padding:0 24px;box-sizing:border-box;color:var(--foreground,#183247)}
+.project-brief dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:0;border:1.5px solid var(--foreground,#183247);background:var(--background,#fff)}
+.project-brief dl>div{padding:18px 20px;border-bottom:1px solid var(--border,#cbd5e1);min-width:0}.project-brief dl>div:nth-child(odd){border-right:1px solid var(--border,#cbd5e1)}.project-brief dl>div:nth-last-child(-n+2){border-bottom:0}
+.project-brief dt{font-family:var(--font-mono,monospace);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-foreground,#526170);margin-bottom:8px}.project-brief dd{margin:0;font-size:15px;line-height:1.6;overflow-wrap:anywhere}
+@media(max-width:640px){.project-brief{padding:0 20px}.project-brief dl{grid-template-columns:1fr}.project-brief dl>div:nth-child(odd){border-right:0}.project-brief dl>div:nth-last-child(2){border-bottom:1px solid var(--border,#cbd5e1)}}
