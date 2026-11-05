@@ -75,6 +75,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
 <script src="../../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<link rel="stylesheet" href="../../../assets/css/project-brief.css?v=clarity1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -103,6 +104,8 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <nav class="fan-links" aria-label="Fan study sections"><a href="replay/iss_chase.html">ISS chase videos</a><a href="#profiles">Six motion profiles</a><a href="replay/fault_comparisons.html">Healthy versus fault</a><a href="#validation">Plant validation</a><a href="replay/engineering_checks.html">Engineering replays</a></nav>
 <img class="fan-preview" src="../../../assets/media/modeling/fan-simscape/gnc_mode3_poster.png?v=matrix1" width="1280" height="720" alt="Following spacecraft view, fan-force schematic, bottom TAG and forward IR camera projections, and synchronized telemetry during an ORBES translation.">
 <p class="fan-small">Saved Simscape results. Schematic body and ideal fan forces; the controller is a simple truth-state PD with bounded allocation. This study is separate from the reaction-wheel vehicle and the flight DLQR/EKF localization study.</p></section>
+<aside class="project-brief" aria-label="Project at a glance"><dl><div><dt>Question</dt><dd>How do fourteen fan forces produce six-axis motion and recover from disturbances?</dd></div><div><dt>Inputs</dt><dd>2.7 kg vehicle, fan locations and limits, guidance profiles and injected actuator faults.</dd></div><div><dt>Outputs</dt><dd>Simscape body states and thrust logs; MuJoCo MPC chase, clearance and recovery studies.</dd></div><div><dt>How I checked it</dt><dd>Plant and force/torque checks, matched-engine comparisons and independent recorded-trajectory safety audits.</dd></div></dl></aside>
+
 <section class="fan-section" id="profiles" aria-labelledby="profiles-title"><h2 id="profiles-title">Six motion profiles</h2><p>Each movie includes the commanded path, time-colored measured trajectory and floor reference tags. IR targets and the IR camera panel appear only in IR Track, inward Orbit and Toss-and-Track; the other modes show the bottom TAG camera. The 14 fan holes and thrust bars share one actual-thrust color scale: gray off, then cyan, green, gold and red at 0.2834 N. Playback lasts 30 seconds; the displayed simulation clock preserves each profile’s actual duration.</p><div class="fan-grid"><article class="fan-card"><h3>GNC 1 · Hold / offset acquisition</h3>
 <video controls playsinline preload="none" poster="../../../assets/media/modeling/fan-simscape/gnc_mode1_poster.png?v=matrix1" aria-label="Simscape replay of GNC 1: Hold / offset acquisition"><source src="../../../assets/media/modeling/fan-simscape/gnc_mode1.mp4?v=matrix1" type="video/mp4"></video>
 <p>Acquire (0, 0, 1) m from (0.6, −0.4, 1.3) m, then hold upright.</p><p class="fan-small">30 s replay · simulation clock shown in the video</p>

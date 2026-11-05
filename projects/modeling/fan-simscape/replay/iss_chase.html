@@ -78,7 +78,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <link rel="stylesheet" href="replay.css?v=recovery1">
 <link rel="stylesheet" href="iss_planning.css?v=planning2">
 <script src="iss_planning.js?v=planning2" defer></script>
-<script src="iss_branch_player.js" defer></script>
+<script src="iss_branch_player.js?v=viewregion1" defer></script>
 <script>if(new URLSearchParams(location.search).has("embed"))document.documentElement.classList.add("fan-embedded");</script>
 </head>
 <body>
@@ -102,10 +102,20 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </header>
 
 <main id="main" class="fan-replay" tabindex="-1">
-<nav class="replay-back"><a href="../#iss-chase">← Fan Simscape study</a><a href="#mpc-branches">MPC alternatives</a><a href="#mpc-planning">MPC planning tour</a><a href="#corner-chase">Native corner chase</a><a href="#recovery">Target recovery</a><a href="#tour">Station traverse</a></nav>
+<nav class="replay-back"><a href="#view-region">3D viewpoint selection</a><a href="../#iss-chase">← Fan Simscape study</a><a href="#mpc-branches">MPC alternatives</a><a href="#mpc-planning">MPC planning tour</a><a href="#corner-chase">Native corner chase</a><a href="#recovery">Target recovery</a><a href="#tour">Station traverse</a></nav>
 <h1>ISS chase and target recovery</h1>
 <p>Following and body-camera views with synchronized fan thrusts, clearance and pointing, acquisition and tracking telemetry. Guidance uses delayed RF measurements; camera visibility is geometric.</p>
 <style>.iss-video{border:1.5px solid var(--foreground);margin:24px 0;padding:18px}.iss-video video{display:block;width:100%;height:auto;background:#101a25}.iss-video h2{margin-top:0}.scope-note{border-left:3px solid rgb(var(--acc));padding:12px 18px;background:color-mix(in srgb,rgb(var(--acc)) 7%,var(--background))}.iss-figure{width:100%;height:auto;display:block;margin:20px 0}.iss-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:24px 0}.iss-summary div{border:1px solid var(--foreground);padding:16px}.iss-summary strong{display:block;font-size:26px}.iss-video p:last-child{margin-bottom:0}</style>
+<section id="view-region" class="iss-video" aria-labelledby="view-region-title" data-branch-player data-source-duration="90" data-source-rate="5">
+<h2 id="view-region-title">Online 3D viewpoint selection</h2>
+<p>The drone chooses a viewing position from observed free space instead of following one breadcrumb point. The station view shows the body <strong>+X facing arrow</strong>, the target and moving keepout; the XY inset magnifies the short MPC predictions and XZ shows vertical motion.</p>
+<video controls playsinline preload="metadata" poster="../../../../assets/media/modeling/fan-simscape/iss-chase/planning/view-region/view_region_3d_poster.png" aria-label="3D MuJoCo-record replay with online viewing positions, six diagnostic MPC alternatives and recorded fallback status"><source src="../../../../assets/media/modeling/fan-simscape/iss-chase/planning/view-region/view_region_3d.mp4" type="video/mp4"></video>
+<div class="planning-controls"><label>Video speed <select data-branch-rate><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label><output data-branch-speed>Paused · simulation 0.0×</output><output data-branch-clock>Simulation 0.0 s</output></div>
+<p><strong>Blue points:</strong> online map-filtered viewing positions. <strong>Cyan:</strong> recorded MPC plan. <strong>Green to amber:</strong> six separately solved, constraint-checked alternatives scored against the same reference, normalized per frame. These alternatives are post-run diagnostics and were not used online.</p>
+<p><strong>Safety fallback:</strong> route MPC → observed-space braking MPC → command rejection if still infeasible. The recorded fallback was enabled but never triggered: 0 activations in 901 control decisions.</p>
+<p class="scope-note">Custom 3D replay of a matched 90-second MuJoCo test, not native Simscape footage or a full-station qualification. Independent checks passed with zero contacts. Minimum wall clearance increased from 0.215 m to 0.364 m; target separation decreased from 0.649 m to 0.561 m, above the unchanged 0.45 m limit. Goal-distance preference also changed from a single 0.9 m point to 0.75–1.05 m. Camera, simulated range sensing, delayed RF feedback and physical guards stayed unchanged. Guidance p95 was 373 ms against a 100 ms period; real-time operation remains unqualified.</p>
+<p><a href="https://github.com/ltmps/ORBES-sim/tree/feat/iss-view-region/matlab/fan_model/iss_chase_2026-10-30/station_mockup_v1/safety_v2/publish/view_region_study">Source, matched comparison and reviewed evidence</a></p>
+</section>
 <section id="mpc-branches" class="iss-video" aria-labelledby="branches-title" data-branch-player data-source-duration="90" data-source-rate="5">
 <h2 id="branches-title">MPC alternatives and safety fallback</h2>
 <p>Five or six constraint-checked candidate paths share the same observed state, prediction model and safety constraints. <strong>Cyan</strong> marks the recorded chosen plan. The alternatives use a <strong>green-to-amber gradient</strong> for increasing stage cost against the same original reference; the color scale is normalized within each frame.</p>

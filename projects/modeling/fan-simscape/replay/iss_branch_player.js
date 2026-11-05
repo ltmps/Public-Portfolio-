@@ -11,7 +11,8 @@
     return {time,speed};
   }
   function mount(doc){
-    const panel=doc.querySelector('[data-branch-player]');if(!panel)return;
+    const panels=doc.querySelectorAll?doc.querySelectorAll('[data-branch-player]'):[doc.querySelector('[data-branch-player]')];
+    for(const panel of panels){if(!panel)continue;
     const video=panel.querySelector('video');
     const select=panel.querySelector('[data-branch-rate]');
     const speed=panel.querySelector('[data-branch-speed]');
@@ -25,6 +26,7 @@
     select.addEventListener('change',()=>{video.playbackRate=Number(select.value);update();});
     for(const event of ['play','pause','ended','ratechange','timeupdate','seeked','loadedmetadata'])video.addEventListener(event,update);
     update();
+    }
   }
   return {readout,mount};
 });

@@ -15,6 +15,7 @@
 
 <link rel="stylesheet" href="../../../../assets/css/sherpa-training.css?v=234f6d9f31">
 <script src="../../../../assets/js/sherpa-training.js?v=ab18948725" defer></script>
+<link rel="stylesheet" href="../../../../assets/css/project-brief.css?v=clarity1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -53,7 +54,9 @@
 </tbody></table></div>
 <figure><a href="../../../../assets/media/modeling/sherpa-training/learned-cycle-telemetry.png"><img src="../../../../assets/media/modeling/sherpa-training/learned-cycle-telemetry.png" width="1440" height="1040" loading="lazy" decoding="async" style="display:block;width:100%;height:auto" alt="Learned full-cycle progression, cart station, hose bend radius and twist, helium leakage and seal load."></a><figcaption>Cycle progression, carriage travel, hose bending and twist, helium leakage and seal load. The valve remains interlocked closed during transit.</figcaption></figure>
 <p><a href="../../../../assets/media/modeling/sherpa-training/feedback-finetune-evaluation.json">Policy evaluation data</a> / <a href="../../../../assets/media/modeling/sherpa-training/operational-cycle-comparison.json">Full-cycle rail trials</a></p>
-</section><section class="sm-film training-layout" id="design-alignment" aria-labelledby="design-alignment-title"><h2 id="design-alignment-title">SHERPA layout</h2>
+</section>
+<aside class="project-brief" aria-label="Project at a glance"><dl><div><dt>Question</dt><dd>Can a learned controller connect a flexible hose, purge-stow it and reconnect?</dd></div><div><dt>Inputs</dt><dd>Supplied waypoints, external RGB-D estimates, noisy encoders and pressure/contact instruments.</dd></div><div><dt>Outputs</dt><dd>Arm and rail trajectories, hose bend/twist, seal load, leakage and cycle completion.</dd></div><div><dt>How I checked it</dt><dd>Contact and clearance checks on all 3,372 states of the shown seed; separate policy-evaluation and rail-trial results are linked.</dd></div></dl></aside>
+<section class="sm-film training-layout" id="design-alignment" aria-labelledby="design-alignment-title"><h2 id="design-alignment-title">SHERPA layout</h2>
 <div class="training-layout-grid"><div><p>The intended SHERPA arrangement uses FREND arms on rail carts. A camera can be positioned by any available FREND arm, including an assisting arm observing hose handling. The hose carriages are intended to stow below the rail. The <a href="../robotics/#14_client_axis_lidar_access">CAD servicing views</a> and <a href="../refuel/#04_customer_refueling">hose retrieval and stow sequence</a> provide the mission context.</p><p>The training setup uses a fixed external RGB-D camera, a pregrasped connector and a lower purge socket. The next configuration adds a FREND-positioned camera and hose retrieval from the below-rail stow location.</p></div><figure><a href="../refuel/#04_customer_refueling"><img src="../../../../assets/media/modeling/sherpa-training/cad-hose-stow.png" alt="SHERPA CAD cutaway showing the tool cradle and stowed hose below the circular rail." width="1280" height="720" loading="lazy" decoding="async"></a><figcaption>Tool and hose stow below the rail. <a href="../refuel/#04_customer_refueling">View the CAD sequence</a>.</figcaption></figure></div></section><section class="sm-film" id="rail-trade-study" aria-labelledby="rail-trade-title">
 <h2 id="rail-trade-title">Linear versus circular rail</h2>
 <p>Both rail policies use the same arm, fixtures and 0.875 m travel. Each trained for 16,384 PPO steps and was evaluated on ten connection and ten stow trials, starting near the socket.</p>
