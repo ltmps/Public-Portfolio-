@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Native Simscape ISS chase videos, synchronized fan telemetry and explicitly scoped visual recovery results.">
+<meta name="description" content="An eight-minute ISS MPC chase with moving keepouts, body-facing cues, playback-speed readouts and synchronized prediction maps, alongside native Simscape comparisons.">
 <title>ISS chase and recovery | ORBES</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <link rel="stylesheet" href="../../../../assets/css/gy.css?v=c7d3b0db52">
@@ -76,6 +76,8 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </style>
 <script src="../../../../assets/js/gy.js?v=9db17a7d34" defer></script>
 <link rel="stylesheet" href="replay.css?v=recovery1">
+<link rel="stylesheet" href="iss_planning.css?v=planning1">
+<script src="iss_planning.js?v=planning1" defer></script>
 <script>if(new URLSearchParams(location.search).has("embed"))document.documentElement.classList.add("fan-embedded");</script>
 </head>
 <body>
@@ -99,10 +101,34 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </header>
 
 <main id="main" class="fan-replay" tabindex="-1">
-<nav class="replay-back"><a href="../#iss-chase">← Fan Simscape study</a><a href="#corner-chase">Station corner chase</a><a href="#recovery">Target recovery</a><a href="#tour">Station traverse</a></nav>
+<nav class="replay-back"><a href="../#iss-chase">← Fan Simscape study</a><a href="#mpc-planning">MPC planning tour</a><a href="#corner-chase">Native corner chase</a><a href="#recovery">Target recovery</a><a href="#tour">Station traverse</a></nav>
 <h1>ISS chase and target recovery</h1>
 <p>Following and body-camera views with synchronized fan thrusts, clearance and pointing, acquisition and tracking telemetry. Guidance uses delayed RF measurements; camera visibility is geometric.</p>
 <style>.iss-video{border:1.5px solid var(--foreground);margin:24px 0;padding:18px}.iss-video video{display:block;width:100%;height:auto;background:#101a25}.iss-video h2{margin-top:0}.scope-note{border-left:3px solid rgb(var(--acc));padding:12px 18px;background:color-mix(in srgb,rgb(var(--acc)) 7%,var(--background))}.iss-figure{width:100%;height:auto;display:block;margin:20px 0}.iss-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:24px 0}.iss-summary div{border:1px solid var(--foreground);padding:16px}.iss-summary strong{display:block;font-size:26px}.iss-video p:last-child{margin-bottom:0}</style>
+<section id="mpc-planning" class="iss-video" aria-labelledby="planning-title" data-planning-player data-plans="../../../../assets/media/modeling/fan-simscape/iss-chase/planning/plans.json">
+<h2 id="planning-title">Inside the MPC: full-station chase</h2>
+<p>Eight minutes across 157 target checkpoints, with enforced moving keepouts, a sliding cost trace, the selected fan-command sequence and a bright lime body +X facing arrow.</p>
+<video id="planning-video" controls playsinline preload="metadata" poster="../../../../assets/media/modeling/fan-simscape/iss-chase/planning/station_planning_poster.png" aria-label="Eight-minute full-station MuJoCo MPC chase with body-facing direction, prediction and cost telemetry"><source src="../../../../assets/media/modeling/fan-simscape/iss-chase/planning/station_planning_tour.mp4" type="video/mp4"></video>
+<div class="planning-controls">
+<label for="planning-rate">Video speed <select id="planning-rate"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option><option value="4">4×</option></select></label>
+<output id="planning-speed" for="planning-rate">Paused · video 1×</output>
+<output id="planning-clock">Simulation 0.0 s</output>
+</div>
+<div class="planning-details">
+<div class="planning-map">
+<div class="planning-map-head"><h3>Future path · magnified</h3><label for="planning-plane">Plane <select id="planning-plane"><option value="XY">XY</option><option value="XZ">XZ</option><option value="YZ">YZ</option></select></label></div>
+<canvas id="planning-future" width="720" height="420" role="img" aria-label="Magnified, equal-scale XY view of the actual logged two-second MPC prediction synchronized to the video"></canvas>
+<p id="planning-map-readout">Loading recorded predictions…</p>
+</div>
+<div class="planning-guide"><h3>Read the future path</h3>
+<p><span class="plan-key plan-cyan">●</span> Current feedback state <span class="plan-key plan-cyan">━━</span> Selected prediction<br><span class="plan-key plan-white">┄┄</span> Reference <span class="plan-key plan-amber">┄┄</span> Target forecast<br><span class="plan-key plan-lime">➜</span> Body +X / camera-facing axis</p>
+<p>The plotted future is the actual <strong>2-second, 20-step MPC horizon</strong>. Automatic magnification makes a short plan readable without extending its physical length. Switch to XZ or YZ when the motion is vertical. The 3D view and XZ inset in the movie show this same prediction.</p>
+<p id="planning-compression">Playback slows near acquisition and close encounters. The live speed readout includes these timing changes and your selected video speed.</p>
+<p class="planning-small">Simulation speed means simulated seconds per real playback second. A paused player advances no simulated time.</p>
+</div></div>
+<p class="scope-note">Custom MuJoCo rendering of a new, independently checked closed-loop study: 9883.6 s simulated, 157 target checkpoints, 19 chaser module bounds, zero sampled wall contacts and continuous wall/target/keepout guards passing. The chaser follows Cupola at standoff. This is separate from the native Simscape videos below. Station geometry combines NASA-derived meshes and schematic bays; metric feedback uses delayed RF. Extra keepout zones are enforced constraints without collision response.</p>
+<noscript><p>The movie plays without JavaScript. Speed readouts and the synchronized prediction map require JavaScript.</p></noscript>
+</section>
 <section id="corner-chase" class="iss-video" aria-labelledby="corner-chase-title"><h2 id="corner-chase-title">Across the station: corner chase and recovery</h2>
 <video controls playsinline preload="metadata" poster="../../../../assets/media/modeling/fan-simscape/iss-chase/station_corner_poster.png" aria-label="Station-wide corner chase trajectory playback in the native Mechanics Explorer viewer"><source src="../../../../assets/media/modeling/fan-simscape/iss-chase/station_corner_chase.mp4" type="video/mp4"></video>
 <p>The continuous route covers 157 target checkpoints across 20 modeled components, including off-center turns and reversals. Both cameras, fourteen fan thrusts, separation, clearance and visible-only breadcrumbs share the source clock. Playback slows around acquisition.</p>
