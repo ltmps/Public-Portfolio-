@@ -27,4 +27,16 @@ assert(clock.textContent.includes('50.0 s'));assert(speed.textContent.includes('
 select.value='2';select.fire('change');assert.equal(video.playbackRate,2);assert(speed.textContent.includes('simulation 10.0×'));
 video.paused=true;video.fire('pause');assert(speed.textContent.includes('simulation 0.0×'));
 assert.deepEqual(readout({currentTime:20,playbackRate:2,paused:false,ended:false},5,90),{time:90,speed:0});
+// Each movie keeps its own speed and clock when two diagnostic players coexist.
+function player(){
+  const video=node({currentTime:3,paused:false,ended:false,playbackRate:1});
+  const select=node({value:'1'}),speed=node(),clock=node();
+  const nodes={'video':video,'[data-branch-rate]':select,'[data-branch-speed]':speed,'[data-branch-clock]':clock};
+  return {video,select,speed,clock,panel:{dataset:{sourceRate:'5',sourceDuration:'90'},querySelector:k=>nodes[k]}};
+}
+const first=player(),second=player();
+mount({querySelectorAll:()=>[first.panel,second.panel]});
+first.select.value='2';first.select.fire('change');
+assert.equal(first.video.playbackRate,2);assert.equal(second.video.playbackRate,1);
+assert(first.speed.textContent.includes('simulation 10.0×'));assert(second.speed.textContent.includes('simulation 5.0×'));
 console.log('PASS: diagnostic media hashes/scope, guard evidence, shared gradient meaning, speed, source clock and pause/end behavior.');

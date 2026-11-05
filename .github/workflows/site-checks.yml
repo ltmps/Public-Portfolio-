@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/check-site.cjs
+      - run: node scripts/check-project-briefs.cjs
       - run: node scripts/check-easymini-trace.cjs
       - run: node scripts/check-singularity-gallery.cjs
       - run: node scripts/check-modeling-media.cjs

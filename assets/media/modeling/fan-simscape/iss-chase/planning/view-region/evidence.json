@@ -1,0 +1,38 @@
+{
+  "status": "reviewed",
+  "movieSha256": "c3c7117a9a0d8085b51d3f6d53a3cd314d0ee722c6526f801ebc607eea2f05bd",
+  "fullDecodePassed": true,
+  "decodedFramesReviewedAtVideoSeconds": [
+    0,
+    9,
+    17.9
+  ],
+  "sourceDurationS": 90,
+  "playbackSpeed": 5,
+  "frames": 271,
+  "alternatives": {
+    "accepted": 1626,
+    "attempted": 1626,
+    "minimumDistinctPathsAt1mm": 6,
+    "maximumDistinctPathsAt1mm": 6,
+    "minimumConstraintResidualM": -1.5916157281026244e-12,
+    "maximumAffineDynamicsResidual": 1.6994177874825322e-12,
+    "usedOnline": false
+  },
+  "fallbackActivations": 0,
+  "limitations": [
+    "Custom 3D replay, not native Simscape footage",
+    "Six MPC alternatives are post-run diagnostics, not online candidates used for control",
+    "No observed-braking fallback activation in this run; status reflects all 901 control decisions",
+    "90-second partial course only; no new physical study or full-station qualification"
+  ],
+  "checks": [
+    "Ruff passed",
+    "Projection orientation/equal-metre checks passed",
+    "Source block and branch SHA checks passed",
+    "Recorded fallback status checked across all 901 decisions"
+  ],
+  "posterSha256": "97cee9139b3921577f919dff1a8ca0e1db3242b0588933d2a6562dcf9156ed00",
+  "onlineViewpointSelection": true,
+  "completeTour": false
+}
