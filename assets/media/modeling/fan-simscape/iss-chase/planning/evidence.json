@@ -1,0 +1,22 @@
+{
+  "movieSha256": "72aa69fc7f028ae739b6715fd13efeca99edcef72370848093f002467fe64ded",
+  "publishedMovieSha256": "72aa69fc7f028ae739b6715fd13efeca99edcef72370848093f002467fe64ded",
+  "plansSha256": "5f9ca9c75b667c38491789cca204907c354ea1ab3191a35c64d31498544bd371",
+  "frames": 7200,
+  "durationS": 480,
+  "sourceDurationS": 9883.6,
+  "targetCheckpoints": 157,
+  "chaserModuleBounds": 19,
+  "physicalAndIndependentAuditPassed": true,
+  "minimumWallClearanceLowerBoundM": 0.16394424584277775,
+  "minimumTargetSeparationLowerBoundM": 0.47777609426216794,
+  "zeroSampledContacts": true,
+  "predictionHorizonS": 2,
+  "predictionPoints": 21,
+  "angularLimitScope": "Future optimizer states; fixed measured X0 excluded",
+  "recordedAngularSpeedMaxRadS": 0.6549021311529514,
+  "rendering": "Custom MuJoCo presentation of qualified closed-loop records; not native Simscape",
+  "depth": "Delayed RF metric backup; geometric visibility, not stereo depth",
+  "zoneContactResponse": false,
+  "wallContactPhysics": true
+}

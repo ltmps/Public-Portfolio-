@@ -1,0 +1,13 @@
+.planning-controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;padding:14px 0;border-bottom:1px solid var(--foreground);font-variant-numeric:tabular-nums}
+.planning-controls label,.planning-map-head label{display:flex;align-items:center;gap:10px;font-weight:600}
+.planning-controls output{font-family:var(--font-mono);font-size:13px}
+.planning-controls select,.planning-map-head select{color:var(--foreground);background:var(--background);border:1px solid var(--foreground);padding:8px 12px;font:inherit;min-height:40px}
+.planning-controls select:focus-visible,.planning-map-head select:focus-visible{outline:3px solid rgb(var(--acc));outline-offset:3px}
+.planning-details{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,1fr);gap:24px;margin:24px 0}
+.planning-map{min-width:0}.planning-map-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.planning-map-head h3{margin:0;font-size:20px}.planning-map canvas{display:block;width:100%;height:auto;aspect-ratio:12/7;background:#101a25;border:1px solid #34465c}
+.planning-map p,.planning-small{font-size:13px;color:var(--muted-foreground)}
+.planning-guide h3{margin-top:0;font-size:20px}.planning-guide p{font-size:15px;line-height:1.7}
+.plan-key{display:inline-block;min-width:20px;text-align:center;font-weight:bold;text-shadow:0 0 1px #111;background:#101a25;padding:0 3px;border-radius:3px}
+.plan-cyan{color:#57dfdb}.plan-white{color:#ecf3fa}.plan-amber{color:#ffbe72}.plan-lime{color:#c1ff55}
+@media(max-width:760px){.planning-details{grid-template-columns:minmax(0,1fr)}.planning-controls{gap:10px}.planning-controls output{font-size:12px}.planning-map-head h3{font-size:18px}}
