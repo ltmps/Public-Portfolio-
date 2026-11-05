@@ -22,6 +22,7 @@ jobs:
       - run: node scripts/check-supervisor-review.cjs
       - run: node scripts/check-mpc-replay.cjs
       - run: node scripts/check-iss-planning.cjs
+      - run: node scripts/check-iss-branches.cjs
       - run: node scripts/check-reaction-wheel-locus.cjs
       - run: node scripts/check-sherpa-missions.cjs
       - run: node scripts/check-sherpa-training.cjs
@@ -30,6 +31,7 @@ jobs:
         run: |
           node --check assets/js/gy.js
           node --check projects/modeling/fan-simscape/replay/iss_planning.js
+          node --check projects/modeling/fan-simscape/replay/iss_branch_player.js
           node --check projects/modeling/fan-simscape/replay/arm_fixtures.js
           node --check assets/js/easymini-trace.js
           node --check assets/js/reaction-wheel-locus.js

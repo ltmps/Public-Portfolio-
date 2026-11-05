@@ -1,0 +1,30 @@
+{
+  "movieSha256": "ea7f6c2203d01719ce05c7c2dfe2a22ed3e675847d61bc70954fb59d8ec64281",
+  "posterSha256": "dd100a02f97b83810e61f12a50fadb8e55fdbef48638227988b9b3b871fe712e",
+  "sourceDurationS": 90,
+  "frames": 271,
+  "fps": 15,
+  "playbackSpeed": 5,
+  "requestedHorizonS": 8,
+  "selectedHorizonS": 4,
+  "longHorizonAccepted": false,
+  "alternativesUsedOnline": false,
+  "acceptedCandidates": 1614,
+  "attemptedCandidates": 1626,
+  "minimumRenderedPerFrame": 5,
+  "maximumRenderedPerFrame": 6,
+  "gradient": "Shared original per-stage tracking plus effort cost; green low to amber high; normalized per frame; terminal penalty not mapped",
+  "numericalAuditPassed": true,
+  "completeTour": false,
+  "minimumWallClearanceM": 0.21487927563653839,
+  "minimumTargetDistanceM": 0.6489120189572775,
+  "minimumExtraZoneDistancesM": [
+    0.664530046849992,
+    5.581371205311009,
+    9.921717054358226
+  ],
+  "zeroContacts": true,
+  "gncCycleP95S": 0.25360909989103675,
+  "cycleDeadlineMissFraction": 0.4872364039955605,
+  "nativeSimscape": false
+}
