@@ -10,22 +10,29 @@
     const a=Math.max(0,i-1),b=Math.min(data.frames-1,i+1);
     return (data.sourceTime[b]-data.sourceTime[a])/((b-a)/data.fps);
   }
+  function viewBounds(points,target,ax,ay,mode){
+    const values=mode==='context'?points.concat(target):points;
+    const xs=values.map(p=>p[ax]),ys=values.map(p=>p[ay]);
+    const lo=[Math.min(...xs),Math.min(...ys)],hi=[Math.max(...xs),Math.max(...ys)];
+    const center=[(lo[0]+hi[0])/2,(lo[1]+hi[1])/2];
+    const span=Math.max(.06,(hi[0]-lo[0])*1.45,(hi[1]-lo[1])*1.45);
+    return {center,span};
+  }
   function mount(doc){
     const root=doc.querySelector('[data-planning-player]');if(!root)return;
     const video=root.querySelector('video'),rate=doc.getElementById('planning-rate');
     const plane=doc.getElementById('planning-plane'),canvas=doc.getElementById('planning-future');
     const speed=doc.getElementById('planning-speed'),clock=doc.getElementById('planning-clock');
     const readout=doc.getElementById('planning-map-readout');
+    const fit=doc.getElementById('planning-fit');
     let data=null,raf=null;
     const axes={XY:[0,1],XZ:[0,2],YZ:[1,2]};
     function draw(i){
       const [ax,ay]=axes[plane.value],points=data.prediction[i],ref=data.reference[i];
       const w=720,h=420,c=canvas.getContext('2d');
       c.clearRect(0,0,w,h);c.fillStyle='#101a25';c.fillRect(0,0,w,h);
-      const xs=points.map(p=>p[ax]),ys=points.map(p=>p[ay]);
-      const lo=[Math.min(...xs),Math.min(...ys)],hi=[Math.max(...xs),Math.max(...ys)];
-      const center=[(lo[0]+hi[0])/2,(lo[1]+hi[1])/2];
-      const span=Math.max(.06,(hi[0]-lo[0])*1.45,(hi[1]-lo[1])*1.45);
+      const target=data.targetPrediction[i];
+      const {center,span}=viewBounds(points,target,ax,ay,fit.value);
       const box={x:80,y:32,w:600,h:320};const scale=Math.min(box.w,box.h)/span;
       const project=p=>[box.x+box.w/2+(p[ax]-center[0])*scale,box.y+box.h/2-(p[ay]-center[1])*scale];
       c.font='13px system-ui';c.textAlign='center';c.lineWidth=1;
@@ -40,13 +47,19 @@
       c.fillText(plane.value[0]+' (m)',box.x+box.w/2,h-12);
       c.save();c.translate(17,box.y+box.h/2);c.rotate(-Math.PI/2);c.fillText(plane.value[1]+' (m)',0,0);c.restore();
       c.fillStyle='#aabbd0';c.textAlign='left';c.font='13px system-ui';
-      c.fillText('Equal metre scale · automatic magnification',box.x,19);
+      c.fillText('Equal metre scale · '+(fit.value==='context'?'chaser + target context':'chaser prediction magnified'),box.x,19);
       c.save();c.beginPath();c.rect(box.x,box.y,box.w,box.h);c.clip();
       function path(values,color,dash,width){
         c.strokeStyle=color;c.lineWidth=width;c.setLineDash(dash);c.beginPath();
         values.forEach((p,k)=>{const [x,y]=project(p);k?c.lineTo(x,y):c.moveTo(x,y);});c.stroke();c.setLineDash([]);
       }
-      path(ref,'#ecf3fa',[7,6],2);path(data.targetPrediction[i],'#ffbe72',[4,5],2);path(points,'#57dfdb',[],4);
+      path(ref,'#ecf3fa',[7,6],2);path(target,'#ffbe72',[8,4],4);path(points,'#57dfdb',[],4);
+      const targetStart=project(target[0]),targetEnd=project(target[target.length-1]);
+      c.fillStyle='#ffbe72';c.beginPath();c.arc(...targetStart,5,0,Math.PI*2);c.fill();
+      c.font='bold 14px system-ui';c.fillText('T / forecast',targetStart[0]+9,targetStart[1]-11);
+      if(Math.hypot(targetEnd[0]-targetStart[0],targetEnd[1]-targetStart[1])>12){
+        c.fillText('+'+((target.length-1)*data.dt).toFixed(1)+' s',targetEnd[0]+9,targetEnd[1]+17);
+      }
       for(const k of [0,5,10,15,20]){
         const [x,y]=project(points[k]);c.fillStyle='#57dfdb';c.beginPath();c.arc(x,y,k===0?6:3,0,Math.PI*2);c.fill();
       }
@@ -63,9 +76,17 @@
         c.lineTo(end[0]-10*Math.cos(angle+.45),end[1]-10*Math.sin(angle+.45));c.closePath();c.fill();
       }else{c.beginPath();c.arc(...origin,9,0,Math.PI*2);c.stroke();}
       c.restore();
+      const inside=p=>{const [x,y]=project(p);return x>=box.x&&x<=box.x+box.w&&y>=box.y&&y<=box.y+box.h;};
+      const targetVisible=target.filter(inside).length;
+      if(targetVisible<target.length){
+        c.fillStyle='#101a25';c.fillRect(box.x+8,box.y+8,440,28);c.fillStyle='#ffbe72';c.font='14px system-ui';
+        c.fillText('Target forecast '+(targetVisible?'partly ':'')+'outside zoom — select Context',box.x+17,box.y+27);
+      }
       let distance=0;for(let k=1;k<points.length;k++)distance+=Math.hypot(...points[k].map((v,j)=>v-points[k-1][j]));
-      readout.textContent='Full 2.0 s prediction · '+(distance*100).toFixed(1)+' cm planned 3D travel · plan at '+data.planTime[i].toFixed(1)+' simulated s';
-      canvas.setAttribute('aria-label',plane.value+' equal-scale magnified view of the actual two-second MPC plan at '+data.planTime[i].toFixed(1)+' simulated seconds');
+      const targetPlaneTravel=target.slice(1).reduce((sum,p,k)=>sum+Math.hypot(p[ax]-target[k][ax],p[ay]-target[k][ay]),0);
+      readout.textContent='Full 2.0 s prediction · '+(distance*100).toFixed(1)+' cm planned 3D travel · plan at '+data.planTime[i].toFixed(1)+' simulated s'+
+        (targetPlaneTravel<.001?' · target forecast has little '+plane.value+' motion':'');
+      canvas.setAttribute('aria-label',plane.value+' equal-scale '+(fit.value==='context'?'chaser and target context':'magnified prediction')+' view of the actual two-second MPC plan at '+data.planTime[i].toFixed(1)+' simulated seconds');
     }
     function update(){
       if(!data)return;
@@ -77,6 +98,7 @@
     function tick(){update();if(!video.paused&&!video.ended)raf=requestAnimationFrame(tick);else raf=null;}
     rate.addEventListener('change',()=>{video.playbackRate=Number(rate.value);update();});
     plane.addEventListener('change',update);
+    fit.addEventListener('change',update);
     for(const event of ['timeupdate','seeking','seeked','loadedmetadata','pause','ratechange','ended'])video.addEventListener(event,update);
     video.addEventListener('play',()=>{if(raf===null)tick();});
     fetch(root.dataset.plans).then(r=>{if(!r.ok)throw Error('Recorded plans unavailable');return r.json();}).then(value=>{
@@ -84,5 +106,5 @@
       data=value;update();
     }).catch(()=>{readout.textContent='Prediction data unavailable. The video still shows the logged 3D prediction and XZ inset.';});
   }
-  return {frameAt,timelineSpeed,mount};
+  return {frameAt,timelineSpeed,viewBounds,mount};
 });

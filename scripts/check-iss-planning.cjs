@@ -15,6 +15,13 @@ for(let i=0;i<data.frames;i++){
   assert(Math.abs(Math.hypot(...data.facing[i])-1)<2e-7);
   if(i)assert(data.sourceTime[i]>data.sourceTime[i-1]);
   assert(api.timelineSpeed(i,data)>0);
+  for(const [ax,ay] of [[0,1],[0,2],[1,2]]){
+    const b=api.viewBounds(data.prediction[i],data.targetPrediction[i],ax,ay,'context');
+    for(const point of data.prediction[i].concat(data.targetPrediction[i])){
+      assert(Math.abs(point[ax]-b.center[0])<=.9375*b.span,'Context must include both future paths horizontally');
+      assert(Math.abs(point[ay]-b.center[1])<=.5*b.span,'Context must include both future paths vertically');
+    }
+  }
 }
 assert.equal(data.sourceTime.at(-1),9883.6);
 assert.equal(api.frameAt(0,data),0);assert.equal(api.frameAt(240,data),3600);
@@ -27,6 +34,7 @@ function node(extra={}){return Object.assign({events:{},textContent:'',value:'',
 const video=node({paused:true,ended:false,currentTime:0,playbackRate:1});
 const ctx=new Proxy({}, {get(o,k){return o[k]??(()=>{});}});
 const nodes={'planning-rate':node({value:'1'}),'planning-plane':node({value:'XY'}),
+ 'planning-fit':node({value:'context'}),
  'planning-future':node({getContext:()=>ctx}),'planning-speed':node(),'planning-clock':node(),'planning-map-readout':node()};
 const player=node({dataset:{plans:'plans.json'},querySelector:()=>video});
 const document={querySelector:()=>player,getElementById:k=>nodes[k]};
@@ -43,8 +51,10 @@ async function run(){
   assert(nodes['planning-speed'].textContent.includes((2*api.timelineSpeed(3600,data)).toFixed(1)+'×'));
   nodes['planning-plane'].value='XZ';nodes['planning-plane'].fire('change');
   assert(nodes['planning-future'].attrs['aria-label'].startsWith('XZ'));
+  nodes['planning-fit'].value='plan';nodes['planning-fit'].fire('change');
+  nodes['planning-fit'].value='context';nodes['planning-fit'].fire('change');
   video.currentTime=480;video.fire('seeked');assert(nodes['planning-clock'].textContent.includes('9883.6'));
   video.paused=true;video.fire('pause');assert(nodes['planning-speed'].textContent.includes('simulation 0.0×'));
-  console.log('PASS: 7200 causal horizons, exact reviewed movie hash, source clocks, seek/end clamping, rate/pause readouts and XY/XZ controls.');
+  console.log('PASS: 7200 causal horizons, context contains both paths in all three planes, exact movie hash, source clocks, seeking, rate/pause and view controls.');
 }
 run().catch(e=>{console.error(e);process.exitCode=1;});
