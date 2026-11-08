@@ -106,6 +106,14 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <h1>ISS chase and target recovery</h1>
 <p>Following and body-camera views with synchronized fan thrusts, clearance and pointing, acquisition and tracking telemetry. Guidance uses delayed RF measurements; camera visibility is geometric.</p>
 <style>.iss-video{border:1.5px solid var(--foreground);margin:24px 0;padding:18px}.iss-video video{display:block;width:100%;height:auto;background:#101a25}.iss-video h2{margin-top:0}.scope-note{border-left:3px solid rgb(var(--acc));padding:12px 18px;background:color-mix(in srgb,rgb(var(--acc)) 7%,var(--background))}.iss-figure{width:100%;height:auto;display:block;margin:20px 0}.iss-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:24px 0}.iss-summary div{border:1px solid var(--foreground);padding:16px}.iss-summary strong{display:block;font-size:26px}.iss-video p:last-child{margin-bottom:0}</style>
+<section id="shaped-dock" class="iss-video" aria-labelledby="shaped-dock-title">
+<h2 id="shaped-dock-title">Shaped dock: docking and undocking</h2>
+<video id="shaped-dock-video" controls playsinline preload="metadata" poster="../../../../assets/media/modeling/fan-simscape/shaped-dock/poster.png" aria-label="New closed-loop MuJoCo shaped-dock approach, attachment, charging, release and departure"><source src="../../../../assets/media/modeling/fan-simscape/shaped-dock/closedloop.mp4" type="video/mp4"></video>
+<label for="shaped-dock-rate">Playback </label><select id="shaped-dock-rate"><option value="0.5">Slow</option><option value="1" selected>Normal</option><option value="2">Fast</option></select> <output id="shaped-dock-speed">2× simulated time</output>
+<p>Forward camera and external view, at 2× simulation speed. Short cyan lines show rear range beams. Eight raised facets supplement four central beams so the controller can measure sideways alignment while the dock is behind the camera.</p>
+<p class="scope-note">New MuJoCo closed-loop trial: 133.2 s simulated, zero unintended contacts, then settled after undocking. This video replays that trial’s recorded physical states.</p>
+<details><summary>Checks and limits</summary><p>All 13,320 sampled motion states pass phase limits; 318 twelve-range pose updates are accepted after release. Synthetic room, sensor and latch assumptions. Uncertainty is uncalibrated: 74/1,331 relative-pose estimates fall outside its 3σ ellipsoid. <a href="https://github.com/ltmps/ORBES-sim/blob/feat/inspection-docking-autonomy/matlab/fan_model/inspection_autonomy_2026-11-06/shaped_closedloop_checkpoint/README.md">Evidence and preserved failures</a>.</p></details>
+</section>
 <section id="view-region" class="iss-video" aria-labelledby="view-region-title" data-branch-player data-source-duration="90" data-source-rate="5">
 <h2 id="view-region-title">Online 3D viewpoint selection</h2>
 <p>The drone chooses a viewing position from observed free space instead of following one breadcrumb point. The station view shows the body <strong>+X facing arrow</strong>, the target and moving keepout; the XY inset magnifies the short MPC predictions and XZ shows vertical motion.</p>
@@ -190,5 +198,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 
 
 
+<script src="shaped_dock_player.js"></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+{
+  "frames": 999,
+  "fps": 15,
+  "playbackSpeed": 2,
+  "fullFfmpegDecodePassed": true,
+  "fullOpenCvDecodePassed": true,
+  "sha256": "473ce85db8db65c426f74d3babe5e98565efd4c58218275dcc2df2d3edd5be47",
+  "source": "shaped_closedloop_cycle200_v4",
+  "newClosedLoopFlight": true,
+  "visualReviewPassed": true,
+  "reviewedFrames": [
+    0,
+    706,
+    998
+  ]
+}
