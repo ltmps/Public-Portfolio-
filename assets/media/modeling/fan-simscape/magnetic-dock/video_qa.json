@@ -1,0 +1,17 @@
+{
+  "decodedFrames": 419,
+  "fps": 15.0,
+  "width": 1440,
+  "height": 480,
+  "allFramesDecoded": true,
+  "nonStatic": true,
+  "sha256": "57067b5bd37c132ee03444fbeb0571011279e2c8975bc72c434723e2fda25e8d",
+  "sizeBytes": 1183201,
+  "reviewFrames": [
+    0,
+    135,
+    225,
+    285,
+    418
+  ]
+}
