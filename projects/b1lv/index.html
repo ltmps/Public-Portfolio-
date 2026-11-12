@@ -6,7 +6,7 @@
 <meta name="description" content="Gavin Yam's Bronco 1 case study: propellant feed-system preparation, hardware traceability, pressurant concepts and shared failure analysis at Cal Poly Pomona Liquid Rocket Lab.">
 <title>Bronco 1: Propellant Feed Systems and Test Readiness | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
@@ -94,14 +94,14 @@
 .gy-wrench{transform-box:fill-box;transform-origin:85% 15%;animation:gy-wrench 6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="../../assets/js/gy.js?v=5f0b7efd82" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -121,7 +121,6 @@
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / <a class="gy-link" href="../../index.html#work">Selected work</a> / Part 03</p>
 <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
 <div style="display: flex; flex-direction: column; gap: 24px;">
-<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">CPP Liquid Rocket Lab · Propellant Feed Systems · 2022 to 2023</p>
 <h1 id="page-title" style="margin: 0; font-size: clamp(56px, 7vw, 104px); line-height: 0.86; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Bronco 1</h1>
 <p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 22ch; text-wrap: pretty;">Connecting the hardware to the test results.</p>
 </div>
@@ -143,16 +142,16 @@
 <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">REPLICA FEED PIPING</span>
 </span>
 <div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden;">
-<img class="gy-img" src="../../assets/images/b1lv/test-stand-wide.jpg" alt="Instrumented piping, hoses and wiring on a mobile test stand, with team members nearby." style="width: 100%; height: 100%; object-fit: cover;">
+<img width="1600" height="1200" class="gy-img" src="../../assets/images/b1lv/test-stand-wide.jpg" alt="Instrumented piping, hoses and wiring on a mobile test stand, with team members nearby." style="width: 100%; height: 100%; object-fit: cover;">
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
 </figure>
 </div>
 <dl style="margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); border: 1.5px solid var(--foreground); background: var(--background);">
-<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Team</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Propellant Feed Systems</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Team</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">CPP Liquid Rocket Lab, Propellant Feed Systems</dd></div>
 <div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Work</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Hardware prep, concept trades</dd></div>
 <div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Record</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Test data, models, FMEA</dd></div>
-<div style="padding: 12px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Type</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Student engineering project</dd></div>
+<div style="padding: 12px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Type</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Student engineering project, 2022 to 2023</dd></div>
 </dl>
 </section>
 
@@ -176,7 +175,6 @@
 <section aria-labelledby="prep-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="prep-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Hardware preparation</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Drawings to parts</span>
 </div>
 <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 12px;">
 <li class="gy-step" style="padding: 18px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">01 · Organize the piping</span><span style="font-size: 15px; line-height: 1.5;">I cross-checked 20 assembly P&amp;ID drawings against the lab inventory, flagged missing parts and organized the hardware into 15 P&amp;ID segments.</span></li>
@@ -190,7 +188,6 @@
 <section aria-labelledby="setup-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="setup-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8a4 4 0 0 1 4 4v10"/><path d="M3 11h8"/><path d="M11 21h8"/><path d="M3 5v8M17 21v-6"/></svg>System &amp; setup</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · See the path before the data</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; margin: 0 0 32px;">
 <article style="border: 1.5px solid var(--foreground); background: var(--background);">
@@ -207,13 +204,13 @@
 </article>
 </div>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #000; overflow: hidden;"><img src="../../assets/images/b1lv/oxidizer-piping-replica.jpg" alt="Team CAD rendering of a long oxidizer-piping replica, with fittings and upright branches at either end." style="width: 100%; height: auto; display: block;"></div>
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #000; overflow: hidden;"><img loading="lazy" decoding="async" width="2249" height="506" src="../../assets/images/b1lv/oxidizer-piping-replica.jpg" alt="Team CAD rendering of a long oxidizer-piping replica, with fittings and upright branches at either end." style="width: 100%; height: auto; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · Oxidizer-piping replica · team CAD</figcaption>
 </figure>
 <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: center;">
 <p style="margin: 0; font-size: 20px; line-height: 1.5;">The replica isolates the oxidizer piping from the rest of the vehicle. Valves, fittings and instrumentation tie each measurement to its physical path.</p>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="aspect-ratio: 4 / 3; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img class="gy-img" src="../../assets/images/b1lv/water-flow-test-600.jpg" alt="Close view of valves, pressure instrumentation and wiring on the water-flow test stand." style="width: 100%; height: 100%; object-fit: cover;"></div>
+<div class="gy-frame" style="aspect-ratio: 4 / 3; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img loading="lazy" decoding="async" width="600" height="450" class="gy-img" src="../../assets/images/b1lv/water-flow-test-600.jpg" alt="Close view of valves, pressure instrumentation and wiring on the water-flow test stand." style="width: 100%; height: 100%; object-fit: cover;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 3 · Instrumented assembly</figcaption>
 </figure>
 </div>
@@ -222,7 +219,6 @@
 <section aria-labelledby="flow-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="flow-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18a9 9 0 1 1 16 0"/><path d="m12 13 4-5"/><circle cx="12" cy="13" r="1.5"/></svg>Water-flow testing</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · Trace discrepancies to the setup</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; margin: 0 0 32px;">
 <article style="border: 1.5px solid var(--foreground); background: var(--background);">
@@ -240,7 +236,7 @@
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; align-items: start;">
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="aspect-ratio: 558 / 745; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img src="../../assets/images/b1lv/annotated-piping.jpg" alt="Original red annotation brackets the extended piping between PT-02W and AV-01W." style="width: 100%; height: 100%; object-fit: cover;"></div>
+<div class="gy-frame" style="aspect-ratio: 558 / 745; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img loading="lazy" decoding="async" width="558" height="745" src="../../assets/images/b1lv/annotated-piping.jpg" alt="Original red annotation brackets the extended piping between PT-02W and AV-01W." style="width: 100%; height: 100%; object-fit: cover;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · Extended piping · team annotation</figcaption>
 </figure>
 <div style="display: flex; flex-direction: column; gap: 16px;">
@@ -259,7 +255,7 @@
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Diagram D1 · Leak and mass-accounting faults · schematic</figcaption>
 </figure>
 <figure class="gy-fig" style="grid-column: 1 / -1; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 24px;"><img src="../../assets/images/b1lv/pressure-flow-analysis.png" style="width: 100%; max-width: 980px; height: auto; display: block; margin: 0 auto;" alt="Team plot of tank pressure in psig versus mass flow in pounds mass per second, with experimental error bars, predicted points and fitted trends."></div>
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 24px;"><img loading="lazy" decoding="async" width="947" height="602" src="../../assets/images/b1lv/pressure-flow-analysis.png" style="width: 100%; max-width: 980px; height: auto; display: block; margin: 0 auto;" alt="Team plot of tank pressure in psig versus mass flow in pounds mass per second, with experimental error bars, predicted points and fitted trends."></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 5 · Tank pressure vs. mass flow, block 1</figcaption>
 </figure>
 <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 24px; align-items: start;">
@@ -289,7 +285,6 @@
 <section aria-labelledby="tank-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="tank-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>Tank model</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail E · Simulation vs. hand calcs</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; margin: 0 0 32px;">
 <article style="border: 1.5px solid var(--foreground); background: var(--background);">
@@ -307,7 +302,7 @@
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: center;">
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 12px;"><img src="../../assets/images/b1lv/lox-combined-stress.png" alt="Modeled LOX tank stress field with a von Mises stress legend in psi and an indicated maximum." style="width: 100%; max-height: 520px; object-fit: contain; display: block;"></div>
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 12px;"><img loading="lazy" decoding="async" width="645" height="712" src="../../assets/images/b1lv/lox-combined-stress.png" alt="Modeled LOX tank stress field with a von Mises stress legend in psi and an indicated maximum." style="width: 100%; max-height: 520px; object-fit: contain; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 6 · LOX tank, combined pressure and thermal load</figcaption>
 </figure>
 <div style="display: flex; flex-direction: column; gap: 16px;">
@@ -320,7 +315,6 @@
 <section aria-labelledby="lessons-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="lessons-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/></svg>Lessons</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Make assumptions visible</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 32px; align-items: start;">
 <div style="display: flex; flex-direction: column; gap: 20px;">
@@ -346,7 +340,7 @@
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted-foreground);">All visuals: B1LV project team, Cal Poly Pomona Liquid Rocket Lab, 2022 to 2023</p>
 </div>
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="aspect-ratio: 4 / 3; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img class="gy-img" src="../../assets/images/b1lv/team-work-area-600.jpg" alt="Project team gathered around laptops and paperwork at tables beneath a canopy." style="width: 100%; height: 100%; object-fit: cover;"></div>
+<div class="gy-frame" style="aspect-ratio: 4 / 3; border: 1.5px solid var(--foreground); overflow: hidden; background: #000;"><img loading="lazy" decoding="async" width="600" height="450" class="gy-img" src="../../assets/images/b1lv/team-work-area-600.jpg" alt="Project team gathered around laptops and paperwork at tables beneath a canopy." style="width: 100%; height: 100%; object-fit: cover;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 7 · Test-day work area</figcaption>
 </figure>
 </div>

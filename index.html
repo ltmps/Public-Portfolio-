@@ -6,7 +6,7 @@
 <meta name="description" content="Gavin Yam, Mechanical &amp; Simulation Engineer. I model hardware, build it, and test whether the model was right. Robotics, rockets, and building systems.">
 <title>Gavin Yam | Mechanical &amp; Simulation Engineer</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.5);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.35);cursor:default}
@@ -65,7 +65,7 @@
 .gy-card:hover .gy-play{opacity:0}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="assets/js/gy.js?v=5f0b7efd82" defer></script>
 <script src="assets/js/gy-mesh.js?v=6657c4c060" defer></script>
 </head>
 <body>
@@ -100,7 +100,7 @@
 <span style="flex: 1; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--foreground);">A</span>
 </div>
 <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
-<header style="display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding: 14px 24px 14px 32px; border-bottom: 1px solid var(--border); background: var(--background);">
+<header class="gy-head gy-head-home" style="display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding: 14px 24px 14px 32px; border-bottom: 1px solid var(--border); background: var(--background);">
 <a href="#top" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
 <nav aria-label="Main" style="display: flex; gap: 8px 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
@@ -112,7 +112,7 @@
 <button type="button" class="gy-toggle" data-gy-theme aria-pressed="false"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark mode</span></button>
 </div>
 </header>
-<div style="padding: 56px 48px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 48px; align-items: center;">
+<div class="gy-hero" style="padding: 56px 48px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 48px; align-items: center;">
 <div style="display: flex; flex-direction: column; gap: 28px;">
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">Mechanical &amp; Simulation Engineer</p>
 <h1 style="margin: 0; font-size: clamp(64px, 10vw, 148px); line-height: 0.86; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Gavin<br>Yam</h1>
@@ -124,7 +124,7 @@
 <li>Test whether the model was right.</li>
 </ol>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+<div class="gy-hero-cta" style="display: flex; flex-wrap: wrap; gap: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
 <a class="gy-btn" href="#work" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1.5px solid var(--foreground); background: var(--background); text-decoration: none;">Selected work <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg></a>
 <a class="gy-btn" href="projects/modeling/" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1.5px solid var(--foreground); background: var(--background); text-decoration: none;">Simulations <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
 <a class="gy-btn" href="mailto:legendgavin00@gmail.com" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1.5px solid var(--foreground); background: var(--background); text-decoration: none;">Email</a>
@@ -135,7 +135,7 @@
 <div style="position: relative; width: 320px; height: 320px; max-width: 72vw; max-height: 72vw;">
 <div class="gy-ring" aria-hidden="true" style="position: absolute; inset: -16px; border-radius: 50%; border: 1px dashed var(--foreground);"></div>
 <div style="position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--foreground); background: var(--muted);">
-<img src="assets/images/profile-600.jpg" alt="Gavin Yam" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+<img width="600" height="900" src="assets/images/profile-600.jpg" alt="Gavin Yam" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
 </div>
 <span aria-hidden="true" style="position: absolute; top: 4px; right: 4px; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--foreground); background: var(--background); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 15px; font-weight: 600;">A</span>
 </div>
@@ -180,7 +180,6 @@
 <div style="border: 1.5px solid var(--foreground); background: var(--background);">
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 9px 16px; border-bottom: 1.5px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">
 <h2 id="dims-title" style="margin: 0; font-size: 11px; font-weight: 600;">Key dimensions</h2>
-<span>Hover to dimension</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 1px; background: var(--foreground);">
 <div class="gy-stat" style="flex: 1 1 240px; padding: 28px 24px 26px; display: flex; flex-direction: column; gap: 22px;">
@@ -210,7 +209,6 @@
 <section id="work" aria-labelledby="work-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 96px 32px 72px;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 80px;">
 <h2 id="work-title" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Selected work</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Sheet 02 · Hover to dimension, click to open</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 96px 80px;">
 
@@ -233,12 +231,11 @@
 <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">HARDWARE-CALIBRATED INPUTS</span>
 </span>
 <div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1.5px solid var(--foreground); background: #000;">
-<img class="gy-img" src="assets/images/orbes/hardware.png" alt="ORBES cube robot with a camera, white fan grilles and a purple frame." style="width: 100%; height: 100%; object-fit: cover;">
+<img loading="lazy" decoding="async" width="875" height="630" class="gy-img" src="assets/images/orbes/hardware.png" alt="ORBES cube robot with a camera, white fan grilles and a purple frame." style="width: 100%; height: 100%; object-fit: cover;">
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
 <div style="display: flex;">
 <div style="flex: 1 1 auto; min-width: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Part</span>
 <h3 style="margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase;">ORBES free-flyer</h3>
 <span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">MuJoCo simulation and hardware-informed control of a 6-DOF free-flyer</span>
 </div>
@@ -265,12 +262,11 @@
 <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">SIMPLIFIED DISTURBANCE MODEL</span>
 </span>
 <div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1.5px solid var(--foreground); background: #fff;">
-<img class="gy-img" src="2026, 09_07_53 PM.png" alt="Satellite jitter model: disturbance model, flexible spacecraft dynamics and attitude control loop feeding detector motion." style="width: 100%; height: 100%; object-fit: cover;">
+<img loading="lazy" decoding="async" width="960" height="720" class="gy-img" src="2026, 09_07_53 PM.png" alt="Satellite jitter model: disturbance model, flexible spacecraft dynamics and attitude control loop feeding detector motion." style="width: 100%; height: 100%; object-fit: cover;">
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
 <div style="display: flex;">
 <div style="flex: 1 1 auto; min-width: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Part</span>
 <h3 style="margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase;">Satellite jitter</h3>
 <span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Multi-body dynamics, passive versus active mitigation</span>
 </div>
@@ -297,12 +293,11 @@
 <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">P&amp;ID + LOX CLEANING PREP</span>
 </span>
 <div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1.5px solid var(--foreground); background: #000;">
-<img class="gy-img" src="assets/images/b1lv/test-stand-wide-600.jpg" alt="Cal Poly Pomona Liquid Rocket Lab team at the instrumented test stand." style="width: 100%; height: 100%; object-fit: cover;">
+<img loading="lazy" decoding="async" width="600" height="450" class="gy-img" src="assets/images/b1lv/test-stand-wide-600.jpg" alt="Cal Poly Pomona Liquid Rocket Lab team at the instrumented test stand." style="width: 100%; height: 100%; object-fit: cover;">
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
 <div style="display: flex;">
 <div style="flex: 1 1 auto; min-width: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Part</span>
 <h3 style="margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase;">Bronco 1 feed system</h3>
 <span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Piping organization, cleaning readiness and water-flow testing</span>
 </div>
@@ -329,12 +324,11 @@
 <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap;">AVIONICS + RECOVERY</span>
 </span>
 <div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1.5px solid var(--foreground); background: #fff;">
-<img class="gy-img" src="assets/images/singularity/manufacturing-slide-19.png" alt="Singularity team manufacturing slide with fin-alignment tools, machining and a fabricated component." style="width: 100%; height: 100%; object-fit: cover; object-position: center 60%;">
+<img loading="lazy" decoding="async" width="1600" height="900" class="gy-img" src="assets/images/singularity/manufacturing-slide-19.png" alt="Singularity team manufacturing slide with fin-alignment tools, machining and a fabricated component." style="width: 100%; height: 100%; object-fit: cover; object-position: center 60%;">
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
 <div style="display: flex;">
 <div style="flex: 1 1 auto; min-width: 0; padding: 16px 20px 18px; display: flex; flex-direction: column; gap: 6px;">
-<span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Part</span>
 <h3 style="margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase;">Singularity rocket</h3>
 <span style="font-size: 15px; line-height: 1.45; color: var(--muted-foreground);">Integration, parachute packing and GPS range tests</span>
 </div>
@@ -348,7 +342,6 @@
 <section id="simulations" aria-labelledby="sims-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="sims-title" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>Simulations</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Sheet 03 · Hover to run, click to open</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px;">
 <a class="gy-card" href="projects/modeling/" data-gy-vid data-gy-glow style="position: relative; display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--background); border: 1.5px solid var(--foreground);">
@@ -356,7 +349,6 @@
 <video src="assets/media/modeling/case10_cad.mp4" poster="assets/media/modeling/case10_preview.png" muted loop preload="metadata" aria-label="Simscape recording of a compound slew with camera tracking" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
 <div style="padding: 16px 20px 18px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;">
 <span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Simscape &amp; PID</span><span style="font-size: 19px; font-weight: 700; text-transform: uppercase;">Compound slew + tracking</span></span>
 <svg class="gy-arrow" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
@@ -367,7 +359,6 @@
 <video src="assets/media/modeling/encke/heliocentric.mp4" poster="assets/media/modeling/encke/heliocentric.png" muted loop preload="metadata" aria-label="Heliocentric playback of the Mars-assisted transfer to comet Encke" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<p class="gy-strip"><span>Video, muted</span><span class="gy-play">Hover to play</span></p>
 <div style="padding: 16px 20px 18px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;">
 <span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Mission study · CAPCOM</span><span style="font-size: 19px; font-weight: 700; text-transform: uppercase;">Earth to comet Encke</span></span>
 <svg class="gy-arrow" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
@@ -387,7 +378,6 @@
 <section id="experience" aria-labelledby="exp-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="exp-title" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>Experience</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Revision history · linked rows open their sheet</span>
 </div>
 <div style="overflow-x: auto; border: 1.5px solid var(--foreground); background: var(--background);">
 <table style="width: 100%; min-width: 760px; border-collapse: collapse;">
@@ -444,7 +434,6 @@
 <section id="tools" aria-labelledby="tools-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 32px 112px;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="tools-title" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Toolkit</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Bill of materials</span>
 </div>
 <div style="overflow-x: auto; border: 1.5px solid var(--foreground); background: var(--background);">
 <table style="width: 100%; min-width: 640px; border-collapse: collapse;">

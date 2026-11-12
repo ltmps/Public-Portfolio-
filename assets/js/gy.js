@@ -93,7 +93,7 @@
     }
   }
 
-  /* Hover or focus plays the muted video inside; leaving pauses it. Reduced motion
+  /* Hover, focus or (on touch) scrolling into view plays the muted video inside. Reduced motion
      leaves every video paused until the visitor presses play. */
   function bindVideos() {
     var els = document.querySelectorAll('[data-gy-vid]');
@@ -107,6 +107,20 @@
       if (e.type === 'focusout' && e.currentTarget.contains(e.relatedTarget)) return;
       var v = e.currentTarget.querySelector('video');
       if (v) v.pause();
+    }
+    /* Touch screens have no hover, so a video plays while most of it is on screen. */
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var v = en.target.querySelector('video');
+          if (!v) return;
+          if (en.isIntersecting && en.intersectionRatio >= 0.6 && !reduced()) {
+            v.muted = true; v.playsInline = true;
+            var p = v.play(); if (p && p.catch) p.catch(function () {});
+          } else v.pause();
+        });
+      }, { threshold: [0, 0.6] });
+      for (var j = 0; j < els.length; j++) io.observe(els[j]);
     }
     for (var i = 0; i < els.length; i++) {
       els[i].addEventListener('mouseenter', play);

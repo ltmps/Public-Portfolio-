@@ -6,7 +6,7 @@
 <meta name="description" content="From launch-vehicle separation to deployed spacecraft. SHERPA mission concept animations.">
 <title>SHERPA deployment | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);cursor:default}
@@ -61,7 +61,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 .st-key:focus-visible{outline:2px solid rgb(var(--acc));outline-offset:2px}
 
 </style>
-<script src="../../../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="../../../../assets/js/gy.js?v=5f0b7efd82" defer></script>
 <link rel="stylesheet" href="../../../../assets/css/sherpa-missions.css?v=aef162478f">
 <script src="../../../../assets/js/sherpa-missions.js?v=a734f4dc1e" defer></script>
 <script src="../../../../assets/js/sherpa-strips.js?v=401f2d6589" defer></script>
@@ -73,7 +73,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -90,11 +90,11 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 
 <main id="main" tabindex="-1" class="sm-main">
 <header class="sm-intro"><p class="sm-eyebrow"><a href="../../../../index.html">Home</a> / <a href="../../">Simulations</a> / <a href="../">SHERPA</a></p>
-<p class="sm-eyebrow">SHERPA / Mission animations</p><h1>Deployment</h1><p class="sm-lead">From launch-vehicle separation to deployed spacecraft.</p>
+<h1>Deployment</h1><p class="sm-lead">From launch-vehicle separation to deployed spacecraft.</p>
 </header>
 <nav class="sm-nav" data-sm-strip="SHERPA missions" tabindex="0" aria-label="SHERPA missions, scroll horizontally"><a href="../deployment/" aria-current="page">Deployment</a><a href="../repair/">Repair</a><a href="../refuel/">Refuel</a><a href="../relay/">Relay</a><a href="../resupply/">Resupply</a><a href="../robotics/">Robotics</a><a href="../disposal/">Disposal</a></nav>
-<nav class="sm-index" aria-label="Videos on this page"><span class="sm-eyebrow">On this page</span><ul data-sm-strip="Videos on this page" tabindex="0" aria-label="Videos on this page, scroll horizontally"><li><a href="#01_falcon_heavy_deployment">Falcon Heavy deployment</a></li><li><a href="#11_yac_cruise_deployment">YAC cruise deployment</a></li></ul></nav>
-<section class="sm-film" id="01_falcon_heavy_deployment" aria-labelledby="01_falcon_heavy_deployment-title"><p class="sm-eyebrow">0:46 / Silent / 24 fps</p><h2 id="01_falcon_heavy_deployment-title">Falcon Heavy deployment</h2>
+<nav class="sm-index" aria-label="Videos on this page"><ul data-sm-strip="Videos on this page" tabindex="0" aria-label="Videos on this page, scroll horizontally"><li><a href="#01_falcon_heavy_deployment">Falcon Heavy deployment</a></li><li><a href="#11_yac_cruise_deployment">YAC cruise deployment</a></li></ul></nav>
+<section class="sm-film" id="01_falcon_heavy_deployment" aria-labelledby="01_falcon_heavy_deployment-title"><h2 id="01_falcon_heavy_deployment-title">Falcon Heavy deployment</h2>
 <p id="01_falcon_heavy_deployment-description">The fairing opens, SHERPA separates axially, and the solar arrays and radiators unfold before arm checkout. The scene uses the spacecraft CAD with proposed compact hinge interfaces and concept deployment timing.</p>
 <figure><video controls playsinline preload="none" width="1280" height="720" poster="../../../../assets/media/modeling/sherpa/01_falcon_heavy_deployment.jpg" aria-label="Falcon Heavy deployment" aria-describedby="01_falcon_heavy_deployment-description"><source src="../../../../assets/media/modeling/sherpa/01_falcon_heavy_deployment.mp4" type="video/mp4"><p>Your browser does not support embedded video.</p></video><figcaption>Falcon Heavy deployment. Concept animation using project CAD.</figcaption></figure>
 <div class="sm-phases" aria-label="Falcon Heavy deployment sequence"><ol class="sm-phase-grid" data-sm-strip="Mission sequence" tabindex="0" aria-label="Mission sequence, scroll horizontally"><li class="sm-phase" data-sm-time="0" data-sm-description="LV second stage / native adapter connected"><span class="sm-phase-time">0:00</span><span class="sm-phase-label">LV second stage</span><span class="sm-phase-fallback">LV second stage / native adapter connected</span></li>
@@ -106,7 +106,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <li class="sm-phase" data-sm-time="35" data-sm-description="Fixed-base Canadarm checkout / FREND restrained"><span class="sm-phase-time">0:35</span><span class="sm-phase-label">Fixed-base Canadarm checkout</span><span class="sm-phase-fallback">Fixed-base Canadarm checkout / FREND restrained</span></li></ol><p class="sm-current-phase" hidden><span class="sm-eyebrow">Current phase</span><strong data-sm-current-time></strong><span data-sm-current-description></span></p></div></section>
 <aside class="project-brief" aria-label="Project at a glance"><dl><div><dt>Question</dt><dd>Can the proposed spacecraft move from launch packaging to a deployed layout?</dd></div><div><dt>Inputs</dt><dd>Project CAD, proposed hinges, separation sequence and concept timing.</dd></div><div><dt>Outputs</dt><dd>Deployment sequences and camera views of arrays, radiators and arms.</dd></div><div><dt>How I checked it</dt><dd>Reviewed CAD motion and attached-frame sequences; these are concept animations rather than qualified deployment tests.</dd></div></dl></aside>
 
-<section class="sm-film" id="11_yac_cruise_deployment" aria-labelledby="11_yac_cruise_deployment-title"><p class="sm-eyebrow">0:32 / Silent / 24 fps</p><h2 id="11_yac_cruise_deployment-title">YAC cruise deployment</h2>
+<section class="sm-film" id="11_yac_cruise_deployment" aria-labelledby="11_yac_cruise_deployment-title"><h2 id="11_yac_cruise_deployment-title">YAC cruise deployment</h2>
 <p id="11_yac_cruise_deployment-description">After separation, YAC deploys its solar arrays and radio mast while its inflatable entry shield stays stowed. The final camera move circles the cruise configuration. Hinges, standoffs and deployment timing are concept details; the sequence begins after launch-vehicle separation.</p>
 <figure><video controls playsinline preload="none" width="1280" height="720" poster="../../../../assets/media/modeling/sherpa/11_yac_cruise_deployment.jpg" aria-label="YAC cruise deployment" aria-describedby="11_yac_cruise_deployment-description"><source src="../../../../assets/media/modeling/sherpa/11_yac_cruise_deployment.mp4" type="video/mp4"><p>Your browser does not support embedded video.</p></video><figcaption>YAC cruise deployment. Concept animation using project CAD.</figcaption></figure>
 <div class="sm-phases" aria-label="YAC cruise deployment sequence"><ol class="sm-phase-grid" data-sm-strip="Mission sequence" tabindex="0" aria-label="Mission sequence, scroll horizontally"><li class="sm-phase" data-sm-time="0" data-sm-description="Separated YAC / HIAD remains stowed"><span class="sm-phase-time">0:00</span><span class="sm-phase-label">Separated YAC</span><span class="sm-phase-fallback">Separated YAC / HIAD remains stowed</span></li>

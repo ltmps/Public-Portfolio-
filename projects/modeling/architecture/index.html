@@ -6,7 +6,7 @@
 <meta name="description" content="An educational SCExample systems architecture study connecting physical, functional and operational domains through planar flight, a two-sortie mission cycle and heater-loss recovery.">
 <title>Systems architecture study | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);cursor:default}
@@ -74,7 +74,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 .gy-zoom:hover img{transform:scale(2.2)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="../../../assets/js/gy.js?v=5f0b7efd82" defer></script>
 <script src="../../../assets/js/architecture-study.js?v=0adb9ccece" defer></script>
 <link rel="stylesheet" href="../../../assets/css/project-brief.css?v=clarity1">
 </head>
@@ -83,7 +83,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -103,7 +103,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../../index.html">Home</a> / <a class="gy-link" href="../">Simulations</a> / Study 04</p>
 <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
 <div style="display: flex; flex-direction: column; gap: 24px;">
-<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">SCExample · System Composer + Simulink</p>
 <h1 id="page-title" style="margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.88; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Systems<br>architecture</h1>
 <p style="margin: 0; font-size: 24px; line-height: 1.4; max-width: 28ch; text-wrap: pretty;">From architecture to flight.</p>
 <p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 44ch; color: var(--muted-foreground);">Operational activities drive functional commands, and functional commands drive physical effects. System Composer organizes the model and Simulink runs it.</p>
@@ -129,7 +128,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <video src="../../../assets/media/modeling/architecture/planar-flight.mp4" poster="../../../assets/media/modeling/architecture/planar-flight.jpg" muted loop preload="metadata" aria-label="Planar flight replay: nominal and reduced-power paths over an obstacle with constraint, resource and phase panels" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
-<figcaption style="padding: 8px 12px; border-top: 1px solid var(--foreground); background: var(--background); display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;"><span>Planar flight replay</span><span class="gy-play" style="color: var(--muted-foreground);">Hover to play</span></figcaption>
+<figcaption style="padding: 8px 12px; border-top: 1px solid var(--foreground); background: var(--background); display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;"><span>Planar flight replay</span></figcaption>
 </figure>
 </div>
 </section>
@@ -160,7 +159,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="chain-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="chain-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>One event, three domains</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Step through the 27 s event</span>
 </div>
 <div role="group" aria-label="Event chain" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--foreground); border: 1.5px solid var(--foreground);">
 <button type="button" class="gy-chip on" data-ar-ev="0" aria-pressed="true"><span>01 · Physical</span>Power drops</button>
@@ -189,7 +187,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="planar-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="planar-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20c3-9 9-14 18-16"/><path d="M15 4h6v6"/><path d="M3 20h18"/></svg>Planar flight</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · Force-driven plant · 2 cases × 110 s</span>
 </div>
 <p style="margin: 0 0 28px; font-size: 20px; line-height: 1.5; max-width: 62ch;">Thrust and pitch moment drive a native Aerospace 6DOF plant through takeoff, a survey over one obstacle, return and landing. The reduced case loses power at 27 s.</p>
 <figure class="gy-fig" style="margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px;">
@@ -200,7 +197,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </figure>
 <div style="border: 1.5px solid var(--foreground); background: var(--background); overflow-x: auto;">
 <table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
-<thead><tr style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left;"><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground);">Measurement</th><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-left: 1px solid var(--foreground);">Nominal 350 W</th><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-left: 1px solid var(--foreground); color: rgb(var(--acc));">Reduced to 200 W</th></tr></thead>
+<thead><tr style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left;"><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground);">Measurement</th><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-left: 1px solid var(--foreground);">Nominal 350 W</th><th style="padding: 10px 16px; border-bottom: 1.5px solid var(--foreground); border-left: 1px solid var(--foreground); text-decoration: underline 2px rgb(var(--acc)); text-underline-offset: 4px;">Reduced to 200 W</th></tr></thead>
 <tbody style="font-variant-numeric: tabular-nums;">
 <tr class="gy-row"><td style="padding: 10px 16px; border-bottom: 1px solid var(--border);">Survey outcome</td><td style="padding: 10px 16px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--foreground);">Full configured route</td><td style="padding: 10px 16px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--foreground);">Return triggered at 27.00 s</td></tr>
 <tr class="gy-row"><td style="padding: 10px 16px; border-bottom: 1px solid var(--border);">Landing and downlink complete</td><td style="padding: 10px 16px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--foreground);">95.74 s</td><td style="padding: 10px 16px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--foreground);">62.56 s</td></tr>
@@ -219,7 +216,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="cycle-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="cycle-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>Two-sortie mission cycle</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · 19 functions share one ledger</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px 40px; align-items: start;">
 <div style="display: flex; flex-direction: column; gap: 16px;">
@@ -239,15 +235,14 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 </figure>
 </div>
 <figure class="gy-fig" style="margin: 24px 0 0; display: flex; flex-direction: column; gap: 10px;">
-<a class="gy-frame gy-zoom" href="../../../assets/media/modeling/architecture/catalog-couplings.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img src="../../../assets/media/modeling/architecture/catalog-couplings.png" alt="Catalog allocation map of all 57 base elements: 10 operational activities, 19 functions and 28 physical components or groups, joined by 43 allocation lines." style="width: 100%; height: auto; display: block;"></a>
-<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. D2 · Catalog allocation map · 10 OA, 19 functions, 28 physical · lines are allocations, not signals · hover to zoom, select to open</figcaption>
+<a class="gy-frame gy-zoom" href="../../../assets/media/modeling/architecture/catalog-couplings.png" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #fff; overflow: hidden;"><img width="2909" height="2520" src="../../../assets/media/modeling/architecture/catalog-couplings.png" alt="Catalog allocation map of all 57 base elements: 10 operational activities, 19 functions and 28 physical components or groups, joined by 43 allocation lines." style="width: 100%; height: auto; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. D2 · Catalog allocation map · 10 OA, 19 functions, 28 physical · lines are allocations, not signals</figcaption>
 </figure>
 </section>
 
 <section aria-labelledby="heater-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="heater-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z"/><path d="M12 9v8"/></svg>Heater-loss recovery</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail E · Restored vs persistent loss</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px 40px; align-items: start;">
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
@@ -273,7 +268,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="env-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="env-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Recovery envelope</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail F · Select a power and onset</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 32px 48px; align-items: start;">
 <div>
@@ -313,7 +307,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="prep-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="prep-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>How it was prepared</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail G · Six steps from catalog to replay</span>
 </div>
 <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 10px;">
 <li class="gy-step" style="padding: 18px 20px; border: 1px solid var(--foreground); background: var(--background); display: flex; flex-direction: column; gap: 8px;"><span class="gy-stepn" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;">01 · PRESERVE ARCHITECTURE</span><span style="font-size: 15px; line-height: 1.55;">Carry the 57-element base catalog forward with all 224 relations and 75 flows, so every new behavior traces back to the base architecture.</span></li>
@@ -327,7 +320,7 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <p style="margin: 0; flex: 0 0 auto; padding: 16px 20px; border-right: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Resource to authority</p>
 <div style="flex: 1 1 420px; padding: 16px 20px; font-family: var(--font-mono); font-size: 14px; line-height: 1.9; overflow-x: auto;">
 <div>P<sub>flight</sub> = P<sub>idle</sub> + T<sup>3/2</sup> / (η √(2ρA)) + P<sub>drag</sub></div>
-<div style="color: rgb(var(--acc));">T<sub>cap</sub> = [max(P<sub>bus</sub> − P<sub>heater</sub> − P<sub>idle</sub> − P<sub>drag</sub>, 0) · η √(2ρA)]<sup>2/3</sup></div>
+<div style="color: var(--foreground); font-weight: 600;">T<sub>cap</sub> = [max(P<sub>bus</sub> − P<sub>heater</sub> − P<sub>idle</sub> − P<sub>drag</sub>, 0) · η √(2ρA)]<sup>2/3</sup></div>
 <div>ΔE = (P<sub>charge</sub> − P<sub>heater</sub> − P<sub>flight</sub>) · Δt</div>
 </div>
 </div>
@@ -336,7 +329,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="ops-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="ops-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h11M10 12h11M10 18h11"/><path d="M4 6h1v4M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>Operations</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail H · Educational Mars-helicopter model</span>
 </div>
 <p style="margin: 0 0 28px; font-size: 18px; line-height: 1.55; max-width: 66ch; color: var(--muted-foreground);">Architecture and allocation views separate operations, functions and physical subsystems, so a requirement can be followed through the system. The model adds typed interfaces and executable mission-state behavior.</p>
 <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 10px;">
@@ -356,7 +348,6 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="play-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="play-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>Scenario playback</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail I · Pick a fault, scrub the time</span>
 </div>
 <div role="group" aria-label="Scenario" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
 <button type="button" class="gy-toggle" data-ar-pick="s:0" aria-pressed="false">Nominal mission</button>
@@ -432,13 +423,12 @@ h2:hover .gy-hi{transform:rotate(-10deg) scale(1.1)}
 <section aria-labelledby="trace-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 32px;">
 <h2 id="trace-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="2.5"/><circle cx="19" cy="12" r="2.5"/><circle cx="5" cy="19" r="2.5"/><path d="M7.5 5H12v14H7.5M12 12h4.5"/></svg>Traceability</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail J · Requirement to component</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: flex-start;">
 <p style="margin: 0; flex: 1 1 280px; font-size: 18px; line-height: 1.55;">Altitude-sensing requirements trace to the preparation and survey operations, the sensing function and the altimeter that fulfills them.</p>
 <figure class="gy-fig" style="margin: 0; flex: 2 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
-<a class="gy-frame gy-zoom" href="../../../assets/media/modeling/traceability-example.svg" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #f8fafc; overflow: hidden;"><img src="../../../assets/media/modeling/traceability-example.svg" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component." style="width: 100%; height: auto; display: block;"></a>
-<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. J1 · Solid lines native, dashed line a proposed metric · hover to zoom, select to open</figcaption>
+<a class="gy-frame gy-zoom" href="../../../assets/media/modeling/traceability-example.svg" target="_blank" rel="noopener" data-gy-zoom style="display: block; border: 1.5px solid var(--foreground); background: #f8fafc; overflow: hidden;"><img loading="lazy" decoding="async" src="../../../assets/media/modeling/traceability-example.svg" alt="Altitude-sensing requirements linked to preparation and survey operations, the sensing function and the altimeter component." style="width: 100%; height: auto; display: block;"></a>
+<figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. J1 · Solid lines native, dashed line a proposed metric</figcaption>
 </figure>
 </div>
 </section>

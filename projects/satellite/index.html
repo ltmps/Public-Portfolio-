@@ -6,7 +6,7 @@
 <meta name="description" content="SPACEJAM satellite jitter analysis: a coupled spacecraft model connecting disturbances, structural dynamics and attitude control to detector motion and image blur.">
 <title>Jitter analysis and mitigation | Gavin Yam</title>
 <script>try{if(localStorage.getItem('gy-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
-<link rel="stylesheet" href="../../assets/css/gy.css?v=c7d3b0db52">
+<link rel="stylesheet" href="../../assets/css/gy.css?v=d1eb18fecc">
 <style>
 .gy{--acc:245,73,0;--gmaj:rgba(10,10,10,.06);--gmin:rgba(10,10,10,.025);--paper:rgba(255,255,255,.78);transition:background-color .35s,color .35s}
 :root[data-theme="dark"] .gy{--acc:43,127,255;--gmaj:rgba(250,250,250,.06);--gmin:rgba(250,250,250,.022);--paper:rgba(10,10,10,.45);cursor:default}
@@ -47,14 +47,14 @@
 .gy-card:hover .gy-arrow{transform:translate(4px,-4px)}
 @media (prefers-reduced-motion: reduce){.gy *,.gy *::before{transition:none !important;animation:none !important}}
 </style>
-<script src="../../assets/js/gy.js?v=9db17a7d34" defer></script>
+<script src="../../assets/js/gy.js?v=5f0b7efd82" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="gy gy-grid" data-gy-root style="position: relative; overflow: hidden; background-color: var(--background); color: var(--foreground); font-family: var(--font-sans);">
 <div class="gy-loupe" aria-hidden="true" style="position: absolute; z-index: 0; pointer-events: none;"></div>
 
-<header style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
+<header class="gy-head" style="position: relative; z-index: 5; border-bottom: 1.5px solid var(--foreground); background: var(--background);">
 <div style="max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;">
 <a href="../../index.html" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">G. Yam / Engineering</a>
 <div style="display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;">
@@ -74,7 +74,6 @@
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / <a class="gy-link" href="../../index.html#work">Selected work</a> / Part 02</p>
 <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
 <div style="display: flex; flex-direction: column; gap: 24px;">
-<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">UC Berkeley / Honeywell capstone · Aug 2023 to May 2024</p>
 <h1 id="page-title" style="margin: 0; font-size: clamp(48px, 6vw, 88px); line-height: 0.88; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">Satellite<br>jitter</h1>
 <p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 24ch; text-wrap: pretty;">Follow the disturbance. See its effect on the image.</p>
 </div>
@@ -96,14 +95,14 @@
 <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; padding: 10px 2px; background: var(--background); border: 1px solid rgb(var(--acc)); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; white-space: nowrap; color: var(--foreground);">MODEL TO IMAGE</span>
 </span>
 <div style="position: relative; aspect-ratio: 960 / 720; overflow: hidden;">
-<img src="../../2026, 09_07_53 PM.png" alt="Block diagram linking spacecraft disturbances and flexible dynamics to attitude control, detector motion and a blurred point spread function." style="width: 100%; height: 100%; object-fit: contain;">
+<img width="960" height="720" src="../../2026, 09_07_53 PM.png" alt="Block diagram linking spacecraft disturbances and flexible dynamics to attitude control, detector motion and a blurred point spread function." style="width: 100%; height: 100%; object-fit: contain;">
 <span class="gy-glow" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;"></span>
 </div>
 </figure>
 </div>
 <dl style="margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); border: 1.5px solid var(--foreground); background: var(--background);">
-<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Role</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Senior Capstone Co-Lead</dd></div>
-<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Team</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">SPACEJAM</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Role</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Senior Capstone Co-Lead, Aug 2023 to May 2024</dd></div>
+<div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Team</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">SPACEJAM, UC Berkeley / Honeywell capstone</dd></div>
 <div style="padding: 12px 16px; border-right: 1px solid var(--foreground);"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Tools</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Simulink, Python</dd></div>
 <div style="padding: 12px 16px;"><dt style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground);">Work</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 600;">Modeling, mitigation, communication</dd></div>
 </dl>
@@ -129,7 +128,6 @@
 <section aria-labelledby="model-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="model-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Coupled model</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Disturbance to image</span>
 </div>
 <p style="margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 56ch;">Attitude control, flexible structural motion and disturbance inputs in one model, carried into the detector frame so mitigation could be judged by image blur.</p>
 <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 10px;">
@@ -144,11 +142,10 @@
 <section aria-labelledby="iter-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="iter-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>Model iteration</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · Refine, then reassess</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px; align-items: center;">
 <figure class="gy-fig" style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 16px;"><img src="../../2026, 09_08_05 PM.png" alt="Four-stage cycle: update the plant, refine sensors and plant, update jitter models, assess impact and revise." style="width: 100%; height: auto; display: block;"></div>
+<div class="gy-frame" style="border: 1.5px solid var(--foreground); background: #fff; padding: 16px;"><img loading="lazy" decoding="async" width="1257" height="595" src="../../2026, 09_08_05 PM.png" alt="Four-stage cycle: update the plant, refine sensors and plant, update jitter models, assess impact and revise." style="width: 100%; height: auto; display: block;"></div>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 2 · SPACEJAM model-improvement cycle</figcaption>
 </figure>
 <div style="border: 1px solid var(--foreground); background: var(--background);">
@@ -166,7 +163,6 @@
 <section aria-labelledby="result-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="result-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Simulation result</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail D · Same disturbances, two cases</span>
 </div>
 <figure style="margin: 0; border: 1.5px solid var(--foreground); background: var(--background);">
 <div style="padding: 12px 20px; border-bottom: 1px solid var(--foreground); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">Combined-disturbance attitude-hold error · vector RMS, arcseconds</div>
@@ -187,7 +183,6 @@
 <section aria-labelledby="team-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="team-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg>Team</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Turn the analysis into recommendations</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 32px; align-items: start;">
 <dl style="margin: 0; border: 1.5px solid var(--foreground); background: var(--background);">
