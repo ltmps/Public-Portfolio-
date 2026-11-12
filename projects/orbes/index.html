@@ -141,7 +141,6 @@
 <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;"><a class="gy-link" href="../../index.html">Home</a> / <a class="gy-link" href="../../index.html#work">Selected work</a> / Part 01</p>
 <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 64px 72px; align-items: end;">
 <div style="display: flex; flex-direction: column; gap: 24px;">
-<p style="margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">Mechanical controls</p>
 <h1 id="page-title" style="margin: 0; font-size: clamp(64px, 9vw, 136px); line-height: 0.86; letter-spacing: -0.05em; font-weight: 700; text-transform: uppercase;">ORBES</h1>
 <p style="margin: 0; font-size: 26px; line-height: 1.35; max-width: 22ch; text-wrap: pretty;">A 6-DOF free-flyer: MuJoCo simulation, hardware-informed controls.</p>
 </div>
@@ -204,7 +203,6 @@
 <section aria-labelledby="system-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="system-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>The system</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail B · Architecture</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 48px; align-items: start;">
 <div style="display: flex; flex-direction: column; gap: 24px;">
@@ -274,7 +272,6 @@
 <section aria-labelledby="tests-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="tests-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="15" height="14" rx="1"/><path d="m22 8-5 4 5 4z"/></svg>Test stories</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Detail C · Follow the mismatch to a smaller test</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px;">
 <article class="gy-story" style="border: 1.5px solid var(--foreground); background: var(--background); display: flex; flex-direction: column;">
@@ -410,7 +407,6 @@
 <p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted-foreground);">The ORBES cube hangs from an overhead line so it can turn freely in yaw. Its IR camera finds the brightest blob in each frame, and the bearing is that blob's angle from the image center, with the shaded band marking the image edge. When the beacon sits outside the center 10% of the frame, the controller drives the X-face motors in opposing pairs to turn the cube toward it, which is the stepped command in the bottom trace. The yaw trace shows the cube swinging past the beacon and back, and the red marks show the frames where the beacon left the view.</p>
 </div>
 </div>
-<p class="gy-strip"><span>Video, muted · onboard log</span></p>
 <figcaption style="font-family: var(--font-mono); font-size: 12px; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;">Fig. 4 · IR beacon tracking test · video with the logged bearing, IMU yaw and X-face command</figcaption>
 </figure>
 <figure class="gy-fig" data-gy-vid data-gy-expand="Fig. 5 · Live IMU data in RViz" tabindex="0" aria-label="Fig. 5 · Live IMU data in RViz: muted video, opens larger" style="margin: 24px 0 0; display: flex; flex-direction: column; gap: 10px;">
@@ -435,7 +431,6 @@
 <section aria-labelledby="lessons-title" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 112px 32px 0;">
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1.5px solid var(--foreground); margin-bottom: 40px;">
 <h2 id="lessons-title" style="margin: 0; font-size: 40px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase; display: flex; align-items: center; gap: 14px;"><svg class="gy-hi" aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/></svg>Lessons</h2>
-<span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Check the estimate, then the command</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 32px; align-items: start;">
 <div style="border: 1px solid var(--foreground); background: var(--background);">
